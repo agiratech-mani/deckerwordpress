@@ -1,0 +1,517 @@
+<?php
+/**
+ * The template used for displaying page content in Decker Digital full width layouts
+ *
+ * @package WordPress
+ * @subpackage Twenty_Eleven
+ * @since Twenty Eleven 1.0
+ */
+?>
+<style type="text/css">
+@keyframes flip {
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+  to {
+    transform: perspective(400px);
+  }
+}
+
+.entry-content {
+    padding:0;
+    width:100%;
+}
+
+.section {
+    padding:55px 20px;
+    color:#16618b;
+    font-size:20px;
+    line-height:1.4em;
+    text-align:center;
+}
+.section.header {
+    background-image:url(/wp-content/themes/twentyeleven-child/images/deckerdigital-bg-header.png);
+    background-position:center top;
+    background-repeat:no-repeat;
+    background-size:cover;
+    padding:15px 0;
+}
+.section.big-image {
+    padding: 0 0 55px 0;
+}
+
+.inner-section {
+    width:100%;
+    max-width:1044px;
+    margin:0 auto;
+}
+.entry-content .section h1, .entry-content .section h2 {
+    font-family: 'felt_tip_romanregular' !important;
+    text-align:center;
+    margin:0 auto;
+    font-size:53px;
+    line-height:1.52em;
+    font-weight:normal;
+    color:#16618b;
+}
+.entry-content .section h2.title-size53 {font-size:53px;}
+.entry-content .section h2.title-size36 {font-size:36px;}
+
+.section h3 {
+    text-align:center;
+    font-weight:normal;
+    font-size:22px;
+    color:#16618b;
+    font-family:"Benton Sans Cond",?Arial,?sans-serif;
+    line-height:1.4em;
+    max-width:800px;
+    margin:0 auto;
+}
+.section h3.subtitle-size22 {font-size:22px;}
+.section h3.subtitle-size26 {font-size:26px;}
+.section h3.subtitle-size28 {font-size:28px;}
+
+.section.bg-blue_dark h1, .section.bg-blue_dark h2, .bg-blue_dark h3,
+.section.bg-red h1, .section.bg-red h2, .section.bg-red h3 {
+	color:#ffffff;
+}
+.section, .section.bg-white { background-color:#ffffff; }
+.section.bg-red, .module .bg-red { background-color:#c83d44; color:#ffffff; }
+.section.header.bg-red { background-color:#c53b43;}
+.section.bg-blue_dark, .module .bg-blue_dark { background-color:#145F89; color:#ffffff; }
+
+.section.bg-blue_med { background-color:#bde7fb; color:#ffffff; }
+.module .bg-blue_med { background-color:#2f8abc; color:#ffffff; }
+
+.module .bg-orange { background-color:#F79625; color:#ffffff; }
+.section.bg-blue_light { background-color:#e2f6ff; }
+.section.bg-gray_light { background-color:#f6f6f6; }
+
+.flip_side.bg-red { color:#c83d44; }
+.flip_side.bg-blue_dark { color:#145F89; }
+.flip_side.bg-blue_med { color:#2f8abc; }
+.flip_side.bg-orange { color:#F79625; }
+
+
+.section.header .heading {
+    display:flex;
+}
+.heading-right {
+    padding:20px 0 0 0;
+}
+sup {
+    bottom:1em;
+}
+.inner-section p {
+	text-align:left;
+	max-width:840px;
+	width:100%;
+}
+.inner-section p,
+.inner-section img.aligncenter {
+	margin-left:auto;
+	margin-right:auto;
+}
+.inner-section .statement_detail p {
+	max-width:100%;
+	margin-left: 12px;
+}
+.entry-content .section img {
+	max-width:100%;
+	height:auto;
+}
+.inner-section .statement {
+	width:100%;
+	text-align:left;
+	font-weight:bold;
+	font-size:18px;
+	margin:0 5px 1em 0;
+	cursor: pointer;
+}
+.inner-section .statement::before {
+	font-family: "FontAwesome";
+	content: "\f0da";
+	margin-right: 10px;
+}
+.inner-section .statement_detail {
+	margin:0 0 2em 12px;
+}
+
+.section-content {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;/*50px;*/
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.section-content ol li {
+	text-align: left;
+}
+.big-image .section-content {
+	margin-top:0;
+}
+
+.heading-left, .heading-right {
+    width:50%;
+}
+.iwant-left, .iwant-right {
+    width:32%;
+    padding:0 2%;
+    margin:0 0 -50px 0;
+}
+@media (max-width: 639px) {
+    .section.header {
+        padding:15px 0 0 0;
+        margin:0 0 20px 0;
+    }
+    .section.header .heading {
+        display:block;
+    }
+    .heading-left, .heading-right {
+        width:100%;
+    }
+    .heading-right {
+        padding:0;
+        margin:0 0 16% 0;
+    }
+
+    .iwant-left, .iwant-right {
+        width:100%;
+        padding:0%;
+        margin:0;
+    }
+    .iwant-right {
+        margin:0 0 -50px 0;
+    }
+}
+.magic {
+    width:33%;
+    -webkit-align-self:center;
+    align-self:center;
+}
+@media (max-width: 767px) {
+    .magic {
+        width:100%;
+    }
+}
+.section .magic img {
+    max-width:129px;
+}
+.section .magic.middle img {
+    width:100%;
+    max-width:326px;
+}
+
+.section .magic p {
+    font-size:15px;
+    max-width:200px;
+    text-align:center;
+}
+
+.module {
+	width: 23%;
+	height: 200px;
+	margin: 10px 5px;
+	padding: 5px;
+	display: -webkit-flex;
+	display: flex;
+	cursor: pointer;
+}
+.module_inner {
+	height: 90%;
+	width: 100%;
+	border-radius: 5px;
+	padding: 15px;
+	-webkit-display: flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.module .over {
+	font-size:22px;
+	margin: 0 auto;
+}
+.module .over p {
+	text-align: center;
+}
+.module .under {
+	font-size: 18px;
+	text-align: left;
+	display: none;
+	background-size: 100% 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	height: 210px;
+	width: 100%;
+	border-radius: 5px;
+	padding: 0 20px;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.flip_side {
+	backface-visibility: visible !important;
+	animation-name: flip;
+	animation-duration: 1500ms;
+	animation-fill-mode: both;
+	background-color: #fff !important;
+	border: 1px solid #ccc;
+}
+.under ul {
+	margin: 0 0 18px 0;
+}
+.under ul li {
+	font-size: 14px;
+	margin: 0 0 10px;
+	line-height: normal;
+	width: 120%;
+}
+.section-content .statement_detail {
+	display: none;
+}
+.statement.accordion_open::before {
+	content: "\f0d7";
+	margin-right: 6px;
+}
+
+.section a.link-button {
+	display:inline-block;
+	background-color: #c83d44;
+	border-radius: 4px;
+	font-family: felt_tip_romanregular;
+	font-size: 26px;
+	padding: 13px 20px;
+	margin:15px;
+	color:#ffffff;
+    text-decoration:none;
+}
+.section a.link-button:hover {
+	text-decoration:none;
+	cursor:pointer;
+}
+.section a.link-button .small {
+    font-size:22px;
+}
+.section a.link-button.blue {
+    background-color:#2f8abc;
+}
+
+@media only screen and (max-width:768px) {
+	.module {
+		width: 40%;
+	}
+	.under ul li {
+		width: 100%;
+	}
+} 
+
+@media only screen and (max-width:480px) {
+	.module {
+		width: 50%;
+	}
+	.under ul li {
+		font-size: 12px;
+	}
+} 
+@media only screen and (max-width:479px) {
+	.module {
+		width: 80%;
+	}
+}
+@media only screen and (max-width:320px) {
+	.under ul li {
+		width: 150%;
+	}
+} 
+
+
+/* Note: Video player styling with image over video editable in footer.php */
+</style>
+
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<div class="entry-content">
+		<?php
+        the_content();
+
+        if( have_rows('section') ):
+            while ( have_rows('section') ) : the_row();
+                $moreclass = false;
+                $background_color = get_sub_field('background_color');
+                if($background_color){
+                    $moreclass = ' bg-'.$background_color;
+                }
+                $style = false;
+                /*if($background=='image'){
+                    $background_image = get_sub_field('background_image');
+                    $style = ' style="background-image:url('.$background_image['url'].');"';
+                }*/
+
+                $title = false;
+                $subtitle = false;
+                $title_size = intval(get_sub_field('title_size'));
+                $display = false;
+                $content_type = get_sub_field('content_type');
+
+                if($content_type!="heading" && $content_type!="images"){
+                    if(get_sub_field('title')){
+                        $title = '<h2 class="title-size'.$title_size.'">'.get_sub_field('title').'</h2>';
+                    }
+                    $subtitle_size = intval(get_sub_field('subtitle_size'));
+                    if(get_sub_field('subtitle')){
+                        $subtitle = '<h3 class="subtitle-size'.$subtitle_size.'">'.get_sub_field('subtitle').'</h3>';
+                    }
+                }
+
+                if($content_type=="heading"){
+                    $moreclass .= ' header';
+                    $display =
+                    '<div class="heading">
+                        <div class="heading-left">
+                            '.get_sub_field('heading_left').'
+                        </div>
+                        <div class="heading-right">
+                            '.get_sub_field('heading_right').'
+                        </div>
+                    </div>';
+
+                } elseif($content_type=="general"){
+                    $display = get_sub_field('general_content');
+
+                } elseif($content_type=="image"){
+                    $big_image = get_sub_field('big_image');//echo '<pre>';print_r($big_image);echo '</pre>';
+                    $moreclass .= ' big-image';
+                    $display = '<img src="'.$big_image['url'].'" alt="'.$big_image['alt'].'" width="'.$big_image['sizes']['large-feature-width'].'" height="'.$big_image['large-feature-height'].'" />';
+
+                } elseif($content_type=="magic"){
+                    $magicimage = array();
+                    for($i==1;$i<=4;$i++){
+                        $magicimage[$i] = get_sub_field('the_magic_slot_'.$i.'_image');
+                        $image[$i] = '<img src="'.$magicimage[$i]['sizes']['medium'].'" alt="'.$magicimage[$i]['alt'].'" width="258" />';
+                    }
+                    $magicimagemiddle = get_sub_field('the_magic_in_the_middle');
+                    $middleimage = '<img src="'.$magicimagemiddle['sizes']['large'].'" alt="'.$magicimagemiddle['alt'].'" width="349" />';
+                    $display = '
+                    <div class="magic">
+                        '.$image[1].'
+                        <p>'.get_sub_field('the_magic_slot_1_text').'</p>
+                        '.$image[2].'
+                        <p>'.get_sub_field('the_magic_slot_2_text').'</p>
+                    </div>
+                    <div class="magic middle">
+                        '.$middleimage.'
+                    </div>
+                    <div class="magic">
+                        '.$image[3].'
+                        <p>'.get_sub_field('the_magic_slot_3_text').'</p>
+                        '.$image[4].'
+                        <p>'.get_sub_field('the_magic_slot_4_text').'</p>
+                    </div>';
+
+                } elseif($content_type=="modules") {
+                    if( have_rows('lab_module') ):
+											while ( have_rows('lab_module') ) : the_row();
+												$module_color = get_sub_field('module_color');
+												$background_image = get_sub_field('background_image');
+												$show_number = get_sub_field('show_number');
+												$dnumber = "";
+												$dpadding = "";
+												
+												if ($show_number == 1) {
+													$dnumber = '<strong>'.get_sub_field('module_number').'</strong><br />';
+												} else {
+													$dpadding = "style='padding:15px 0'";
+												}
+
+												$display .=
+												'<div class="module">
+														<div class="module_inner bg-'.$module_color.'" '.$dpadding.'>
+															<div class="over">'
+															. $dnumber . get_sub_field('module_title') .
+														'</div>
+														<div class="under" style="background-image:url('.$background_image.')">
+															'.get_sub_field('module_text').'
+														</div>
+													</div>
+												</div>';
+											endwhile;
+                    endif;
+
+                } elseif($content_type=="accordion"){
+                    if( have_rows('expandcollapse') ):
+                        while ( have_rows('expandcollapse') ) : the_row();
+                            $display .=
+                            '<div class="statement">
+                              '.get_sub_field('question_or_statement').'
+                            </div>
+                            <div class="statement_detail">
+                              '.get_sub_field('expanded_detail').'
+                            </div>';
+                        endwhile;
+                    endif;
+                }
+
+                echo '
+                <div class="section '.$moreclass.'" '.$style.'>
+                    <div class="inner-section">
+                        '.$title.'
+                        '.$subtitle.'
+                        <div class="section-content">
+                            '.$display.'
+                        </div>
+                    </div>
+                </div>';
+
+            endwhile;
+
+            echo do_shortcode(get_field('html_code'));
+
+        endif;
+
+        ?>
+        <div style="clear:both;"></div>
+
+	</div><!-- .entry-content -->
+
+</article><!-- #post-<?php the_ID(); ?> -->
+
+<script type="text/javascript">
+(function($) {
+$(function() {
+	
+// Engine for the modules flip box
+$(".module_inner").mouseenter(function() {
+	$(this).addClass("flip_side");
+	$(this).find(".over").hide();
+	$(this).find(".under").css({"display":"-webkit-flex", "display":"flex"});
+});
+$(".module").mouseleave(function() {
+	$(".flip_side").removeClass("flip_side");
+	$(this).find(".over").slideDown();
+	$(this).find(".under").hide();
+});
+	
+	
+// Engine for the FAQ section
+$(".section-content .statement").click(function() {
+	$(this).next().slideToggle(100);
+	$(this).toggleClass("accordion_open");
+});
+
+
+});
+})(jQuery);
+</script>

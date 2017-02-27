@@ -1,0 +1,139 @@
+.wp_lightbox_error_message{
+color: red;
+font-weight: bold;
+font-style: italic;
+}
+
+.lightbox_ultimate_fp_overlay{
+display:none;
+padding:15px;
+width:640px;
+background-color:#fff;
+}
+.close {
+	background:url(../../images/flowplayer/close.png) no-repeat;
+	position:absolute;
+	top:-15px;
+	right:-15px; 
+	display:block;
+	width:35px;
+	height:35px;
+	cursor:pointer;
+}
+a.player {
+	height:450px;
+	display:block;
+}
+
+.lightbox_img_frame_fancy1 a img
+{
+border-radius: 5px; -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px;
+border: 1px solid #E0E0E0;
+box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+padding:8px;
+}
+.lightbox_img_frame_fancy1 a img:hover{
+border: 1px solid #9C9C9C;
+}
+
+.lightbox_img_frame_fancy2 a img
+{
+background-color: #6D8289;
+border-radius: 5px; -moz-border-radius:5px; -khtml-border-radius:5px; -webkit-border-radius:5px;
+border: 1px solid #ccc;
+padding: 10px;
+}
+.lightbox_img_frame_fancy2 a img:hover
+{
+filter: alpha(opacity=90);
+opacity: 0.9;
+}
+
+.lightbox_fancy_grid_view_gallery a img
+{
+float: left;
+margin: 0px 10px 10px 0px;
+}
+.lightbox_fancy_grid_view_gallery_125x125 a img
+{
+float: left;
+width: 125px;
+height: 125px;
+margin: 0px 10px 10px 0px;
+}
+.lightbox_fancy_grid_view_gallery_150x150 a img
+{
+float: left;
+width: 150px;
+height: 150px;
+margin: 0px 10px 10px 0px;
+}
+.lightbox_fancy_grid_view_gallery_200x200 a img
+{
+float: left;
+width: 200px;
+height: 200px;
+margin: 0px 10px 10px 0px;
+}
+.lightbox_fancy_grid_view_gallery_250x250 a img
+{
+float: left;
+width: 250px;
+height: 250px;
+margin: 0px 10px 10px 0px;
+}
+.lightbox_fancy_grid_view_gallery_300x250 a img
+{
+float: left;
+width: 300px;
+height: 250px;
+margin: 0px 10px 10px 0px;
+}
+.lightbox_ultimate_clear_float
+{
+clear: both;
+}
+#html5lightbox-video
+{
+background-color: #000000;
+}
+/* auto thumb css*/
+.wplu_auto_thumb_box{
+position: relative;
+width: 200px;
+height: 150px;
+}
+.wplu_auto_thumb_play{
+position: absolute;
+left: 75px;
+top: 50px;
+}
+.wplu_auto_anchor_image{
+width: 200px;
+height: 150px;
+}
+/* end of auto thumb css*/
+
+/* Thumbnail with play button CSS */
+.wplu_play_img_container {
+position: relative;
+display: inline-block;
+}
+.wplu_play_img_box{  
+position: absolute;
+width:60px;
+height:60px;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0; 
+margin: auto; 
+}
+.wplu_play_img_box img{  
+border: none !important;
+border-radius: 0 0 0 0 !important;
+box-shadow: none !important;
+padding: 0 !important;
+background-color: transparent !important;  
+}
+/* End of Thumbnail with play button CSS */

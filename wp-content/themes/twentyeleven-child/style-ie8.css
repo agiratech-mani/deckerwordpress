@@ -1,0 +1,40 @@
+#access a {
+    letter-spacing:0;
+    padding: 0 0 0 10px;
+}
+#secondary .widget h3 {
+    letter-spacing:0;
+    font-size:12px;
+}
+
+.bullets {
+    margin-left:0;
+    margin-right:8px;
+    margin:10px 8px 0 0;
+}
+#home-solution-matching {
+    margin:38px 0 0 -5px;
+}
+
+#programs .middle div.cell.two-thirds a {
+    font-size:12px;
+    line-height:18px;
+}
+
+.page-template-page-locations-php table {
+    border:1px solid #ddd;
+    width:610px;
+}
+
+#footer-top aside h3,
+#footer-top aside .textwidget {
+    letter-spacing:0;
+    font-size:12px;
+    }
+    #footer-top aside {
+        width:444px;
+    }
+    #footer-top .icon {
+        margin:10px 25px 5px 0;
+    }
+

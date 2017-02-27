@@ -1,0 +1,17 @@
+/* footer */
+.site-footer {
+	background-color: #0090D6;	
+	min-height: 95px;
+
+	clear: both;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+
+h1, h2 {
+	font-size: 60px;
+}
+

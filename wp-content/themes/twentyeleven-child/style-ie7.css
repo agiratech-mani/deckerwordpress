@@ -1,0 +1,56 @@
+#access a {
+    letter-spacing:0;
+    padding: 0 0 0 10px;
+}
+#secondary h3 {
+    letter-spacing:0;
+    font-size:12px;
+}
+
+#home-solution-matching {
+    margin:34px 0 0 -5px;
+}
+#solution-matching .middle p a {
+    position:absolute;
+    }
+    #solution-matching .middle.three-across p a {
+        width:155px;/*191-36*/
+    }
+    #solution-matching .middle.four-across p a {
+        width:107px;
+    }
+    #solution-matching .middle.five-across p a {
+        width:77px;
+    }
+#solution-matching .middle p.selected a,
+#solution-matching .middle p:hover a {
+    background:transparent;
+}
+#solution-matching .middle p.selected {
+    background:#1791c9;
+}
+#solution-matching .middle p a {
+    line-height:22px;
+    background:transparent;
+}
+
+#programs .middle div.cell.two-thirds a {
+    font-size:12px;
+    line-height:18px;
+}
+
+.page-template-page-locations-php table {
+    width:615px;
+}
+
+#footer-top aside h3,
+#footer-top aside .textwidget {
+    letter-spacing:0;
+    font-size:12px;
+    }
+    #footer-top aside {
+        width:444px;
+    }
+    #footer-top .icon {
+        margin:10px 25px 5px 0;
+    }

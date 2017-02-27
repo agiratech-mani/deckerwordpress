@@ -1,0 +1,145 @@
+<?php
+/**
+ * The template used for displaying page content in Decker Digital full width layouts
+ *
+ * @package WordPress
+ * @subpackage Twenty_Eleven
+ * @since Twenty Eleven 1.0
+ */
+?>
+<style type="text/css">
+.section {
+    padding:55px 0;
+    color:#16618b;
+    font-size:20px;
+    line-height:1.4em;
+    text-align:center;
+}
+.inner-section {
+    width:100%;
+    max-width:1044px;
+    margin:0 auto;
+}
+.entry-content .section h1, .entry-content .section h2 {
+    font-family: 'felt_tip_romanregular' !important;
+    text-align:center;
+    margin:0 auto;
+    font-size:53px;
+    line-height:1.52em;
+    font-weight:normal;
+    color:#16618b;
+}
+.entry-content .section h2.title-size53 {font-size:53px;}
+.entry-content .section h2.title-size36 {font-size:36px;}
+
+.section h3 {
+    text-align:center;
+    font-weight:normal;
+    font-size:22px;
+    color:#16618b;
+    font-family:"Benton Sans Cond",?Arial,?sans-serif;
+    line-height:1.4em;
+    max-width:800px;
+    margin:0 auto;
+}
+.section h3.subtitle-size22 {font-size:22px;}
+.section h3.subtitle-size26 {font-size:26px;}
+.section h3.subtitle-size28 {font-size:28px;}
+
+.section.bg-blue_dark h1, .section.bg-blue_dark h2, .bg-blue_dark h3,
+.section.bg-red h1, .section.bg-red h2, .section.bg-red h3 {
+    color:#ffffff;
+}
+.section, .section.bg-white { background-color:#ffffff;}
+.section.bg-red {             background-color:#c83d44;color:#ffffff;}
+.section.bg-blue_dark {       background-color:#2f8abc;color:#ffffff;}
+.section.bg-blue_med {        background-color:#bde7fb;}
+.section.bg-blue_light {      background-color:#e2f6ff;}
+.section.bg-gray_light {      background-color:#f6f6f6;}
+
+.inner-section p {
+    text-align:left;
+    max-width:840px;
+}
+.inner-section p,
+.inner-section img.aligncenter {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.section a.link-button {
+    display:inline-block;
+    background-color: #c83d44;
+    border-radius: 4px;
+    font-family: felt_tip_romanregular;
+    font-size: 25px;
+    padding: 13px 20px;
+    margin:15px;
+    color:#ffffff;
+}
+.section a.link-button:hover {
+    text-decoration:none;
+    cursor:pointer;
+}
+
+</style>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<div class="entry-content">
+		<?php
+        the_content();
+
+        if( have_rows('section') ):
+            while ( have_rows('section') ) : the_row();
+                $moreclass = false;
+                $background_color = get_sub_field('background_color');
+                if($background_color){
+                    $moreclass = ' bg-'.$background_color;
+                }
+                $style = false;
+                /*if($background=='image'){
+                    $background_image = get_sub_field('background_image');
+                    $style = ' style="background-image:url('.$background_image['url'].');"';
+                }*/
+
+                $title = false;
+                $subtitle = false;
+                $title_size = intval(get_sub_field('title_size'));
+                if(get_sub_field('title')){
+                    $title = '<h2 class="title-size'.$title_size.'">'.get_sub_field('title').'</h2>';
+                }
+                $subtitle_size = intval(get_sub_field('subtitle_size'));
+                if(get_sub_field('subtitle')){
+                    $subtitle = '<h3 class="subtitle-size'.$subtitle_size.'">'.get_sub_field('subtitle').'</h3>';
+                }
+
+                $display = false;
+                $general_content = get_sub_field('general_content');
+                $big_image = get_sub_field('big_image');//echo '<pre>';print_r($big_image);echo '</pre>';
+                if($general_content){
+                    $display = get_sub_field('general_content');
+                } elseif($big_image){
+                    $display = '<img src="'.$big_image['sizes']['large'].'" alt="'.$big_image['alt'].'" width="'.$big_image['width'].'" height="'.$big_image['height'].'" />';
+                }
+
+                echo '
+                <div class="section '.$moreclass.'" '.$style.'>
+                    <div class="inner-section">
+                        '.$title.'
+                        '.$subtitle.'
+                        <div class="section-content">'.$display.'</div>
+                    </div>
+                </div>';
+
+            endwhile;
+
+            echo do_shortcode(get_field('html_code'));
+
+        endif;
+
+        ?>
+        <div style="clear:both;"></div>
+
+	</div><!-- .entry-content -->
+
+</article><!-- #post-<?php the_ID(); ?> -->

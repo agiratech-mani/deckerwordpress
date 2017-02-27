@@ -1,0 +1,8 @@
+plugins/woocommerce-dynamic-pricing/classes/modules/class-wc-dynamic-pricing-advanced-category.php
+just inside function adjust_cart, around line 27 add:
+global $woocommerce;
+
+in function adjust_cart, after the $valid_sets check, around line 35, add:
+if($woocommerce->cart->has_discount('spreadthenews')!=1){
+   return;
+}

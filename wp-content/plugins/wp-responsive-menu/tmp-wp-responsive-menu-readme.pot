@@ -1,0 +1,202 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "WP Responsive Menu"
+msgstr ""
+
+#. Short description.
+msgid "WP Responsive Menu turns your WordPress menu to a highly customizable sliding responsive menu."
+msgstr ""
+
+#. Screenshot description.
+msgid "<p>Admin settings.</p>"
+msgstr ""
+
+#. Screenshot description.
+msgid "<p>WP Responsive Menu view.</p>"
+msgstr ""
+
+#. Screenshot description.
+msgid "<p>Check out <a href=\"http://magnigenie.com/wp-responsive-menu-mobile-menu-plugin-wordpress/\">the demo</a></p>"
+msgstr ""
+
+#. Found in description header.
+msgid "Features:"
+msgstr ""
+
+#. Found in description header.
+msgid "Important Notes"
+msgstr ""
+
+#. Found in description list item.
+msgid "Fully responsive and works on all type of mobile devices. "
+msgstr ""
+
+#. Found in description list item.
+msgid "Easily integrates with wordpress menu system."
+msgstr ""
+
+#. Found in description list item.
+msgid "Easy to use admin interface. "
+msgstr ""
+
+#. Found in description list item.
+msgid "Easily replace your menu with responsive menu on mobile devices."
+msgstr ""
+
+#. Found in description list item.
+msgid "Choose your custom colors to match your theme."
+msgstr ""
+
+#. Found in description list item.
+msgid "Option to open menu from top, left and right."
+msgstr ""
+
+#. Found in description list item.
+msgid "Easily add your website logo the the menu."
+msgstr ""
+
+#. Found in description list item.
+msgid "Easily hide unwanted elements on mobile devices."
+msgstr ""
+
+#. Found in description list item.
+msgid "Supports swipe gestures."
+msgstr ""
+
+#. Found in description list item.
+msgid "Enable/Disable pinch to zoom feature."
+msgstr ""
+
+#. Found in description list item.
+msgid "Works perfectly on all devices/platforms."
+msgstr ""
+
+#. Found in description list item.
+msgid "Add a custom search bar to your menu."
+msgstr ""
+
+#. Found in description list item.
+msgid "Ability to change the search bar text."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "WordPress Responsive Menu plugin will help you to get a cool, highly customizable mobile menu plugin. Using this plugin you can easily convert your wordpress menu to a great, elegant looking sliding menu for all mobile devices."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "This plugin works out of box with any theme frameworks like genesis or thesis and it also works fine with multisite setups."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "If you are looking for more options then <a href=\"http://magnigenie.com/wp-responsive-menu-pro/\">check out the pro version</a> of the plugin."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "This plugin is based on  <a href=\"https://github.com/artberri/sidr\">sidr jquery menu plugin</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "For Quick support please check WP Responsive menu <a href=\"http://magnigenie.com/support/queries/wp-responsive-menu/\">Support forum</a>."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "If you have any  suggestions for a new plugin, feel free to email me at sagar@magnigenie.com."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Check out <a href=\"http://magnigenie.com/wp-responsive-menu-mobile-menu-plugin-wordpress/\">the demo</a>"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Go to your admin area and select Plugins -&gt; Add new from the menu."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Search for \"WP Responsive Menu\"."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click install."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Click activate."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Once the plugin is installed then you can see WPR Menu on the left navigation bar of WordPress Dashboard."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed conflict custom post type and contact form 7 menu."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added option to change the search box placeholder text."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Tested with WordPress 4.4 and added support for it."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed nesting icon issue."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added WordPress 4.3 support."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Updated google font loading method so that it would adapt to the protocol of the website."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed browser javascript issue for lower versions of IE."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed the submenu icon not showing error."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed menu spacing issue."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed jquery sidr issue for the top menu."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed menu scroll issue when there is more items inside menu."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed top menu z-index issue."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed plugin conflict with the themes already using options framework for their theme configuration."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Completely removed plugin settings page and used options framework for admin settings of the plugin."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed admin bar issue when user is logged in."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add option to disable swipe."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Added admin option to add search box to menu."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Initial public release."
+msgstr ""

@@ -1,0 +1,1 @@
+<?php /*This file is for locking out malicious IPs, they are sent here if their IP is noted in html/.htaccess.*/ ?>
