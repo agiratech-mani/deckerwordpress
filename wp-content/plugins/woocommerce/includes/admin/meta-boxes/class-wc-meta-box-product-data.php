@@ -173,7 +173,7 @@ class WC_Meta_Box_Product_Data {
 					) ) );
 
 					// Expirey
-					woocommerce_wp_text_input( array( 'id' => '_token_expiry', 'label' => __( 'Token expiry', 'woocommerce' ), 'placeholder' => __( 'Never', 'woocommerce' ), 'description' => __( 'Enter the number of days before a Token expires, or leave blank.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+					woocommerce_wp_text_input( array( 'id' => '_token_expiry', 'label' => __( 'Token validity', 'woocommerce' ), 'placeholder' => __( 'Never', 'woocommerce' ), 'description' => __( 'Enter the number of days before a Token expires, or leave blank.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
 						'step' 	=> '1',
 						'min'	=> '0'
 					) ) );
@@ -785,7 +785,6 @@ class WC_Meta_Box_Product_Data {
 	 */
 	public static function save( $post_id, $post ) {
 		global $wpdb;
-
 		// Add any default post meta
 		add_post_meta( $post_id, 'total_sales', '0', true );
 

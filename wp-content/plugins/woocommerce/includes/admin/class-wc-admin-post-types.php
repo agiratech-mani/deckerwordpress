@@ -344,6 +344,9 @@ class WC_Admin_Post_Types {
 						<div class="tax_status">' . $the_product->tax_status . '</div>
 						<div class="tax_class">' . $the_product->tax_class . '</div>
 						<div class="backorders">' . $the_product->backorders . '</div>
+						<div class="course_url">' . $the_product->course_url . '</div>
+						<div class="devices_limit">' . $the_product->devices_limit . '</div>
+						<div class="token_expiry">' . $the_product->token_expiry . '</div>
 					</div>
 				';
 
@@ -1110,7 +1113,7 @@ class WC_Admin_Post_Types {
 			update_post_meta( $post_id, '_tax_class', wc_clean( $_REQUEST['_tax_class'] ) );
 		}
 
-		if ( $product->is_type('simple') || $product->is_type('external') ) {
+		if ( $product->is_type('simple') || $product->is_type('external') || $product->is_type('course') ) {
 
 			if ( isset( $_REQUEST['_regular_price'] ) ) {
 				$new_regular_price = $_REQUEST['_regular_price'] === '' ? '' : wc_format_decimal( $_REQUEST['_regular_price'] );
@@ -1144,6 +1147,13 @@ class WC_Admin_Post_Types {
 					update_post_meta( $post_id, '_price', $new_regular_price );
 				}
 			}
+		}
+
+		if($product->is_type('course'))
+		{
+			update_post_meta( $post_id, '_course_url',  $_REQUEST['_course_url']  );
+			update_post_meta( $post_id, '_devices_limit',  $_REQUEST['_devices_limit']  );
+			update_post_meta( $post_id, '_token_expiry',  $_REQUEST['_token_expiry']  );
 		}
 
 		// Handle stock status

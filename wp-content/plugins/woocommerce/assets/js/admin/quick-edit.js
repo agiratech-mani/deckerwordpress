@@ -71,7 +71,7 @@ jQuery(function( $ ) {
 		var product_type       = $wc_inline_data.find( '.product_type' ).text(),
 			product_is_virtual = $wc_inline_data.find( '.product_is_virtual' ).text();
 
-		if ( 'simple' === product_type || 'external' === product_type ) {
+		if ( 'simple' === product_type || 'external' === product_type || 'course' === product_type) {
 			$( '.price_fields', '.inline-edit-row' ).show().removeAttr( 'style' );
 		} else {
 			$( '.price_fields', '.inline-edit-row' ).hide();

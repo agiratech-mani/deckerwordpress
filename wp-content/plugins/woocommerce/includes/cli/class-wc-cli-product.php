@@ -1072,7 +1072,7 @@ class WC_CLI_Product extends WC_CLI_Command {
 	 */
 	private function save_product_meta( $product_id, $data ) {
 		global $wpdb;
-
+		
 		// Product Type
 		$product_type = null;
 		if ( isset( $data['type'] ) ) {
