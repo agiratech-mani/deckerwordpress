@@ -83,7 +83,7 @@ class WC_Meta_Box_Product_Data {
 						'general' => array(
 							'label'  => __( 'General', 'woocommerce' ),
 							'target' => 'general_product_data',
-							'class'  => array( 'hide_if_grouped' ),
+							'class'  => array( 'show_if_simple','show_if_external','show_if_course'),
 						),
 						'inventory' => array(
 							'label'  => __( 'Inventory', 'woocommerce' ),
@@ -93,17 +93,17 @@ class WC_Meta_Box_Product_Data {
 						'shipping' => array(
 							'label'  => __( 'Shipping', 'woocommerce' ),
 							'target' => 'shipping_product_data',
-							'class'  => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external' ),
+							'class'  => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external', 'hide_if_course' ),
 						),
 						'linked_product' => array(
 							'label'  => __( 'Linked Products', 'woocommerce' ),
 							'target' => 'linked_product_data',
-							'class'  => array(),
+							'class'  => array('hide_if_course'),
 						),
 						'attribute' => array(
 							'label'  => __( 'Attributes', 'woocommerce' ),
 							'target' => 'product_attributes',
-							'class'  => array(),
+							'class'  => array('hide_if_course'),
 						),
 						'variations' => array(
 							'label'  => __( 'Variations', 'woocommerce' ),
@@ -113,7 +113,7 @@ class WC_Meta_Box_Product_Data {
 						'advanced' => array(
 							'label'  => __( 'Advanced', 'woocommerce' ),
 							'target' => 'advanced_product_data',
-							'class'  => array(),
+							'class'  => array('hide_if_course'),
 						)
 					) );
 
@@ -137,8 +137,13 @@ class WC_Meta_Box_Product_Data {
 					woocommerce_wp_text_input( array( 'id' => '_button_text', 'label' => __( 'Button text', 'woocommerce' ), 'placeholder' => _x('Buy product', 'placeholder', 'woocommerce'), 'description' => __( 'This text will be shown on the button linking to the external product.', 'woocommerce' ) ) );
 
 				echo '</div>';
+				echo '<div class="options_group show_if_course">';
 
-				echo '<div class="options_group pricing show_if_simple show_if_external hidden">';
+					// External URL
+					woocommerce_wp_text_input( array( 'id' => '_course_url', 'label' => __( 'Coruse URL', 'woocommerce' ), 'placeholder' => 'http://', 'description' => __( 'Enter the external URL to the product.', 'woocommerce' ) ) );
+				echo '</div>';
+
+				echo '<div class="options_group pricing show_if_simple show_if_external show_if_course hidden">';
 
 					// Price
 					woocommerce_wp_text_input( array( 'id' => '_regular_price', 'label' => __( 'Regular price', 'woocommerce' ) . ' (' . get_woocommerce_currency_symbol() . ')', 'data_type' => 'price' ) );
@@ -160,7 +165,19 @@ class WC_Meta_Box_Product_Data {
 					do_action( 'woocommerce_product_options_pricing' );
 
 				echo '</div>';
+				echo '<div class="options_group show_if_course hidden">';
+					// Download Limit
+					woocommerce_wp_text_input( array( 'id' => '_devices_limit', 'label' => __( 'Devices limit', 'woocommerce' ), 'placeholder' => __( 'Unlimited', 'woocommerce' ), 'description' => __( 'Leave blank for unlimited re-downloads.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+						'step' 	=> '1',
+						'min'	=> '0'
+					) ) );
 
+					// Expirey
+					woocommerce_wp_text_input( array( 'id' => '_token_expiry', 'label' => __( 'Token expiry', 'woocommerce' ), 'placeholder' => __( 'Never', 'woocommerce' ), 'description' => __( 'Enter the number of days before a Token expires, or leave blank.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+						'step' 	=> '1',
+						'min'	=> '0'
+					) ) );
+				echo '</div>';
 				echo '<div class="options_group show_if_downloadable hidden">';
 
 					?>
@@ -272,7 +289,6 @@ class WC_Meta_Box_Product_Data {
 				do_action( 'woocommerce_product_options_general_product_data' );
 				?>
 			</div>
-
 			<div id="inventory_product_data" class="panel woocommerce_options_panel hidden">
 
 				<?php
@@ -1209,6 +1225,14 @@ class WC_Meta_Box_Product_Data {
 
 			if ( isset( $_POST['_button_text'] ) ) {
 				update_post_meta( $post_id, '_button_text', wc_clean( $_POST['_button_text'] ) );
+			}
+		}
+		if ( 'course' == $product_type ) {
+
+			if ( isset( $_POST['_course_url'] ) ) {
+				update_post_meta( $post_id, '_course_url', esc_url_raw( $_POST['_course_url'] ) );
+				update_post_meta( $post_id, '_devices_limit', $_POST['_devices_limit'] );
+				update_post_meta( $post_id, '_token_expiry', $_POST['_token_expiry'] );
 			}
 		}
 

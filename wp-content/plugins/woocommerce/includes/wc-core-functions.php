@@ -168,7 +168,7 @@ function wc_get_template_part( $slug, $name = '' ) {
 
 	// Allow 3rd party plugins to filter template file from their plugin.
 	$template = apply_filters( 'wc_get_template_part', $template, $slug, $name );
-
+	
 	if ( $template ) {
 		load_template( $template, false );
 	}

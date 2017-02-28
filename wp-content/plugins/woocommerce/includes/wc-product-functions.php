@@ -527,8 +527,9 @@ function wc_get_product_types() {
 	return (array) apply_filters( 'product_type_selector', array(
 		'simple'   => __( 'Simple product', 'woocommerce' ),
 		'grouped'  => __( 'Grouped product', 'woocommerce' ),
+		'variable' => __( 'Variable product', 'woocommerce' ),
 		'external' => __( 'External/Affiliate product', 'woocommerce' ),
-		'variable' => __( 'Variable product', 'woocommerce' )
+		'course' => __( 'Course product', 'woocommerce' )
 	) );
 }
 

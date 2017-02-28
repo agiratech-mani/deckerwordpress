@@ -69,6 +69,13 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
             </div>
             <div class="coursecolumn coursetitle">
                 '; the_title(); echo '';
+                 if($product->get_type() == "course")
+                {
+                	$device_limit = $product->get_devices_limit();
+                	$token_expiry = $product->get_token_expiry();
+                	echo '<span class=" price"> Devices : '.$device_limit.'&nbsp;&nbsp;';
+                	echo ' Expiry : '.$token_expiry.'(Days)</span>';
+                }
                 if ($price_html = $product->get_price_html()){
                     if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
                         // sold out
@@ -77,6 +84,7 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	                <span class="price">'.$price_html.'</span>';
                     }
                 }
+               
                 echo '
             </div>
             <div class="coursecolumn courseregister">';
