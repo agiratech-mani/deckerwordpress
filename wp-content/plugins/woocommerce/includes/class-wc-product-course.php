@@ -49,7 +49,9 @@ class WC_Product_Course extends WC_Product {
 
 		return apply_filters( 'woocommerce_product_add_to_cart_text', $text, $this );
 	}
-
+	public function needs_shipping() {
+		return apply_filters( 'woocommerce_product_needs_shipping', false, $this );
+	}
 	/**
 	 * Get product url.
 	 *
