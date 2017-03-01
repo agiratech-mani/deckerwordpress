@@ -60,6 +60,7 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
     <div class="product-top">
         <?php
         if(is_page_template( 'page-locations.php' ) || is_page_template( 'page-full-width.php' )){//locations page, NY pages
+
             echo '
             <div class="coursecolumn coursesale">';
                 if ($product->is_on_sale()){
@@ -111,7 +112,7 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
             <h3><?php the_title(); ?></h3>
 
             <?php
-		    if(stripos($_SERVER['SCRIPT_URL'],'/self-directed-learning-resources/')!==false){
+		    if(stripos($_SERVER['REQUEST_URI'],'/self-directed-learning-resources/') !== false){
 		        // || stripos($_SERVER['SCRIPT_URL'],'/program-registration/')!==false
 
             	/**
