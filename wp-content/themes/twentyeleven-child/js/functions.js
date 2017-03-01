@@ -39,5 +39,4 @@ if (url.search("book-communicate-to-influence") < 0) {
 }
 
 
-});
 })( jQuery );

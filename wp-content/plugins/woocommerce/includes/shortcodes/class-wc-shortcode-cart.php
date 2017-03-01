@@ -76,7 +76,6 @@ class WC_Shortcode_Cart {
 		if ( WC()->cart->is_empty() ) {
 			wc_get_template( 'cart/cart-empty.php' );
 		} else {
-			echo "Asd";
 			wc_get_template( 'cart/cart.php' );
 		}
 	}

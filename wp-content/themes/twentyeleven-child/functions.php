@@ -674,7 +674,6 @@ function wt_attendee_update_order_meta( $order_id ) {
         }
     }
 }
-
 function wt_count_attendees($count_this_product) {
     global $woocommerce;
     $attendee_count = 0;
@@ -710,6 +709,35 @@ function wt_count_attendees($count_this_product) {
 
     return $attendee_count;
 }
+add_action('woocommerce_checkout_update_order_meta', 'wt_tokens_update_order_meta');
+
+function wt_tokens_update_order_meta( $order_id ) 
+{
+    global $woocommerce;
+    foreach ($woocommerce->cart->get_cart() as $item_id => $values) 
+    {
+        $_product = $values['data'];
+        //$attendee_count = wt_count_attendees($_product);
+        if ($_product->exists() && $values['quantity'] > 0)
+        {   
+            $terms = wp_get_post_terms( $_product->id, 'product_cat' );
+            foreach ( $terms as $term ){
+                $categories[] = $term->term_id;
+            }
+            if ( in_array(2448,$categories ))
+            {
+                update_post_meta( $order_id, $_product->post->post_title .' Tokens '.$n.' Title', uniqid());
+            }
+        }
+    }
+}
+
+function wt_count_tokens($count_this_product) 
+{
+    global $woocommerce;
+
+}
+
 
  // Change who gets the automatic WP update emails
 function change_auto_update_email( $email ) {
