@@ -5229,7 +5229,11 @@ ul.products li.product h3 {
 	display: inline-block;
 	vertical-align: top;
 }
-
+.page-id-14374 .woocommerce ul.products li.product {
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+}
 .product-top {
   display: block;
 /*min-height:140px;*/
