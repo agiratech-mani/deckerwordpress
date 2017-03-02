@@ -111,6 +111,7 @@ class WC_Emails {
 		add_action( 'woocommerce_email_order_details', array( $this, 'order_details' ), 10, 4 );
 		add_action( 'woocommerce_email_order_details', array( $this, 'order_schema_markup' ), 20, 4 );
 		add_action( 'woocommerce_email_order_meta', array( $this, 'order_meta' ), 10, 3 );
+		add_action( 'woocommerce_email_order_tokens', array( $this, 'order_tokens' ), 10, 3 );
 		add_action( 'woocommerce_email_customer_details', array( $this, 'customer_details' ), 10, 3 );
 		add_action( 'woocommerce_email_customer_details', array( $this, 'email_addresses' ), 20, 3 );
 
@@ -430,7 +431,19 @@ class WC_Emails {
 			}
 		}
 	}
+	public function order_tokens( $order, $sent_to_admin = false, $plain_text = false ) 
+	{
+		$web_tokens = $order->get_web_tokens();
+		if(!empty($web_tokens))
+		{
+			if ( $plain_text ) {
+				echo  wc_get_template( 'emails/plain/email-web-tokens-details.php', array( 'web_tokens' => $web_tokens ) );
+			} else {
+				echo wc_get_template( 'emails/email-web-tokens-details.php', array( 'web_tokens' => $web_tokens ) );
+			}
+		}
 
+	}
 	/**
 	 * Is customer detail field valid?
 	 * @param  array  $field

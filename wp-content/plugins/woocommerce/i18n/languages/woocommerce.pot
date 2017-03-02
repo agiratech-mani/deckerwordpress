@@ -20050,6 +20050,11 @@ msgstr ""
 msgid "Customer details"
 msgstr ""
 
+#: templates/emails/email-web-tokens-details.php:26
+#: templates/emails/plain/email-web-tokens-details.php:25
+msgid "Course licence details"
+msgstr ""
+
 #: templates/emails/plain/admin-new-order.php:25
 msgid "You have received an order from %s."
 msgstr ""

@@ -714,11 +714,33 @@ add_action('woocommerce_checkout_update_order_meta', 'wt_tokens_update_order_met
 function wt_tokens_update_order_meta( $order_id ) 
 {
     global $woocommerce;
+    $current_user = wp_get_current_user();
+    $bitly_login = get_option( 'woocommerce_bitly_login', '' );
+    $bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
     foreach ($woocommerce->cart->get_cart() as $item_id => $values) 
     {
         $_product = $values['data'];
+        $product_id = $_product->id;
+        $courseurl = $_product->get_course_url();
+        $devices_limit = $_product->get_devices_limit();
+        $token_expiry = $_product->get_token_expiry();
+        $product_type = $_product->get_type();
         //$attendee_count = wt_count_attendees($_product);
-        if ($_product->exists() && $values['quantity'] > 0)
+        $dateobj = new DateTime();
+        $createdate = $dateobj->format('Y-m-d H:i:s');
+        
+
+        if($token_expiry != '' && $token_expiry > 0)
+        {
+            $dateobj->add(new DateInterval('P'.$token_expiry.'D'));
+            $expirydate = $dateobj->format('Y-m-d H:i:s');
+        }
+        else
+        {
+            $expirydate = '';
+        }
+        
+        if ($_product->exists() && $values['quantity'] > 0 && $product_type == "course")
         {   
             $terms = wp_get_post_terms( $_product->id, 'product_cat' );
             foreach ( $terms as $term ){
@@ -726,10 +748,56 @@ function wt_tokens_update_order_meta( $order_id )
             }
             if ( in_array(2448,$categories ))
             {
-                update_post_meta( $order_id, $_product->post->post_title .' Tokens '.$n.' Title', uniqid());
+                //update_post_meta( $order_id, $_product->post->post_title .' Tokens '.$n.' Title', uniqid());
+                for($p = 0;$p < $values['quantity'];$p++)
+                {
+                   $token = uniqid();
+                   $long_url = $courseurl.'?t='.$token;
+                   $short_url = get_bitly_short_url($long_url,$bitly_login,$bitly_api_key);
+                   $banner_data = array(
+                        'order_id'              => $order_id,
+                        'user_id'               => $current_user->ID,
+                        'product_id'            => $product_id,
+                        'token'                 => $token,
+                        'short_url'             => $short_url,
+                        'token_device_limit'    => $devices_limit,
+                        'token_created_date'    => $createdate,
+                        'token_expiry_date'     => $expirydate,
+                        'token_last_accessed'   => '',
+                        'token_last_device'     => ''
+                    );
+                    wootokens_add_web_tokens($banner_data);
+                    /*$to = "mani@securenext.net";
+                    $subject = "Tokens";
+                    $message = print_r($banner_data,true);
+                    wp_mail( $to, $subject, $message);*/
+                }
+                
             }
         }
     }
+}
+function get_bitly_short_url($url,$login,$appkey,$format='txt') {
+    $connectURL = 'http://api.bit.ly/v3/shorten?login='.$login.'&apiKey='.$appkey.'&uri='.urlencode($url).'&format='.$format;
+    return curl_get_result($connectURL);
+}
+
+/* returns expanded url */
+function get_bitly_long_url($url,$login,$appkey,$format='txt') {
+    $connectURL = 'http://api.bit.ly/v3/expand?login='.$login.'&apiKey='.$appkey.'&shortUrl='.urlencode($url).'&format='.$format;
+    return curl_get_result($connectURL);
+}
+
+/* returns a result form url */
+function curl_get_result($url) {
+    $ch = curl_init();
+    $timeout = 5;
+    curl_setopt($ch,CURLOPT_URL,$url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    return $data;
 }
 
 function wt_count_tokens($count_this_product) 

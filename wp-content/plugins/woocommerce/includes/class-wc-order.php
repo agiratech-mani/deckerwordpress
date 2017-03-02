@@ -288,4 +288,9 @@ class WC_Order extends WC_Abstract_Order {
 	public function get_remaining_refund_items() {
 		return absint( $this->get_item_count() - $this->get_item_count_refunded() );
 	}
+	public function get_web_tokens()
+	{
+		$web_tokens = wootokens_get_web_tokens($this->id);
+		return $web_tokens;
+	}
 }

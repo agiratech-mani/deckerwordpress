@@ -41,6 +41,8 @@ do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_tex
  */
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
 
+do_action( 'woocommerce_email_order_tokens', $order, $sent_to_admin, $plain_text, $email );
+
 /**
  * @hooked WC_Emails::customer_details() Shows customer details
  * @hooked WC_Emails::email_address() Shows email address
