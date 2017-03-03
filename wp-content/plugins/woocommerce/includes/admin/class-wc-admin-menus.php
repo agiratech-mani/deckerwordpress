@@ -25,6 +25,7 @@ class WC_Admin_Menus {
 	public function __construct() {
 		// Add menus
 		add_action( 'admin_menu', array( $this, 'admin_menu' ), 9 );
+		add_action( 'admin_menu', array( $this, 'web_tokens_menu' ), 10 );
 		add_action( 'admin_menu', array( $this, 'reports_menu' ), 20 );
 		add_action( 'admin_menu', array( $this, 'settings_menu' ), 50 );
 		add_action( 'admin_menu', array( $this, 'status_menu' ), 60 );
@@ -78,7 +79,6 @@ class WC_Admin_Menus {
 	 */
 	public function settings_menu() {
 		$settings_page = add_submenu_page( 'woocommerce', __( 'WooCommerce Settings', 'woocommerce' ),  __( 'Settings', 'woocommerce' ) , 'manage_woocommerce', 'wc-settings', array( $this, 'settings_page' ) );
-
 		add_action( 'load-' . $settings_page, array( $this, 'settings_page_init' ) );
 	}
 
@@ -103,6 +103,13 @@ class WC_Admin_Menus {
 	 */
 	public function addons_menu() {
 		add_submenu_page( 'woocommerce', __( 'WooCommerce Extensions', 'woocommerce' ),  __( 'Extensions', 'woocommerce' ) , 'manage_woocommerce', 'wc-addons', array( $this, 'addons_page' ) );
+	}
+
+	/**
+	 * Addons menu item.
+	 */
+	public function web_tokens_menu() {
+		add_submenu_page( 'woocommerce', __( 'WooCommerce Tokens', 'woocommerce' ),  __( 'Tokens', 'woocommerce' ) , 'manage_woocommerce', 'wc-tokens', array( $this, 'tokens_page' ) );
 	}
 
 	/**
@@ -226,6 +233,14 @@ class WC_Admin_Menus {
 	public function addons_page() {
 		WC_Admin_Addons::output();
 	}
+
+	/**
+	 * Init the tokens page.
+	 */
+	public function tokens_page() {
+		WC_Admin_Tokens::output();
+	}
+
 
 	/**
 	 * Add custom nav meta box.

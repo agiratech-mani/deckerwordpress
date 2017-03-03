@@ -18,7 +18,7 @@ function wootokens_add_web_tokens( $data ) {
     $id = $web_tokens->add_web_tokens( $data );
     return $id;
 }
-function wootokens_get_web_tokens( $order_id ) {
+function wootokens_get_web_tokens( $order_id = NULL ) {
     global $web_tokens;
     $tokens = $web_tokens->get_web_tokens( $order_id );
     return $tokens;

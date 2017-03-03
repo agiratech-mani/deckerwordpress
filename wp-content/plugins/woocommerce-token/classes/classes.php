@@ -23,14 +23,16 @@ class WooCommerce_Token
         $id = $wpdb->insert_id;
         return $id;
     }
-    public function get_web_tokens($order_id) {
+    public function get_web_tokens($order_id = NULL) {
         global $wpdb;
         $sql = "SELECT tokens.*,posts.post_title as product FROM " . $wpdb->web_tokens." as tokens ";
         $sql .= "LEFT JOIN ".$wpdb->posts." as posts on posts.id = tokens.`product_id`";
-        $sql .= " where order_id = ". $order_id;
+        if(!is_null($order_id))
+        {
+            $sql .= " where order_id = ". $order_id;
+        }
         $sql .= " ORDER BY id;";
         $web_tokens = $wpdb->get_results($sql);
         return $web_tokens;
     }
-
 }
