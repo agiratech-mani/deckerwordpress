@@ -15,16 +15,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
-
-class WC_Admin_Tokens_Table_List extends WP_List_Table {
+class WC_Admin_Device_Histories_Table_List extends WP_List_Table {
 
 
 	/** Class constructor */
 	public function __construct() {
 
 		parent::__construct( [
-			'singular' => __( 'token', 'woocommerce' ), //singular name of the listed records
-			'plural'   => __( 'tokens', 'woocommerce' ), //plural name of the listed records
+			'singular' => __( 'device_history', 'woocommerce' ), //singular name of the listed records
+			'plural'   => __( 'device_histories', 'woocommerce' ), //plural name of the listed records
 			'ajax'     => false //does this table support ajax?
 		] );
 	}
@@ -35,16 +34,9 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns =  array(
-			'cb'           => '<input type="checkbox" />',
-			'token'        => __( 'Token', 'woocommerce' ),
-			'short_url' => __( 'Course URL', 'woocommerce' ),
-			'order_id'        => __( 'Order', 'woocommerce' ),
-			'product_id'       => __( 'Product', 'woocommerce' ),
-			'user_id'       => __( 'User', 'woocommerce' ),
-			'token_device_limit' => __( 'Device Limit', 'woocommerce' ),
-			'token_expiry_date' => __( 'Token Expiry', 'woocommerce' ),
-			'token_last_accessed' => __( 'Last Accessed', 'woocommerce' ),
-			'token_last_device' => __( 'Last Accessed Device', 'woocommerce' ),
+			'device_id' => __( 'Device', 'woocommerce' ),
+			'access_ip'       => __( 'IP', 'woocommerce' ),
+			'access_date' => __( 'Accessed date', 'woocommerce' ),
 		);
 		return $columns;
 	}
@@ -57,11 +49,11 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	 *
 	 * @return mixed
 	 */
-	public static function get_web_tokens( $per_page = 5, $page_number = 1 ) {
+	public static function get_web_device_histories( $per_page = 5, $page_number = 1,$tid ) {
 
 		global $wpdb;
-		$sql = "SELECT * FROM {$wpdb->prefix}web_tokens";
-
+		$sql = "SELECT * FROM {$wpdb->prefix}web_device_history";
+		$sql .=" where device_id = {$tid}";
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
 			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' desc';
@@ -96,10 +88,11 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	 *
 	 * @return null|string
 	 */
-	public static function record_count() {
+	public static function record_count($id) {
 		global $wpdb;
 
-		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}web_tokens";
+		$sql = "SELECT COUNT(*) FROM {$wpdb->prefix}web_device_history";
+		$sql .=" where device_id = {$id}";
 
 		return $wpdb->get_var( $sql );
 	}
@@ -117,57 +110,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	 */
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-			case 'order_id':
-				return  "<a href='post.php?post={$item[$column_name]}&amp;action=view' class='row-title'><strong>#{$item[$column_name]}</strong></a>";
-			case 'product_id':
-				return  "<a href='post.php?post={$item[$column_name]}&amp;action=view' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
-			case 'user_id':
-				if($item[$column_name] == '')
-				{
-					return '';
-				}
-				else
-				{
-					$userdata = WP_User::get_data_by( "ID", $item[$column_name] );
-					return  "<a href='user-edit.php?user_id={$item[$column_name]}&amp;wp_http_referer=%2Fwp-admin%2Fusers.php' class='row-title'><strong>{$userdata->display_name}</strong></a>";
-				}
-			case 'token_device_limit':
-				if($item[$column_name] > 0)
-				{
-					//return $item[$column_name];
-					return  "<a href='admin.php?page=wc-tokens&token_id={$item['id']}' class='row-title'><strong>{$item[$column_name]}</strong></a>";
-				}
-				else
-				{
-					return "Unlimited";
-				}
-			case 'token_expiry_date':
-				if($item[$column_name] != "0000-00-00 00:00:00")
-				{
-					return $item[$column_name];
-				}
-				else
-				{
-					return "Never";
-				}
-			case 'token_last_accessed':
-				if($item[$column_name] != "0000-00-00 00:00:00")
-				{
-					return $item[$column_name];
-				}
-				else
-				{
-					return "-";
-				}
-			case 'token_last_device':
-				if($item[$column_name] > 0)
-				{
-					return $item[$column_name];
-				}
-				else
-				{
-					return "-";
-				}
+			case 'id':
 			default:
 				return $item[ $column_name ];
 				//return print_r( $item, true ); //Show the whole array for troubleshooting purposes
@@ -236,8 +179,8 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	 * Handles data query and filter, sorting, and pagination.
 	 */
 	public function prepare_items() {
-
-		$per_page = $this->get_items_per_page( 'tokens_per_page', 10 );
+		$device_id = $_GET['device_id'];
+		$per_page = $this->get_items_per_page( 'token_devices_per_page', 10 );
 		$columns  = $this->get_columns();
 		$hidden   = array();
 		$sortable = $this->get_sortable_columns();
@@ -249,9 +192,9 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 
 		
 		$current_page = $this->get_pagenum();
-		$total_items  = self::record_count();
+		$total_items  = self::record_count($device_id);
 
-		$this->items = self::get_web_tokens( $per_page, $current_page );
+		$this->items = self::get_web_device_histories( $per_page, $current_page,$device_id);
 		$this->set_pagination_args( [
 			'total_items' => $total_items, //WE have to calculate the total number of items
 			'per_page'    => $per_page //WE have to determine how many items to show on a page

@@ -82,6 +82,8 @@ class WooCommerce_Token
         $ip = $params['ip'];
         $url = $this->get_domain($params['url']);
         $browserdet = get_browser($useragent);
+        print_r( $browserdet);
+        die;
         $browser = $browserdet->browser;
         $os = $browserdet->platform;
         $device_type = $browserdet->device_type;

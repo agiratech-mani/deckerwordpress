@@ -22,6 +22,7 @@ function web_tokens_routes()
 	register_rest_route( 'wt/v1', '/verifytoken', array(
 		'methods' => 'POST',
 		'callback' => "verify_tokens",
+		'permission_callback' => function(){ return true; }
 	) );
 }
 function verify_tokens(WP_REST_Request $request) {
