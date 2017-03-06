@@ -82,8 +82,6 @@ class WooCommerce_Token
         $ip = $params['ip'];
         $url = $this->get_domain($params['url']);
         $browserdet = get_browser($useragent);
-        print_r( $browserdet);
-        die;
         $browser = $browserdet->browser;
         $os = $browserdet->platform;
         $device_type = $browserdet->device_type;
@@ -106,7 +104,6 @@ class WooCommerce_Token
                     $token_data = [];
                     $token_data['token_last_device'] = $devices[0]->id;
                     $token_data['token_last_accessed'] = (new DateTime())->format('Y-m-d H:i:s');
-                    $token_data['access_ip'] = $ip;
                     $device_id = $this->update_token($token_data,$tid);
                     $success = 1;
                     $status = "Verified";
