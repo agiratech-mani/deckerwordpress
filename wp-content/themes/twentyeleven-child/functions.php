@@ -752,14 +752,15 @@ function wt_tokens_update_order_meta( $order_id )
                 for($p = 0;$p < $values['quantity'];$p++)
                 {
                    $token = uniqid();
-                   $long_url = $courseurl.'?t='.$token;
+                   $long_url = $courseurl.'?token='.$token;
                    $short_url = get_bitly_short_url($long_url,$bitly_login,$bitly_api_key);
                    $banner_data = array(
                         'order_id'              => $order_id,
                         'user_id'               => $current_user->ID,
                         'product_id'            => $product_id,
                         'token'                 => $token,
-                        'short_url'             => $short_url,
+                        'short_url'             => trim($short_url),
+                        'long_url'              => $long_url,
                         'token_device_limit'    => $devices_limit,
                         'token_created_date'    => $createdate,
                         'token_expiry_date'     => $expirydate,

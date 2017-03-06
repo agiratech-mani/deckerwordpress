@@ -15,4 +15,30 @@ function web_token_init() {
     }*/
 }
 
+add_action( 'rest_api_init', 'web_tokens_routes' );
+
+function web_tokens_routes() 
+{
+	register_rest_route( 'wt/v1', '/verifytoken', array(
+		'methods' => 'POST',
+		'callback' => "verify_tokens",
+	) );
+}
+function verify_tokens(WP_REST_Request $request) {
+
+	global $wpdb, $web_tokens;
+	$web_tokens = new WooCommerce_Token();
+	$params = $request->get_params();
+    $type = $params['type'];
+    if($type == "verify_tokens")
+    {
+    	return $web_tokens->verify_tokens($request);
+    }
+    elseif($type == "add_new")
+    {
+    	return $web_tokens->add_new($request);
+    }
+	
+}
+
 ?>
