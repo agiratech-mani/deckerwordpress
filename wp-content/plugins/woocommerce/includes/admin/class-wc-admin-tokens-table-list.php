@@ -118,9 +118,9 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
 			case 'order_id':
-				return  "<a href='post.php?post={$item[$column_name]}&amp;action=view' class='row-title'><strong>#{$item[$column_name]}</strong></a>";
+				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>#{$item[$column_name]}</strong></a>";
 			case 'product_id':
-				return  "<a href='post.php?post={$item[$column_name]}&amp;action=view' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
+				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
 			case 'user_id':
 				if($item[$column_name] == '')
 				{
@@ -139,7 +139,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				}
 				else
 				{
-					return "Unlimited";
+					return  "<a href='admin.php?page=wc-tokens&token_id={$item['id']}' class='row-title'><strong>Unlimited</strong></a>";
 				}
 			case 'token_expiry_date':
 				if($item[$column_name] != "0000-00-00 00:00:00")

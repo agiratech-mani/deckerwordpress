@@ -70,13 +70,6 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
             </div>
             <div class="coursecolumn coursetitle">
                 '; the_title(); echo '';
-                 if($product->get_type() == "course")
-                {
-                	$device_limit = ($product->get_devices_limit() == ''?"Unlimited":$product->get_devices_limit());
-                	$token_expiry = ($product->get_token_expiry() == ''?"Never":$product->get_token_expiry()).'(Days)';
-                	echo '<span class=" price"> Devices : '.$device_limit.'</span>';
-                	echo '<span class=" price"> Validity : '.$token_expiry.'</span>';
-                }
                 if ($price_html = $product->get_price_html()){
                     if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
                         // sold out
@@ -85,7 +78,13 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	                <span class="price">'.$price_html.'</span>';
                     }
                 }
-               
+               	if($product->get_type() == "course")
+                {
+                	$device_limit = ($product->get_devices_limit() == ''?"Unlimited":$product->get_devices_limit());
+                	$token_expiry = ($product->get_token_expiry() == ''?"Never":$product->get_token_expiry().'(Days)');
+                	//echo '<span class=" price"> Devices : '.$device_limit.'</span>';
+                	echo '<span class=" price"> Validity : '.$token_expiry.'</span>';
+                }
                 echo '
             </div>
             <div class="coursecolumn courseregister">';
