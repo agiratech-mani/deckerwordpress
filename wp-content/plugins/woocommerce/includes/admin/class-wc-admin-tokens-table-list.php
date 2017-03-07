@@ -35,16 +35,14 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns =  array(
-			'cb'           => '<input type="checkbox" />',
+			'order_id'        => __( 'Order', 'woocommerce' ),
+			'user_id'       => __( 'User', 'woocommerce' ),
+			'product_id'       => __( 'Product', 'woocommerce' ),
 			'token'        => __( 'Token', 'woocommerce' ),
 			'short_url' => __( 'Course URL', 'woocommerce' ),
-			'order_id'        => __( 'Order', 'woocommerce' ),
-			'product_id'       => __( 'Product', 'woocommerce' ),
-			'user_id'       => __( 'User', 'woocommerce' ),
-			'token_device_limit' => __( 'Device Limit', 'woocommerce' ),
-			'token_expiry_date' => __( 'Token Expiry', 'woocommerce' ),
-			'token_last_accessed' => __( 'Last Accessed', 'woocommerce' ),
-			'token_last_device' => __( 'Last Accessed Device', 'woocommerce' ),
+			'registered' => __( 'Device Registered', 'woocommerce' ),
+			'token_expiry_date' => __( 'Token Expiry Date', 'woocommerce' ),
+			'token_last_accessed' => __( 'Last Accessed', 'woocommerce' )
 		);
 		return $columns;
 	}
@@ -60,15 +58,16 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	public static function get_web_tokens( $per_page = 5, $page_number = 1 ) {
 
 		global $wpdb;
-		$sql = "SELECT * FROM {$wpdb->prefix}web_tokens";
-
+		$sql = "SELECT tokens.*,count(devices.id) as registered FROM {$wpdb->prefix}web_tokens as tokens";
+		$sql .= " LEFT JOIN {$wpdb->prefix}web_token_devices as devices on devices.token_id = tokens.id";
+		$sql .= " GROUP BY tokens.id";
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
 			$sql .= ! empty( $_REQUEST['order'] ) ? ' ' . esc_sql( $_REQUEST['order'] ) : ' desc';
 		}
 		else
 		{
-			$sql .= ' ORDER BY id desc';
+			$sql .= ' ORDER BY tokens.id desc';
 		}
 
 		$sql .= " LIMIT $per_page";
@@ -122,7 +121,8 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 			case 'product_id':
 				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
 			case 'user_id':
-				if($item[$column_name] == '')
+				return get_post_meta($item["order_id"],"_billing_first_name",true).' '.get_post_meta($item["order_id"],"_billing_last_name",true).'<br><a href="mailto:'.get_post_meta($item["order_id"],"_billing_email",true).'">'.get_post_meta($item["order_id"],"_billing_email",true).'</a>';
+				/*if($item[$column_name] == '')
 				{
 					return '';
 				}
@@ -130,9 +130,10 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				{
 					$userdata = WP_User::get_data_by( "ID", $item[$column_name] );
 					return  "<a href='user-edit.php?user_id={$item[$column_name]}&amp;wp_http_referer=%2Fwp-admin%2Fusers.php' class='row-title'><strong>{$userdata->display_name}</strong></a>";
-				}
-			case 'token_device_limit':
-				if($item[$column_name] > 0)
+				}*/
+			case 'registered':
+				return  "<a href='admin.php?page=wc-tokens&token_id={$item['id']}' class='row-title'><strong>{$item[$column_name]}</strong></a>";
+				/*if($item[$column_name] > 0)
 				{
 					//return $item[$column_name];
 					return  "<a href='admin.php?page=wc-tokens&token_id={$item['id']}' class='row-title'><strong>{$item[$column_name]}</strong></a>";
@@ -140,7 +141,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				else
 				{
 					return  "<a href='admin.php?page=wc-tokens&token_id={$item['id']}' class='row-title'><strong>Unlimited</strong></a>";
-				}
+				}*/
 			case 'token_expiry_date':
 				if($item[$column_name] != "0000-00-00 00:00:00")
 				{

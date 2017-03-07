@@ -37,9 +37,11 @@ class WooCommerce_Token
     }
     public function get_web_token_by($token = NULL) {
         global $wpdb;
-        $sql = "SELECT * FROM " . $wpdb->web_tokens;
-        $sql .= " where token = '". $token."'";
-        $sql .= " ORDER BY id;";
+        $sql = "SELECT tokens.*,count(devices.id) as registered FROM " . $wpdb->web_tokens." as tokens ";
+        $sql .= "LEFT JOIN {$wpdb->prefix}web_token_devices as devices on devices.token_id = tokens.id";
+        //$sql = "SELECT * FROM " . $wpdb->web_tokens;
+        $sql .= " where tokens.token = '". $token."'";
+        $sql .= " GROUP BY tokens.id ORDER BY tokens.id;";
         $web_tokens = $wpdb->get_results($sql);
         return $web_tokens;
     }
@@ -76,6 +78,7 @@ class WooCommerce_Token
     public function verify_tokens($request) 
     {
         global $wpdb;
+        $registered = 0;
         $params = $request->get_params();
         $token = $params['token'];
         $useragent = $params['useragent'];
@@ -133,6 +136,7 @@ class WooCommerce_Token
                    {
                         $success = 1;
                         $status = "New";
+                        $registered = $tokenobj[0]->registered;
                    }
                    
                 }
@@ -150,7 +154,8 @@ class WooCommerce_Token
         }
         $data = array( 
             'success'=>$success,
-            'status'=> $status
+            'status'=> $status,
+            'registered'=> $registered
         );
 
         // Create the response object

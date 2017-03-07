@@ -35,13 +35,14 @@ class WC_Admin_Tokens_Device_Table_List extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns =  array(
-			'id' => __( 'Token', 'woocommerce' ),
+			'token_id' => __( 'Token', 'woocommerce' ),
+			'id' => __( 'Device ID', 'woocommerce' ),
 			'device_os' => __( 'OS', 'woocommerce' ),
 			'browser'        => __( 'Browser', 'woocommerce' ),
 			'device_type'       => __( 'Device Type', 'woocommerce' ),
 			'access_ip'       => __( 'IP', 'woocommerce' ),
-			'device_create_date' => __( 'Device created', 'woocommerce' ),
-			'device_last_accessed' => __( 'Last accessed', 'woocommerce' ),
+			'device_create_date' => __( 'Device Created Date', 'woocommerce' ),
+			'device_last_accessed' => __( 'Last Accessed', 'woocommerce' ),
 		);
 		return $columns;
 	}

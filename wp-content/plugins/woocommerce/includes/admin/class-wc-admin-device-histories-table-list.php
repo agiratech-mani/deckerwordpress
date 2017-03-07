@@ -34,9 +34,9 @@ class WC_Admin_Device_Histories_Table_List extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns =  array(
-			'device_id' => __( 'Device', 'woocommerce' ),
+			'device_id' => __( 'Device ID', 'woocommerce' ),
 			'access_ip'       => __( 'IP', 'woocommerce' ),
-			'access_date' => __( 'Accessed date', 'woocommerce' ),
+			'access_date' => __( 'Accessed Date', 'woocommerce' ),
 		);
 		return $columns;
 	}
