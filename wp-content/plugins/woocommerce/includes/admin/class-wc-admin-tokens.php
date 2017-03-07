@@ -37,7 +37,7 @@ class WC_Admin_Tokens {
 		}
 		else if(!empty($_GET) && isset($_GET['device_id']) && $_GET['device_id'] > 0)
 		{
-			echo '<h2>' . __( 'Device Access Histories', 'woocommerce' ).'</h2>'.' <a href="admin.php?page=wc-tokens">Back</a>';
+			echo '<h2>' . __( 'Device Access History', 'woocommerce' ).'</h2>'.' <a href="admin.php?page=wc-tokens">Back</a>';
 			$tokens_table_list = new WC_Admin_Device_Histories_Table_List();
 			$tokens_table_list->prepare_items();
 			echo '<input type="hidden" name="page" value="wc-tokens" />';
