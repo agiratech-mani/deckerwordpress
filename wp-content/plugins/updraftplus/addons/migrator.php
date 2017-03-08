@@ -2047,7 +2047,7 @@ class UpdraftPlus_Addons_Migrator_RemoteSend {
 										});
 									}, 1700);
 									
-									updraft_backupnow_go(backupnow_nodb, backupnow_nofiles, backupnow_nocloud, onlythisfileentity, extradata, $('#remotesend_backupnow_label').val());
+									updraft_backupnow_go(backupnow_nodb, backupnow_nofiles, backupnow_nocloud, onlythisfileentity, extradata, $('#remotesend_backupnow_label').val(), '');
 								}
 								buttons[updraftlion.close] = function() { $(this).dialog("close"); };
 								$mmodal.dialog("option", "buttons", buttons);

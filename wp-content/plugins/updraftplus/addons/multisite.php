@@ -2,9 +2,9 @@
 /*
 UpdraftPlus Addon: multisite:Multisite/Network
 Description: Makes UpdraftPlus compatible with a WordPress Network (a.k.a. multi-site) and adds Network-related features
-Version: 3.3
+Version: 3.4
 Shop: /shop/network-multisite/
-Latest Change: 1.12.28
+Latest Change: 1.12.33
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
@@ -30,17 +30,14 @@ if (is_multisite()) {
 
 		public static function get_updraft_option($option, $default = false) {
 			$tmp = get_site_option('updraftplus_options');
-			if (isset($tmp[$option])) {
-				return $tmp[$option];
-			} else {
-				return $default;
-			}
+			$ret = isset($tmp[$option]) ? $tmp[$option] : $default;
+			return apply_filters('updraftplus_get_option', $ret, $option, $default);
 		}
 
 		public static function update_updraft_option($option, $value, $use_cache = true) {
 			$tmp = get_site_option('updraftplus_options', array(), $use_cache);
 			if (!is_array($tmp)) $tmp = array();
-			$tmp[$option] = $value;
+			$tmp[$option] = apply_filters('updraftplus_update_option', $value, $option, $use_cache);
 			return update_site_option('updraftplus_options', $tmp);
 		}
 

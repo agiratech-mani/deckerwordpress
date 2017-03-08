@@ -2,9 +2,9 @@
 /*
 UpdraftPlus Addon: moredatabase:Multiple database backup options
 Description: Provides the ability to encrypt database backups, and to back up external databases
-Version: 1.3
+Version: 1.4
 Shop: /shop/moredatabase/
-Latest Change: 1.12.31
+Latest Change: 1.12.33
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
@@ -12,6 +12,8 @@ if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 $updraftplus_addon_moredatabase = new UpdraftPlus_Addon_MoreDatabase;
 
 class UpdraftPlus_Addon_MoreDatabase {
+
+	private $database_tables;
 
 	public function __construct() {
 		add_filter('updraft_backup_databases', array($this, 'backup_databases'));
@@ -25,6 +27,9 @@ class UpdraftPlus_Addon_MoreDatabase {
 		add_filter('updraft_extradb_testconnection_go', array($this, 'extradb_testconnection_go'), 10, 2);
 		add_action('updraftplus_restore_form_db', array($this, 'restore_form_db'), 9);
 		add_filter('updraftplus_get_settings_meta', array($this, 'get_settings_meta'));
+		add_filter('updraft_backupnow_database_showmoreoptions', array($this, 'backupnow_database_showmoreoptions'), 10, 2);
+		add_filter('updraft_backupnow_options', array($this, 'backupnow_options'), 10, 2);
+		add_filter('updraftplus_backup_table', array($this, 'updraftplus_backup_table'), 10, 5);
 	}
 
 	public function get_settings_meta($meta) {
@@ -454,6 +459,105 @@ class UpdraftPlus_Addon_MoreDatabase {
 		}
 
 		return $result_path;
+	}
+
+	/**
+	 * A method that gets a list of tables from the users databases and generates html using these values so that the user can select what tables they want to backup instead of a full database backup.
+	 * @param  [type] $ret this contains the upgrade to premium link and gets cleared here and replaced with table content
+	 * @param  [type] $prefix currently unused here because these parameters are passed to the filter
+	 * @return [String] A string that contains HTML to be appended to the backup now modal
+	 */
+	public function backupnow_database_showmoreoptions($ret, $prefix) {
+
+		global $updraftplus;
+
+		$ret = '';
+
+		$ret .= '<em>'.__('You should backup all tables unless you are an expert in the internals of the WordPress database.', 'updraftplus').'</em><br>';
+
+		// In future this can be passed an array of databases to support external databases
+		$database_table_list = $updraftplus->get_database_tables();
+
+		foreach ($database_table_list as $key => $database) {
+			$database_name = $key;
+			$show_as = ('wp' == $key) ? __('WordPress database', 'updraftplus') : $key;
+			$ret .= '<br><em>'. $show_as . ' ' . __('tables','updraftplus') . '</em><br>';
+
+			foreach ($database as $key => $value) {
+				/*
+					This outputs each table to the page setting the name to updraft_include_tables_ $database_name this allows the value to be trimmed later and to build an array of tables to be backed up
+				*/
+				$ret .= '<input class="updraft_db_entity" id="'.$prefix.'updraft_db_'.$value.'" checked="checked" type="checkbox" name="updraft_include_tables_'. $database_name . '" value="'.$value.'"> <label for="'.$prefix.'updraft_db_'.$value.'">'.$value.'</label><br>';
+			}
+		}
+
+		return $ret;
+	}
+
+	/**
+	 * This method checks to see if all tables are selected to backup if they are not then it creates an array of tables to be backed up ready for the backup to use later to exclude them
+	 * @param  [array] $options an array of options that is being passed to the backup method
+	 * @param  [array] $request an array of ajax request and extra parameters including the tables that are selected for backup
+	 */
+	public function backupnow_options($options, $request) {
+		if (!is_array($options)) return $options;
+
+		// if onlythesetableentities is not an array then all tables are being backed up and we don't need to do this
+		if (!empty($request['onlythesetableentities']) && is_array($request['onlythesetableentities'])) {
+			$database_tables = array();
+			$database_entities = $request['onlythesetableentities'];
+			
+			foreach ($database_entities as $key => $value) {
+				/*
+					This name key inside the value array is the database name prefixed by 23 characters so we need to remove them to get the actual name, then the value key inside the value array has the table name.
+				*/
+				$database_tables[substr($value['name'], 23)][$key] = $value['value'];
+			}
+
+			$this->database_tables = $database_tables;
+		}
+
+		return $options;
+	}
+
+	/**
+	 * This method is called during a backup to check if the table is included in this classes database_tables array if it is then return true so it can be backed up otherwise return false so that it is skipped
+	 * @param  [boolean] $bool a boolean value
+	 * @param  [string] $table a string containing the table 
+	 * @param  [string] $table_prefix a string containing the table prefix
+	 * @param  [string|int] $whichdb a string or int indicating what database this table is from
+	 * @param  [array] $dbinfo an array of information about the current database
+	 * @return [boolean] a boolean value indicating if a table should be included in the backup or not
+	 */
+	public function updraftplus_backup_table($bool, $table, $table_prefix, $whichdb, $dbinfo) {
+
+		// Check this empty not to cause errors
+		if (!empty($this->database_tables)) {
+			// whichdb could be an int in which case to get the name of the database and the array key use the name from dbinfo
+			if ('wp' !== $whichdb) {
+				$key = $dbinfo['name'];
+			} else {
+				$key = $whichdb;
+			}
+
+			// first check table_prefix is not empty and that the table does not already have the prefix attached
+			if (!empty($table_prefix) && substr($table, 0, strlen($table_prefix)) === $table_prefix) {
+				$table_name = $table;
+			} else {
+				$table_name = $table_prefix . $table;
+			}
+
+			// check this is actually set not to cause any errors
+			if (isset($this->database_tables[$key])) {
+				if (in_array($table_name, $this->database_tables[$key])){
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 }
 

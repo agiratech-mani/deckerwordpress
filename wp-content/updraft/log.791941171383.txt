@@ -1,0 +1,7 @@
+0000.000 (0) Opened log file at time: Wed, 08 Mar 2017 07:45:12 +0000 on http://app.deckerwp.com
+0000.001 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 2.12.32.22 WP: 4.7.3 PHP: 7.0.16-3+deb.sury.org~xenial+1 (fpm-fcgi, Linux agiratech 4.4.0-64-generic #85-Ubuntu SMP Mon Feb 20 11:50:30 UTC 2017 x86_64) MySQL: 5.7.17 WPLANG: en_US Server: nginx/1.10.0 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 13M | 4.8M) multisite: N openssl: OpenSSL 1.0.2k  26 Jan 2017 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.002 (0) Free space on disk containing Updraft's temporary directory: 198723.6 MB
+0000.004 (0) Tasks: Backup files: 1 (schedule: weekly) Backup DB: 1 (schedule: weekly)
+0000.006 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.008 (0) Semaphore lock (fd) failed (line 41)
+0000.009 (0) Failed to gain semaphore lock (fd) - another backup of this type is apparently already active - aborting (if this is wrong - i.e. if the other backup crashed without removing the lock, then another can be started after 3 minutes)

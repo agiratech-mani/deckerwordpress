@@ -3,7 +3,7 @@
 Plugin Name: No Longer in Directory
 Plugin URI: https://www.whitefirdesign.com/no-longer-in-directory
 Description: Checks for installed plugins that are no longer in the WordPress.org Plugin Directory.
-Version: 1.0.57
+Version: 1.0.59
 Author: White Fir Design
 Author URI: https://www.whitefirdesign.com/
 License: GPLv2
@@ -192,6 +192,6 @@ function no_longer_in_directory_page() {
 	}
 	else 
 		echo "<h3>".__('No installed plugins were last updated over two years ago in the WordPress.org Plugin Directory.', 'no-longer-in-directory')."</h3>";
-	echo '<br><br><br>You can get comprehensive monitoring of security vulnerabilities in the plugins you use with our <a href="https://www.pluginvulnerabilities.com/">Plugin Vulnerabilities service</a>. You can try it free for the first month.';
+	echo '<br><br><br>You can get comprehensive monitoring of security vulnerabilities in the plugins you use and the ability to help choose plugins that <a href="https://www.pluginvulnerabilities.com/wordpress-plugin-security-reviews/">will receive a security review from us</a> with our <a href="https://www.pluginvulnerabilities.com/">Plugin Vulnerabilities service</a>. You can get your first month of the service for free when you use the coupon code "FirstMonthFree" when <a href="https://www.pluginvulnerabilities.com/product/subscription/">signing up</a>.';
 	echo '</div>';
 }

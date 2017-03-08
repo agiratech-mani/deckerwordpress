@@ -27,7 +27,7 @@ If you want WordPress to begin alerting when installed plugins have been removed
 
 The plugin will also separately list any plugins that have not been updated in the WordPress.org Plugin Directory in over two years.
 
-For removed plugins that have a security vulnerability, a link to a security advisory maybe included in the results of the check. You can get comprehensive monitoring of security vulnerabilities in all of the plugins you use with our [Plugin Vulnerabilities service](https://www.pluginvulnerabilities.com/).
+For removed plugins that have a security vulnerability, a link to a security advisory maybe included in the results of the check. You can get comprehensive monitoring of security vulnerabilities in all of the plugins you use and the ability to help choose plugins that [will receive a security review from us](https://www.pluginvulnerabilities.com/wordpress-plugin-security-reviews/) with our with our [Plugin Vulnerabilities service](https://www.pluginvulnerabilities.com/).
 
 To insure that plugins that have returned to the WordPress.org Plugin Directory since the list was last updated are not incorrectly warned about, the plugin rechecks the WordPress.org Plugin Directory to confirm any installed plugins that are on the list have not returned to the directory.
 
@@ -50,6 +50,14 @@ Please let us know if you are interested in us adding additional localizations.
 1. Plugin Page
 
 == Changelog ==
+
+= 1.0.59 =
+* Refreshed removed and no longer updated plugin lists with data from March 2, 2017 
+* Added additional security advisories
+
+= 1.0.58 =
+* Refreshed removed and no longer updated plugin lists with data from February 21, 2017 
+* Added additional security advisories
 
 = 1.0.57 =
 * Refreshed removed and no longer updated plugin lists with data from December 12, 2016 
