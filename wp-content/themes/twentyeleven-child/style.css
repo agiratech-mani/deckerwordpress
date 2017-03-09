@@ -5298,12 +5298,19 @@ a.button, button.button, input.button, #respond input#submit, #content input.but
   padding: 6px 10px;
 }
 
-.page-id-163 .product-top a:last-child {
+/*.page-id-163 .product-top a:last-child {
 	display: none;
 }
 .page-id-163 .product-top .pdesc + .price {
 	display: none !important;
 }
+
+.page-id-14374 .product-top a:last-child {
+  display: none;
+}
+.page-id-14374 .product-top .pdesc + .price {
+  display: none !important;
+}*/
 
 #colorful a.button, #colorful button.button, #colorful input.button, #colorful #respond input#submit, #content #colorful input.button {
   background:#ffffff !important;
