@@ -23,5 +23,21 @@ function wootokens_get_web_tokens( $order_id = NULL ) {
     $tokens = $web_tokens->get_web_tokens( $order_id );
     return $tokens;
 }
+function wootokens_get_web_token( $order_id = NULL ) {
+    global $web_tokens;
+    $tokens = $web_tokens->get_web_token_by_id( $order_id );
+    return $tokens;
+}
+function wootokens_get_import_user( $userid = NULL ) {
+    global $wpdb;
+    $sql = "select * from {$wpdb->prefix}web_import_users ";
+    if(!is_null($userid))
+    {
+        $sql .= " where id = ". $userid;
+    }
+    $sql .= " ORDER BY id;";
+    $web_tokens = $wpdb->get_row($sql);
+    return $web_tokens;
+}
 
 ?>

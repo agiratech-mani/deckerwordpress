@@ -45,6 +45,17 @@ class WooCommerce_Token
         $web_tokens = $wpdb->get_results($sql);
         return $web_tokens;
     }
+    public function get_web_token_by_id($token = NULL) {
+        global $wpdb;
+        $sql = "SELECT tokens.*,posts.post_title as product,count(devices.id) as registered FROM " . $wpdb->web_tokens." as tokens ";
+        $sql .= " LEFT JOIN {$wpdb->prefix}web_token_devices as devices on devices.token_id = tokens.id";
+        $sql .= " LEFT JOIN {$wpdb->prefix}posts as posts on posts.ID = tokens.product_id";
+        //$sql = "SELECT * FROM " . $wpdb->web_tokens;
+        $sql .= " where tokens.id = '". $token."'";
+        $sql .= " GROUP BY tokens.id ORDER BY tokens.id;";
+        $web_tokens = $wpdb->get_row($sql);
+        return $web_tokens;
+    }
     public function get_web_token_devices_by($tid,$browser=NULL,$os=NULL,$device_type=NULL) {
         global $wpdb;
         $sql = "SELECT * FROM " . $wpdb->prefix."web_token_devices";

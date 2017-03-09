@@ -36,7 +36,11 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	public function get_columns() {
 		$columns =  array(
 			'order_id'        => __( 'Order', 'woocommerce' ),
-			'user_id'       => __( 'User', 'woocommerce' ),
+			//'user_id'       => __( 'User', 'woocommerce' ),
+			'first_name'       => __( 'First Name', 'woocommerce' ),
+			'last_name'       => __( 'Last Name', 'woocommerce' ),
+			'email'       => __( 'Email Address', 'woocommerce' ),
+			'company'       => __( 'Company', 'woocommerce' ),
 			'product_id'       => __( 'Product', 'woocommerce' ),
 			'token'        => __( 'Token', 'woocommerce' ),
 			'short_url' => __( 'Course URL', 'woocommerce' ),
@@ -58,8 +62,9 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	public static function get_web_tokens( $per_page = 5, $page_number = 1 ) {
 
 		global $wpdb;
-		$sql = "SELECT tokens.*,count(devices.id) as registered FROM {$wpdb->prefix}web_tokens as tokens";
+		$sql = "SELECT tokens.*,'email' as email,'first_name' as first_name,'last_name' as last_name,'company' as company,count(devices.id) as registered,imuser.first_name as ifn,imuser.last_name as iln,imuser.email as iemail FROM {$wpdb->prefix}web_tokens as tokens";
 		$sql .= " LEFT JOIN {$wpdb->prefix}web_token_devices as devices on devices.token_id = tokens.id";
+		$sql .= " LEFT JOIN {$wpdb->prefix}web_import_users as imuser on imuser.id = tokens.user_id";
 		$sql .= " GROUP BY tokens.id";
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
@@ -117,7 +122,14 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
 			case 'order_id':
-				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>#{$item[$column_name]}</strong></a>";
+				if($item["order_type"] == "Order")
+				{
+					return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>#{$item[$column_name]}</strong></a>";
+				}
+				else
+				{
+					return  "Upload <strong>#{$item[$column_name]}</strong>";
+				}
 			case 'product_id':
 				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
 			case 'user_id':
@@ -169,6 +181,46 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				{
 					return "-";
 				}
+			case 'first_name':
+				if($item["order_type"] == "Order")
+				{
+					$fn = get_post_meta($item["order_id"],"_billing_first_name",true);
+				}
+				else
+				{
+					$fn = $item['ifn'];
+				}
+				return ($fn == ''?"-":$fn);
+			case 'last_name':
+				if($item["order_type"] == "Order")
+				{
+					$fn = get_post_meta($item["order_id"],"_billing_last_name",true);
+				}
+				else
+				{
+					$fn = $item['iln'];
+				}
+				return ($fn == ''?"-":$fn);
+			case 'email':
+				if($item["order_type"] == "Order")
+				{
+					$fn = get_post_meta($item["order_id"],"_billing_email",true);
+				}
+				else
+				{
+					$fn = $item['iemail'];
+				}
+				return ($fn == ''?"-":'<a href="mailto:'.$fn.'">'.$fn.'</a>');
+			case 'company':
+				if($item["order_type"] == "Order")
+				{
+					$fn = get_post_meta($item["order_id"],"_billing_company",true);
+				}
+				else
+				{
+					$fn = "-";
+				}
+				return ($fn == ''?"-":$fn);
 			default:
 				return $item[ $column_name ];
 				//return print_r( $item, true ); //Show the whole array for troubleshooting purposes

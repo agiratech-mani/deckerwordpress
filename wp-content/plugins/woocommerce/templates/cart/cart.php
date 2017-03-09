@@ -102,7 +102,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 					<td class="product-quantity" data-title="<?php _e( 'Quantity', 'woocommerce' ); ?>">
 						<?php
-							if ( $_product->is_sold_individually() ) {
+							if ( $_product->is_sold_individually() || $_product->product_type == "course") {
 								$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
 							} else {
 								$product_quantity = woocommerce_quantity_input( array(
