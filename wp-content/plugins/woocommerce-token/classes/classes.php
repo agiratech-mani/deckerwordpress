@@ -127,8 +127,8 @@ class WooCommerce_Token
                     $device_id = $this->update_device($device_data,$devices[0]->id);
 
                     $device_history_data = [];
-                    $device_history_data['token_id'] = $devices[0]->id;
-                    $device_history_data['device_id'] = $tid;
+                    $device_history_data['token_id'] = $tid;
+                    $device_history_data['device_id'] = $devices[0]->id;
                     $device_history_data['access_date'] = (new DateTime())->format('Y-m-d H:i:s');
                     $device_history_data['access_ip'] = $ip;
                     $device_id = $this->add_device_history($device_history_data);
@@ -237,14 +237,14 @@ class WooCommerce_Token
                         $token_data = [];
                         $token_data['token_last_device'] = $device_id;
                         $token_data['token_last_accessed'] = (new DateTime())->format('Y-m-d H:i:s');
-                        $device_id = $this->update_token($token_data,$tid);
+                        $this->update_token($token_data,$tid);
 
                         $device_history_data = [];
                         $device_history_data['token_id'] = $tid;
                         $device_history_data['device_id'] = $device_id;
                         $device_history_data['access_date'] = (new DateTime())->format('Y-m-d H:i:s');
                         $device_history_data['access_ip'] = $ip;
-                        $device_id = $this->add_device_history($device_history_data);
+                        $device_history_data_id = $this->add_device_history($device_history_data);
                         $success = 1;
                         //$status ="DeviceAdded";
                         $status ="Verified";
