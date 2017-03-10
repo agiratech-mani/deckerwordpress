@@ -31,15 +31,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<thead>
 			<tr>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Device Limit', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expired', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiration Date', 'woocommerce' ); ?></th>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Link', 'woocommerce' ); ?></th>
 			</tr>
 		<thead>
 		<tbody>
 	    	<tr>
 	    		<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo $web_tokens->product; ?></td>
-	    		<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo ($web_tokens->token_device_limit > 0?$web_tokens->token_device_limit:"Unlimited"); ?></td>
 	    		<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><?php echo ($web_tokens->token_expiry_date == '0000-00-00 00:00:00'?'Never':$web_tokens->token_expiry_date); ?></td>
 	    		<td class="td" style="text-align:left; vertical-align:middle; border: 1px solid #eee; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; word-wrap:break-word;"><a href="<?php echo $web_tokens->short_url; ?>" target="_blank"><?php echo $web_tokens->short_url; ?></a></td>
 	    	</tr>

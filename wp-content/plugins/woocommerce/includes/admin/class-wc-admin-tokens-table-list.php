@@ -62,9 +62,10 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 	public static function get_web_tokens( $per_page = 5, $page_number = 1 ) {
 
 		global $wpdb;
-		$sql = "SELECT tokens.*,'email' as email,'first_name' as first_name,'last_name' as last_name,'company' as company,count(devices.id) as registered,imuser.first_name as ifn,imuser.last_name as iln,imuser.email as iemail FROM {$wpdb->prefix}web_tokens as tokens";
+		$sql = "SELECT tokens.*,'email' as email,'first_name' as first_name,'last_name' as last_name,'company' as company,count(devices.id) as registered,imuser.first_name as ifn,imuser.last_name as iln,imuser.email as iemail,im.created as im_created,imuser.company as imcompany  FROM {$wpdb->prefix}web_tokens as tokens";
 		$sql .= " LEFT JOIN {$wpdb->prefix}web_token_devices as devices on devices.token_id = tokens.id";
 		$sql .= " LEFT JOIN {$wpdb->prefix}web_import_users as imuser on imuser.id = tokens.user_id";
+		$sql .= " LEFT JOIN {$wpdb->prefix}web_imports as im on im.id = tokens.order_id";
 		$sql .= " GROUP BY tokens.id";
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
 			$sql .= ' ORDER BY ' . esc_sql( $_REQUEST['orderby'] );
@@ -128,7 +129,8 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				}
 				else
 				{
-					return  "Upload <strong>#{$item[$column_name]}</strong>";
+					$date = new DateTime($item['im_created']);
+					return  "#Upload_{$date->format('mdy')}<strong> {$item[$column_name]}</strong>";
 				}
 			case 'product_id':
 				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
@@ -218,7 +220,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				}
 				else
 				{
-					$fn = "-";
+					$fn = $item['imcompany'];
 				}
 				return ($fn == ''?"-":$fn);
 			default:

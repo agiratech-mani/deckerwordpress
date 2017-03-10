@@ -25,10 +25,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php printf( __( "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:", 'woocommerce' ), get_option( 'blogname' ) ); ?></p>
+<p><?php //printf( __( "Hi there. Your recent order on %s has been completed. Your order details are shown below for your reference:", 'woocommerce' ), get_option( 'blogname' ) ); 
+echo "Hi there! Your Decker Digital order has been completed and you’re set to go!"; ?></p>
 
 <?php
 
+do_action( 'woocommerce_email_order_tokens', $order, $sent_to_admin, $plain_text, $email );
 /**
  * @hooked WC_Emails::order_details() Shows the order details table.
  * @hooked WC_Emails::order_schema_markup() Adds Schema.org markup.
@@ -41,7 +43,7 @@ do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_tex
  */
 do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
 
-do_action( 'woocommerce_email_order_tokens', $order, $sent_to_admin, $plain_text, $email );
+
 
 /**
  * @hooked WC_Emails::customer_details() Shows customer details

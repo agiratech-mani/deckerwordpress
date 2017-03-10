@@ -116,7 +116,8 @@ class WC_Admin_Tokens {
 							        $csvdata['first_name'] = $data[1];
 							        $csvdata['last_name'] = $data[2];
 							        $csvdata['email'] = $data[0];
-							        $csvdata['validity'] = ($data[3]>0?$data[3]:1);
+							        $csvdata['company'] = $data[3];
+							        $csvdata['validity'] = ($data[4]>0?$data[4]:1);
 							        $csvdata['created'] = (new DateTime())->format("Y-m-d H:i:s");
 							        $wpdb->insert( $wpdb->prefix . 'web_import_users', $csvdata);
 							        $userid = $wpdb->insert_id;
@@ -157,7 +158,7 @@ class WC_Admin_Tokens {
 			$products = get_posts( $args ); 
 
 			echo "<div class='wrap'>";
-			echo '<h2>' . __( 'Import Users', 'woocommerce' ).'</h2>';
+			echo '<h2>' . __( 'Import Licenses', 'woocommerce' ).'</h2>';
 			include( 'settings/views/html-imports-token-users.php' );
 			echo "</div>";
 		}

@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		
 	</div>
 	<?php } ?>
-	<div>Please use the below this <a href="/wp-content/uploads/Bulk_Upload_Template.csv" download>Template</a></div>
+	<div>Please use this <a href="/wp-content/uploads/Bulk_Upload_Template.csv" download>Template</a>.</div>
 	<form method="post" id="import-users" enctype="multipart/form-data">
 		<table class="form-table">
 			<tbody>
@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
-						<label for="token_file"><?php _e( 'User CSV', 'woocommerce' ); ?></label>
+						<label for="token_file"><?php _e( 'License Sheard Sheet', 'woocommerce' ); ?></label>
 					</th>
 					<td class="forminp">
 						
