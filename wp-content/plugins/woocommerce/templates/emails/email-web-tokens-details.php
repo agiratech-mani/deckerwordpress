@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <h2><?php _e( 'Course licence details', 'woocommerce' ); ?></h2>
 <div>
-	You have purchased a license to access Decker Digital: Communicate To Influence for one year, on a single device. Please note your expiry date below.
+	You have purchased a license to access Decker Digital: Communicate To Influence for one year, on a single computer. Please note your expiry date below.
 	<br>
 	<br>
 	To get started, copy and paste your Unique Course Link into your Chrome browser. Happy communicating!
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
 				<?php /* <th class="td" scope="col" style="text-align:left;"><?php _e( 'Device Limit', 'woocommerce' ); ?></th> */ ?>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiry Date', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Link', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Unique Course Link', 'woocommerce' ); ?></th>
 			</tr>
 		<thead>
 		<tbody>

@@ -167,7 +167,7 @@ class WC_Meta_Box_Product_Data {
 				echo '</div>';
 				echo '<div class="options_group show_if_course hidden">';
 					// Download Limit
-					woocommerce_wp_text_input( array( 'id' => '_devices_limit', 'label' => __( 'Devices limit', 'woocommerce' ), 'placeholder' => __( 'Unlimited', 'woocommerce' ), 'description' => __( 'Leave blank for unlimited re-downloads.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+					woocommerce_wp_text_input( array( 'id' => '_devices_limit', 'label' => __( 'Devices limit', 'woocommerce' ), 'placeholder' => __( 'Unlimited', 'woocommerce' ), 'description' => __( 'Leave blank for unlimited.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
 						'step' 	=> '1',
 						'min'	=> '0'
 					) ) );
@@ -223,7 +223,7 @@ class WC_Meta_Box_Product_Data {
 					<?php
 
 					// Download Limit
-					woocommerce_wp_text_input( array( 'id' => '_download_limit', 'label' => __( 'Download limit', 'woocommerce' ), 'placeholder' => __( 'Unlimited', 'woocommerce' ), 'description' => __( 'Leave blank for unlimited re-downloads.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+					woocommerce_wp_text_input( array( 'id' => '_download_limit', 'label' => __( 'Download limit', 'woocommerce' ), 'placeholder' => __( 'Unlimited', 'woocommerce' ), 'description' => __( 'Leave blank for unlimited.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
 						'step' 	=> '1',
 						'min'	=> '0'
 					) ) );

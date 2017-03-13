@@ -295,7 +295,7 @@ extract( $variation_data );
 			</div>
 			<div class="show_if_variation_downloadable" style="display: none;">
 				<p class="form-row form-row-first">
-					<label><?php _e( 'Download limit', 'woocommerce' ); ?> <?php echo wc_help_tip( __( 'Leave blank for unlimited re-downloads.', 'woocommerce' ) ); ?></a></label>
+					<label><?php _e( 'Download limit', 'woocommerce' ); ?> <?php echo wc_help_tip( __( 'Leave blank for unlimited.', 'woocommerce' ) ); ?></a></label>
 					<input type="number" size="5" name="variable_download_limit[<?php echo $loop; ?>]" value="<?php if ( isset( $_download_limit ) ) echo esc_attr( $_download_limit ); ?>" placeholder="<?php esc_attr_e( 'Unlimited', 'woocommerce' ); ?>" step="1" min="0" />
 				</p>
 				<p class="form-row form-row-last">
