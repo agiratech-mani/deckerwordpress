@@ -689,6 +689,7 @@ class WC_Form_Handler {
 	 * @param bool $url (default: false)
 	 */
 	public static function add_to_cart_action( $url = false ) {
+		
 		if ( empty( $_REQUEST['add-to-cart'] ) || ! is_numeric( $_REQUEST['add-to-cart'] ) ) {
 			return;
 		}

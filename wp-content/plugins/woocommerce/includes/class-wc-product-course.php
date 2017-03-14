@@ -81,6 +81,9 @@ class WC_Product_Course extends WC_Product {
 		return $this->token_expiry;
 	}
 
+	public function is_sold_individually() {
 
+		return true;
+	}
 	
 }

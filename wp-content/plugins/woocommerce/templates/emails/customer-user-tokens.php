@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading); ?>
 
-<p><?php printf( __( "Hi there. Admin have generate sample course token for you. Find the access url below.", 'woocommerce' )); ?></p>
+<p><?php printf( __( "Hi there. Admin have generated sample course token for you. Find the access url below.", 'woocommerce' )); ?></p>
 
 <?php
 
