@@ -273,7 +273,7 @@ class WooCommerce_Token
         // Add a custom status code
         $response->set_status( 201 );
         // Add a custom header
-        $response->header( 'Location', 'http://example.com/' );
+        $response->header( 'Location', 'http://decker.com/' );
         return $response;
     }
     public function add_device($data)

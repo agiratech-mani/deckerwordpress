@@ -191,7 +191,8 @@ class WC_Admin_Tokens {
 		else
 		{
 			echo "<div class='wrap'>";
-			echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>' . '</h2>';
+			//echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>' . '</h2>';
+			echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
 			$tokens_table_list = new WC_Admin_Tokens_Table_List();
 			$tokens_table_list->prepare_items();
 			echo '<input type="hidden" name="page" value="wc-tokens" />';
