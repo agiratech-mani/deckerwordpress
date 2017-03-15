@@ -25,9 +25,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 
-<p><?php _e( "Your order has been received and is now being processed. Your order details are shown below for your reference:", 'woocommerce' ); ?></p>
+<p><?php 
+if($email->isCourse && $email->isOthers)
+{
+	_e( "Hi there! Your order has been completed and you’re set to go!");
+}
+elseif($email->isCourse)
+{
+	_e( "Hi there! Your Decker Digital order has been completed and you’re set to go!");
+}
+else
+{
+	_e( "Your order has been received and is now being processed. Your order details are shown below for your reference:", 'woocommerce' ); 
+}
+?></p>
 
 <?php
+
+do_action( 'woocommerce_email_order_tokens', $order, $sent_to_admin, $plain_text, $email );
 
 /**
  * @hooked WC_Emails::order_details() Shows the order details table.

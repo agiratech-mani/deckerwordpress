@@ -51,6 +51,25 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			$this->object       = wc_get_order( $order_id );
 			$this->recipient    = $this->object->billing_email;
 
+			$items = $this->object->get_items();
+			$this->isCourse = false;
+			$this->isOthers = false;
+			foreach ($items as $key => $value) {
+				$pro = wc_get_product($value['item_meta']['_product_id'][0]);
+				if($pro->product_type == "course" && !$this->isCourse)
+				{
+					$this->isCourse = true;
+				}
+				else if(!$isOthers)
+				{
+					$this->isOthers  = true;
+				}
+				if($this->isCourse && $this->isOthers)
+				{
+					break;
+				}
+			}
+
 			$this->find['order-date']      = '{order_date}';
 			$this->find['order-number']    = '{order_number}';
 
@@ -77,7 +96,7 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			'email_heading' => $this->get_heading(),
 			'sent_to_admin' => false,
 			'plain_text'    => false,
-			'email'			=> $this
+			'email'			=> $this,
 		) );
 	}
 

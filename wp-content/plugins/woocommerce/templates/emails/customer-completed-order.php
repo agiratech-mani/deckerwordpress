@@ -30,7 +30,6 @@ echo "Hi there! Your Decker Digital order has been completed and you’re set to
 
 <?php
 
-do_action( 'woocommerce_email_order_tokens', $order, $sent_to_admin, $plain_text, $email );
 /**
  * @hooked WC_Emails::order_details() Shows the order details table.
  * @hooked WC_Emails::order_schema_markup() Adds Schema.org markup.
