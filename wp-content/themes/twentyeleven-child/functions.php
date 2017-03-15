@@ -940,10 +940,11 @@ function add_order_email_instructions($order, $sent_to_admin) {
 					$order->add_order_note("Customer agreed with the terms and conditions");
 							
 					// Message that goes out in customer's email
-					echo "<br/>";
-					echo "This receipt also verifies that you have read and accepted the <a href='https://decker.com/terms-and-conditions'>Terms and Conditions</a>";
+					
 				}
 			}
 		}
+        echo "<br/>";
+        echo "This receipt also verifies that you have read and accepted the <a href='https://decker.com/terms-and-conditions'>Terms and Conditions</a>";
 	}
 }
