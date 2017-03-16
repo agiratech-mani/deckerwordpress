@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	You have purchased a license to access Decker Digital: Communicate To Influence for one year, on a single computer. Please note your expiry date below.
 	<br>
 	<br>
-	To get started, copy and paste your Unique Course Link into your Chrome browser. You’ll want to bookmark this link and keep it handy so that you return to the course at any time. And don’t worry, we’ll save your place.
+	To get started, copy and paste your Unique Course Link into your Chrome browser. You’ll want to bookmark this link and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place.
 	<br>
 	<br>
 	Happy communicating!
