@@ -25,14 +25,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<h2><?php _e( 'Course licence details', 'woocommerce' ); ?></h2>
+<h2><?php _e( 'Course license details', 'woocommerce' ); ?></h2>
 <div>
 	<table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 		<thead>
 			<tr>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiration Date', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Link', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Unique Course Link', 'woocommerce' ); ?></th>
 			</tr>
 		<thead>
 		<tbody>
