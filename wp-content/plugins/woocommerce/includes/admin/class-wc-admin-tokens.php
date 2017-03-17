@@ -63,7 +63,7 @@ class WC_Admin_Tokens {
 				'token_last_device'     => ''
 			);
 			$tokenid =wootokens_add_web_tokens($token_data);
-			do_action( 'woocommerce_token_generated',$tokenid);
+			//( 'woocommerce_token_generated',$tokenid);
         }
 	}
 	private static function table_list_output() {
@@ -151,7 +151,7 @@ class WC_Admin_Tokens {
 		        array(
 		           	'taxonomy'      => 'product_type',
 		            'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-		            'terms'         => 2458,
+		            'terms'         => 2458,//2458
 		            'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
 		        ),
 		    ));
