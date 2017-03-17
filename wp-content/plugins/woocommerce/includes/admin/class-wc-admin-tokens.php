@@ -23,7 +23,7 @@ class WC_Admin_Tokens {
 		self::table_list_output();
 		//include_once( 'views/html-admin-page-coupons.php' );
 	}
-	private static function generate_tokens($fileid,$userid,$product_id,$data)
+	private static function generate_tokens($fileid,$userid,$product_id,$data,$token_send_email = 0)
 	{
 		$bitly_login = get_option( 'woocommerce_bitly_login', '' );
     	$bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
@@ -63,7 +63,12 @@ class WC_Admin_Tokens {
 				'token_last_device'     => ''
 			);
 			$tokenid =wootokens_add_web_tokens($token_data);
-			//( 'woocommerce_token_generated',$tokenid);
+
+			//Commended Token Generetad mail code based on client instruction - March 17 2017
+			if($token_send_email)
+			{
+				do_action( 'woocommerce_token_generated',$tokenid);
+			}
         }
 	}
 	private static function table_list_output() {
@@ -74,6 +79,11 @@ class WC_Admin_Tokens {
 			{
 				$error = [];
 				$csverror = [];
+				$token_send_email = 0;
+				if(!empty($_POST['token_send_email']))
+				{
+					$token_send_email = 1;
+				}
 				if(empty($_POST['token_product']))
 				{
 					$error[] = "Please select Product.";
@@ -93,12 +103,13 @@ class WC_Admin_Tokens {
 					$target_file = $target_dir . basename($_FILES["token_file"]["name"]);
 					$uploadOk = 1;
 					$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-					$filename = $target_dir."uploads_".(new DateTime())->format("YmdHis").".csv";
+					$filename = $target_dir."uploads_".(new DateTime())->format("YmdHis").".".$imageFileType;
 					move_uploaded_file($_FILES["token_file"]["tmp_name"],$filename);
 			        $table_name = $wpdb->prefix . 'web_imports';
 			        $data = [];
 			        $data['file'] = $filename;
 			        $data['user_id'] = get_current_user_id();
+			        $data['send_email'] = $token_send_email;
 			        $data['created'] = (new DateTime())->format("Y-m-d H:i:s");
 			        $wpdb->insert( $table_name, $data);
 			        $fileid = $wpdb->insert_id;
@@ -121,7 +132,7 @@ class WC_Admin_Tokens {
 							        $csvdata['created'] = (new DateTime())->format("Y-m-d H:i:s");
 							        $wpdb->insert( $wpdb->prefix . 'web_import_users', $csvdata);
 							        $userid = $wpdb->insert_id;
-							        self::generate_tokens($fileid,$userid,$product_id,$csvdata);
+							        self::generate_tokens($fileid,$userid,$product_id,$csvdata,$token_send_email);
 							    }
 							    else
 							    {
@@ -141,22 +152,44 @@ class WC_Admin_Tokens {
 					}
 				}
 			}
-			$args     = array( 'post_type' => 'product', 'tax_query' => array(
-		        array(
-		            'taxonomy'      => 'product_cat',
-		            'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-		            'terms'         => 2448,
-		            'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
-		        ),
-		        array(
-		           	'taxonomy'      => 'product_type',
-		            'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-		            'terms'         => 2458,//2458
-		            'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
-		        ),
-		    ));
-			$products = get_posts( $args ); 
+			// $args     = array( 'post_type' => 'product', 'tax_query' => array(
+			// 	'posts_per_page' => -1,
+			//        array(
+			//            'taxonomy'      => 'product_cat',
+			//            'field' => 'term_id', //This is optional, as it defaults to 'term_id'
+			//            'terms'         => 2448,
+			//            'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
+			//        ),
+			//        array(
+			//           	'taxonomy'      => 'product_type',
+			//            'field' => 'name', //This is optional, as it defaults to 'term_id'
+			//            'terms'         => "course",//2458
+			//            'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
+			//        ),
+			//    ));
 
+			$args = array(
+			    'posts_per_page' => -1,
+			    'tax_query' => array(
+			        'relation' => 'AND',
+			        array(
+			            'taxonomy' => 'product_cat',
+			            'field' => 'slug',
+			            'terms' => 'decker-digital'
+			        ),
+			        array(
+			           	'taxonomy'      => 'product_type',
+			            'field' => 'name', //This is optional, as it defaults to 'term_id'
+			            'terms'         => "course",//2458
+			            'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
+			        ),
+			    ),
+			    'post_type' => 'product',
+			    'orderby' => 'title',
+			);
+			//$the_query = new WP_Query( $args );
+
+			$products = get_posts( $args ); 
 			echo "<div class='wrap'>";
 			echo '<h2>' . __( 'Import Licenses', 'woocommerce' ).'</h2>';
 			include( 'settings/views/html-imports-token-users.php' );
@@ -191,8 +224,8 @@ class WC_Admin_Tokens {
 		else
 		{
 			echo "<div class='wrap'>";
-			//echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>' . '</h2>';
-			echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
+			echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>' . '</h2>';
+			//echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
 			$tokens_table_list = new WC_Admin_Tokens_Table_List();
 			$tokens_table_list->prepare_items();
 			echo '<input type="hidden" name="page" value="wc-tokens" />';

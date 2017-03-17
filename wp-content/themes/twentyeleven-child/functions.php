@@ -928,8 +928,31 @@ add_action('woocommerce_email_after_order_table', 'add_order_email_instructions'
 function add_order_email_instructions($order, $sent_to_admin) {
 	if (!$sent_to_admin) {
 		global $woocommerce;
-		
-		foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
+		//print_r();
+        /*print_r(get_post_meta($order->id,"_add_customer_term",true));
+        update_post_meta($order->id,"_add_customer_term",1);
+        echo $order->id;
+        print_r(get_post_meta($order->id,"_add_customer_term",true));*/
+        $order_id = $order->id;
+        $items = $order->get_items();
+        $_add_customer_term = get_post_meta($order_id,"_add_customer_term",true);
+        if(!$_add_customer_term)
+        {
+            update_post_meta($order_id,"_add_customer_term",1);
+            foreach ($items as $key => $item) {
+                $_product_id = $item['item_meta']['_product_id'][0];
+                //echo "_product_id".$_product_id;
+                $terms = get_the_terms($_product_id, 'product_cat');
+                foreach ($terms as $term) {
+                    $_categoryid = $term->term_id;
+                    if(($_categoryid === 2448)) {
+                        // Message that goes out in admin's order notes
+                        $order->add_order_note("Customer agreed with the terms and conditions");
+                    }
+                }
+            }
+        }
+		/*foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
 			$_product = $values['data'];
 			$terms = get_the_terms($_product->id, 'product_cat');
 
@@ -940,10 +963,11 @@ function add_order_email_instructions($order, $sent_to_admin) {
 					$order->add_order_note("Customer agreed with the terms and conditions");
 							
 					// Message that goes out in customer's email
-					
+					// echo "<br/>";
+                    // echo "This receipt also verifies that you have read and accepted the <a href='https://decker.com/terms-and-conditions'>Terms and Conditions</a>";
 				}
 			}
-		}
+		}*/
         echo "<br/>";
         echo "This receipt also verifies that you have read and accepted the <a href='https://decker.com/terms-and-conditions'>Terms and Conditions</a>";
 	}

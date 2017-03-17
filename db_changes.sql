@@ -80,3 +80,5 @@ CREATE TABLE IF NOT EXISTS `dcom_web_token_devices` (
   `device_last_accessed` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+ALTER TABLE  `dcom_web_imports` ADD  `send_email` TINYINT( 1 ) NULL AFTER  `user_id` ;

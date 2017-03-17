@@ -46,12 +46,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
-						<label for="token_file"><?php _e( 'License Sheard Sheet', 'woocommerce' ); ?></label>
+						<label for="token_file"><?php _e( 'License Sheet', 'woocommerce' ); ?></label>
 					</th>
 					<td class="forminp">
 						
 						<input name="token_file" id="token_file" type="file" class="input-text regular-input" value="" accept=".csv"/>
 						<small>(required) The import files type should csv.</small>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row" class="titledesc">
+						<label for="token_file"><?php _e( 'Send Email?', 'woocommerce' ); ?></label>
+					</th>
+					<td class="forminp">
+						<input name="token_send_email" type="checkbox" id="token_send_email" value="1">
+						<small>If checkbox checked we will send mail to the imported user.</small>
 					</td>
 				</tr>
 				<tr valign="top">
