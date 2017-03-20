@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td class="forminp">
 						
 						<input name="token_file" id="token_file" type="file" class="input-text regular-input" value="" accept=".csv,.xlsx,.xls"/>
-						<small>(required) The import files type should csv.</small>
+						<small>(required) The import files type should .csv,.xlsx,.xls.</small>
 					</td>
 				</tr>
 				<tr valign="top">
