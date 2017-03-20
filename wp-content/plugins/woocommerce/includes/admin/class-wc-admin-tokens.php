@@ -1,4 +1,4 @@
-<?php
+	<?php
 /**
  * Token Page
  *
@@ -11,6 +11,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once ABSPATH . 'wp-includes/PHPExcel/Classes/PHPExcel/IOFactory.php';
 
 /**
  * WC_Admin_Tokens Class.
@@ -102,19 +103,62 @@ class WC_Admin_Tokens {
 					}
 					$target_file = $target_dir . basename($_FILES["token_file"]["name"]);
 					$uploadOk = 1;
-					$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-					$filename = $target_dir."uploads_".(new DateTime())->format("YmdHis").".".$imageFileType;
-					move_uploaded_file($_FILES["token_file"]["tmp_name"],$filename);
-			        $table_name = $wpdb->prefix . 'web_imports';
-			        $data = [];
-			        $data['file'] = $filename;
-			        $data['user_id'] = get_current_user_id();
-			        $data['send_email'] = $token_send_email;
-			        $data['created'] = (new DateTime())->format("Y-m-d H:i:s");
-			        $wpdb->insert( $table_name, $data);
-			        $fileid = $wpdb->insert_id;
-			        $arrResult  = 0;
-					$handle     = fopen($filename, "r");
+					$fileType = pathinfo($target_file,PATHINFO_EXTENSION);
+					$validTypes = array('xlsx','xls','csv');
+					if(in_array(strtolower($fileType), $validTypes))
+					{
+
+						$filename = $target_dir."uploads_".(new DateTime())->format("YmdHis").".".$fileType;
+						move_uploaded_file($_FILES["token_file"]["tmp_name"],$filename);
+				        $table_name = $wpdb->prefix . 'web_imports';
+				        $data = [];
+				        $data['file'] = $filename;
+				        $data['user_id'] = get_current_user_id();
+				        $data['send_email'] = $token_send_email;
+				        $data['created'] = (new DateTime())->format("Y-m-d H:i:s");
+				        $wpdb->insert( $table_name, $data);
+				        $fileid = $wpdb->insert_id;
+				        $arrResult  = 0;
+				        $objPHPExcel = PHPExcel_IOFactory::load($filename);
+						$results = $objPHPExcel->getSheet(0)->toArray();
+						if(!empty($results))
+						{
+							foreach ($results as $data) {
+								if(!empty($data[0]))
+						    	{
+						    		$arrResult++;
+						    		if(filter_var($data[0], FILTER_VALIDATE_EMAIL))
+						    		{
+								        $csvdata = [];
+								        $csvdata['import_id'] = $fileid;
+								        $csvdata['first_name'] = $data[1];
+								        $csvdata['last_name'] = $data[2];
+								        $csvdata['email'] = $data[0];
+								        $csvdata['company'] = $data[3];
+								        $csvdata['validity'] = ($data[4]>0?$data[4]:1);
+								        $csvdata['created'] = (new DateTime())->format("Y-m-d H:i:s");
+								        $wpdb->insert( $wpdb->prefix . 'web_import_users', $csvdata);
+								        $userid = $wpdb->insert_id;
+								        self::generate_tokens($fileid,$userid,$product_id,$csvdata,$token_send_email);
+								    }
+								    else
+								    {
+								    	$csverror[] = "Email is not valid in Row {$arrResult}({$data[0]})";
+								    }
+							    }
+							}
+						}
+						/*else
+						{
+							$csverror[] = "License sheet is empty.";
+						}*/
+					}
+					else
+					{
+						$csverror[] = "License sheet should xls, xlsx or csv.";
+					}
+
+					/*$handle     = fopen($filename, "r");
 					if(empty($handle) === false) {
 					    while(($data = fgetcsv($handle, 1000, ",")) !== FALSE){
 					    	if(!empty($data[0]))
@@ -141,10 +185,10 @@ class WC_Admin_Tokens {
 						    }
 					    }
 					    fclose($handle);
-					}
+					}*/
 					if($arrResult <= 0)
 					{
-						$error[] = "Upload CSV not having data.";
+						$error[] = "License sheet is empty.";
 					}
 					if(empty($error) && empty($csverror))
 					{

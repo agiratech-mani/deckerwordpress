@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</th>
 					<td class="forminp">
 						
-						<input name="token_file" id="token_file" type="file" class="input-text regular-input" value="" accept=".csv"/>
+						<input name="token_file" id="token_file" type="file" class="input-text regular-input" value="" accept=".csv,.xlsx,.xls"/>
 						<small>(required) The import files type should csv.</small>
 					</td>
 				</tr>
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</th>
 					<td class="forminp">
 						<input name="token_send_email" type="checkbox" id="token_send_email" value="1">
-						<small>If checkbox checked we will send mail to the imported user.</small>
+						<small>If checked email will be sent to imported user.</small>
 					</td>
 				</tr>
 				<tr valign="top">
