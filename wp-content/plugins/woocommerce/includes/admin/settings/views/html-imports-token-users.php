@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wrap">
 	<?php if(!empty($error)) { ?>
 	<div id="message" class="updated fade">
-		<p><strong>The following fields are wrong:</strong></p>
+		<p><strong>Errors:</strong></p>
 		<?php foreach ($error as $err) { ?>
 			<p><strong><?php echo $err; ?></strong></p>
 		<?php } ?>

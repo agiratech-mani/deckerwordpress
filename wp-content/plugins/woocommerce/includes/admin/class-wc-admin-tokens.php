@@ -91,7 +91,7 @@ class WC_Admin_Tokens {
 				}
 				if(empty($_FILES['token_file']['tmp_name']))
 				{
-					$error[] = "Please select User CSV.";
+					$error[] = "Please select License sheet.";
 				}
 				$product_id = $_POST['token_product'];
 				if(empty($error))
@@ -155,7 +155,7 @@ class WC_Admin_Tokens {
 					}
 					else
 					{
-						$csverror[] = "License sheet should xls, xlsx or csv.";
+						$error[] = "License sheet should xls, xlsx or csv.";
 					}
 
 					/*$handle     = fopen($filename, "r");
@@ -186,7 +186,7 @@ class WC_Admin_Tokens {
 					    }
 					    fclose($handle);
 					}*/
-					if($arrResult <= 0)
+					if($arrResult <= 0 && empty($error))
 					{
 						$error[] = "License sheet is empty.";
 					}
