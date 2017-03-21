@@ -196,22 +196,24 @@ class WC_Admin_Tokens {
 					    }
 					    fclose($handle);
 					}*/
+					if(count($errrow) < $arrResult)
+					{
+						$csverror[] = "Licenses generated successfully.";
+					}
 					if(count($errrow) > 0)
 					{	
-						if(count($errrow) < $arrResult)
-						{
-							$csverror[] = "Licenses generated successfully.";
-						}
 						$csverror[] = "Row ".implode(',', $errrow)." failed. Please fix only the failed rows and upload again.";
 					}
 					else if($arrResult <= 0 && empty($error))
 					{
 						$error[] = "License sheet is empty.";
 					}
-					else if(empty($error) && empty($csverror))
+
+
+					if($arrResult > 0 && ($arrResult - count($errrow)) > 0)
 					{
 						//wp_redirect("admin.php?page=wc-tokens");
-						$csverror[] = "Licenses generated successfully.";
+						//$csverror[] = "Licenses generated successfully.";
 						if($token_report_email)
 						{
 							do_action( 'woocommerce_web_token_report',$fileid);
