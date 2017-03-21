@@ -66,14 +66,14 @@ class WC_Email_Web_Token_Report extends WC_Email {
 			$ews->setTitle('Data');
 			$ews->setCellValue('A1', 'S.No'); // Sets cell 'a1' to value 'ID 
     		$ews->setCellValue('B1', 'Token');
-    		$ews->setCellValue('C1', 'first_name');
-    		$ews->setCellValue('D1', 'last_name');
-    		$ews->setCellValue('E1', 'email');
-    		$ews->setCellValue('F1', 'short_url');
-    		$ews->setCellValue('G1', 'long_url');
-    		$ews->setCellValue('H1', 'created_date');
-    		$ews->setCellValue('I1', 'expiry_date');
-    		$ews->setCellValue('J1', 'company');
+    		$ews->setCellValue('C1', 'First Name');
+    		$ews->setCellValue('D1', 'Last Name');
+    		$ews->setCellValue('E1', 'Email');
+    		$ews->setCellValue('F1', 'Short Url');
+    		$ews->setCellValue('G1', 'Long Url');
+    		$ews->setCellValue('H1', 'Created Date');
+    		$ews->setCellValue('I1', 'Expiry Date');
+    		$ews->setCellValue('J1', 'Company');
     		$ews->fromArray($tokens, ' ', 'A2');
     		$header = 'A1:J1';
 			$style = array(
