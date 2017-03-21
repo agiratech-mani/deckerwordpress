@@ -69,6 +69,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</th>
 					<td class="forminp">
 						<input name="token_report_email" type="text" id="token_report_email" value="">
+						<small>If fields not blank generated license details will be sent specified mail.</small>
 					</td>
 				</tr>
 				<tr valign="top">
