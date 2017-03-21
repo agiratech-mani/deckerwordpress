@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WC_Email_Generate_Tokens' ) ) :
-
+if ( ! class_exists( 'WC_Email_Web_Token_Report' ) ) :
+require_once ABSPATH . 'wp-includes/PHPExcel/Classes/PHPExcel.php';
 /**
  * Cancelled Order Email.
  *
@@ -17,23 +17,23 @@ if ( ! class_exists( 'WC_Email_Generate_Tokens' ) ) :
  * @author      WooThemes
  * @extends     WC_Email
  */
-class WC_Email_Generate_Tokens extends WC_Email {
+class WC_Email_Web_Token_Report extends WC_Email {
 
 	/**
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->id               = 'token_generated';
+		$this->id               = 'web_token_report';
 		$this->customer_email = true;
-		$this->title            = __( 'Your License Details', 'woocommerce' );
-		$this->description      = __( 'Token Generated.', 'woocommerce' );
-		$this->heading          = __( 'Your License Details', 'woocommerce' );
-		$this->subject          = __( '[{site_title}] Your License Details', 'woocommerce' );
-		$this->template_html    = 'emails/customer-user-tokens.php';
-		$this->template_plain   = 'emails/plain/email-web-gen-tokens-details.php';
+		$this->title            = __( 'Your generated licenses are attached', 'woocommerce' );
+		$this->description      = __( 'Your generated licenses are attached.', 'woocommerce' );
+		$this->heading          = __( 'Your generated licenses are attached', 'woocommerce' );
+		$this->subject          = __( '[{site_title}] Your generated licenses are attached', 'woocommerce' );
+		$this->template_html    = 'emails/customer-web-tokens-report.php';
+		$this->template_plain   = 'emails/plain/customer-web-tokens-report.php';
 
 		// Triggers for this email
-		add_action( 'woocommerce_token_generated_notification', array( $this, 'trigger' ) );
+		add_action( 'woocommerce_web_token_report_notification', array( $this, 'trigger' ) );
 
 		// Call parent constructor
 		parent::__construct();
@@ -47,29 +47,70 @@ class WC_Email_Generate_Tokens extends WC_Email {
 	 *
 	 * @param int $order_id
 	 */
-	public function trigger( $token_id ) {
-		if ( $token_id ) {
-			$this->object = wootokens_get_web_token($token_id);
+	public function trigger( $imported_id ) {
 
-			if($this->object->order_type == "Order")
-			{
-				$recipient = get_post_meta($this->object->order_id,"_billing_email",true);
-			}
-			else
-			{
-				$importuser = wootokens_get_import_user($this->object->user_id);
-				$recipient = $importuser->email;
-			}
+		if ( $imported_id ) {
+			$tokens = wootokens_get_tokens_import($imported_id);
+			//print_r($tokens);
+			$ea = new PHPExcel();
+			$ea->getProperties()
+			   ->setCreator('Taylor Ren')
+			   ->setTitle('PHPExcel Demo')
+			   ->setLastModifiedBy('Taylor Ren')
+			   ->setDescription('A demo to show how to use PHPExcel to manipulate an Excel file')
+			   ->setSubject('PHP Excel manipulation')
+			   ->setKeywords('excel php office phpexcel lakers')
+			   ->setCategory('programming');
 
+			$ews = $ea->getSheet(0);
+			$ews->setTitle('Data');
+			$ews->setCellValue('A1', 'S.No'); // Sets cell 'a1' to value 'ID 
+    		$ews->setCellValue('B1', 'Token');
+    		$ews->setCellValue('C1', 'first_name');
+    		$ews->setCellValue('D1', 'last_name');
+    		$ews->setCellValue('E1', 'email');
+    		$ews->setCellValue('F1', 'short_url');
+    		$ews->setCellValue('G1', 'long_url');
+    		$ews->setCellValue('H1', 'created_date');
+    		$ews->setCellValue('I1', 'expiry_date');
+    		$ews->setCellValue('J1', 'company');
+    		$ews->fromArray($tokens, ' ', 'A2');
+    		$header = 'A1:J1';
+			$style = array(
+			    'font' => array('bold' => true,),
+			    'alignment' => array('horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,),
+			    );
+			$ews->getStyle($header)->applyFromArray($style);
+
+			$writer = PHPExcel_IOFactory::createWriter($ea, 'Excel2007');
+			            
+			$writer->setIncludeCharts(true);
+			$target_dir = get_home_path()."wp-content/uploads/importdownloads/";
+			if(!is_dir($target_dir))
+			{
+				mkdir($target_dir,0777,true);
+			}
+			$filename = $target_dir."Imported_Data_".(new DateTime())->format('dmY')."_".$imported_id.".xlsx";
+			$writer->save($filename);
+			$your_pdf_path = $filename;
+			$attachments[] = $your_pdf_path;
+
+			$this->object = wootokens_get_import($imported_id);
+			$recipient = $this->object->report_to_email;
 			$this->recipient = $recipient;
 		}
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
 		}
-
-		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $attachments );
 	}
+	public function get_attachments() {
+		//return apply_filters( 'woocommerce_email_attachments', array(), $this->id, $this->object );
 
+		$your_pdf_path = get_home_path()."wp-content/uploads/imports/output.xlsx";
+		$attachments[] = $your_pdf_path;
+		return $attachments;
+	}
 	/**
 	 * Get content html.
 	 *
@@ -151,4 +192,4 @@ class WC_Email_Generate_Tokens extends WC_Email {
 
 endif;
 
-return new WC_Email_Generate_Tokens();
+return new WC_Email_Web_Token_Report();

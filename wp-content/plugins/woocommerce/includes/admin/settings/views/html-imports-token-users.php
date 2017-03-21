@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php } ?>
 	<?php if(!empty($csverror)) { ?>
 	<div id="message" class="updated fade">
-		<p><strong>CSV upload except following rows:</strong></p>
+		<!-- <p><strong>CSV upload except following rows:</strong></p> -->
 		<?php foreach ($csverror as $err) { ?>
 			<p><strong><?php echo $err; ?></strong></p>
 		<?php } ?>
@@ -61,6 +61,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<td class="forminp">
 						<input name="token_send_email" type="checkbox" id="token_send_email" value="1">
 						<small>If checked email will be sent to imported user.</small>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row" class="titledesc">
+						<label for="token_report_email"><?php _e( 'Send Report to Email', 'woocommerce' ); ?></label>
+					</th>
+					<td class="forminp">
+						<input name="token_report_email" type="text" id="token_report_email" value="">
 					</td>
 				</tr>
 				<tr valign="top">

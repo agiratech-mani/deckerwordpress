@@ -23,6 +23,22 @@ function wootokens_get_web_tokens( $order_id = NULL ) {
     $tokens = $web_tokens->get_web_tokens( $order_id );
     return $tokens;
 }
+function wootokens_get_tokens_import( $importid = NULL ) {
+    global $web_tokens;
+    $tokens = $web_tokens->get_tokens_import( $importid );
+    return $tokens;
+}
+function wootokens_get_import( $importid = NULL ) {
+    global $web_tokens,$wpdb;
+    $sql = "select * from {$wpdb->prefix}web_imports ";
+    if(!is_null($importid))
+    {
+        $sql .= " where id = ". $importid;
+    }
+    $sql .= " ORDER BY id;";
+    $web_tokens = $wpdb->get_row($sql);
+    return $web_tokens;
+}
 function wootokens_get_web_token( $order_id = NULL ) {
     global $web_tokens;
     $tokens = $web_tokens->get_web_token_by_id( $order_id );

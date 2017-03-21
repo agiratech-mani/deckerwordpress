@@ -82,6 +82,7 @@ class WC_Emails {
 			'woocommerce_new_customer_note',
 			'woocommerce_created_customer',
 			'woocommerce_token_generated',
+			'woocommerce_web_token_report',
 		) );
 
 		foreach ( $email_actions as $action ) {
@@ -147,6 +148,7 @@ class WC_Emails {
 		$this->emails['WC_Email_Customer_Reset_Password'] 		     = include( 'emails/class-wc-email-customer-reset-password.php' );
 		$this->emails['WC_Email_Customer_New_Account'] 		         = include( 'emails/class-wc-email-customer-new-account.php' );
 		$this->emails['WC_Email_Generate_Tokens'] 		         = include( 'emails/class-wc-email-generate-tokens.php' );
+		$this->emails['WC_Email_Web_Token_Report'] 		         = include( 'emails/class-wc-email-web-token-report.php' );
 
 		$this->emails = apply_filters( 'woocommerce_email_classes', $this->emails );
 

@@ -80,10 +80,16 @@ class WC_Admin_Tokens {
 			{
 				$error = [];
 				$csverror = [];
+				$errrow = [];
 				$token_send_email = 0;
+				$token_report_email = "";
 				if(!empty($_POST['token_send_email']))
 				{
 					$token_send_email = 1;
+				}
+				if(!empty($_POST['token_report_email']))
+				{
+					$token_report_email = $_POST['token_report_email'];
 				}
 				if(empty($_POST['token_product']))
 				{
@@ -108,18 +114,20 @@ class WC_Admin_Tokens {
 					if(in_array(strtolower($fileType), $validTypes))
 					{
 
-						$filename = $target_dir."uploads_".(new DateTime())->format("YmdHis").".".$fileType;
-						move_uploaded_file($_FILES["token_file"]["tmp_name"],$filename);
+						$filename = "uploads_".(new DateTime())->format("YmdHis").".".$fileType;;
+
+						move_uploaded_file($_FILES["token_file"]["tmp_name"],$target_dir.$filename);
 				        $table_name = $wpdb->prefix . 'web_imports';
 				        $data = [];
 				        $data['file'] = $filename;
 				        $data['user_id'] = get_current_user_id();
 				        $data['send_email'] = $token_send_email;
+				        $data['report_to_email'] = $_POST['token_report_email'];
 				        $data['created'] = (new DateTime())->format("Y-m-d H:i:s");
 				        $wpdb->insert( $table_name, $data);
 				        $fileid = $wpdb->insert_id;
 				        $arrResult  = 0;
-				        $objPHPExcel = PHPExcel_IOFactory::load($filename);
+				        $objPHPExcel = PHPExcel_IOFactory::load($target_dir.$filename);
 						$results = $objPHPExcel->getSheet(0)->toArray();
 						if(!empty($results))
 						{
@@ -143,7 +151,9 @@ class WC_Admin_Tokens {
 								    }
 								    else
 								    {
-								    	$csverror[] = "Email is not valid in Row {$arrResult}({$data[0]})";
+								    	//$csverror[] = "Email is not valid in Row {$arrResult}({$data[0]})";
+								    	$errrow[] = $arrResult;
+
 								    }
 							    }
 							}
@@ -186,13 +196,26 @@ class WC_Admin_Tokens {
 					    }
 					    fclose($handle);
 					}*/
-					if($arrResult <= 0 && empty($error))
+					if(count($errrow) > 0)
+					{	
+						if(count($errrow) < $arrResult)
+						{
+							$csverror[] = "Licenses generated successfully.";
+						}
+						$csverror[] = "Row ".implode(',', $errrow)." failed. Please fix only the failed rows and upload again.";
+					}
+					else if($arrResult <= 0 && empty($error))
 					{
 						$error[] = "License sheet is empty.";
 					}
-					if(empty($error) && empty($csverror))
+					else if(empty($error) && empty($csverror))
 					{
-						wp_redirect("admin.php?page=wc-tokens");
+						//wp_redirect("admin.php?page=wc-tokens");
+						$csverror[] = "Licenses generated successfully.";
+						if($token_report_email)
+						{
+							do_action( 'woocommerce_web_token_report',$fileid);
+						}
 					}
 				}
 			}

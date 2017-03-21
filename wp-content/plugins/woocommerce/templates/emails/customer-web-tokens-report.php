@@ -25,23 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 do_action( 'woocommerce_email_header', $email_heading); ?>
 
-<p><?php printf( __( "Hi there! Your Decker Digital order has been completed and you’re set to go!", 'woocommerce' )); ?></p>
-<h2><?php printf( __( 'Course license details', 'woocommerce' )); ?></h2>
-<div>
-	You have purchased a license to access Decker Digital: Communicate To Influence for one year, on a single computer. Please note your expiry date below.
-	<br>
-	<br>
-	To get started, copy and paste your Unique Course Link into your Chrome browser. You’ll want to bookmark this link and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place.
-	<br>
-	<br>
-	Happy communicating!
-	<br>
-	<br>
-</div>
+<p><?php printf( __( "Hi there! Your generated licenses are attached.", 'woocommerce' )); ?></p>
 <?php
 
 
-do_action( 'woocommerce_email_generate_tokens', $token, $sent_to_admin, $plain_text, $email );
+//do_action( 'woocommerce_email_generate_tokens', $token, $sent_to_admin, $plain_text, $email );
 
 /**
  * @hooked WC_Emails::customer_details() Shows customer details
@@ -52,4 +40,4 @@ do_action( 'woocommerce_email_generate_tokens', $token, $sent_to_admin, $plain_t
 /**
  * @hooked WC_Emails::email_footer() Output the email footer
  */
-do_action( 'woocommerce_email_footer', $email );
+//do_action( 'woocommerce_email_footer', $email );
