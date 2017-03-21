@@ -130,7 +130,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 				else
 				{
 					$date = new DateTime($item['im_created']);
-					return  "#Upload_{$date->format('mdy')}<strong> {$item[$column_name]}</strong>";
+					return  "#Upload_{$date->format('mdy')}_<strong>{$item[$column_name]}</strong>";
 				}
 			case 'product_id':
 				return  "<a href='post.php?post={$item[$column_name]}&amp;action=edit' class='row-title'><strong>".get_the_title($item[$column_name])."</strong></a>";
