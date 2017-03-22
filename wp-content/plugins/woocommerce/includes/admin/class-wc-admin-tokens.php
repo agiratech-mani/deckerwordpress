@@ -131,7 +131,11 @@ class WC_Admin_Tokens {
 						$results = $objPHPExcel->getSheet(0)->toArray();
 						if(!empty($results))
 						{
-							foreach ($results as $data) {
+							foreach ($results as $key => $data) {
+								if($key <= 0)
+								{
+									continue;
+								}
 								if(!empty($data[0]))
 						    	{
 						    		$arrResult++;
