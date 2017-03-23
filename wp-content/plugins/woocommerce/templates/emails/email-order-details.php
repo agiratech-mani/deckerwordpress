@@ -33,6 +33,7 @@ if($email->isCourse)
 }
 ?>
 <br>
+<br>
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 	<thead>
 		<tr>

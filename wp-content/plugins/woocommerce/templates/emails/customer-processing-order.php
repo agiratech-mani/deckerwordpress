@@ -28,7 +28,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 <p><?php 
 if($email->isCourse && $email->isOthers)
 {
-	_e( "Hi there! Your order has been completed and you’re set to go!");
+	_e( "Hi there! You’ll find your course license details below, and we bet you’re anxious to get started…");
 }
 elseif($email->isCourse)
 {
