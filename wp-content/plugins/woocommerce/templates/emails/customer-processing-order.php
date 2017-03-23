@@ -32,7 +32,7 @@ if($email->isCourse && $email->isOthers)
 }
 elseif($email->isCourse)
 {
-	_e( "Hi there! Your Decker Digital order has been completed and you’re set to go!");
+	_e( "Hi there! You’ll find your course license details below, and we bet you’re anxious to get started…");
 }
 else
 {
@@ -65,4 +65,9 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 /**
  * @hooked WC_Emails::email_footer() Output the email footer
  */
+if($email->isCourse)
+{
+	_e("Need help? Email us at <a href='mailto:support@decker.com'>support@decker.com</a> or give us a call at (844) 897-2389.");	
+}
+
 do_action( 'woocommerce_email_footer', $email );

@@ -25,12 +25,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<h2><?php _e( 'Course license details', 'woocommerce' ); ?></h2>
+<h2><?php _e( 'Welcome to Decker Digital: Communicate to Influence', 'woocommerce' ); ?></h2>
 <div>
-	You have purchased a license to access Decker Digital: Communicate To Influence for one year, on a single computer. Please note your expiry date below.
+	Let’s go!
 	<br>
 	<br>
-	To get started, copy and paste your Unique Course Link into your Chrome browser. You’ll want to bookmark this link and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place.
+	Copy and paste your <span style="color:#D22735;font-weight:bold;">Unique Course Link</span> below into your <b>Chrome browser</b>. 
+	<br>
+	<br>
+	Be sure to bookmark this link, and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place. 
 	<br>
 	<br>
 	Happy communicating!
@@ -39,9 +42,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 		<thead>
 			<tr>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Course', 'woocommerce' ); ?></th>
 				<?php /* <th class="td" scope="col" style="text-align:left;"><?php _e( 'Device Limit', 'woocommerce' ); ?></th> */ ?>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiration Date', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiry Date', 'woocommerce' ); ?></th>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Unique Course Link', 'woocommerce' ); ?></th>
 			</tr>
 		<thead>

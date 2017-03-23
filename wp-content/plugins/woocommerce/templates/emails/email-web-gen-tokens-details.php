@@ -30,8 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 		<thead>
 			<tr>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Product', 'woocommerce' ); ?></th>
-				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiration Date', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Course', 'woocommerce' ); ?></th>
+				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Expiry Date', 'woocommerce' ); ?></th>
 				<th class="td" scope="col" style="text-align:left;"><?php _e( 'Unique Course Link', 'woocommerce' ); ?></th>
 			</tr>
 		<thead>
