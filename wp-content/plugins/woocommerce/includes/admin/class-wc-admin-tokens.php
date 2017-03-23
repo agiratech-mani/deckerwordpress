@@ -139,13 +139,14 @@ class WC_Admin_Tokens {
 								if(!empty($data[0]))
 						    	{
 						    		$arrResult++;
-						    		if(filter_var($data[0], FILTER_VALIDATE_EMAIL))
+						    		$email = trim($data[0]);
+						    		if(!filter_var($email, FILTER_VALIDATE_EMAIL) === false)
 						    		{
 								        $csvdata = [];
 								        $csvdata['import_id'] = $fileid;
 								        $csvdata['first_name'] = $data[1];
 								        $csvdata['last_name'] = $data[2];
-								        $csvdata['email'] = $data[0];
+								        $csvdata['email'] = $email;
 								        $csvdata['company'] = $data[3];
 								        $csvdata['validity'] = ($data[4]>0?$data[4]:1);
 								        $csvdata['created'] = (new DateTime())->format("Y-m-d H:i:s");
