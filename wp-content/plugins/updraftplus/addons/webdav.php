@@ -2,11 +2,11 @@
 /*
 UpdraftPlus Addon: webdav:WebDAV Support
 Description: Allows UpdraftPlus to back up to WebDAV servers
-Version: 2.1
+Version: 2.2
 Shop: /shop/webdav/
 Include: includes/PEAR
 IncludePHP: methods/stream-base.php
-Latest Change: 1.12.17
+Latest Change: 1.12.35
 */
 
 /*
@@ -28,7 +28,7 @@ class UpdraftPlus_Addons_RemoteStorage_webdav extends UpdraftPlus_AddonStorage_v
 		parent::__construct('webdav', 'WebDAV');
 	}
 
-	public function bootstrap() {
+	public function bootstrap($opts = false, $connect = true) {
 		if (!class_exists('HTTP_WebDAV_Client_Stream')) {
 			// Needed in the include path because PEAR modules (including the file immediately required) will themselves require based on the relative path only
 			set_include_path(UPDRAFTPLUS_DIR.'/includes/PEAR'.PATH_SEPARATOR.get_include_path());
@@ -110,4 +110,5 @@ class UpdraftPlus_Addons_RemoteStorage_webdav extends UpdraftPlus_AddonStorage_v
 
 }
 
-$updraftplus_addons_webdav = new UpdraftPlus_Addons_RemoteStorage_webdav;
+// Do *not* instantiate here; it is a storage module, so is instantiated on-demand
+// $updraftplus_addons_webdav = new UpdraftPlus_Addons_RemoteStorage_webdav;

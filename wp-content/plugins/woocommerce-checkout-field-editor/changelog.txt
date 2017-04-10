@@ -1,5 +1,11 @@
 *** Checkout Field Editor Changelog ***
 
+2017-04-03 - version 1.5.4
+* Fix - Update for WooCommerce 3.0 compatibility.
+
+2017-02-22 - version 1.5.3
+* Misc - Only include custom field types when using a custom Customer / Order CSV Export order export format
+
 2017-01-06 - version 1.5.2
 * Fix - Remove option/placeholder field for checkbox as it is not needed.
 * Fix - Ensure field data is added to order XML exports.

@@ -1,0 +1,682 @@
+On branch B2
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   wp-config.php
+	modified:   wp-content/plugins/woocommerce/assets/css/_animation.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/_mixins.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/_variables.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/activation.css
+	modified:   wp-content/plugins/woocommerce/assets/css/activation.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/admin.css
+	modified:   wp-content/plugins/woocommerce/assets/css/admin.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/auth.css
+	modified:   wp-content/plugins/woocommerce/assets/css/auth.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/dashboard.css
+	modified:   wp-content/plugins/woocommerce/assets/css/dashboard.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/menu.css
+	modified:   wp-content/plugins/woocommerce/assets/css/menu.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/prettyPhoto.css
+	modified:   wp-content/plugins/woocommerce/assets/css/prettyPhoto.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/reports-print.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/select2.css
+	modified:   wp-content/plugins/woocommerce/assets/css/select2.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/twenty-seventeen.css
+	modified:   wp-content/plugins/woocommerce/assets/css/twenty-seventeen.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/wc-setup.css
+	modified:   wp-content/plugins/woocommerce/assets/css/wc-setup.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/woocommerce-layout.css
+	modified:   wp-content/plugins/woocommerce/assets/css/woocommerce-layout.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css
+	modified:   wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.scss
+	modified:   wp-content/plugins/woocommerce/assets/css/woocommerce.css
+	modified:   wp-content/plugins/woocommerce/assets/css/woocommerce.scss
+	deleted:    wp-content/plugins/woocommerce/assets/images/chosen-sprite.png
+	deleted:    wp-content/plugins/woocommerce/assets/images/chosen-sprite@2x.png
+	modified:   wp-content/plugins/woocommerce/assets/images/icons/credit-cards/mastercard.png
+	modified:   wp-content/plugins/woocommerce/assets/images/icons/credit-cards/mastercard.svg
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/backbone-modal.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/backbone-modal.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-coupon.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-coupon.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-order.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-order.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-product-variation.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-product-variation.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-product.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/meta-boxes-product.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/product-ordering.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/product-ordering.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/quick-edit.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/quick-edit.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/reports.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/reports.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/settings-views-html-settings-tax.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/settings-views-html-settings-tax.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/settings.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/settings.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/wc-enhanced-select.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/wc-enhanced-select.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/wc-shipping-zone-methods.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/wc-shipping-zone-methods.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/wc-shipping-zones.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/wc-shipping-zones.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/woocommerce_admin.js
+	modified:   wp-content/plugins/woocommerce/assets/js/admin/woocommerce_admin.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/address-i18n.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/address-i18n.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/cart.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/cart.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/checkout.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/checkout.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/country-select.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/country-select.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/password-strength-meter.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/password-strength-meter.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/price-slider.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/price-slider.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/single-product.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/single-product.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.js
+	modified:   wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js
+	modified:   wp-content/plugins/woocommerce/assets/js/select2/select2.js
+	modified:   wp-content/plugins/woocommerce/assets/js/select2/select2.min.js
+	modified:   wp-content/plugins/woocommerce/dummy-data/dummy-data.xml
+	modified:   wp-content/plugins/woocommerce/i18n/continents.php
+	modified:   wp-content/plugins/woocommerce/i18n/countries.php
+	modified:   wp-content/plugins/woocommerce/i18n/languages/woocommerce.pot
+	modified:   wp-content/plugins/woocommerce/i18n/locale-info.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/AR.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/AU.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/BD.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/BR.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/CA.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/CN.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/ES.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/GR.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/HK.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/HU.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/ID.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/IN.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/IR.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/IT.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/MX.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/MY.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/NP.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/NZ.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/PE.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/TH.php
+	modified:   wp-content/plugins/woocommerce/i18n/states/ZA.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-data.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-order.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-payment-gateway.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-payment-token.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-product.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-rest-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-rest-posts-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-rest-terms-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-session.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-settings-api.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-shipping-method.php
+	modified:   wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-widget.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-addons.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-api-keys-table-list.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-api-keys.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-assets.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-attributes.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-dashboard.php
+	deleted:    wp-content/plugins/woocommerce/includes/admin/class-wc-admin-device-histories-table-list.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-duplicate-product.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-help.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-importers.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-menus.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-meta-boxes.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-notices.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-permalink-settings.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-pointers.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-post-types.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-profile.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-reports.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-settings.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-setup-wizard.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-status.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-taxonomies.php
+	deleted:    wp-content/plugins/woocommerce/includes/admin/class-wc-admin-tokens-device-table-list.php
+	deleted:    wp-content/plugins/woocommerce/includes/admin/class-wc-admin-tokens-table-list.php
+	deleted:    wp-content/plugins/woocommerce/includes/admin/class-wc-admin-tokens.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-webhooks-table-list.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin-webhooks.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/class-wc-admin.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/importers/class-wc-tax-rate-importer.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-coupon-data.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-order-actions.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-order-data.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-order-downloads.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-order-notes.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-data.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-images.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-short-description.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-download-permission.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-fee.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-item-meta.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-item.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-items.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-refund.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-order-shipping.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-attribute.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-download.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-variation-download.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-variation-admin.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-admin-report.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-coupon-usage.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-customer-list.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-customers.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-low-in-stock.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-most-stocked.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-out-of-stock.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-sales-by-category.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-sales-by-date.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-sales-by-product.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-stock.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-taxes-by-code.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/reports/class-wc-report-taxes-by-date.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-accounts.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-api.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-checkout.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-emails.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-general.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-integrations.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-page.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-products.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-shipping.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/class-wc-settings-tax.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-admin-page-shipping-classes.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-admin-page-shipping-zone-methods.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-admin-page-shipping-zones-instance.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-admin-page-shipping-zones.php
+	deleted:    wp-content/plugins/woocommerce/includes/admin/settings/views/html-imports-token-users.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-keys-edit.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-settings-tax.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-webhook-log.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/html-webhooks-edit.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/settings/views/settings-tax.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-addons.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-reports.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-status-logs.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-status-report.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-status-tools.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-status.php
+	deleted:    wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-tokens.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-bulk-edit-product.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-install.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-legacy-shipping.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-no-shipping-methods.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-template-check.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-theme-support.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-tracking.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-update.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-updated.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-notice-updating.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-quick-edit-product.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/views/html-report-by-date.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/wc-admin-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/admin/wc-meta-box-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-authentication.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-coupons-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-customer-downloads-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-customers-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-exception.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-order-notes-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-order-refunds-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-orders-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-attribute-terms-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-attributes-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-categories-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-reviews-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-shipping-classes-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-tags-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-products-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-report-sales-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-report-top-sellers-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-reports-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-tax-classes-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-taxes-controller.php
+	deleted:    wp-content/plugins/woocommerce/includes/api/class-wc-rest-tokens-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-webhook-deliveries.php
+	modified:   wp-content/plugins/woocommerce/includes/api/class-wc-rest-webhooks-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-authentication.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-coupons.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-customers.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-json-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-orders.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-products.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-reports.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-resource.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-server.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v1/class-wc-api-xml-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-authentication.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-coupons.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-customers.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-json-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-orders.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-products.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-reports.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-resource.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-server.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v2/class-wc-api-webhooks.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-authentication.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-coupons.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-customers.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-json-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-orders.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-products.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-reports.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-resource.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-server.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-taxes.php
+	modified:   wp-content/plugins/woocommerce/includes/api/legacy/v3/class-wc-api-webhooks.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-ajax.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-api.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-auth.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-autoloader.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-background-updater.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-breadcrumb.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-cache-helper.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-cart.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-checkout.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-cli.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-comments.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-countries.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-coupon.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-customer.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-download-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-emails.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-embed.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-form-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-frontend-scripts.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-geo-ip.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-geolocation.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-https.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-install.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-legacy-api.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-logger.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-order-factory.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-order-item-meta.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-order-refund.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-order.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-payment-gateways.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-payment-tokens.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-post-data.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-post-types.php
+	deleted:    wp-content/plugins/woocommerce/includes/class-wc-product-course.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-product-external.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-product-factory.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-product-grouped.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-product-simple.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-product-variable.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-product-variation.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-query.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-session-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-shipping-rate.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-shipping-zone.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-shipping-zones.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-shipping.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-shortcodes.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-tax.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-template-loader.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-tracker.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-validation.php
+	modified:   wp-content/plugins/woocommerce/includes/class-wc-webhook.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-command.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-coupon.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-customer.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-exception.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-order.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-product-category.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-product.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-report.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-tax.php
+	deleted:    wp-content/plugins/woocommerce/includes/cli/class-wc-cli-tool.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-cancelled-order.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-completed-order.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-invoice.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-new-account.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-note.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-on-hold-order.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-processing-order.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-refunded-order.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-customer-reset-password.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-failed-order.php
+	deleted:    wp-content/plugins/woocommerce/includes/emails/class-wc-email-generate-tokens.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email-new-order.php
+	deleted:    wp-content/plugins/woocommerce/includes/emails/class-wc-email-web-token-report.php
+	modified:   wp-content/plugins/woocommerce/includes/emails/class-wc-email.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/bacs/class-wc-gateway-bacs.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/cheque/class-wc-gateway-cheque.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/class-wc-payment-gateway-cc.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/class-wc-payment-gateway-echeck.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/cod/class-wc-gateway-cod.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/paypal/class-wc-gateway-paypal.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/paypal/includes/class-wc-gateway-paypal-ipn-handler.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/paypal/includes/class-wc-gateway-paypal-pdt-handler.php
+	deleted:    wp-content/plugins/woocommerce/includes/gateways/paypal/includes/class-wc-gateway-paypal-refund.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/paypal/includes/class-wc-gateway-paypal-request.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/paypal/includes/class-wc-gateway-paypal-response.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/paypal/includes/settings-paypal.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/simplify-commerce/class-wc-addons-gateway-simplify-commerce.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/simplify-commerce/class-wc-gateway-simplify-commerce.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/simplify-commerce/includes/Simplify.php
+	modified:   wp-content/plugins/woocommerce/includes/gateways/simplify-commerce/includes/Simplify/AccessToken.php
+	modified:   wp-content/plugins/woocommerce/includes/libraries/class-emogrifier.php
+	modified:   wp-content/plugins/woocommerce/includes/libraries/class-wc-eval-math.php
+	modified:   wp-content/plugins/woocommerce/includes/libraries/wp-async-request.php
+	modified:   wp-content/plugins/woocommerce/includes/libraries/wp-background-process.php
+	modified:   wp-content/plugins/woocommerce/includes/payment-tokens/class-wc-payment-token-cc.php
+	modified:   wp-content/plugins/woocommerce/includes/payment-tokens/class-wc-payment-token-echeck.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/flat-rate/class-wc-shipping-flat-rate.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/flat-rate/includes/settings-flat-rate.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/free-shipping/class-wc-shipping-free-shipping.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/legacy-flat-rate/class-wc-shipping-legacy-flat-rate.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/legacy-flat-rate/includes/settings-flat-rate.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/legacy-free-shipping/class-wc-shipping-legacy-free-shipping.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/legacy-international-delivery/class-wc-shipping-legacy-international-delivery.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/legacy-local-delivery/class-wc-shipping-legacy-local-delivery.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/legacy-local-pickup/class-wc-shipping-legacy-local-pickup.php
+	modified:   wp-content/plugins/woocommerce/includes/shipping/local-pickup/class-wc-shipping-local-pickup.php
+	modified:   wp-content/plugins/woocommerce/includes/shortcodes/class-wc-shortcode-cart.php
+	modified:   wp-content/plugins/woocommerce/includes/shortcodes/class-wc-shortcode-checkout.php
+	modified:   wp-content/plugins/woocommerce/includes/shortcodes/class-wc-shortcode-my-account.php
+	modified:   wp-content/plugins/woocommerce/includes/shortcodes/class-wc-shortcode-order-tracking.php
+	modified:   wp-content/plugins/woocommerce/includes/theme-support/class-wc-twenty-seventeen.php
+	deleted:    wp-content/plugins/woocommerce/includes/vendor/class-wp-rest-controller.php
+	modified:   wp-content/plugins/woocommerce/includes/vendor/wp-rest-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/walkers/class-product-cat-dropdown-walker.php
+	modified:   wp-content/plugins/woocommerce/includes/walkers/class-product-cat-list-walker.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-account-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-attribute-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-cart-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-conditional-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-core-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-coupon-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-deprecated-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-formatting-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-notice-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-order-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-page-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-product-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-rest-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-template-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-template-hooks.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-term-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-update-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-user-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/wc-widget-functions.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-cart.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-layered-nav-filters.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-layered-nav.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-price-filter.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-product-categories.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-product-search.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-product-tag-cloud.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-products.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-rating-filter.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-recent-reviews.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-recently-viewed.php
+	modified:   wp-content/plugins/woocommerce/includes/widgets/class-wc-widget-top-rated-products.php
+	modified:   wp-content/plugins/woocommerce/readme.txt
+	modified:   wp-content/plugins/woocommerce/templates/archive-product.php
+	modified:   wp-content/plugins/woocommerce/templates/auth/form-grant-access.php
+	modified:   wp-content/plugins/woocommerce/templates/auth/form-login.php
+	modified:   wp-content/plugins/woocommerce/templates/auth/header.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/cart-empty.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/cart-totals.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/cart.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/cross-sells.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/mini-cart.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/proceed-to-checkout-button.php
+	modified:   wp-content/plugins/woocommerce/templates/cart/shipping-calculator.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/cart-errors.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/form-billing.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/form-checkout.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/form-coupon.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/form-login.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/form-pay.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/form-shipping.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/payment.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/review-order.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/terms.php
+	modified:   wp-content/plugins/woocommerce/templates/checkout/thankyou.php
+	modified:   wp-content/plugins/woocommerce/templates/content-product.php
+	modified:   wp-content/plugins/woocommerce/templates/content-single-product.php
+	modified:   wp-content/plugins/woocommerce/templates/content-widget-product.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/admin-cancelled-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/admin-failed-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/admin-new-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-completed-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-invoice.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-new-account.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-note.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-on-hold-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-processing-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/customer-refunded-order.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/customer-user-tokens.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/customer-web-tokens-report.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/email-addresses.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/email-customer-details.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/email-header.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/email-order-details.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/email-order-items.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/email-styles.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/email-web-gen-tokens-details.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/email-web-tokens-details.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/admin-cancelled-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/admin-failed-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/admin-new-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-completed-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-invoice.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-new-account.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-note.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-on-hold-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-processing-order.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/customer-refunded-order.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/plain/customer-user-tokens.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/plain/customer-web-tokens-report.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/email-order-details.php
+	modified:   wp-content/plugins/woocommerce/templates/emails/plain/email-order-items.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/plain/email-web-gen-tokens-details.php
+	deleted:    wp-content/plugins/woocommerce/templates/emails/plain/email-web-tokens-details.php
+	modified:   wp-content/plugins/woocommerce/templates/global/breadcrumb.php
+	modified:   wp-content/plugins/woocommerce/templates/global/form-login.php
+	modified:   wp-content/plugins/woocommerce/templates/global/quantity-input.php
+	modified:   wp-content/plugins/woocommerce/templates/global/sidebar.php
+	modified:   wp-content/plugins/woocommerce/templates/global/wrapper-end.php
+	modified:   wp-content/plugins/woocommerce/templates/global/wrapper-start.php
+	modified:   wp-content/plugins/woocommerce/templates/loop/add-to-cart.php
+	modified:   wp-content/plugins/woocommerce/templates/loop/orderby.php
+	modified:   wp-content/plugins/woocommerce/templates/loop/pagination.php
+	modified:   wp-content/plugins/woocommerce/templates/loop/rating.php
+	modified:   wp-content/plugins/woocommerce/templates/loop/result-count.php
+	modified:   wp-content/plugins/woocommerce/templates/loop/sale-flash.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/dashboard.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/downloads.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/form-add-payment-method.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/form-edit-account.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/form-edit-address.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/form-login.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/form-lost-password.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/form-reset-password.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/my-address.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/my-downloads.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/my-orders.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/orders.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/payment-methods.php
+	modified:   wp-content/plugins/woocommerce/templates/myaccount/view-order.php
+	modified:   wp-content/plugins/woocommerce/templates/notices/error.php
+	modified:   wp-content/plugins/woocommerce/templates/notices/notice.php
+	modified:   wp-content/plugins/woocommerce/templates/notices/success.php
+	modified:   wp-content/plugins/woocommerce/templates/order/form-tracking.php
+	modified:   wp-content/plugins/woocommerce/templates/order/order-again.php
+	modified:   wp-content/plugins/woocommerce/templates/order/order-details-customer.php
+	modified:   wp-content/plugins/woocommerce/templates/order/order-details-item.php
+	modified:   wp-content/plugins/woocommerce/templates/order/order-details.php
+	modified:   wp-content/plugins/woocommerce/templates/order/tracking.php
+	modified:   wp-content/plugins/woocommerce/templates/product-searchform.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product-reviews.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/add-to-cart/external.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/add-to-cart/grouped.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/add-to-cart/simple.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/add-to-cart/variable.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/add-to-cart/variation-add-to-cart-button.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/meta.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/price.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/product-attributes.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/product-image.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/product-thumbnails.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/rating.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/related.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/review-meta.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/review-rating.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/review.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/sale-flash.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/share.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/short-description.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/tabs/additional-information.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/tabs/description.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/tabs/tabs.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/title.php
+	modified:   wp-content/plugins/woocommerce/templates/single-product/up-sells.php
+	modified:   wp-content/plugins/woocommerce/uninstall.php
+	modified:   wp-content/plugins/woocommerce/woocommerce.php
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	changes.txt
+	changes/
+	crul-mani.php
+	decker_wp_mar_13_2017_1.tar
+	decker_wp_mar_14_2017_9.tar
+	decker_wp_mar_15_2017_1.tar
+	decker_wp_mar_15_2017_2.tar
+	decker_wp_mar_15_2017_3.tar
+	decker_wp_mar_16_2017_1.tar
+	decker_wp_mar_17_2017_1.tar
+	decker_wp_mar_17_2017_2.tar
+	decker_wp_mar_17_2017_3.tar
+	decker_wp_mar_20_2017_1.tar
+	decker_wp_mar_20_2017_2.tar
+	decker_wp_mar_20_2017_3.tar
+	decker_wp_mar_20_2017_4.tar
+	decker_wp_mar_21_2017_1.tar
+	decker_wp_mar_21_2017_2.tar
+	decker_wp_mar_21_2017_3.tar
+	decker_wp_mar_21_2017_4.tar
+	decker_wp_mar_21_2017_5.tar
+	decker_wp_mar_22_2017_1.tar
+	decker_wp_mar_23_2017_1.tar
+	decker_wp_mar_23_2017_2.tar
+	decker_wp_mar_23_2017_3.tar
+	email.html
+	mac.php
+	wp-admin/output.xlsx
+	wp-content/plugins/woocommerce/assets/css/activation-rtl.css
+	wp-content/plugins/woocommerce/assets/css/admin-rtl.css
+	wp-content/plugins/woocommerce/assets/css/auth-rtl.css
+	wp-content/plugins/woocommerce/assets/css/dashboard-rtl.css
+	wp-content/plugins/woocommerce/assets/css/menu-rtl.css
+	wp-content/plugins/woocommerce/assets/css/photoswipe/
+	wp-content/plugins/woocommerce/assets/css/prettyPhoto-rtl.css
+	wp-content/plugins/woocommerce/assets/css/reports-print-rtl.css
+	wp-content/plugins/woocommerce/assets/css/twenty-seventeen-rtl.css
+	wp-content/plugins/woocommerce/assets/css/wc-setup-rtl.css
+	wp-content/plugins/woocommerce/assets/css/woocommerce-layout-rtl.css
+	wp-content/plugins/woocommerce/assets/css/woocommerce-rtl.css
+	wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen-rtl.css
+	wp-content/plugins/woocommerce/assets/js/admin/system-status.js
+	wp-content/plugins/woocommerce/assets/js/admin/system-status.min.js
+	wp-content/plugins/woocommerce/assets/js/flexslider/
+	wp-content/plugins/woocommerce/assets/js/js-cookie/
+	wp-content/plugins/woocommerce/assets/js/photoswipe/
+	wp-content/plugins/woocommerce/assets/js/select2/select2.full.js
+	wp-content/plugins/woocommerce/assets/js/select2/select2.full.min.js
+	wp-content/plugins/woocommerce/assets/js/zoom/
+	wp-content/plugins/woocommerce/i18n/states/IE.php
+	wp-content/plugins/woocommerce/i18n/states/NG.php
+	wp-content/plugins/woocommerce/i18n/states/PK.php
+	wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-deprecated-hooks.php
+	wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-log-handler.php
+	wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-rest-crud-controller.php
+	wp-content/plugins/woocommerce/includes/abstracts/abstract-wc-rest-shipping-zones-controller.php
+	wp-content/plugins/woocommerce/includes/admin/class-wc-admin-log-table-list.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/class-wc-meta-box-product-reviews.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-advanced.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-attributes.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-general.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-inventory.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-linked-products.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-panel.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-shipping.php
+	wp-content/plugins/woocommerce/includes/admin/meta-boxes/views/html-product-data-variations.php
+	wp-content/plugins/woocommerce/includes/admin/views/html-admin-page-status-logs-db.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-payment-gateways-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-product-variations-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-setting-options-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-settings-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-shipping-methods-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-shipping-zone-locations-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-shipping-zone-methods-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-shipping-zones-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-system-status-controller.php
+	wp-content/plugins/woocommerce/includes/api/class-wc-rest-system-status-tools-controller.php
+	wp-content/plugins/woocommerce/includes/api/legacy/class-wc-rest-legacy-coupons-controller.php
+	wp-content/plugins/woocommerce/includes/api/legacy/class-wc-rest-legacy-orders-controller.php
+	wp-content/plugins/woocommerce/includes/api/legacy/class-wc-rest-legacy-products-controller.php
+	wp-content/plugins/woocommerce/includes/api/v1/
+	wp-content/plugins/woocommerce/includes/class-wc-background-emailer.php
+	wp-content/plugins/woocommerce/includes/class-wc-customer-download.php
+	wp-content/plugins/woocommerce/includes/class-wc-data-exception.php
+	wp-content/plugins/woocommerce/includes/class-wc-data-store.php
+	wp-content/plugins/woocommerce/includes/class-wc-datetime.php
+	wp-content/plugins/woocommerce/includes/class-wc-deprecated-action-hooks.php
+	wp-content/plugins/woocommerce/includes/class-wc-deprecated-filter-hooks.php
+	wp-content/plugins/woocommerce/includes/class-wc-log-levels.php
+	wp-content/plugins/woocommerce/includes/class-wc-order-item-coupon.php
+	wp-content/plugins/woocommerce/includes/class-wc-order-item-fee.php
+	wp-content/plugins/woocommerce/includes/class-wc-order-item-product.php
+	wp-content/plugins/woocommerce/includes/class-wc-order-item-shipping.php
+	wp-content/plugins/woocommerce/includes/class-wc-order-item-tax.php
+	wp-content/plugins/woocommerce/includes/class-wc-order-item.php
+	wp-content/plugins/woocommerce/includes/class-wc-product-attribute.php
+	wp-content/plugins/woocommerce/includes/class-wc-product-download.php
+	wp-content/plugins/woocommerce/includes/class-wc-register-wp-admin-settings.php
+	wp-content/plugins/woocommerce/includes/class-wc-structured-data.php
+	wp-content/plugins/woocommerce/includes/cli/class-wc-cli-rest-command.php
+	wp-content/plugins/woocommerce/includes/cli/class-wc-cli-runner.php
+	wp-content/plugins/woocommerce/includes/cli/class-wc-cli-tool-command.php
+	wp-content/plugins/woocommerce/includes/cli/class-wc-cli-update-command.php
+	wp-content/plugins/woocommerce/includes/data-stores/
+	wp-content/plugins/woocommerce/includes/gateways/paypal/includes/class-wc-gateway-paypal-api-handler.php
+	wp-content/plugins/woocommerce/includes/interfaces/
+	wp-content/plugins/woocommerce/includes/legacy/
+	wp-content/plugins/woocommerce/includes/log-handlers/
+	wp-content/plugins/woocommerce/includes/vendor/abstract-wp-rest-controller.php
+	wp-content/plugins/woocommerce/includes/wc-order-item-functions.php
+	wp-content/plugins/woocommerce/includes/wc-stock-functions.php
+	wp-content/plugins/woocommerce/templates/single-product/photoswipe.php
+	wp-content/plugins/woocommerce/templates/single-product/stock.php
+	wp-content/updraft/backup_2017-04-04-0001_Decker_Communications_9b40675202f6-db.gz
+	wp-content/updraft/backup_2017-04-04-0001_Decker_Communications_9b40675202f6-wpcore.zip
+	wp-content/updraft/log.32e9bcec3b43.txt
+	wp-content/updraft/log.76fab50c779c.txt
+	wp-content/updraft/log.916da266485e.txt
+	wp-content/updraft/log.9b40675202f6.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")

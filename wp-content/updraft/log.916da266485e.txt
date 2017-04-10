@@ -1,0 +1,488 @@
+0000.000 (0) Opened log file at time: Mon, 10 Apr 2017 05:40:23 +0000 on https://local.deckerwp.com
+0000.002 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 2.12.35.22 WP: 4.7.3 PHP: 5.5.9-1ubuntu4.21 (fpm-fcgi, Linux manikandan-Inspiron-3542 3.13.0-116-generic #163-Ubuntu SMP Fri Mar 31 14:13:22 UTC 2017 x86_64) MySQL: 5.5.54 WPLANG: en_US Server: nginx/1.4.6 safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 19.9M | 20.5M) multisite: N openssl: OpenSSL 1.0.1f 6 Jan 2014 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.004 (0) Free space on disk containing Updraft's temporary directory: 364121.5 MB
+0000.006 (0) Tasks: Backup files: 1 (schedule: weekly) Backup DB: 1 (schedule: weekly)
+0000.009 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.011 (0) Set semaphore last lock (fd) time to 2017-04-10 05:40:23
+0000.013 (0) Semaphore lock (fd) complete
+0000.017 (0) Backup run: resumption=0, nonce=916da266485e, begun at=1491802823 (0s ago), job type=backup, label=Automatic backup before update
+0000.021 (0) Scheduling a resumption (1) after 300 seconds (1491803123) in case this run gets aborted
+0000.026 (0) Checking if we have a zip executable available
+0000.028 (0) Testing: /usr/bin/zip
+0000.054 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.056 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.057 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.058 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.059 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.086 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.088 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.091 (0) Working binary zip found: /usr/bin/zip
+0000.095 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.098 (0) Creation of backups of directories: beginning
+0000.105 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0000.205 (0) Total entities for the zip file: 881 directories, 5256 files (0 skipped as non-modified), 73.1 MB
+0000.208 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 100 files added (on-disk size: 0 KB)
+0000.211 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 200 files added (on-disk size: 0 KB)
+0000.214 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 300 files added (on-disk size: 0 KB)
+0000.219 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 400 files added (on-disk size: 0 KB)
+0000.223 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 500 files added (on-disk size: 0 KB)
+0000.224 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (4.8 MB, 5256 files batched, 501 (501) added so far); re-opening (prior size: 0 KB)
+0000.375 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: size is now: 2.90 MB
+0000.379 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 600 files added (on-disk size: 3004.7 KB)
+0000.381 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 700 files added (on-disk size: 3004.7 KB)
+0000.384 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 800 files added (on-disk size: 3004.7 KB)
+0000.387 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 900 files added (on-disk size: 3004.7 KB)
+0000.390 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1000 files added (on-disk size: 3004.7 KB)
+0000.391 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (11.2 MB, 5256 files batched, 501 (1002) added so far); re-opening (prior size: 3004.7 KB)
+0001.037 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: size is now: 7.00 MB
+0001.042 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1100 files added (on-disk size: 7145.4 KB)
+0001.045 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1200 files added (on-disk size: 7145.4 KB)
+0001.049 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1300 files added (on-disk size: 7145.4 KB)
+0001.053 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1400 files added (on-disk size: 7145.4 KB)
+0001.057 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1500 files added (on-disk size: 7145.4 KB)
+0001.058 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (8.4 MB, 5256 files batched, 501 (1503) added so far); re-opening (prior size: 7145.4 KB)
+0001.442 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: size is now: 10.40 MB
+0001.446 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1600 files added (on-disk size: 10601.2 KB)
+0001.448 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1700 files added (on-disk size: 10601.2 KB)
+0001.451 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1800 files added (on-disk size: 10601.2 KB)
+0001.455 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 1900 files added (on-disk size: 10601.2 KB)
+0001.459 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2000 files added (on-disk size: 10601.2 KB)
+0001.460 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (7.8 MB, 5256 files batched, 501 (2004) added so far); re-opening (prior size: 10601.2 KB)
+0001.869 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: size is now: 13.10 MB
+0001.876 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2100 files added (on-disk size: 13366.1 KB)
+0001.882 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2200 files added (on-disk size: 13366.1 KB)
+0001.888 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2300 files added (on-disk size: 13366.1 KB)
+0001.892 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2400 files added (on-disk size: 13366.1 KB)
+0001.894 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2500 files added (on-disk size: 13366.1 KB)
+0001.895 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (6.4 MB, 5256 files batched, 501 (2505) added so far); re-opening (prior size: 13366.1 KB)
+0002.193 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2600 files added (on-disk size: 15781.4 KB)
+0002.196 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2700 files added (on-disk size: 15781.4 KB)
+0002.203 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2800 files added (on-disk size: 15781.4 KB)
+0002.209 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 2900 files added (on-disk size: 15781.4 KB)
+0002.215 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3000 files added (on-disk size: 15781.4 KB)
+0002.217 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (5.5 MB, 5256 files batched, 501 (3006) added so far); re-opening (prior size: 15781.4 KB)
+0002.494 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3100 files added (on-disk size: 17193.6 KB)
+0002.499 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3200 files added (on-disk size: 17193.6 KB)
+0002.503 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3300 files added (on-disk size: 17193.6 KB)
+0002.506 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3400 files added (on-disk size: 17193.6 KB)
+0002.509 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3500 files added (on-disk size: 17193.6 KB)
+0002.510 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (8.8 MB, 5256 files batched, 501 (3507) added so far); re-opening (prior size: 17193.6 KB)
+0002.872 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3600 files added (on-disk size: 19259.3 KB)
+0002.875 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3700 files added (on-disk size: 19259.3 KB)
+0002.878 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3800 files added (on-disk size: 19259.3 KB)
+0002.880 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 3900 files added (on-disk size: 19259.3 KB)
+0002.885 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4000 files added (on-disk size: 19259.3 KB)
+0002.887 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (11.6 MB, 5256 files batched, 501 (4008) added so far); re-opening (prior size: 19259.3 KB)
+0003.366 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4100 files added (on-disk size: 21772.8 KB)
+0003.371 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4200 files added (on-disk size: 21772.8 KB)
+0003.377 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4300 files added (on-disk size: 21772.8 KB)
+0003.383 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4400 files added (on-disk size: 21772.8 KB)
+0003.388 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4500 files added (on-disk size: 21772.8 KB)
+0003.389 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (1.6 MB, 5256 files batched, 501 (4509) added so far); re-opening (prior size: 21772.8 KB)
+0003.541 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4600 files added (on-disk size: 22354.1 KB)
+0003.545 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4700 files added (on-disk size: 22354.1 KB)
+0003.552 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4800 files added (on-disk size: 22354.1 KB)
+0003.556 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 4900 files added (on-disk size: 22354.1 KB)
+0003.560 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 5000 files added (on-disk size: 22354.1 KB)
+0003.562 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (4 MB, 5256 files batched, 501 (5010) added so far); re-opening (prior size: 22354.1 KB)
+0003.759 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 5100 files added (on-disk size: 25137.1 KB)
+0003.762 (0) Zip: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip.tmp: 5200 files added (on-disk size: 25137.1 KB)
+0004.077 (0) Created plugins zip (0) - 26805.6 KB in 4 s (6751.5 KB/s) (SHA1 checksum: f1fb6f55c743512f34bb3940e7ad6f173cde6efd)
+0004.079 (0) No backup of themes: excluded by user's options
+0004.080 (0) No backup of uploads: excluded by user's options
+0004.081 (0) No backup of wpcore: excluded by user's options
+0004.082 (0) No backup of others: excluded by user's options
+0004.083 (0) No backup of more: excluded by user's options
+0004.087 (0) Saving backup status to database (elements: 2)
+0004.091 (0) Beginning creation of database dump (WordPress DB)
+0004.092 (0) All tables found will be backed up (indicated by backupdb_nonwp option)
+0004.093 (0) Testing: /usr/bin/mysqldump
+0004.111 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `dcom_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!40101 SET character_set_client = utf8 */;\nC (truncated - 1089 bytes total)
+0004.113 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0004.126 (0) Table dcom_options: Total expected rows (approximate): 1337
+0004.300 (0) Table dcom_options: Total rows added: 1337 in 0.17 seconds
+0004.301 (0) Table dcom_options: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_options.table.gz - 221.1 KB)
+0004.305 (0) Table dcom_users: Total expected rows (approximate): 25
+0004.307 (0) Table dcom_users: Total rows added: 25 in 0.00 seconds
+0004.309 (0) Table dcom_users: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_users.table.gz - 2 KB)
+0004.314 (0) Table dcom_usermeta: Total expected rows (approximate): 1027
+0004.342 (0) Table dcom_usermeta: Total rows added: 1027 in 0.03 seconds
+0004.344 (0) Table dcom_usermeta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_usermeta.table.gz - 13.1 KB)
+0004.348 (0) Table dcom_commentmeta: Total expected rows (approximate): 3777
+0004.418 (0) Table dcom_commentmeta: Total rows added: 3777 in 0.07 seconds
+0004.420 (0) Table dcom_commentmeta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_commentmeta.table.gz - 27.9 KB)
+0004.423 (0) Table dcom_comments: Total expected rows (approximate): 5816
+0004.794 (0) Table dcom_comments: Total rows added: 5816 in 0.37 seconds
+0004.796 (0) Table dcom_comments: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_comments.table.gz - 343.8 KB)
+0004.799 (0) Table dcom_links: Total expected rows (approximate): 0
+0004.803 (0) Table dcom_links: Total rows added: 0 in 0.00 seconds
+0004.804 (0) Table dcom_links: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_links.table.gz - 0.4 KB)
+0004.809 (0) Table dcom_postmeta: Total expected rows (approximate): 91052
+0005.267 (0) Table dcom_postmeta: binary mysqldump finished (writes: 41) in 0.46 seconds
+0005.269 (0) Table dcom_postmeta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_postmeta.table.gz - 1336.8 KB)
+0005.273 (0) Table dcom_posts: Total expected rows (approximate): 7110
+0006.833 (0) Table dcom_posts: Total rows added: 7110 in 1.56 seconds
+0006.858 (0) Table dcom_posts: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts.table.gz - 4296.3 KB)
+0006.861 (0) Table dcom_term_relationships: Total expected rows (approximate): 5677
+0006.915 (0) Table dcom_term_relationships: Total rows added: 5677 in 0.05 seconds
+0006.918 (0) Table dcom_term_relationships: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_term_relationships.table.gz - 18.2 KB)
+0006.922 (0) Table dcom_term_taxonomy: Total expected rows (approximate): 1938
+0006.958 (0) Table dcom_term_taxonomy: Total rows added: 1938 in 0.04 seconds
+0006.959 (0) Table dcom_term_taxonomy: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_term_taxonomy.table.gz - 11.1 KB)
+0006.962 (0) Table dcom_termmeta: Total expected rows (approximate): 1378
+0006.987 (0) Table dcom_termmeta: Total rows added: 1378 in 0.02 seconds
+0006.988 (0) Table dcom_termmeta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_termmeta.table.gz - 10.2 KB)
+0006.991 (0) Table dcom_terms: Total expected rows (approximate): 1938
+0007.035 (0) Table dcom_terms: Total rows added: 1938 in 0.04 seconds
+0007.039 (0) Table dcom_terms: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_terms.table.gz - 27.3 KB)
+0007.043 (0) Table dcom_woocommerce_order_itemmeta: Total expected rows (approximate): 14368
+0007.104 (0) Table dcom_woocommerce_order_itemmeta: binary mysqldump finished (writes: 32) in 0.06 seconds
+0007.106 (0) Table dcom_woocommerce_order_itemmeta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_order_itemmeta.table.gz - 84.4 KB)
+0007.109 (0) Table dcom_woocommerce_payment_tokenmeta: Total expected rows (approximate): 0
+0007.111 (0) Table dcom_woocommerce_payment_tokenmeta: Total rows added: 0 in 0.00 seconds
+0007.111 (0) Table dcom_woocommerce_payment_tokenmeta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_payment_tokenmeta.table.gz - 0.3 KB)
+0007.114 (0) Table dcom_bpspro_db_backup: Total expected rows (approximate): 0
+0007.117 (0) Table dcom_bpspro_db_backup: Total rows added: 0 in 0.00 seconds
+0007.119 (0) Table dcom_bpspro_db_backup: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_bpspro_db_backup.table.gz - 0.4 KB)
+0007.123 (0) Table dcom_bpspro_login_security: Total expected rows (approximate): 1
+0007.126 (0) Table dcom_bpspro_login_security: Total rows added: 1 in 0.00 seconds
+0007.127 (0) Table dcom_bpspro_login_security: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_bpspro_login_security.table.gz - 0.6 KB)
+0007.130 (0) Table dcom_bpspro_seclog_ignore: Total expected rows (approximate): 1
+0007.133 (0) Table dcom_bpspro_seclog_ignore: Total rows added: 1 in 0.00 seconds
+0007.134 (0) Table dcom_bpspro_seclog_ignore: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_bpspro_seclog_ignore.table.gz - 0.4 KB)
+0007.137 (0) Table dcom_gf_addon_feed: Total expected rows (approximate): 6
+0007.139 (0) Table dcom_gf_addon_feed: Total rows added: 6 in 0.00 seconds
+0007.140 (0) Table dcom_gf_addon_feed: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_gf_addon_feed.table.gz - 1 KB)
+0007.143 (0) Table dcom_hitasoft_player_videos: Total expected rows (approximate): 0
+0007.144 (0) Table dcom_hitasoft_player_videos: Total rows added: 0 in 0.00 seconds
+0007.145 (0) Table dcom_hitasoft_player_videos: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_hitasoft_player_videos.table.gz - 0.4 KB)
+0007.148 (0) Table dcom_lockdowns: Total expected rows (approximate): 242
+0007.155 (0) Table dcom_lockdowns: Total rows added: 242 in 0.01 seconds
+0007.156 (0) Table dcom_lockdowns: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_lockdowns.table.gz - 5.2 KB)
+0007.159 (0) Table dcom_login_fails: Total expected rows (approximate): 98484
+0007.515 (0) Table dcom_login_fails: binary mysqldump finished (writes: 34) in 0.36 seconds
+0007.518 (0) Table dcom_login_fails: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_login_fails.table.gz - 965 KB)
+0007.522 (0) Table dcom_posts__20150818: Total expected rows (approximate): 5666
+0008.959 (0) Table dcom_posts__20150818: Total rows added: 5666 in 1.44 seconds
+0008.960 (0) Table dcom_posts__20150818: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts__20150818.table.gz - 3804 KB)
+0008.963 (0) Table dcom_posts__20151022: Total expected rows (approximate): 5850
+0010.346 (0) Table dcom_posts__20151022: Total rows added: 5850 in 1.38 seconds
+0010.347 (0) Table dcom_posts__20151022: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts__20151022.table.gz - 3847.4 KB)
+0010.351 (0) Table dcom_posts__214829: Total expected rows (approximate): 4726
+0011.520 (0) Table dcom_posts__214829: Total rows added: 4726 in 1.17 seconds
+0011.522 (0) Table dcom_posts__214829: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts__214829.table.gz - 3457.1 KB)
+0011.525 (0) Table dcom_rg_form: Total expected rows (approximate): 11
+0011.526 (0) Table dcom_rg_form: Total rows added: 11 in 0.00 seconds
+0011.527 (0) Table dcom_rg_form: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_form.table.gz - 0.7 KB)
+0011.529 (0) Table dcom_rg_form_meta: Total expected rows (approximate): 11
+0011.538 (0) Table dcom_rg_form_meta: Total rows added: 11 in 0.01 seconds
+0011.540 (0) Table dcom_rg_form_meta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_form_meta.table.gz - 10.5 KB)
+0011.544 (0) Table dcom_rg_form_view: Total expected rows (approximate): 28598
+0011.695 (0) Table dcom_rg_form_view: binary mysqldump finished (writes: 34) in 0.15 seconds
+0011.698 (0) Table dcom_rg_form_view: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_form_view.table.gz - 333.2 KB)
+0011.702 (0) Table dcom_rg_incomplete_submissions: Total expected rows (approximate): 0
+0011.704 (0) Table dcom_rg_incomplete_submissions: Total rows added: 0 in 0.00 seconds
+0011.705 (0) Table dcom_rg_incomplete_submissions: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_incomplete_submissions.table.gz - 0.4 KB)
+0011.708 (0) Table dcom_rg_lead: Total expected rows (approximate): 656
+0011.748 (0) Table dcom_rg_lead: Total rows added: 656 in 0.04 seconds
+0011.751 (0) Table dcom_rg_lead: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead.table.gz - 18.5 KB)
+0011.754 (0) Table dcom_rg_lead_detail: Total expected rows (approximate): 7838
+0011.908 (0) Table dcom_rg_lead_detail: Total rows added: 7838 in 0.15 seconds
+0011.910 (0) Table dcom_rg_lead_detail: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_detail.table.gz - 142.5 KB)
+0011.913 (0) Table dcom_rg_lead_detail_long: Total expected rows (approximate): 256
+0011.933 (0) Table dcom_rg_lead_detail_long: Total rows added: 256 in 0.02 seconds
+0011.936 (0) Table dcom_rg_lead_detail_long: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_detail_long.table.gz - 43.3 KB)
+0011.939 (0) Table dcom_rg_lead_meta: Total expected rows (approximate): 1034
+0011.958 (0) Table dcom_rg_lead_meta: Total rows added: 1034 in 0.02 seconds
+0011.960 (0) Table dcom_rg_lead_meta: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_meta.table.gz - 7.6 KB)
+0011.962 (0) Table dcom_rg_lead_notes: Total expected rows (approximate): 185
+0011.987 (0) Table dcom_rg_lead_notes: Total rows added: 185 in 0.02 seconds
+0011.988 (0) Table dcom_rg_lead_notes: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_notes.table.gz - 32.4 KB)
+0011.991 (0) Table dcom_rg_salesforce: Total expected rows (approximate): 2
+0011.993 (0) Table dcom_rg_salesforce: Total rows added: 2 in 0.00 seconds
+0011.995 (0) Table dcom_rg_salesforce: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_salesforce.table.gz - 0.7 KB)
+0011.999 (0) Table dcom_vtprd_lifetime_limits_purchaser: Total expected rows (approximate): 0
+0012.002 (0) Table dcom_vtprd_lifetime_limits_purchaser: Total rows added: 0 in 0.00 seconds
+0012.003 (0) Table dcom_vtprd_lifetime_limits_purchaser: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_lifetime_limits_purchaser.table.gz - 0.4 KB)
+0012.007 (0) Table dcom_vtprd_lifetime_limits_purchaser_logid_rule: Total expected rows (approximate): 0
+0012.010 (0) Table dcom_vtprd_lifetime_limits_purchaser_logid_rule: Total rows added: 0 in 0.00 seconds
+0012.011 (0) Table dcom_vtprd_lifetime_limits_purchaser_logid_rule: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_lifetime_limits_purchaser_logid_rule.table.gz - 0.4 KB)
+0012.016 (0) Table dcom_vtprd_lifetime_limits_purchaser_rule: Total expected rows (approximate): 0
+0012.019 (0) Table dcom_vtprd_lifetime_limits_purchaser_rule: Total rows added: 0 in 0.00 seconds
+0012.021 (0) Table dcom_vtprd_lifetime_limits_purchaser_rule: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_lifetime_limits_purchaser_rule.table.gz - 0.4 KB)
+0012.026 (0) Table dcom_vtprd_purchase_log: Total expected rows (approximate): 0
+0012.029 (0) Table dcom_vtprd_purchase_log: Total rows added: 0 in 0.00 seconds
+0012.030 (0) Table dcom_vtprd_purchase_log: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_purchase_log.table.gz - 0.4 KB)
+0012.051 (0) Table dcom_vtprd_purchase_log_product: Total expected rows (approximate): 0
+0012.054 (0) Table dcom_vtprd_purchase_log_product: Total rows added: 0 in 0.00 seconds
+0012.056 (0) Table dcom_vtprd_purchase_log_product: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_purchase_log_product.table.gz - 0.4 KB)
+0012.061 (0) Table dcom_vtprd_purchase_log_product_rule: Total expected rows (approximate): 0
+0012.062 (0) Table dcom_vtprd_purchase_log_product_rule: Total rows added: 0 in 0.00 seconds
+0012.063 (0) Table dcom_vtprd_purchase_log_product_rule: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_purchase_log_product_rule.table.gz - 0.4 KB)
+0012.067 (0) Table dcom_web_device_history: Total expected rows (approximate): 117
+0012.071 (0) Table dcom_web_device_history: Total rows added: 117 in 0.00 seconds
+0012.072 (0) Table dcom_web_device_history: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_device_history.table.gz - 1.5 KB)
+0012.075 (0) Table dcom_web_import_users: Total expected rows (approximate): 103
+0012.079 (0) Table dcom_web_import_users: Total rows added: 103 in 0.00 seconds
+0012.080 (0) Table dcom_web_import_users: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_import_users.table.gz - 2.3 KB)
+0012.086 (0) Table dcom_web_imports: Total expected rows (approximate): 66
+0012.089 (0) Table dcom_web_imports: Total rows added: 66 in 0.00 seconds
+0012.090 (0) Table dcom_web_imports: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_imports.table.gz - 1.4 KB)
+0012.094 (0) Table dcom_web_token_devices: Total expected rows (approximate): 42
+0012.098 (0) Table dcom_web_token_devices: Total rows added: 42 in 0.00 seconds
+0012.100 (0) Table dcom_web_token_devices: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_token_devices.table.gz - 1.5 KB)
+0012.105 (0) Table dcom_web_tokens: Total expected rows (approximate): 189
+0012.118 (0) Table dcom_web_tokens: Total rows added: 171 in 0.01 seconds
+0012.120 (0) Table dcom_web_tokens: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_tokens.table.gz - 6 KB)
+0012.124 (0) Table dcom_woocommerce_api_keys: Total expected rows (approximate): 0
+0012.126 (0) Table dcom_woocommerce_api_keys: Total rows added: 0 in 0.00 seconds
+0012.127 (0) Table dcom_woocommerce_api_keys: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_api_keys.table.gz - 0.4 KB)
+0012.130 (0) Table dcom_woocommerce_attribute_taxonomies: Total expected rows (approximate): 0
+0012.132 (0) Table dcom_woocommerce_attribute_taxonomies: Total rows added: 0 in 0.00 seconds
+0012.133 (0) Table dcom_woocommerce_attribute_taxonomies: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_attribute_taxonomies.table.gz - 0.3 KB)
+0012.137 (0) Table dcom_woocommerce_downloadable_product_permissions: Total expected rows (approximate): 0
+0012.139 (0) Table dcom_woocommerce_downloadable_product_permissions: Total rows added: 0 in 0.00 seconds
+0012.140 (0) Table dcom_woocommerce_downloadable_product_permissions: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_downloadable_product_permissions.table.gz - 0.4 KB)
+0012.143 (0) Table dcom_woocommerce_order_items: Total expected rows (approximate): 1812
+0012.174 (0) Table dcom_woocommerce_order_items: Total rows added: 1812 in 0.03 seconds
+0012.175 (0) Table dcom_woocommerce_order_items: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_order_items.table.gz - 13.5 KB)
+0012.178 (0) Table dcom_woocommerce_payment_tokens: Total expected rows (approximate): 0
+0012.179 (0) Table dcom_woocommerce_payment_tokens: Total rows added: 0 in 0.00 seconds
+0012.181 (0) Table dcom_woocommerce_payment_tokens: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_payment_tokens.table.gz - 0.3 KB)
+0012.186 (0) Table dcom_woocommerce_sessions: Total expected rows (approximate): 0
+0012.188 (0) Table dcom_woocommerce_sessions: Total rows added: 0 in 0.00 seconds
+0012.189 (0) Table dcom_woocommerce_sessions: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_sessions.table.gz - 0.3 KB)
+0012.192 (0) Table dcom_woocommerce_shipping_zone_locations: Total expected rows (approximate): 0
+0012.193 (0) Table dcom_woocommerce_shipping_zone_locations: Total rows added: 0 in 0.00 seconds
+0012.194 (0) Table dcom_woocommerce_shipping_zone_locations: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_shipping_zone_locations.table.gz - 0.3 KB)
+0012.197 (0) Table dcom_woocommerce_shipping_zone_methods: Total expected rows (approximate): 2
+0012.199 (0) Table dcom_woocommerce_shipping_zone_methods: Total rows added: 2 in 0.00 seconds
+0012.200 (0) Table dcom_woocommerce_shipping_zone_methods: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_shipping_zone_methods.table.gz - 0.4 KB)
+0012.204 (0) Table dcom_woocommerce_shipping_zones: Total expected rows (approximate): 0
+0012.205 (0) Table dcom_woocommerce_shipping_zones: Total rows added: 0 in 0.00 seconds
+0012.206 (0) Table dcom_woocommerce_shipping_zones: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_shipping_zones.table.gz - 0.3 KB)
+0012.210 (0) Table dcom_woocommerce_tax_rate_locations: Total expected rows (approximate): 0
+0012.211 (0) Table dcom_woocommerce_tax_rate_locations: Total rows added: 0 in 0.00 seconds
+0012.212 (0) Table dcom_woocommerce_tax_rate_locations: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_tax_rate_locations.table.gz - 0.3 KB)
+0012.245 (0) Table dcom_woocommerce_tax_rates: Total expected rows (approximate): 0
+0012.248 (0) Table dcom_woocommerce_tax_rates: Total rows added: 0 in 0.00 seconds
+0012.250 (0) Table dcom_woocommerce_tax_rates: finishing file (backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_tax_rates.table.gz - 0.4 KB)
+0012.254 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_options.table.gz (1/56): adding to final database dump
+0012.350 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_users.table.gz (2/56): adding to final database dump
+0012.352 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_usermeta.table.gz (3/56): adding to final database dump
+0012.359 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_commentmeta.table.gz (4/56): adding to final database dump
+0012.384 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_comments.table.gz (5/56): adding to final database dump
+0012.488 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_links.table.gz (6/56): adding to final database dump
+0012.489 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_postmeta.table.gz (7/56): adding to final database dump
+0012.814 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts.table.gz (8/56): adding to final database dump
+0013.786 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_term_relationships.table.gz (9/56): adding to final database dump
+0013.813 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_term_taxonomy.table.gz (10/56): adding to final database dump
+0013.826 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_termmeta.table.gz (11/56): adding to final database dump
+0013.834 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_terms.table.gz (12/56): adding to final database dump
+0013.850 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_order_itemmeta.table.gz (13/56): adding to final database dump
+0013.873 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_payment_tokenmeta.table.gz (14/56): adding to final database dump
+0013.874 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_bpspro_db_backup.table.gz (15/56): adding to final database dump
+0013.875 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_bpspro_login_security.table.gz (16/56): adding to final database dump
+0013.876 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_bpspro_seclog_ignore.table.gz (17/56): adding to final database dump
+0013.877 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_gf_addon_feed.table.gz (18/56): adding to final database dump
+0013.878 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_hitasoft_player_videos.table.gz (19/56): adding to final database dump
+0013.879 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_lockdowns.table.gz (20/56): adding to final database dump
+0013.882 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_login_fails.table.gz (21/56): adding to final database dump
+0014.138 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts__20150818.table.gz (22/56): adding to final database dump
+0015.009 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts__20151022.table.gz (23/56): adding to final database dump
+0015.867 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_posts__214829.table.gz (24/56): adding to final database dump
+0016.641 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_form.table.gz (25/56): adding to final database dump
+0016.642 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_form_meta.table.gz (26/56): adding to final database dump
+0016.647 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_form_view.table.gz (27/56): adding to final database dump
+0016.745 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_incomplete_submissions.table.gz (28/56): adding to final database dump
+0016.747 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead.table.gz (29/56): adding to final database dump
+0016.756 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_detail.table.gz (30/56): adding to final database dump
+0016.820 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_detail_long.table.gz (31/56): adding to final database dump
+0016.831 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_meta.table.gz (32/56): adding to final database dump
+0016.839 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_lead_notes.table.gz (33/56): adding to final database dump
+0016.851 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_rg_salesforce.table.gz (34/56): adding to final database dump
+0016.852 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_lifetime_limits_purchaser.table.gz (35/56): adding to final database dump
+0016.853 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_lifetime_limits_purchaser_logid_rule.table.gz (36/56): adding to final database dump
+0016.855 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_lifetime_limits_purchaser_rule.table.gz (37/56): adding to final database dump
+0016.856 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_purchase_log.table.gz (38/56): adding to final database dump
+0016.857 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_purchase_log_product.table.gz (39/56): adding to final database dump
+0016.858 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_vtprd_purchase_log_product_rule.table.gz (40/56): adding to final database dump
+0016.858 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_device_history.table.gz (41/56): adding to final database dump
+0016.860 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_import_users.table.gz (42/56): adding to final database dump
+0016.861 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_imports.table.gz (43/56): adding to final database dump
+0016.863 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_token_devices.table.gz (44/56): adding to final database dump
+0016.866 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_web_tokens.table.gz (45/56): adding to final database dump
+0016.871 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_api_keys.table.gz (46/56): adding to final database dump
+0016.873 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_attribute_taxonomies.table.gz (47/56): adding to final database dump
+0016.874 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_downloadable_product_permissions.table.gz (48/56): adding to final database dump
+0016.876 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_order_items.table.gz (49/56): adding to final database dump
+0016.891 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_payment_tokens.table.gz (50/56): adding to final database dump
+0016.892 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_sessions.table.gz (51/56): adding to final database dump
+0016.894 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_shipping_zone_locations.table.gz (52/56): adding to final database dump
+0016.895 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_shipping_zone_methods.table.gz (53/56): adding to final database dump
+0016.896 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_shipping_zones.table.gz (54/56): adding to final database dump
+0016.898 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_tax_rate_locations.table.gz (55/56): adding to final database dump
+0016.900 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db-table-dcom_woocommerce_tax_rates.table.gz (56/56): adding to final database dump
+0016.902 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz: finished writing out complete database file (19088 KB)
+0016.999 (0) Total database tables backed up: 56 (backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz, size: 19548963, checksum (SHA1): de1f061f339f844a21168d4e577fa16e2ca4c42b)
+0017.012 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0017.014 (0) backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz: db: This file has not yet been successfully uploaded: will queue
+0017.016 (0) Saving backup history. Total backup size: 44.8 MB
+0017.026 (0) Requesting upload of the files that have not yet been successfully uploaded (2)
+0017.029 (0) Cloud backup selection (1/1): dropbox (last)
+0017.031 (0) Beginning dispatch of backup to remote (dropbox)
+0017.042 (0) Dropbox: begin cloud upload (using API version 2 with OAuth v2 token)
+0017.044 (0) Dropbox: access gained; setting chunk size to: 1024 KB
+0017.673 (0) Dropbox quota usage: used=718712.4 MB, total=1050624 MB, available=331911.6 MB
+0017.676 (0) Dropbox: Attempt to upload: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip to: Decker/backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip
+0026.931 (0) Dropbox chunked upload: 3.8 % uploaded (AAAAAAABikSQLjhd0h2DGw, 1048576, 1024 KB)
+0038.134 (0) Dropbox chunked upload: 7.6 % uploaded (AAAAAAABikSQLjhd0h2DGw, 2097152, 1024 KB)
+0049.541 (0) Dropbox chunked upload: 11.5 % uploaded (AAAAAAABikSQLjhd0h2DGw, 3145728, 1024 KB)
+0061.452 (0) Dropbox chunked upload: 15.3 % uploaded (AAAAAAABikSQLjhd0h2DGw, 4194304, 1024 KB)
+0072.056 (0) Dropbox chunked upload: 19.1 % uploaded (AAAAAAABikSQLjhd0h2DGw, 5242880, 1024 KB)
+0082.366 (0) Dropbox chunked upload: 22.9 % uploaded (AAAAAAABikSQLjhd0h2DGw, 6291456, 1024 KB)
+0094.034 (0) Dropbox chunked upload: 26.7 % uploaded (AAAAAAABikSQLjhd0h2DGw, 7340032, 1024 KB)
+0105.423 (0) Dropbox chunked upload: 30.6 % uploaded (AAAAAAABikSQLjhd0h2DGw, 8388608, 1024 KB)
+0114.216 (0) Dropbox chunked upload: 34.4 % uploaded (AAAAAAABikSQLjhd0h2DGw, 9437184, 1024 KB)
+0124.731 (0) Dropbox chunked upload: 38.2 % uploaded (AAAAAAABikSQLjhd0h2DGw, 10485760, 1024 KB)
+0135.101 (0) Dropbox chunked upload: 42 % uploaded (AAAAAAABikSQLjhd0h2DGw, 11534336, 1024 KB)
+0146.678 (0) Dropbox chunked upload: 45.8 % uploaded (AAAAAAABikSQLjhd0h2DGw, 12582912, 1024 KB)
+0155.082 (0) Dropbox chunked upload: 49.7 % uploaded (AAAAAAABikSQLjhd0h2DGw, 13631488, 1024 KB)
+0165.715 (0) Dropbox chunked upload: 53.5 % uploaded (AAAAAAABikSQLjhd0h2DGw, 14680064, 1024 KB)
+0176.361 (0) Dropbox chunked upload: 57.3 % uploaded (AAAAAAABikSQLjhd0h2DGw, 15728640, 1024 KB)
+0188.593 (0) Dropbox chunked upload: 61.1 % uploaded (AAAAAAABikSQLjhd0h2DGw, 16777216, 1024 KB)
+0197.664 (0) Dropbox chunked upload: 64.9 % uploaded (AAAAAAABikSQLjhd0h2DGw, 17825792, 1024 KB)
+0208.323 (0) Dropbox chunked upload: 68.8 % uploaded (AAAAAAABikSQLjhd0h2DGw, 18874368, 1024 KB)
+0218.819 (0) Dropbox chunked upload: 72.6 % uploaded (AAAAAAABikSQLjhd0h2DGw, 19922944, 1024 KB)
+0231.153 (0) Dropbox chunked upload: 76.4 % uploaded (AAAAAAABikSQLjhd0h2DGw, 20971520, 1024 KB)
+0240.149 (0) Dropbox chunked upload: 80.2 % uploaded (AAAAAAABikSQLjhd0h2DGw, 22020096, 1024 KB)
+0251.140 (0) Dropbox chunked upload: 84 % uploaded (AAAAAAABikSQLjhd0h2DGw, 23068672, 1024 KB)
+0263.554 (0) The scheduled resumption is within 45 seconds - will reschedule
+0263.559 (0) Rescheduling resumption 1: moving to 345 seconds from now (1491803432)
+0263.563 (0) To decrease the likelihood of overlaps, increasing resumption interval to: 300 + 45 = 345
+0263.565 (0) Dropbox chunked upload: 87.9 % uploaded (AAAAAAABikSQLjhd0h2DGw, 24117248, 1024 KB)
+0275.126 (0) Dropbox chunked upload: 91.7 % uploaded (AAAAAAABikSQLjhd0h2DGw, 25165824, 1024 KB)
+0285.850 (0) Dropbox chunked upload: 95.5 % uploaded (AAAAAAABikSQLjhd0h2DGw, 26214400, 1024 KB)
+0297.237 (0) Dropbox chunked upload: 99.3 % uploaded (AAAAAAABikSQLjhd0h2DGw, 27262976, 1024 KB)
+0300.292 (0) Dropbox chunked upload: 100 % uploaded (AAAAAAABikSQLjhd0h2DGw, 27448894, 1024 KB)
+0303.278 (0) Recording as successfully uploaded: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip (021200929b66d2b6d88d94e65e86a255)
+0303.287 (0) Deleting local file: backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip: OK
+0303.292 (0) Dropbox: File upload success (backup_2017-04-09-2240_Decker_Communications_916da266485e-plugins.zip): 26805 KB in 285s (93 KB/s)
+0303.805 (0) Dropbox quota usage: used=718738.6 MB, total=1050624 MB, available=331885.4 MB
+0303.807 (0) Dropbox: Attempt to upload: backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz to: Decker/backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz
+0313.686 (0) Dropbox chunked upload: 5.4 % uploaded (AAAAAAABikWlqq186ccBpg, 1048576, 1024 KB)
+0323.745 (0) The time we have been running (323.7) is approaching the resumption interval (345) - increasing resumption interval to 354
+0323.748 (0) Dropbox chunked upload: 10.7 % uploaded (AAAAAAABikWlqq186ccBpg, 2097152, 1024 KB)
+0335.251 (0) The time we have been running (335.2) is approaching the resumption interval (354) - increasing resumption interval to 366
+0335.255 (0) Dropbox chunked upload: 16.1 % uploaded (AAAAAAABikWlqq186ccBpg, 3145728, 1024 KB)
+0346.387 (0) The time we have been running (346.4) is approaching the resumption interval (366) - increasing resumption interval to 377
+0346.390 (0) Dropbox chunked upload: 21.5 % uploaded (AAAAAAABikWlqq186ccBpg, 4194304, 1024 KB)
+0355.541 (0) The time we have been running (355.5) is approaching the resumption interval (377) - increasing resumption interval to 386
+0355.546 (0) Dropbox chunked upload: 26.8 % uploaded (AAAAAAABikWlqq186ccBpg, 5242880, 1024 KB)
+0365.378 (0) The time we have been running (365.4) is approaching the resumption interval (386) - increasing resumption interval to 396
+0365.380 (0) Dropbox chunked upload: 32.2 % uploaded (AAAAAAABikWlqq186ccBpg, 6291456, 1024 KB)
+0378.029 (0) The time we have been running (378) is approaching the resumption interval (396) - increasing resumption interval to 409
+0378.032 (0) Dropbox chunked upload: 37.5 % uploaded (AAAAAAABikWlqq186ccBpg, 7340032, 1024 KB)
+0390.265 (0) The time we have been running (390.3) is approaching the resumption interval (409) - increasing resumption interval to 421
+0390.268 (0) Dropbox chunked upload: 42.9 % uploaded (AAAAAAABikWlqq186ccBpg, 8388608, 1024 KB)
+0399.220 (0) The time we have been running (399.2) is approaching the resumption interval (421) - increasing resumption interval to 430
+0399.223 (0) Dropbox chunked upload: 48.3 % uploaded (AAAAAAABikWlqq186ccBpg, 9437184, 1024 KB)
+0411.971 (0) The time we have been running (412) is approaching the resumption interval (430) - increasing resumption interval to 442
+0411.974 (0) Dropbox chunked upload: 53.6 % uploaded (AAAAAAABikWlqq186ccBpg, 10485760, 1024 KB)
+0423.894 (0) The time we have been running (423.9) is approaching the resumption interval (442) - increasing resumption interval to 454
+0423.896 (0) Dropbox chunked upload: 59 % uploaded (AAAAAAABikWlqq186ccBpg, 11534336, 1024 KB)
+0435.849 (0) The time we have been running (435.8) is approaching the resumption interval (454) - increasing resumption interval to 466
+0435.851 (0) Dropbox chunked upload: 64.4 % uploaded (AAAAAAABikWlqq186ccBpg, 12582912, 1024 KB)
+0445.777 (0) The time we have been running (445.8) is approaching the resumption interval (466) - increasing resumption interval to 476
+0445.778 (0) Dropbox chunked upload: 69.7 % uploaded (AAAAAAABikWlqq186ccBpg, 13631488, 1024 KB)
+0456.474 (0) The time we have been running (456.5) is approaching the resumption interval (476) - increasing resumption interval to 487
+0456.476 (0) Dropbox chunked upload: 75.1 % uploaded (AAAAAAABikWlqq186ccBpg, 14680064, 1024 KB)
+0468.417 (0) The time we have been running (468.4) is approaching the resumption interval (487) - increasing resumption interval to 499
+0468.421 (0) Dropbox chunked upload: 80.5 % uploaded (AAAAAAABikWlqq186ccBpg, 15728640, 1024 KB)
+0479.953 (0) The time we have been running (479.9) is approaching the resumption interval (499) - increasing resumption interval to 510
+0479.955 (0) Dropbox chunked upload: 85.8 % uploaded (AAAAAAABikWlqq186ccBpg, 16777216, 1024 KB)
+0489.032 (0) The time we have been running (489) is approaching the resumption interval (510) - increasing resumption interval to 520
+0489.034 (0) Dropbox chunked upload: 91.2 % uploaded (AAAAAAABikWlqq186ccBpg, 17825792, 1024 KB)
+0500.677 (0) The time we have been running (500.7) is approaching the resumption interval (520) - increasing resumption interval to 531
+0500.679 (0) Dropbox chunked upload: 96.5 % uploaded (AAAAAAABikWlqq186ccBpg, 18874368, 1024 KB)
+0512.871 (0) The time we have been running (512.9) is approaching the resumption interval (531) - increasing resumption interval to 543
+0512.873 (0) Dropbox chunked upload: 100 % uploaded (AAAAAAABikWlqq186ccBpg, 19548963, 1024 KB)
+0516.613 (0) Recording as successfully uploaded: backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz (674fa2b688e5b31cf1bdf39e85f8904a)
+0516.620 (0) Deleting local file: backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz: OK
+0516.621 (0) Dropbox: File upload success (backup_2017-04-09-2240_Decker_Communications_916da266485e-db.gz): 19090 KB in 212s (89 KB/s)
+0516.622 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=8, retain_db=8
+0516.624 (0) These backup set(s) were imported from a remote location, so will not be counted or pruned. Skipping: 1481479680, 1480835100, 1480748700, 1480662300, 1480575900, 1480403160, 1480230360, 1480057500, 1479971220, 1479884820, 1479798300, 1479625620, 1479539100, 1479452700, 1479366300, 1479279900, 1479193500, 1479107100, 1479020700, 1478934360, 1478847900, 1478761560
+0516.624 (0) Number of backup sets in history: 37; groups (db): 1
+0516.625 (0) Examining (for databases) backup set with group_id=0, nonce=916da266485e, datestamp=1491802823 (Apr 10 2017 05:40:23)
+0516.626 (0) This backup set is the backup set just made, so will not be deleted.
+0516.627 (0) Examining (for databases) backup set with group_id=0, nonce=76fab50c779c, datestamp=1491799790 (Apr 10 2017 04:49:50)
+0516.628 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0516.629 (0) Examining (for databases) backup set with group_id=0, nonce=9b40675202f6, datestamp=1491289319 (Apr 04 2017 07:01:59)
+0516.631 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0516.632 (0) Examining (for databases) backup set with group_id=0, nonce=32e9bcec3b43, datestamp=1489995878 (Mar 20 2017 07:44:38)
+0516.633 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0516.634 (0) Examining (for databases) backup set with group_id=0, nonce=beaecbeb1ad7, datestamp=1489317187 (Mar 12 2017 11:13:07)
+0516.634 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0516.635 (0) Examining (for databases) backup set with group_id=0, nonce=fa275f56dc63, datestamp=1488716649 (Mar 05 2017 12:24:09)
+0516.636 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0516.637 (0) Examining (for databases) backup set with group_id=0, nonce=ab8f56387c84, datestamp=1488109029 (Feb 26 2017 11:37:09)
+0516.638 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0516.638 (0) Examining (for databases) backup set with group_id=0, nonce=51fe7bc5ce19, datestamp=1486292820 (Feb 05 2017 11:07:00)
+0516.639 (0) Examining (for databases) backup set with group_id=0, nonce=5ce9b976d356, datestamp=1485687900 (Jan 29 2017 11:05:00)
+0516.639 (0) Examining (for databases) backup set with group_id=0, nonce=647633a36402, datestamp=1480921709 (Dec 05 2016 07:08:29)
+0516.640 (0) This backup set remains non-empty (f=0/d=1); will retain in history
+0516.641 (0) Examining (for databases) backup set with group_id=0, nonce=dcc9b6835505, datestamp=1480845937 (Dec 04 2016 10:05:37)
+0516.641 (0) Examining (for databases) backup set with group_id=0, nonce=ee09a2e1affe, datestamp=1480489523 (Nov 30 2016 07:05:23)
+0516.642 (0) 1480489523: db: this set includes a database (backup_2016-11-29-2305_Decker_Communications_ee09a2e1affe-db.gz); db count is now 8
+0516.642 (0) 1480489523: db: over retain limit (8); will delete this database
+0516.644 (0) Delete file: backup_2016-11-29-2305_Decker_Communications_ee09a2e1affe-db.gz, service=dropbox
+0516.645 (0) Dropbox: request deletion: Decker/backup_2016-11-29-2305_Decker_Communications_ee09a2e1affe-db.gz
+0517.464 (0) Dropbox error: path_lookup (line: 223, file: /home/manikandan/mani/projects/deckerwordpress/wp-content/plugins/updraftplus/includes/Dropbox2/OAuth/Consumer/Curl.php)
+0517.467 (0) The time we have been running (517.5) is approaching the resumption interval (543) - increasing resumption interval to 548
+0517.469 (0) This backup set is now empty; will remove from history
+0517.469 (0) Corresponding log file (log.ee09a2e1affe.txt) not found - must have already been deleted
+0517.470 (0) Examining (for databases) backup set with group_id=0, nonce=38e00717cd02, datestamp=1480241107 (Nov 27 2016 10:05:07)
+0517.471 (0) Examining (for databases) backup set with group_id=0, nonce=f7d87b86e408, datestamp=1479636339 (Nov 20 2016 10:05:39)
+0517.471 (0) Examining (for databases) backup set with group_id=0, nonce=a1c8ba4d46e3, datestamp=1475740346 (Oct 06 2016 07:52:26)
+0517.472 (0) Number of backup sets in history: 36; groups (files): 1
+0517.473 (0) Examining (for files) backup set with nonce=916da266485e, datestamp=1491802823 (Apr 10 2017 05:40:23)
+0517.473 (0) This backup set is the backup set just made, so will not be deleted.
+0517.474 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.474 (0) Examining (for files) backup set with nonce=76fab50c779c, datestamp=1491799790 (Apr 10 2017 04:49:50)
+0517.475 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.475 (0) Examining (for files) backup set with nonce=9b40675202f6, datestamp=1491289319 (Apr 04 2017 07:01:59)
+0517.477 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.478 (0) Examining (for files) backup set with nonce=32e9bcec3b43, datestamp=1489995878 (Mar 20 2017 07:44:38)
+0517.479 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.480 (0) Examining (for files) backup set with nonce=beaecbeb1ad7, datestamp=1489317187 (Mar 12 2017 11:13:07)
+0517.481 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.482 (0) Examining (for files) backup set with nonce=fa275f56dc63, datestamp=1488716649 (Mar 05 2017 12:24:09)
+0517.483 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.484 (0) Examining (for files) backup set with nonce=ab8f56387c84, datestamp=1488109029 (Feb 26 2017 11:37:09)
+0517.485 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0517.485 (0) Examining (for files) backup set with nonce=51fe7bc5ce19, datestamp=1486292820 (Feb 05 2017 11:07:00)
+0517.486 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0517.487 (0) Examining (for files) backup set with nonce=5ce9b976d356, datestamp=1485687900 (Jan 29 2017 11:05:00)
+0517.487 (0) plugins: over retain limit (8); will delete this file entity
+0517.488 (0) Delete file: backup_2017-01-29-0305_Decker_Communications_5ce9b976d356-plugins.zip, service=dropbox
+0517.489 (0) Dropbox: request deletion: Decker/backup_2017-01-29-0305_Decker_Communications_5ce9b976d356-plugins.zip
+0518.680 (0) Dropbox error: path_lookup (line: 223, file: /home/manikandan/mani/projects/deckerwordpress/wp-content/plugins/updraftplus/includes/Dropbox2/OAuth/Consumer/Curl.php)
+0518.685 (0) The time we have been running (518.7) is approaching the resumption interval (548) - increasing resumption interval to 549
+0518.687 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0518.688 (0) Examining (for files) backup set with nonce=647633a36402, datestamp=1480921709 (Dec 05 2016 07:08:29)
+0518.689 (0) This backup set remains non-empty (f=0/d=1); will retain in history
+0518.690 (0) Examining (for files) backup set with nonce=dcc9b6835505, datestamp=1480845937 (Dec 04 2016 10:05:37)
+0518.691 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0518.692 (0) Examining (for files) backup set with nonce=38e00717cd02, datestamp=1480241107 (Nov 27 2016 10:05:07)
+0518.693 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0518.695 (0) Examining (for files) backup set with nonce=f7d87b86e408, datestamp=1479636339 (Nov 20 2016 10:05:39)
+0518.697 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0518.698 (0) Examining (for files) backup set with nonce=a1c8ba4d46e3, datestamp=1475740346 (Oct 06 2016 07:52:26)
+0518.700 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0518.701 (0) Retain: saving new backup history (sets now: 36) and finishing retain operation
+0518.706 (0) Resume backup (916da266485e, 0): finish run
+0518.708 (0) Decremented the semaphore (fd) by 1
+0518.709 (0) Semaphore (fd) unlocked
+0518.709 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0518.718 (0) No report will be sent to this address, as it is configured to receive them only when there are errors or warnings: secur...
+0518.719 (0) The backup apparently succeeded and is now complete

@@ -2,7 +2,7 @@
 /**
  * Backwards compat.
  *
- * @see https://github.com/woothemes/woocommerce-checkout-field-editor/issues/36
+ * @see https://github.com/woocommerce/woocommerce-checkout-field-editor/issues/36
  *
  * @since 1.5.0
  */

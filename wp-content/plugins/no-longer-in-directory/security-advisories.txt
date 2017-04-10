@@ -9,6 +9,7 @@ ad-buttons,http://packetstormsecurity.com/files/131823/WordPress-Ad-Buttons-2.3.
 ad-minister,https://www.htbridge.com/advisory/HTB23187
 ad-wizz,http://secunia.com/advisories/43964/
 addblockblocker,https://www.pluginvulnerabilities.com/2016/08/01/arbitrary-file-upload-vulnerability-in-adblock-blocker/
+admin-custom-login,https://sumofpwn.nl/advisory/2016/admin_custom_login_wordpress_plugin_custom_login_page_affected_by_persistent_cross_site_scripting.html
 admin-font-editor,http://www.vapidlabs.com/wp/wp_advisory.php?v=526
 ads-widget,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
 adsense-click-fraud-monitoring,http://www.vapid.dhs.org/advisory.php?v=119
@@ -17,8 +18,10 @@ advertisement-management,https://packetstormsecurity.com/files/132886/WordPress-
 ajax-pagination,https://security.dxw.com/advisories/end-user-exploitable-local-file-inclusion-vulnerability-in-ajax-pagination-twitter-style-1-1/
 ajax-random-post,http://www.vapidlabs.com/wp/wp_advisory.php?v=494
 all-in-one-adsense-and-ypn,http://secunia.com/advisories/45579/
+alpine-photo-tile-for-instagram,https://www.sumofpwn.nl/advisory/2016/cross_site_scripting_in_alpine_phototile_for_instagram_wordpress_plugin.html
 answer-my-question,http://lenonleite.com.br/en/blog/2016/11/11/answer-my-question-1-3-plugin-for-wordpress-sql-injection/
 anti-plagiarism,http://www.vapidlabs.com/wp/wp_advisory.php?v=161
+anyvar,http://www.vapidlabs.com/advisory.php?v=177
 bbpress-like-button,https://www.pluginvulnerabilities.com/2016/10/03/sql-injection-vulnerability-in-bbpress-like-button/
 bbs-e-franchise,http://lenonleite.com.br/en/blog/2016/11/18/bbs-e-franchise-1-1-1-plugin-of-wordpress-sql-injection/
 bepro-listings,https://www.pluginvulnerabilities.com/2016/06/03/arbitrary-file-upload-vulnerability-in-bepro-listings/
@@ -28,6 +31,7 @@ breadcrumbs-ez,http://blog.nintechnet.com/malicious-plugins-hosted-in-the-wordpr
 byrev-wp-picshield-hotlink-defence,https://wpvulndb.com/vulnerabilities/8738
 candidate-application-form,http://www.vapid.dhs.org/advisory.php?v=142
 category-list-portfolio-page,http://secunia.com/advisories/46088/
+cf7-database,https://web-beta.archive.org/web/20170403154920/https://wordpress.org/support/topic/xss-4
 chikuncount,https://www.pluginvulnerabilities.com/2017/01/26/vulnerability-details-arbitrary-file-upload-vulnerability-in-chikuncounter/
 cip4-folder-download-widget,http://packetstormsecurity.com/files/130009/WordPress-CIP4-Folder-Download-1.10-Local-File-Inclusion.html
 citizen-space,https://security.dxw.com/advisories/reflected-xss-in-citizen-space-allows-attackers-to-view-sensitive-information-of-the-attackers-choosing/
@@ -42,6 +46,7 @@ contus-video-galleryversion-10,http://secunia.com/advisories/49494/
 cookie-eu,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
 cross-rss,https://codevigilant.com/disclosure/wp-plugin-cross-rss-local-file-inclusion/
 crossslide-jquery-plugin-for-wordpress,http://packetstormsecurity.com/files/130313/WordPress-Cross-Slide-2.0.5-Cross-Site-Request-Forgery-Cross-Site-Scripting.html
+custom-lightbox,https://www.pluginvulnerabilities.com/2017/03/31/vulnerability-details-possible-remote-code-execution-rce-vulnerability-in-lightbox-wp/
 custom-metas,http://seclists.org/oss-sec/2016/q2/85
 customize-youtube-videos,https://packetstormsecurity.com/files/132906/WordPress-Customize-Youtube-Videos-0.2-Cross-Site-Scripting.html
 cysteme-finder,https://www.pluginvulnerabilities.com/2016/09/14/cross-site-request-forgery-csrfarbitrary-file-upload-vulnerability-in-cysteme-finder/
@@ -58,6 +63,7 @@ download-theme,https://www.pluginvulnerabilities.com/2016/07/14/arbitrary-direct
 download-zip-attachments,http://www.vapid.dhs.org/advisory.php?v=129
 downloads-manager,https://www.pluginvulnerabilities.com/2016/09/23/arbitrary-file-upload-vulnerability-in-downloads-manager/
 dp-thumbnail,http://secunia.com/advisories/46090/
+dtracker,http://www.vapidlabs.com/advisory.php?v=186
 e-search,http://www.vapidlabs.com/wp/wp_advisory.php?v=394
 easy-contact-forms-exporter,http://secunia.com/advisories/49450/
 easy2map-photos,http://web.archive.org/web/20170223204819/https://wordpress.org/support/topic/wordpress-plugin-easy2map-photos-cross-site-scripting-xss/
@@ -70,6 +76,7 @@ events-manager-extended,http://secunia.com/advisories/41294/
 facebook-with-login,https://packetstormsecurity.com/files/136397/WordPress-Facebook-With-Login-1.0-Cross-Site-Scripting-SQL-Injection.html
 fast-image-adder,http://www.vapid.dhs.org/advisory.php?v=139
 featured-content,http://secunia.com/advisories/43064/
+file-manager,https://sumofpwn.nl/advisory/2016/cross_site_request_forgery_in_file_manager_wordpress_plugin.html
 fluxlive,http://web.archive.org/web/20170223205030/https://wordpress.org/support/topic/wordpress-plugin-fluxlive-cross-site-scripting-xss/
 fmoblog,http://secunia.com/advisories/34341/
 form-lightbox,https://www.pluginvulnerabilities.com/2016/07/18/option-update-vulnerability-in-form-lightbox/
@@ -81,7 +88,9 @@ gallery-objects,https://www.homelab.it/index.php/2014/07/18/wordpress-gallery-ob
 gallery-slider,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
 gd-star-rating,https://security.dxw.com/advisories/csrf-and-blind-sql-injection-in-gd-star-rating-1-9-22/
 genesis-simple-defaults,https://www.pluginvulnerabilities.com/2016/09/22/arbitrary-file-upload-vulnerability-in-genesis-simple-defaults/
+global-content-blocks,https://sumofpwn.nl/advisory/2016/cross_site_request_forgery_in_global_content_blocks_wordpress_plugin.html
 google-analytics-analyze,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
+google-analytics-dashboard,https://www.sumofpwn.nl/advisory/2016/cross_site_scripting_in_google_analytics_dashboard_wordpress_plugin.html
 google-analytics-dashboard,https://www.sumofpwn.nl/advisory/2016/cross_site_scripting_in_google_analytics_dashboard_wordpress_plugin.html
 google-maps-by-daniel-martyn,https://www.pluginvulnerabilities.com/2017/01/27/vulnerability-details-remote-code-execution-rce-vulnerability-in-google-maps-by-daniel-martyn/
 google-mp3-audio-player,http://www.exploit-db.com/exploits/35460/
@@ -122,11 +131,14 @@ media-file-manager-advanced,http://research.evex.pw/?vuln=16
 meenews,http://secunia.com/advisories/46969/
 member-approval,https://security.dxw.com/advisories/csrf-in-member-approval-131109-permits-unapproved-registrations/
 members-import,https://www.pluginvulnerabilities.com/2016/09/07/cross-site-request-forgery-csrfuser-import-vulnerability-in-members-import/
+membership-simplified-for-oap-members-only,http://www.vapidlabs.com/advisory.php?v=187
 mikiurl-wordpress-eklentisi,http://packetstormsecurity.com/files/129577/Mikiurl-WordPress-Eklentisi-2.0-CSRF-XSS.html
 mini-cart,http://lenonleite.com.br/en/blog/2016/11/11/mini-cart-plugin-1-00-1-for-wordpress/
 miwoftp,http://www.zeroscience.mk/en/vulnerabilities/ZSL-2015-5242.php
 mm-forms-community,http://secunia.com/advisories/49411/
+mobile-app-builder-by-wappress,http://www.vapidlabs.com/advisory.php?v=180
 mobile-domain,http://packetstormsecurity.com/files/130316/WordPress-Mobile-Domain-1.5.2-Cross-Site-Request-Forgery-Cross-Site-Scripting.html
+mobile-friendly-app-builder-by-easytouch,http://www.vapidlabs.com/advisory.php?v=179
 more-fields,https://packetstormsecurity.com/files/135991/WordPress-More-Fields-2.1-Cross-Site-Request-Forgery.html
 multi-meta-box,http://www.vulnerability-lab.com/get_content.php?id=1818
 my-category-order,http://cinu.pl/research/wp-plugins/mail_a466a618943f052549c573eae8759c62.html
@@ -159,6 +171,7 @@ qtranslate,https://www.htbridge.com/advisory/HTB23265
 quick-post-widget,http://secunia.com/advisories/49798/
 ready-ecommerce,https://vexatioustendencies.com/wordpress-plugin-vulnerability-dump-part-1/
 really-easy-slider,http://www.exploit-db.com/exploits/17872/
+really-simple-gallery,https://www.pluginvulnerabilities.com/2017/03/13/cross-site-request-forgery-csrfarbitrary-file-upload-vulnerability-in-really-simple-gallery/
 recent-backups,http://www.vapid.dhs.org/advisory.php?v=144
 recipes-writer,http://www.vapidlabs.com/wp/wp_advisory.php?v=380
 redirection-page,http://packetstormsecurity.com/files/130314/WordPress-Redirection-Page-1.2-CSRF-XSS.html
@@ -167,6 +180,7 @@ rekt-slideshow,http://secunia.com/advisories/46098/
 rent-a-car,http://secunia.com/advisories/46100/
 resume-submissions-job-postings,https://www.exploit-db.com/exploits/19791/
 return-to-top,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
+rockhoist-badges,http://www.vapidlabs.com/advisory.php?v=176
 rss-feed-reader,http://secunia.com/advisories/43071/
 s3-video,http://www.vapidlabs.com/wp/wp_advisory.php?v=240
 se-html5-album-audio-player,https://packetstormsecurity.com/files/132266/WordPress-SE-HTML5-Album-Audio-Player-1.1.0-Directory-Traversal.html
@@ -227,8 +241,9 @@ vk-gallery,http://secunia.com/advisories/46092/
 vodpod-video-gallery,http://secunia.com/advisories/42195
 wa-form-builder,http://lenonleite.com.br/en/blog/2016/11/29/wa-form-builder-1-1-sql-injection/
 web-tripwire,https://www.pluginvulnerabilities.com/2017/02/13/vulnerability-details-arbitrary-file-upload-vulnerability-in-web-tripwire/
+webapp-builder,http://www.vapidlabs.com/advisory.php?v=181
 website-contact-form-with-file-upload,https://www.pluginvulnerabilities.com/2016/09/19/arbitrary-file-upload-vulnerability-in-n-media-website-contact-form-with-file-upload/
-wordpress-file-monitor/,https://www.pluginvulnerabilities.com/2016/06/22/persistent-cross-site-scripting-vulnerability-in-wordpress-file-monitor/
+wordpress-file-monitor,https://www.pluginvulnerabilities.com/2016/06/22/persistent-cross-site-scripting-vulnerability-in-wordpress-file-monitor/
 wordpress-gallery,http://secunia.com/advisories/51347/
 wordpress-processing-embed,http://secunia.com/advisories/42545/
 wordpress-whois-search,http://secunia.com/advisories/47428/
@@ -245,6 +260,7 @@ wp-easy-slideshow,http://www.exploit-db.com/exploits/36612/
 wp-effective-lead-management,http://secunia.com/advisories/50166/
 wp-email-users,http://lenonleite.com.br/en/blog/2017/01/17/english-wp-email-users-1-4-1-plugin-wordpress-sql-injection/
 wp-featured-post-with-thumbnail,http://secunia.com/advisories/43072/
+wp-filebase,https://sumofpwn.nl/advisory/2016/cross_site_scripting_vulnerability_in_wp_filebase_download_manager_wordpress_plugin.html
 wp-flash-player,https://www.netsparker.com/ns-15-009-multiple-xss-vulnerabilities-identified-in-wp-flash-player/
 wp-flipslideshow,https://www.pluginvulnerabilities.com/2016/06/07/persistent-cross-site-scripting-xss-vulnerability-in-flip-slideshow/
 wp-front-end-repository,http://www.vapid.dhs.org/advisory.php?v=141
@@ -257,7 +273,7 @@ wp-js-external-link-info,https://packetstormsecurity.com/files/126238/wpjsextern
 wp-levoslideshow,https://www.pluginvulnerabilities.com/2016/06/07/arbitrary-file-upload-vulnerability-in-levo-slideshow/
 wp-limit-posts-automatically,http://packetstormsecurity.com/files/129647/WordPress-WP-Limit-Posts-Automatically-0.7-CSRF-XSS.html
 wp-menu-creator,http://secunia.com/advisories/45674/
-wp-mobile-detector/,https://www.pluginvulnerabilities.com/2016/06/22/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-wp-mobile-detector/
+wp-mobile-detector,https://www.pluginvulnerabilities.com/2016/06/22/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-wp-mobile-detector/
 wp-mon,http://en.1337day.com/exploit/23532
 wp-photo-album,http://secunia.com/advisories/44351/
 wp-popup,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
@@ -272,6 +288,7 @@ wp-selected-text-sharer,https://packetstormsecurity.com/files/138216/WordPress-S
 wp-seo-spy-google,http://0day.today/exploit/21404
 wp-simple-cart,https://www.pluginvulnerabilities.com/2017/02/06/vulnerability-details-arbitrary-file-upload-in-wp-simple-cart/
 wp-simplemail,http://secunia.com/advisories/50208/
+wp-spamfree,https://sumofpwn.nl/advisory/2016/cross_site_scripting_vulnerability_in_wp_spamfree_anti_spam_wordpress_plugin.html
 wp-starsratebox,http://secunia.com/advisories/44257/
 wp-superb-slideshow,https://www.pluginvulnerabilities.com/2016/06/07/arbitrary-file-upload-vulnerability-in-wp-superb-slideshow/
 wp-timed-popup,http://packetstormsecurity.com/files/129510/WordPress-Timed-Popup-1.3-CSRF-XSS.html
@@ -281,6 +298,7 @@ wp-vault,http://lenonleite.com.br/en/blog/2016/11/30/wp-vault-0-8-6-6-local-file
 wp-vertical-gallery,https://www.pluginvulnerabilities.com/2016/06/07/arbitrary-file-upload-vulnerability-in-vertical-slideshow/
 wp-whois-domain,https://www.pluginvulnerabilities.com/2016/11/28/vulnerability-details-reflected-cross-site-scripting-xss-vulnerability-in-wp-whois-domain/
 wp-yasslideshow,https://www.pluginvulnerabilities.com/2016/06/07/arbitrary-file-upload-vulnerability-in-yas-slideshow/
+wp2android-turn-wp-site-into-android-app,http://www.vapidlabs.com/advisory.php?v=182
 wpcommenttwit,http://packetstormsecurity.com/files/129581/WordPress-wpCommentTwit-0.5-CSRF-XSS.html
 wpe-indoshipping,http://www.vapid.dhs.org/advisory.php?v=145
 wpeasystats,http://secunia.com/advisories/46069/
@@ -294,4 +312,5 @@ xml-and-csv-import-in-article-content,https://packetstormsecurity.com/files/1363
 yahoo-answers-autoposter,http://secunia.com/advisories/48862/
 yt-audio-streaming-audio-from-youtube,http://secunia.com/advisories/43539/
 yurl-retwitt,http://packetstormsecurity.com/files/129582/WordPress-yURL-ReTwitt-WP-1.4-CSRF-XSS.html
+zen-mobile-app-native,http://www.vapidlabs.com/advisory.php?v=178
 zx-csv-upload,https://www.pluginvulnerabilities.com/2016/12/19/cross-site-request-forgery-csrfdatabase-update-vulnerability-in-zx_csv-upload/

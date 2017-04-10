@@ -3,7 +3,7 @@
 Plugin Name: No Longer in Directory
 Plugin URI: https://www.whitefirdesign.com/no-longer-in-directory
 Description: Checks for installed plugins that are no longer in the WordPress.org Plugin Directory.
-Version: 1.0.59
+Version: 1.0.60
 Author: White Fir Design
 Author URI: https://www.whitefirdesign.com/
 License: GPLv2

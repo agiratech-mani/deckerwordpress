@@ -2,25 +2,22 @@
 /*
 UpdraftPlus Addon: sftp:SFTP, SCP and FTPS Support
 Description: Allows UpdraftPlus to back up to SFTP, SSH and encrypted FTP servers
-Version: 2.6
+Version: 2.7
 Shop: /shop/sftp/
-Latest Change: 1.11.28
+Latest Change: 1.12.35
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
-$updraftplus_addons_sftp = new UpdraftPlus_Addons_RemoteStorage_sftp;
-class UpdraftPlus_Addons_RemoteStorage_sftp {
+if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
+
+// Do not instantiate the storage object (as that is instantiated on demand), but only the helper
+$updraftplus_addons_sftp = new UpdraftPlus_Addons_RemoteStorage_sftp_helper;
+class UpdraftPlus_Addons_RemoteStorage_sftp_helper {
 
 	public function __construct() {
-		add_action('updraft_sftp_credentials_test', array($this, 'credentials_test'));
-		add_filter('updraft_sftp_upload_files', array($this, 'upload_files'), 10, 2);
-		add_filter('updraft_sftp_delete_files', array($this, 'delete_files'), 10, 3);
-		add_filter('updraft_sftp_download_file', array($this, 'download_file'), 10, 2);
-		add_filter('updraft_sftp_config_print', array($this, 'config_print'));
 		add_filter('updraft_sftp_ftps_notice', array($this, 'ftps_notice'));
 		add_filter('updraftplus_ftp_possible', array($this, 'updraftplus_ftp_possible'));
-		add_filter('updraft_sftp_listfiles', array($this, 'listfiles'), 10, 2);
 	}
 
 	public function updraftplus_ftp_possible($funcs_disabled) {
@@ -37,6 +34,10 @@ class UpdraftPlus_Addons_RemoteStorage_sftp {
 	public function ftps_notice() {
 		return __("Encrypted FTP is available, and will be automatically tried first (before falling back to non-encrypted if it is not successful), unless you disable it using the expert options. The 'Test FTP Login' button will tell you what type of connection is in use.",'updraftplus').' '.__('Some servers advertise encrypted FTP as available, but then time-out (after a long time) when you attempt to use it. If you find this happenning, then go into the "Expert Options" (below) and turn off SSL there.', 'updraftplus').' '.__('Explicit encryption is used by default. To force implicit encryption (port 990), add :990 to your FTP server below.',' updraftplus');
 	}
+
+}
+
+class UpdraftPlus_Addons_RemoteStorage_sftp extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	public function do_connect_and_chdir() {
 		$options = UpdraftPlus_Options::get_updraft_option('updraft_sftp_settings');
@@ -221,7 +222,7 @@ class UpdraftPlus_Addons_RemoteStorage_sftp {
 
 	}
 
-	public function listfiles($x, $match = 'backup_') {
+	public function listfiles($match = 'backup_') {
 		$sftp = $this->do_connect_and_chdir();
 		if (is_wp_error($sftp)) return $sftp;
 

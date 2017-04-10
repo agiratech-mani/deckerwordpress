@@ -17,15 +17,8 @@ do_credentials_test_deletefile($testfile)
 
 // TODO: Need to deal with the issue of squillions of downloaders showing in a restore operation. Best way would be to never open the downloaders at all - make an AJAX call to see which are actually needed. (Failing that, a back-off mechanism).
 
-if (!class_exists('UpdraftPlus_BackupModule_ViaAddon')) require_once(UPDRAFTPLUS_DIR.'/methods/viaaddon-base.php');
-class UpdraftPlus_BackupModule_remotesend extends UpdraftPlus_BackupModule_ViaAddon {
-	public function __construct() {
-		parent::__construct('remotesend', 'Remote send', '5.2.4');
-	}
-}
-
-if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base.php');
-class UpdraftPlus_Addons_RemoteStorage_remotesend extends UpdraftPlus_RemoteStorage_Addons_Base {
+if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
+class UpdraftPlus_Addons_RemoteStorage_remotesend extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	private $default_chunk_size;
 
@@ -304,11 +297,17 @@ class UpdraftPlus_Addons_RemoteStorage_remotesend extends UpdraftPlus_RemoteStor
 	public function get_opts() {
 		global $updraftplus;
 		$opts = $updraftplus->jobdata_get('remotesend_info');
-		return (is_array($opts)) ? $opts : array();
+		return is_array($opts) ? $opts : array();
 	}
 
 	// do_listfiles(), do_download(), do_delete() : the absence of any method here means that the parent will correctly throw an error
 	
+}
+
+class UpdraftPlus_BackupModule_remotesend extends UpdraftPlus_Addons_RemoteStorage_remotesend {
+	public function __construct() {
+		parent::__construct('remotesend', 'Remote send', '5.2.4');
+	}
 }
 
 $updraftplus_addons_remotesend = new UpdraftPlus_Addons_RemoteStorage_remotesend;

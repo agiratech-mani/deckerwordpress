@@ -2,12 +2,12 @@
 /*
 UpdraftPlus Addon: azure:Microsoft Azure Support
 Description: Microsoft Azure Support
-Version: 1.3
+Version: 1.4
 Shop: /shop/azure/
 Include: includes/azure
-IncludePHP: methods/addon-base.php
+IncludePHP: methods/addon-base-v2.php
 RequiresPHP: 5.3.3
-Latest Change: 1.11.28
+Latest Change: 1.12.35
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
@@ -31,9 +31,9 @@ auth_token
 do_config_print**
 */
 
-if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base.php');
+if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
 
-class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_Addons_Base {
+class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	// https://msdn.microsoft.com/en-us/library/azure/ee691964.aspx - maximum block size is 4MB
 	private $chunk_size = 2097152;
@@ -41,7 +41,6 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 	public function __construct() {
 		// 3rd parameter: chunking? 4th: Test button?
 		parent::__construct('azure', 'Azure', true, true);
-		add_filter('updraft_azure_action_auth', array($this, 'action_auth'));
 		// https://msdn.microsoft.com/en-us/library/azure/ee691964.aspx - maximum block size is 4MB
 		if (defined('UPDRAFTPLUS_UPLOAD_CHUNKSIZE') && UPDRAFTPLUS_UPLOAD_CHUNKSIZE > 0) $this->chunk_size = max(UPDRAFTPLUS_UPLOAD_CHUNKSIZE, 4194304);
 	}
@@ -527,4 +526,5 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 
 }
 
-$updraftplus_addons_azure = new UpdraftPlus_Addons_RemoteStorage_azure;
+// Do *not* instantiate here; it is a storage module, so is instantiated on-demand
+// $updraftplus_addons_azure = new UpdraftPlus_Addons_RemoteStorage_azure;

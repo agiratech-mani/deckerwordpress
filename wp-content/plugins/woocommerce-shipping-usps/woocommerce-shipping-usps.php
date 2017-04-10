@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce USPS Shipping
  * Plugin URI: https://woocommerce.com/products/usps-shipping-method/
  * Description: Obtain shipping rates dynamically via the USPS Shipping API for your orders.
- * Version: 4.4.4
+ * Version: 4.4.5
  * Author: WooCommerce
  * Author URI: https://woocommerce.com
  * Copyright: 2009-2017 WooCommerce
@@ -76,6 +76,8 @@ woothemes_queue_update( plugin_basename( __FILE__ ), '83d1524e8f5f1913e58889f83d
  */
 if ( is_woocommerce_active() ) {
 
+	define( 'WC_USPS_VERSION', '4.4.5' );
+
 	/**
 	 * WC_USPS class
 	 */
@@ -88,12 +90,14 @@ if ( is_woocommerce_active() ) {
 		 *
 		 * @var string
 		 */
-		public $version = '4.4.4';
+		public $version;
 
 		/**
 		 * Constructor
 		 */
 		public function __construct() {
+			$this->version = WC_USPS_VERSION;
+
 			register_activation_hook( __FILE__, array( $this, 'activation_check' ) );
 			add_action( 'admin_init', array( $this, 'maybe_install' ), 5 );
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );

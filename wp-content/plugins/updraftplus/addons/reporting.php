@@ -2,9 +2,9 @@
 /*
 UpdraftPlus Addon: reporting:Sophisticated reporting options
 Description: Provides various new reporting capabilities
-Version: 2.2
+Version: 2.3
 Shop: /shop/reporting/
-Latest Change: 2.12.28
+Latest Change: 2.12.35
 */
 
 # Future possibility: more reporting options; e.g. HTTP ping; tweet, etc.
@@ -217,7 +217,7 @@ class UpdraftPlus_Addon_Reporting {
 
 			echo $show_services."</div></p>\n\n";
 
-			$checksums = array('sha1');
+			$checksums = $updraftplus->which_checksums();
 
 			if (!empty($file_entities)) {
 				foreach ($file_entities as $entity => $info) {

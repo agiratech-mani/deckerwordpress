@@ -3,11 +3,11 @@
  * Plugin Name: WooCommerce FedEx Shipping
  * Plugin URI: https://woocommerce.com/products/fedex-shipping-module/
  * Description: Obtain shipping rates dynamically via the FedEx API for your orders.
- * Version: 3.4.4
- * Author: Automattic
+ * Version: 3.4.5
+ * Author: WooCommerce
  * Author URI: https://woocommerce.com
  *
- * Copyright: 2009-2011 Automattic.
+ * Copyright: 2009-2017 WooCommerce.
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
@@ -36,6 +36,8 @@ function wc_fedex_activation_check(){
 
 register_activation_hook( __FILE__, 'wc_fedex_activation_check' );
 
+define( 'WC_SHIPPING_FEDEX_VERSION', '3.4.5' );
+
 class WC_Shipping_Fedex_Init {
 	/**
 	 * Plugin's version.
@@ -44,7 +46,7 @@ class WC_Shipping_Fedex_Init {
 	 *
 	 * @var string
 	 */
-	public $version = '3.4.4';
+	public $version;
 
 	/** @var object Class Instance */
 	private static $instance;
@@ -60,6 +62,8 @@ class WC_Shipping_Fedex_Init {
 	 * Initialize the plugin's public actions
 	 */
 	public function __construct() {
+		$this->version = WC_SHIPPING_FEDEX_VERSION;
+
 		if ( class_exists( 'WC_Shipping_Method' ) ) {
 			add_action( 'admin_init', array( $this, 'maybe_install' ), 5 );
 			add_action( 'init', array( $this, 'load_textdomain' ) );
@@ -146,8 +150,8 @@ class WC_Shipping_Fedex_Init {
 	 */
 	public function plugin_links( $links ) {
 		$plugin_links = array(
-			'<a href="http://support.woothemes.com/">' . __( 'Support', 'woocommerce-shipping-fedex' ) . '</a>',
-			'<a href="http://docs.woothemes.com/document/fedex/">' . __( 'Docs', 'woocommerce-shipping-fedex' ) . '</a>',
+			'<a href="https://support.woocommerce.com/">' . __( 'Support', 'woocommerce-shipping-fedex' ) . '</a>',
+			'<a href="https://docs.woocommerce.com/document/fedex/">' . __( 'Docs', 'woocommerce-shipping-fedex' ) . '</a>',
 		);
 
 		return array_merge( $plugin_links, $links );

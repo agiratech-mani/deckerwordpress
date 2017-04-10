@@ -84,9 +84,16 @@ class UpdraftPlusAddOns_Options2 {
 				add_action('all_admin_notices', array($this, 'show_admin_warning_update'));
 			}
 		}
+		 
 	}
-
-	function show_admin_warning($message, $class = "updated") {
+	
+	/**
+	 * Echoes a div with a WP dashboard admin message in it
+	 * 
+	 * @param $message String - the message text
+	 * @param $class String - the CSS class for the div
+	 */
+	private function show_admin_warning($message, $class = "updated") {
 		echo '<div class="'.$class.'">'."<p>$message</p></div>";
 	}
 
@@ -370,7 +377,7 @@ ENDHERE;
 		echo '<h3 style="clear:left; margin-top: 10px;">'.__('UpdraftPlus Addons', 'updraftplus').'</h3><div>';
 
 		$addons = $updraftplus_addons2->get_available_addons();
-
+        
 		$this->plugin_update_url = 'update-core.php';
 		# Can we get a direct update URL?
 		$updates_available = get_site_transient('update_plugins');
@@ -450,11 +457,11 @@ ENDHERE;
 	}
 	
 	private function addonbox($key, $name, $shopurl, $description, $installedversion, $latestversion = false, $installed = false, $unclaimed = false, $is_assigned = false, $have_all = false) {
-		$urlbase = UDADDONS2_URL;
+		$urlbase = UPDRAFTPLUS_URL.'/images/addons-images';
 		$mother = $this->mother;
 		if ($installed || ($have_all && $key == 'all')) {
 			$blurb="<p>";
-			$preblurb="<div style=\"float:right;\"><img src=\"$urlbase/yes.png\" width=\"85\" height=\"98\" alt=\"".__("You've got it", 'updraftplus')."\"></div>";
+			$preblurb="<div style=\"float:right;padding-top:10px;\"><img title=\"".__('You\'ve got it','updraftplus')."\" src=\"$urlbase/$key.png\" width=\"100\" height=\"100\" alt=\"".__("You've got it", 'updraftplus')."\"></div>";
 			if ($key !='all') {
 				$blurb .= sprintf(__('Your version: %s', 'updraftplus'), $installedversion);
 				if (!empty($latestversion) && $latestversion == $installedversion) {
@@ -486,7 +493,7 @@ ENDHERE;
 					$preblurb="";
 			} else {
 				$blurb='<p><a href="'.$mother.$shopurl.'">'.__('Get it from the UpdraftPlus.Com Store','updraftplus').'</a>'.(($this->connected) ? '' : ' '.__('(or connect using the form on this page if you have already purchased it)', 'updraftplus')).'</p>';
-				$preblurb="<div style=\"float:right;\"><a href=\"${mother}${shopurl}\"><img src=\"$urlbase/shopcart.png\" width=\"120\" height=\"98\" alt=\"".__('Buy It','updraftplus')."\"></a></div>";
+				$preblurb="<div style=\"float:right;padding-top:10px;\"><a href=\"${mother}${shopurl}\" title=\"".__('Buy It','updraftplus')."\"><img style=\"-webkit-filter: grayscale(100%);filter: grayscale(100%);\" src=\"$urlbase/$key.png\" width=\"100\" height=\"100\" alt=\"".__('Buy It','updraftplus')."\"></a></div>";
 			}
 		}
 		return <<<ENDHERE

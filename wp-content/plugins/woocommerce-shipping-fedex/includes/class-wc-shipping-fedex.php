@@ -828,16 +828,16 @@ class WC_Shipping_Fedex extends WC_Shipping_Method {
 						// Work out the commodoties for CA shipments
 						if ( $parcel_request['packed_products'] ) {
 							foreach ( $parcel_request['packed_products'] as $product ) {
-								if ( isset( $commodoties[ $product->id ] ) ) {
-									$commodoties[ $product->id ]['Quantity'] ++;
-									$commodoties[ $product->id ]['CustomsValue']['Amount'] += round( $product->get_price() );
+								if ( isset( $commodoties[ $product->get_id() ] ) ) {
+									$commodoties[ $product->get_id() ]['Quantity'] ++;
+									$commodoties[ $product->get_id() ]['CustomsValue']['Amount'] += round( $product->get_price() );
 									continue;
 								}
-								$commodoties[ $product->id ] = array(
+								$commodoties[ $product->get_id() ] = array(
 									'Name'                 => sanitize_title( $product->get_title() ),
 									'NumberOfPieces'       => 1,
 									'Description'          => '',
-									'CountryOfManufacture' => ( $country = get_post_meta( $product->id, 'CountryOfManufacture', true ) ) ? $country : WC()->countries->get_base_country(),
+									'CountryOfManufacture' => ( $country = get_post_meta( $product->get_id(), 'CountryOfManufacture', true ) ) ? $country : WC()->countries->get_base_country(),
 									'Weight'               => array(
 										'Units'            => 'LB',
 										'Value'            => max( '0.5', round( wc_get_weight( $product->get_weight(), 'lbs' ), 2 ) ),

@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Checkout Field Editor
  * Plugin URI: https://woocommerce.com/products/woocommerce-checkout-field-editor/
  * Description: Add, remove and modifiy fields shown on your WooCommerce checkout page.
- * Version: 1.5.2
+ * Version: 1.5.4
  * Author: WooCommerce
  * Author URI: https://woocommerce.com
  *
@@ -40,11 +40,11 @@ if ( is_woocommerce_active() ) {
 		$supress_field_modification = false;
 
 		if ( ! class_exists( 'WC_Checkout_Field_Editor' ) ) {
-			require_once( 'classes/class-wc-checkout-field-editor.php' );
+			require_once( 'includes/class-wc-checkout-field-editor.php' );
 		}
 
 		if ( ! class_exists( 'WC_Checkout_Field_Editor_PIP_Integration' ) ) {
-			require_once( 'classes/class-wc-checkout-field-editor-pip-integration.php' );
+			require_once( 'includes/class-wc-checkout-field-editor-pip-integration.php' );
 		}
 
 		/**
@@ -65,7 +65,7 @@ if ( is_woocommerce_active() ) {
 	function woocommmerce_init_cfe_export_handler() {
 
 		if ( ! class_exists( 'WC_Checkout_Field_Editor_Export_Handler' ) ) {
-			require_once( 'classes/class-wc-checkout-field-editor-export-handler.php' );
+			require_once( 'includes/class-wc-checkout-field-editor-export-handler.php' );
 			new WC_Checkout_Field_Editor_Export_Handler();
 		}
 	}
@@ -467,7 +467,7 @@ if ( is_woocommerce_active() ) {
 					// checkbox's value to `0` which then bypass the validation
 					// of checking emptiness.
 					//
-					// @see https://github.com/woothemes/woocommerce/blob/461ec4da1626b28e2a106a4e4530cb22a19e7d36/includes/class-wc-checkout.php#L449-L450
+					// @see https://github.com/woocommerce/woocommerce/blob/461ec4da1626b28e2a106a4e4530cb22a19e7d36/includes/class-wc-checkout.php#L449-L450
 					if ( 'checkbox' !== $field['type'] && empty( $posted[ $key ] ) ) {
 						continue;
 					}
@@ -520,7 +520,7 @@ if ( is_woocommerce_active() ) {
 	 * @return array $custom_fields
 	 */
 	function wc_get_custom_checkout_fields( $order, $types = array( 'billing', 'shipping', 'additional' ) ) {
-		$order_id      = $order->id;
+		$order_id      = version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id();
 		$all_fields    = array();
 		$custom_fields = array();
 
@@ -553,16 +553,17 @@ if ( is_woocommerce_active() ) {
 	 * @param object $order
 	 */
 	function wc_display_custom_fields_view_order( $order ) {
+		$order_id = version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id();
 		$fields   = wc_get_custom_checkout_fields( $order );
 		$found    = false;
 		$html     = '';
 
 		// Loop through all custom fields to see if it should be added
 		foreach ( $fields as $name => $options ) {
-			if ( isset( $options['display_options'] ) && in_array( 'view_order', $options['display_options'] ) &&  '' !== get_post_meta( $order->id, $name, true ) ) {
+			if ( isset( $options['display_options'] ) && in_array( 'view_order', $options['display_options'] ) &&  '' !== get_post_meta( $order_id, $name, true ) ) {
 				$found = true;
 				$html .= '<dt>' . esc_attr( $options['label'] ) . ':</dt>';
-				$html .= '<dd>' . get_post_meta( $order->id, $name, true ) . '</dd>';
+				$html .= '<dd>' . get_post_meta( $order_id, $name, true ) . '</dd>';
 			}
 		}
 
@@ -583,15 +584,16 @@ if ( is_woocommerce_active() ) {
 	 * @param array $types
 	 */
 	function wc_get_custom_fields_for_admin_order( $order, $types ) {
+		$order_id = version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id();
 		$fields   = wc_get_custom_checkout_fields( $order, $types );
 		$html     = '<div class="address custom_checkout_fields">';
 		$found    = false;
 
 		// Loop through all custom fields to see if it should be added
 		foreach ( $fields as $name => $options ) {
-			if ( isset( $options['display_options'] ) && in_array( 'view_order', $options['display_options'] ) &&  '' !== get_post_meta( $order->id, $name, true ) ) {
+			if ( isset( $options['display_options'] ) && in_array( 'view_order', $options['display_options'] ) &&  '' !== get_post_meta( $order_id, $name, true ) ) {
 				$found = true;
-				$html .= '<p><strong>' . esc_attr( $options['label'] ) . ':</strong>' . get_post_meta( $order->id, $name, true ) . '</p>';
+				$html .= '<p><strong>' . esc_attr( $options['label'] ) . ':</strong>' . get_post_meta( $order_id, $name, true ) . '</p>';
 			}
 		}
 

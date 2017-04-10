@@ -5,7 +5,7 @@ Description: Microsoft OneDrive Support
 Version: 1.6
 Shop: /shop/onedrive/
 Include: includes/onedrive
-IncludePHP: methods/addon-base.php
+IncludePHP: methods/addon-base-v2.php
 RequiresPHP: 5.3.3
 Latest Change: 1.12.19
 */
@@ -24,9 +24,9 @@ do_credentials_test($testfile, $posted_settings) - return true/false
 do_credentials_test_deletefile($testfile, $posted_settings)
 */
 
-if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base.php');
+if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
 
-class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorage_Addons_Base {
+class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	// https://dev.onedrive.com/items/upload_large_files.htm says "Use a fragment size that is a multiple of 320 KB"
 	private $chunk_size = 3276800;
@@ -40,7 +40,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 	
 		# 3rd parameter: chunking? 4th: Test button?
 		parent::__construct('onedrive', 'OneDrive', false, false);
-		add_filter('updraft_onedrive_action_auth', array($this, 'action_auth'));
+
 		if (defined('UPDRAFTPLUS_UPLOAD_CHUNKSIZE') && UPDRAFTPLUS_UPLOAD_CHUNKSIZE>0) $this->chunk_size = max(UPDRAFTPLUS_UPLOAD_CHUNKSIZE, 320*1024);
 	}
 	
@@ -1000,4 +1000,5 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 
 }
 
-$updraftplus_addons_onedrive = new UpdraftPlus_Addons_RemoteStorage_onedrive;
+// Do *not* instantiate here; it is a storage module, so is instantiated on-demand
+// $updraftplus_addons_onedrive = new UpdraftPlus_Addons_RemoteStorage_onedrive;

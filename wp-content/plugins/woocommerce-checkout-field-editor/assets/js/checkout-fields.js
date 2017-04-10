@@ -27,6 +27,16 @@ jQuery( document ).ready( function( $ ) {
 		});
 	};
 
+	/**
+	 * Because on WC init, Select2 has already initialized
+	 * our new row making it a Select2 element. So we should
+	 * remove them until a row has been cloned. This prevents
+	 * duplicated Select2 elements to show.
+	 */
+	$( 'tr.new_row' ).find( '.wc-enhanced-select' ).each( function() {
+		$( this ).select2( 'destroy' );
+	});
+
 	$( 'a.new_row' ).click( function() {
 
 		var size = $( '#wc_checkout_fields tbody tr' ).size();
@@ -47,7 +57,7 @@ jQuery( document ).ready( function( $ ) {
 			$( this ).removeClass( 'enhanced' );
 		});
 
-		$( 'body' ).trigger( 'wc-enhanced-select-init' );
+		$( document.body ).trigger( 'wc-enhanced-select-init' );
 
 		field_row_indexes();
 

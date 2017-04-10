@@ -2,17 +2,13 @@
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
-class UpdraftPlus_AddonStorage_viastream {
+if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
+
+class UpdraftPlus_AddonStorage_viastream extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	public function __construct($method, $desc) {
 		$this->method = $method;
 		$this->desc = $desc;
-		add_action('updraft_'.$method.'_credentials_test', array($this, 'credentials_test'));
-		add_filter('updraft_'.$method.'_upload_files', array($this, 'upload_files'), 10, 2);
-		add_filter('updraft_'.$method.'_delete_files', array($this, 'delete_files'), 10, 3);
-		add_filter('updraft_'.$method.'_download_file', array($this, 'download_file'), 10, 2);
-		add_filter('updraft_'.$method.'_config_print', array($this, 'config_print'));
-		add_filter('updraft_'.$method.'_listfiles', array($this, 'listfiles'), 10, 2);
 	}
 
 	public function delete_files($ret, $files, $storage_arr = false) {
@@ -136,7 +132,7 @@ class UpdraftPlus_AddonStorage_viastream {
 
 	}
 
-	public function listfiles($x, $match = 'backup_') {
+	public function listfiles($match = 'backup_') {
 
 		$storage = $this->bootstrap();
 		if (is_wp_error($storage)) return $storage;

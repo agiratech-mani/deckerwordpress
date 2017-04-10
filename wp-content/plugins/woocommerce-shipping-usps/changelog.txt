@@ -1,8 +1,11 @@
 *** USPS Shipping ***
 
+2017-04-03 - version 4.4.5
+* Update - Additional updates for WC 3.0 compatibility.
+
 2017-02-03 - version 4.4.4
 * Update - January 22, 2017 Priority Mail rates update.
-* Update - WC 2.7 compatibility.
+* Update - WC 3.0 compatibility.
 * Fix - Regional Rate A2 box dimensions were off causing wrong box type to be returned.
 
 2016-12-22 - version 4.4.3

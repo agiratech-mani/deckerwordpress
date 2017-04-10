@@ -101,7 +101,7 @@ class UpdraftPlus_Addon_Autobackup {
 		if ($lock_result != $lock_value) return;
 
 		// Remove the lock, to allow the WP updater to claim it and proceed
-		delete_option( $lock_name );
+		delete_option($this->lock_name);
 
 		$this->do_not_filter_auto_backup = true;
 		wp_maybe_auto_update();

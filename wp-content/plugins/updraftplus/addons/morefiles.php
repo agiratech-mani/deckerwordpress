@@ -2,9 +2,9 @@
 /*
 UpdraftPlus Addon: morefiles:Back up more files, including WordPress core
 Description: Creates a backup of WordPress core (including everything in that directory WordPress is in), and any other file/directory you specify too.
-Version: 2.3
+Version: 2.4
 Shop: /shop/more-files/
-Latest Change: 1.12.30
+Latest Change: 1.12.35
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
@@ -37,6 +37,9 @@ class UpdraftPlus_Addons_MoreFiles {
 		add_action('updraftplus_restore_form_wpcore', array($this, 'restore_form_wpcore'));
 		add_filter('updraftplus_checkzip_wpcore', array($this, 'checkzip_wpcore'), 10, 4);
 		add_filter('updraftplus_checkzip_end_wpcore', array($this, 'checkzip_end_wpcore'), 10, 3);
+		
+		add_filter('updraftplus_browse_download_link', array($this, 'updraftplus_browse_download_link'));
+		add_filter('updraftplus_command_get_zipfile_download', array($this, 'updraftplus_command_get_zipfile_download'), 10, 2);
 
 		add_filter('updraftplus_dirlist_more', array($this, 'backup_more_dirlist'));
 		add_filter('updraftplus_dirlist_wpcore', array($this, 'backup_wpcore_dirlist'));
@@ -46,6 +49,63 @@ class UpdraftPlus_Addons_MoreFiles {
 		add_action('updraftplus_admin_enqueue_scripts', array($this, 'updraftplus_admin_enqueue_scripts'));
 	}
 
+	public function updraftplus_browse_download_link($link) {
+		return '<a href="#" id="updraft_zip_download_item">'._x('Download', '(verb)', 'updraftplus').'</a>';
+	}
+	
+	public function updraftplus_command_get_zipfile_download($result, $params) {
+		global $updraftplus;
+
+		$zip_object = 'UpdraftPlus_ZipArchive';
+
+		if (!class_exists('UpdraftPlus_PclZip')) require_once(UPDRAFTPLUS_DIR.'/class-zip.php');
+
+		# In tests, PclZip was found to be 25% slower than ZipArchive
+		if (((defined('UPDRAFTPLUS_PREFERPCLZIP') && UPDRAFTPLUS_PREFERPCLZIP == true) || !class_exists('ZipArchive') || !class_exists('UpdraftPlus_ZipArchive') || (!extension_loaded('zip') && !method_exists('ZipArchive', 'AddFile')))) {
+			$zip_object = 'UpdraftPlus_PclZip';
+		}
+
+		// Retrieve the information from our backup history
+		$backup_history = $updraftplus->get_backup_history();
+
+		// Base name
+		$file = $backup_history[$params['timestamp']][$params['type']];
+
+		// Deal with multi-archive sets
+		if (is_array($file)) $file = $file[$params['findex']];
+
+		// Where it should end up being downloaded to
+		$fullpath = $updraftplus->backups_dir_location().'/'.$file;
+
+		$path = substr($params['path'], strpos($params['path'], '/') + 1);
+
+		if (file_exists($fullpath) && is_readable($fullpath) && filesize($fullpath)>0) {
+
+			$zip = new $zip_object;
+
+			if (!$zip->open($fullpath)) {
+				return array('error' => 'UpdraftPlus: opening zip (' . $fullpath . '): failed to open this zip file.');
+			} else {
+
+				if ($zip_object == 'UpdraftPlus_PclZip') {
+					$extracted = $zip->extract($updraftplus->backups_dir_location() . DIRECTORY_SEPARATOR . 'ziptemp' . DIRECTORY_SEPARATOR, $path);
+				} else {
+					$extracted = $zip->extractTo($updraftplus->backups_dir_location() . DIRECTORY_SEPARATOR . 'ziptemp' . DIRECTORY_SEPARATOR, $path);
+				}
+				
+				@$zip->close();
+
+				if ($extracted) {
+					return array('path' => 'ziptemp'.DIRECTORY_SEPARATOR.$path);
+				} else {
+					return array('error' => 'UpdraftPlus: failed to extract (' . $path . ')');
+				}
+			}
+		}
+
+		return array('error' => 'UpdraftPlus: no such file or diretory (' . $fullpath . '): if the file does exist please make sure it is readable by the server.');
+	}
+	
 	public function updraftplus_admin_enqueue_scripts() {
 		global $updraftplus_admin;
 		$updraftplus_admin->enqueue_jstree();

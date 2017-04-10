@@ -1,37 +1,38 @@
 <?php
 /**
  *  WP-SpamShield Compatibility
- *  File Version 1.9.9.8.8
+ *  File Version 1.9.9.9.5
  */
 
+/* Make sure file remains secure if called directly */
 if( !defined( 'ABSPATH' ) || !defined( 'WPSS_VERSION' ) ) {
-	if( !headers_sent() ) { @header($_SERVER['SERVER_PROTOCOL'].' 403 Forbidden',TRUE,403); @header('X-Robots-Tag: noindex',TRUE); }
+	if( !headers_sent() ) { @header( $_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden', TRUE, 403 ); @header( 'X-Robots-Tag: noindex', TRUE ); }
 	die( 'ERROR: Direct access to this file is not allowed.' );
 }
+/* Prevents unintentional error display if WP_DEBUG not enabled. */
+if( TRUE !== WPSS_DEBUG && TRUE !== WP_DEBUG ) { @ini_set( 'display_errors', 0 ); @error_reporting( 0 ); }
 
-if( TRUE !== WPSS_DEBUG && TRUE !== WP_DEBUG ) { @ini_set( 'display_errors', 0 ); @error_reporting( 0 ); } /* Prevents error display, but will display errors if WP_DEBUG turned on. */
 
 
-
-class WPSS_Compatibility {
+final class WPSS_Compatibility extends WP_SpamShield {
 
 	/**
-	 *  WP-SpamShield Compatibility Class
-	 *  Plugin detection
-	 *  Compatibility deconfliction for some of the plugins listed in the Known Issues and Plugin Conflicts ( http://www.redsandmarketing.com/plugins/wp-spamshield/known-conflicts/ )
-	 *  Where possible, apply compatibility fixes or workarounds
+	 *	WP-SpamShield Compatibility Class
+	 *	Plugin detection
+	 *	Compatibility deconfliction for some of the plugins listed in the Known Issues and Plugin Conflicts ( http://www.redsandmarketing.com/plugins/wp-spamshield/known-conflicts/ )
+	 *	Where possible, apply compatibility fixes or workarounds
 	 */
 
 	function __construct() {
 		/**
-		 *  Do nothing...for now
+		 *	Do nothing...for now
 		 */
 	}
 
 	static public function is_plugin_active( $plug_bn, $check_network = TRUE ) {
 		/**
-		 *  Using this because WordPress native' 'is_plugin_active()' function only works in Admin
-		 *  ex. $plug_bn = 'folder/filename.php'; // Plugin Basename
+		 *	Using this because WordPress native' 'is_plugin_active()' function only works in Admin
+		 *	ex. $plug_bn = 'folder/filename.php'; // Plugin Basename
 		 */
 		if( empty( $plug_bn ) ){ return FALSE; }
 		global $wpss_conf_active_plugins,$wpss_active_plugins,$wpss_active_network_plugins;
@@ -43,7 +44,7 @@ class WPSS_Compatibility {
 		/* Check known plugin constants and classes */
 		$plug_cncl = array(
 			/* Compatibility Fixes */
-			'autoptimize/autoptimize.php' => array( 'cn' => 'AUTOPTIMIZE_WP_CONTENT_NAME', 'cl' => 'autoptimizeConfig' ), 'commentluv/commentluv.php' => array( 'cn' => '', 'cl' => 'commentluv' ), 'si-contact-form/si-contact-form.php' => array( 'cn' => 'FSCF_VERSION', 'cl' => 'FSCF_Util' ), 'jetpack/jetpack.php' => array( 'cn' => 'JETPACK__VERSION', 'cl' => 'Jetpack' ), 'wp-spamfree/wp-spamfree.php' => array( 'cn' => '', 'cl' => 'wpSpamFree' ),
+			'autoptimize/autoptimize.php' => array( 'cn' => 'AUTOPTIMIZE_WP_CONTENT_NAME', 'cl' => 'autoptimizeConfig' ), 'commentluv/commentluv.php' => array( 'cn' => '', 'cl' => 'commentluv' ), 'si-contact-form/si-contact-form.php' => array( 'cn' => 'FSCF_VERSION', 'cl' => 'FSCF_Util' ), 'jetpack/jetpack.php' => array( 'cn' => 'JETPACK__VERSION', 'cl' => 'Jetpack' ), 'wp-slimstat/wp-slimstat.php' => array( 'cn' => '', 'cl' => 'wp_slimstat' ), 'wordpress-seo/wp-seo.php' => array( 'cn' => 'WPSEO_VERSION', 'cl' => '' ), 'wp-spamfree/wp-spamfree.php' => array( 'cn' => '', 'cl' => 'wpSpamFree' ),
 			/* 3rd Party Forms, Membership & Registration */
 			'bbpress/bbpress.php' => array( 'cn' => '', 'cl' => 'bbPress' ), 'buddypress/bp-loader.php' => array( 'cn' => 'BP_PLUGIN_DIR', 'cl' => 'BuddyPress' ), 'contact-form-7/wp-contact-form-7.php' => array( 'cn' => 'WPCF7_VERSION', 'cl' => '' ), 'gravityforms/gravityforms.php' => array( 'cn' => 'GF_MIN_WP_VERSION', 'cl' => 'GFForms' ), 'mailchimp-for-wp/mailchimp-for-wp.php' => array( 'cn' => 'MC4WP_LITE_VERSION', 'cl' => 'MC4WP_Lite' ), 'ninja-forms/ninja-forms.php' => array( 'cn' => 'NF_PLUGIN_VERSION', 'cl' => 'Ninja_Forms' ),
 			/* Cache Plugins */
@@ -58,27 +59,35 @@ class WPSS_Compatibility {
 		if( ( !empty( $plug_cncl[$plug_bn]['cn'] ) && defined( $plug_cncl[$plug_bn]['cn'] ) ) || ( !empty( $plug_cncl[$plug_bn]['cl'] ) && class_exists( $plug_cncl[$plug_bn]['cl'] ) ) ) { $wpss_conf_active_plugins[$plug_bn] = TRUE; return TRUE; }
 		/* No match yet, so now do standard check */
 		if( empty( $wpss_active_plugins ) ) { $wpss_active_plugins = rs_wpss_get_active_plugins(); }
-		if( in_array( $plug_bn, $wpss_active_plugins, TRUE ) ) { $wpss_conf_active_plugins[$plug_bn] = TRUE; return TRUE; }
+		if( WPSS_PHP::in_array( $plug_bn, $wpss_active_plugins ) ) { $wpss_conf_active_plugins[$plug_bn] = TRUE; return TRUE; }
 		if( TRUE === $check_network && is_multisite() ) {
 			if( empty( $wpss_active_network_plugins ) ) { $wpss_active_network_plugins = rs_wpss_get_active_network_plugins(); }
-			if( in_array( $plug_bn, $wpss_active_network_plugins, TRUE ) ) { $wpss_conf_active_network_plugins[$plug_bn] = TRUE; return TRUE; }
+			if( WPSS_PHP::in_array( $plug_bn, $wpss_active_network_plugins ) ) { $wpss_conf_active_network_plugins[$plug_bn] = TRUE; return TRUE; }
 		}
 		return FALSE;
 	}
 
+	/**
+	 *	Add plugins to PHP Compatibility Checker Plugin whitelist to prevent false positives
+	 *	All our plugins are fully PHP 7+ compatible
+	 *	@dependencies	...
+	 *	@since			1.9.9.8.2
+	 */
 	static public function php_compat( $ignored = array() ) {
-		/**
-		 *	Add plugin to whitelist for PHP Compatibility Checker Plugin
-		 *	@since 1.9.9.8.2
-		 */
-		if( empty( $ignored ) || !is_array( $ignored ) ) { return $ignored; }
-		$ignored['*/'.WPSS_PLUGIN_NAME.'/*'] = WPSS_PHP_TEST_MAX;
+		if( !is_array( $ignored ) ) { return $ignored; }
+		$rsmg_plugins = array( 'rs-feedburner', 'rs-head-cleaner', 'rs-head-cleaner-lite', 'rs-nofollow-blogroll', 'rs-system-diagnostic', 'scrapebreaker', 'wp-spamshield' );
+		foreach( $rsmg_plugins as $i => $p ) {
+			$plugin = '*/'.$p.'/*';
+			if( !WPSS_PHP::in_array( $plugin, $ignored ) ) {
+				$ignored[] = $plugin;
+			}
+		}
 		return $ignored;
 	}
 
 	static public function upgrade_conflict_check() {
 		/**
-		 *  When it is detected that the plugin has been upgraded, fire, and run these checks
+		 *	When it is detected that the plugin has been upgraded, fire, and run these checks
 		 */
 
 		/* Plugin Organizer Plugin ( https://wordpress.org/plugins/plugin-organizer/ ) */
@@ -89,14 +98,14 @@ class WPSS_Compatibility {
 
 	static public function supported() {
 		/**
-		 *  Check if supported 3rd party plugins are active that require exceptions
-		 *  hook@ 'plugins_loaded':-100
+		 *	Check if supported 3rd party plugins are active that require exceptions
+		 *	hook@ 'plugins_loaded':-100
 		 */
 
 		/**
-		 *  Turn on Soft Compat Mode for the following plugins: ( TO DO: array() / foreach() )
-		 *  Gravity Forms	- http://www.gravityforms.com/
-		 *  W3 Total Cache	- https://wordpress.org/plugins/w3-total-cache/ - https://www.w3-edge.com/products/w3-total-cache/
+		 *	Turn on Soft Compat Mode for the following plugins: ( TO DO: array() / foreach() )
+		 *	Gravity Forms	- http://www.gravityforms.com/
+		 *	W3 Total Cache	- https://wordpress.org/plugins/w3-total-cache/ - https://www.w3-edge.com/products/w3-total-cache/
 		 */
 		if( self::is_plugin_active( 'gravityforms/gravityforms.php' ) || self::is_plugin_active( 'w3-total-cache/w3-total-cache.php' ) ) {
 			if( !defined( 'WPSS_SOFT_COMPAT_MODE' ) ) { define( 'WPSS_SOFT_COMPAT_MODE', TRUE ); }
@@ -106,10 +115,10 @@ class WPSS_Compatibility {
 
 	static public function conflict_check() {
 		/**
-		 *  Check if plugins with known issues are active, then deconflict using workarounds
-		 *  @hook			'plugins_loaded':100
-		 *  @dependencies	...
-		 *  @since			...
+		 *	Check if plugins with known issues are active, then deconflict using workarounds
+		 *	@hook			'plugins_loaded':100
+		 *	@dependencies	...
+		 *	@since			...
 		 */
 
 		/* New User Approve Plugin ( https://wordpress.org/plugins/new-user-approve/ ) */
@@ -180,59 +189,75 @@ class WPSS_Compatibility {
 		update_option( 'PO_plugin_order', array() );
 	}
 
+	/**
+	 *	Comment Form Compatibility
+	 *	@dependencies	...
+	 *	@since			...
+	 */
 	static public function comment_form() {
-		/**
-		 *  Comment Form Compatibility
-		 */
-
 		if( rs_wpss_is_admin_sproc() ) { return; }
 
 		/* Vantage Theme by Appthemes ( https://www.appthemes.com/themes/vantage/ ) */
-		global $wpss_theme_vantage; if( !empty( $wpss_theme_vantage ) ) { return TRUE; } elseif( defined( 'APP_FRAMEWORK_DIR_NAME' ) && defined( 'VA_VERSION' ) ) { $wpss_theme_vantage = TRUE; return TRUE; }
-		else {
-			$wpss_theme = wp_get_theme();
-			if( !empty( $wpss_theme ) && is_object( $wpss_theme ) ) {
-				$theme_name = $wpss_theme->get( 'Name' );
-				$theme_author = $wpss_theme->get( 'Author' );
-				if( 'Vantage' === $theme_name && 'AppThemes' === $theme_author ) { $wpss_theme_vantage = TRUE; return TRUE; }
+		global $wpss_theme_vantage;
+		if( !empty( $wpss_theme_vantage ) || ( defined( 'APP_FRAMEWORK_DIR_NAME' ) && defined( 'VA_VERSION' ) ) ) {
+			$wpss_theme_vantage = TRUE;
+			return TRUE;
+		} else {
+			$theme				= wp_get_theme();
+			if( !empty( $theme ) && is_object( $theme ) ) {
+				$theme_name		= $theme->get( 'Name' );
+				$theme_author	= $theme->get( 'Author' );
+				if( 'Vantage' === $theme_name && 'AppThemes' === $theme_author ) {
+					$wpss_theme_vantage = TRUE;
+					return TRUE;
+				}
 			}
 		}
 
-		/* Add next here... */
+		/* Add next plugin here... */
 
 		return FALSE;
 	}
 
+	/**
+	 *	Footer JS Compatibility
+	 *	@dependencies	...
+	 *	@since			...
+	 */
 	static public function footer_js() {
-		/**
-		 *  Footer JS Compatibility
-		 */
-
 		if( rs_wpss_is_admin_sproc() ) { return; }
-
 		$js = '';
 
 		/* Vantage Theme by Appthemes ( https://www.appthemes.com/themes/vantage/ ) */
 		global $wpss_theme_vantage;
 		$v_js = ', #add-review-form';
-		if( !empty( $wpss_theme_vantage ) ) { $wpss_theme_vantage = TRUE; $js .= $v_js; }
-		elseif( defined( 'APP_FRAMEWORK_DIR_NAME' ) && defined( 'VA_VERSION' ) ) { $wpss_theme_vantage = TRUE; $js .= $v_js; }
-		else {
-			$wpss_theme = wp_get_theme();
-			$theme_name = $wpss_theme->get( 'Name' );
-			$theme_author = $wpss_theme->get( 'Author' );
-			if( 'Vantage' === $theme_name && 'AppThemes' === $theme_author ) { $wpss_theme_vantage = TRUE; $js .= $v_js; }
+		if( !empty( $wpss_theme_vantage ) || ( defined( 'APP_FRAMEWORK_DIR_NAME' ) && defined( 'VA_VERSION' ) ) ) {
+			$wpss_theme_vantage = TRUE;
+			$js .= $v_js;
+		} else {
+			$theme				= wp_get_theme();
+			if( !empty( $theme ) && is_object( $theme ) ) {
+				$theme_name		= $theme->get( 'Name' );
+				$theme_author	= $theme->get( 'Author' );
+				if( 'Vantage' === $theme_name && 'AppThemes' === $theme_author ) {
+					$wpss_theme_vantage = TRUE;
+					$js .= $v_js;
+				}
+			}
 		}
 
-		/* Add next here... */
+		/* Add next plugin here... */
 
 		return $js;
 	}
 
+	/**
+	 *	Miscellaneous Form Spam Check Bypass
+	 *	Check if Anti-Spam for Miscellaneous Forms should be bypassed
+	 *	@dependencies	...
+	 *	@since			...
+	 */
 	static public function misc_form_bypass() {
-		/**
-		 *  Miscellaneous Form Spam Check Bypass
-		 */
 
 		/* Setup necessary variables */
 		$url		= WPSS_THIS_URL;
@@ -245,8 +270,7 @@ class WPSS_Compatibility {
 		$referer	= rs_wpss_get_referrer();
 
 		/* IP / PROXY INFO - BEGIN */
-		global $wpss_ip_proxy_info; if( empty( $wpss_ip_proxy_info ) ) { $wpss_ip_proxy_info = rs_wpss_ip_proxy_info(); }
-		extract( $wpss_ip_proxy_info );
+		$GLOBALS['wpss_ip_proxy_info'] = rs_wpss_ip_proxy_info(); extract( $GLOBALS['wpss_ip_proxy_info'] );
 		/* IP / PROXY INFO - END */
 
 		/* GEOLOCATION */
@@ -256,8 +280,8 @@ class WPSS_Compatibility {
 		if( defined( 'WPRP_PLUGIN_SLUG' ) && !empty( $_POST['wpr_verify_key'] ) && WP_SpamShield::preg_match( "~\ WP\-Remote$~", $user_agent ) && WP_SpamShield::preg_match( "~\.amazonaws\.com$~", $rev_dns ) ) { return TRUE; }
 
 		/* Ecommerce Plugins */
-		if( ( rs_wpss_is_https() || !empty( $_POST['add-to-cart'] ) || !empty( $_POST['add_to_cart'] ) || !empty( $_POST['addtocart'] ) || !empty( $_POST['product-id'] ) || !empty( $_POST['product_id'] ) || !empty( $_POST['productid'] ) || ( $user_agent === 'PayPal IPN ( https://www.paypal.com/ipn )' && WP_SpamShield::preg_match( "~(^|\.)paypal\.com$~", $rev_dns ) && $fcrdns === '[Verified]' ) ) && self::is_ecom_enabled() ) { return TRUE; }
-		if( ( rs_wpss_is_https() || self::is_ecom_enabled() ) && $fcrdns === '[Verified]' ) {
+		if( ( WP_SpamShield::is_https() || !empty( $_POST['add-to-cart'] ) || !empty( $_POST['add_to_cart'] ) || !empty( $_POST['addtocart'] ) || !empty( $_POST['product-id'] ) || !empty( $_POST['product_id'] ) || !empty( $_POST['productid'] ) || ( $user_agent === 'PayPal IPN ( https://www.paypal.com/ipn )' && WP_SpamShield::preg_match( "~(^|\.)paypal\.com$~", $rev_dns ) && $fcrdns === '[Verified]' ) ) && self::is_ecom_enabled() ) { return TRUE; }
+		if( ( WP_SpamShield::is_https() || self::is_ecom_enabled() ) && $fcrdns === '[Verified]' ) {
 			/* PayPal, Stripe, Authorize.net, Worldpay, etc */
 			if(
 				( $user_agent === 'PayPal IPN ( https://www.paypal.com/ipn )' && WP_SpamShield::preg_match( "~(^|\.)paypal\.com$~", $rev_dns ) ) ||
@@ -266,13 +290,18 @@ class WPSS_Compatibility {
 			) { return TRUE; }
 		}
 
-		/* WooCommerce Payment Gateways */
+		/* WooCommerce Payment Gateways / Endpoints */
 		if( self::is_woocom_enabled() ) {
 			if( ( $user_agent === 'PayPal IPN ( https://www.paypal.com/ipn )' && WP_SpamShield::preg_match( "~^(ipn|ipnpb|notify|reports)(\.sandbox)?\.paypal\.com$~", $rev_dns ) ) || strpos( $req_uri, 'WC_Gateway_Paypal' ) !== FALSE ) { return TRUE; }
-			if( WP_SpamShield::preg_match( "~(^|\.)payfast\.co\.za$~", $rev_dns ) || ( strpos( $req_uri, 'wc-api' ) !== FALSE && strpos( $req_uri, 'WC_Gateway_PayFast' ) !== FALSE ) ) { return TRUE; }
 			/* Plugin: 'woocommerce-gateway-payfast/gateway-payfast.php' */
-			if( WP_SpamShield::preg_match( "~((\?|\&)wc\-api\=WC_(Addons_)?Gateway_|/wc\-api/.*WC_(Addons_)?Gateway_)~", $req_uri ) ) { return TRUE; }
+			if( WP_SpamShield::preg_match( "~(^|\.)payfast\.co\.za$~", $rev_dns ) || ( strpos( $req_uri, 'wc-api' ) !== FALSE && strpos( $req_uri, 'WC_Gateway_PayFast' ) !== FALSE ) ) { return TRUE; }
 			/* $wc_gateways = array( 'WC_Gateway_BACS', 'WC_Gateway_Cheque', 'WC_Gateway_COD', 'WC_Gateway_Paypal', 'WC_Addons_Gateway_Simplify_Commerce', 'WC_Gateway_Simplify_Commerce' ); */
+			if( WP_SpamShield::preg_match( "~((\?|\&)wc\-api\=WC_(Addons_)?Gateway_|/wc\-api/.*WC_(Addons_)?Gateway_)~", $req_uri ) ) { return TRUE; }
+			/* See: woocommerce/includes/wc-conditional-functions.php */
+			$wc_funcs = array( 'is_wc_endpoint_url', 'is_shop', 'is_product_taxonomy', 'is_product', 'is_cart', 'is_checkout', );
+			foreach( $wc_funcs as $i => $f ) {
+				if( function_exists( $f ) && (bool) @$f() ) { return TRUE; }
+			}
 		}
 
 		/* Easy Digital Downloads Payment Gateways */
@@ -296,7 +325,7 @@ class WPSS_Compatibility {
 			&& $fcrdns === '[Verified]'
 		) { return TRUE; }
 
-		/* Clef */
+		/* Clef - TO DO: Remove after June 6, 2017 - https://wptavern.com/clef-is-shutting-down-june-6th */
 		if( defined( 'CLEF_VERSION' ) ) {
 			if( WP_SpamShield::preg_match( "~^Clef/[0-9](\.[0-9]+)+\ \(https\://getclef\.com\)$~", $user_agent ) && WP_SpamShield::preg_match( "~((^|\.)clef\.io|\.amazonaws\.com)$~", $rev_dns ) ) { return TRUE; }
 		}
@@ -314,7 +343,7 @@ class WPSS_Compatibility {
 		if( $user_agent === 'Amazon Simple Notification Service Agent' && isset( $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'], $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_ID'], $_SERVER['HTTP_X_AMZ_SNS_TOPIC_ARN'], $_SERVER['CONTENT_TYPE'], $_POST['HTTP_RAW_POST_DATA'] ) ) {
 			$_POST['HTTP_RAWDS_POST_DATA'] = trim(stripslashes($_POST['HTTP_RAW_POST_DATA']));
 			if(
-				WP_SpamShield::preg_match( "~text/plain~i", $_SERVER['CONTENT_TYPE'] )
+				   WP_SpamShield::preg_match( "~text/plain~i", $_SERVER['CONTENT_TYPE'] )
 				&& WP_SpamShield::preg_match( "~^(SubscriptionConfirmation|Notification|UnsubscribeConfirmation)$~", $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] )
 				&& WP_SpamShield::preg_match( "~\"Type\"\ \:\ \"(SubscriptionConfirmation|Notification|UnsubscribeConfirmation)\",~", $_POST['HTTP_RAWDS_POST_DATA'] )
 				&& WP_SpamShield::preg_match( "~^[a-z0-9\-]+$~", $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_ID'] )
@@ -323,31 +352,41 @@ class WPSS_Compatibility {
 				&& WP_SpamShield::preg_match( "~\"TopicArn\"\ \:\ \"".preg_quote($_SERVER['HTTP_X_AMZ_SNS_TOPIC_ARN'])."\",~", $_POST['HTTP_RAWDS_POST_DATA'] )
 				&& WP_SpamShield::preg_match( "~\"SigningCertURL\"\ \:\ \"https\://sns\." . preg_quote( $amz_sns_topic_arn_matches[1] ) . "\.amazonaws\.com/SimpleNotificationService\-[a-z0-9]+\.pem\"~", $_POST['HTTP_RAWDS_POST_DATA'] )
 				&& $fcrdns === '[Verified]'
-			) { unset($_POST['HTTP_RAWDS_POST_DATA']); return TRUE; }
-			unset($_POST['HTTP_RAWDS_POST_DATA']);
+			) { unset( $_POST['HTTP_RAWDS_POST_DATA'] ); return TRUE; }
+			unset( $_POST['HTTP_RAWDS_POST_DATA'] );
+		}
+
+		/**
+		 *	Slim Stat Analytics - https://wordpress.org/plugins/wp-slimstat/
+		 *	@since	1.9.9.9.5
+		 */
+		if( rs_wpss_is_doing_ajax() && 'POST' === $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && 'slimtrack' === $_POST['action'] && self::is_plugin_active( 'wp-slimstat/wp-slimstat.php' ) ) {
+			return TRUE;
 		}
 
 		/* Nothing was triggered */
 		return FALSE;
 	}
 
+	/**
+	 *	Detect if site is ecommerce (store), or using an ecommerce plugin
+	 *	@dependencies	...
+	 *	@since			...
+	 */
 	static public function is_ecom_enabled() {
-		/**
-		 *  Detect if ecommerce is enabled
-		 */
 		global $wpss_ecom_enabled,$wpss_woocom_enabled;
 		if( !empty( $wpss_ecom_enabled ) || !empty( $wpss_woocom_enabled ) ) { $wpss_ecom_enabled = TRUE; return TRUE; }
 		/**
-		 *  Users can manually to TRUE in wp-config.php (For example, if user has a custom or unknown ecommerce package)
-		 *  Plugin Developers can use WP-SpamShield filter hook 'wpss_misc_form_spam_check_bypass'
+		 *	Users can manually set to TRUE in wp-config.php (For example, if user has a custom or unknown ecommerce package)
+		 *	Plugin Developers can use WP-SpamShield filter hook 'wpss_misc_form_spam_check_bypass'
 		 */
-		if( defined('WPSS_CUSTOM_ECOM') && WPSS_CUSTOM_ECOM ) { $wpss_ecom_enabled = TRUE; return TRUE; }
+		if( defined( 'WPSS_CUSTOM_ECOM' ) && WPSS_CUSTOM_ECOM ) { $wpss_ecom_enabled = TRUE; return TRUE; }
 		/**
-		 *  Detect popular e-commerce plugins
+		 *	Detect popular e-commerce plugins
 		 */
 		$ecom_plug_constants = array(
 			'AFFILIATES_CORE_VERSION', 'AL_BASE_PATH', 'CFCORE_VER', 'EC_CURRENT_VERSION', 'ECWID_PLUGIN_DIR', 'EDD_VERSION', 'EME_DB_VERSION', 'ESHOP_VERSION', 'GF_AUTHORIZENET_VERSION', 'GF_PAYFAST_VERSION', 'GF_PAYPAL_VERSION', 'GF_STRIPE_VERSION', 'GFP_STRIPE_FILE', 'GIVE_VERSION', 'JIGOSHOP_VERSION', 'MEPR_VERSION', 'MP_LITE', 'PMPRO_VERSION', 'SIMPAY_VERSION', 'SIMPLE_WP_MEMBERSHIP_VER', 'UPCP_CD_PLUGIN_PATH', 'USCES_VERSION', 'WC_PP_PRO_ADDON_VERSION', 'wcv_plugin_dir', 'WOOCOMMERCE_VERSION', 'WC_VERSION', 'WP_CART_VERSION', 'WPDM_Version', 'WPPIZZA_VERSION', 'WPSC_VERSION', 'WPSHOP_DIR', 'WS_PLUGIN__S2MEMBER_VERSION', 'WUSPSC_VERSION', 'xoousers_url', 'uultraxoousers_pro_url', 'YITH_WCSTRIPE_VERSION',
-			);
+		);
 		foreach( $ecom_plug_constants as $k => $p ) { if( defined( $p ) ) { $wpss_ecom_enabled = TRUE; return TRUE; } }
 		$ecom_plug_classes = array(
 			'Easy_Digital_Downloads', 'eCommerce_Product_Catalog', 'GF_AuthorizeNet_Bootstrap', 'GF_PayFast_Bootstrap', 'GF_PayPal_Bootstrap', 'GF_Stripe_Bootstrap', 'Give', 'IT_Exchange', 'MarketPress', 'ShoppLoader', 'WC_Paypal_Pro_Gateway_Addon', 'WC_Vendors', 'WooCommerce', 'WP_eCommerce',
@@ -358,46 +397,51 @@ class WPSS_Compatibility {
 		);
 		foreach( $ecom_plugs as $k => $p ) { if( self::is_plugin_active( $p ) ) { $wpss_ecom_enabled = TRUE; return TRUE; } }
 		/**
-		 *  $ecom_plug_str = array();
-		 *  $ecom_plug_regex = array();
+		 *	$ecom_plug_str = array();
+		 *	$ecom_plug_rgx = array();
 		 */
 		return FALSE;
 	}
 
+	/**
+	 *	Detect WooCommerce plugin
+	 *	@dependencies	...
+	 *	@since			...
+	 */
 	static public function is_woocom_enabled() {
-		/**
-		 *  Detect WooCommerce plugin
-		 */
 		global $wpss_ecom_enabled,$wpss_woocom_enabled;
 		if( !empty( $wpss_woocom_enabled ) ) { $wpss_ecom_enabled = TRUE; return TRUE; }
-		$ecom_plug_constants = array( 'WC_VERSION', 'WOOCOMMERCE_VERSION' );
-		foreach( $ecom_plug_constants as $k => $p ) { if( defined( $p ) ) { $wpss_ecom_enabled = TRUE; $wpss_woocom_enabled = TRUE; return TRUE; } }
+		$wc_plug_constants = array( 'WC_VERSION', 'WOOCOMMERCE_VERSION' );
+		foreach( $wc_plug_constants as $k => $p ) { if( defined( $p ) ) { $wpss_ecom_enabled = $wpss_woocom_enabled = TRUE; return TRUE; } }
 		$ecom_plugs = array( 'woocommerce/woocommerce.php' );
-		foreach( $ecom_plugs as $k => $p ) { if( self::is_plugin_active( $p ) ) { $wpss_ecom_enabled = TRUE; $wpss_woocom_enabled = TRUE; return TRUE; } }
+		foreach( $ecom_plugs as $k => $p ) { if( self::is_plugin_active( $p ) ) { $wpss_ecom_enabled = $wpss_woocom_enabled = TRUE; return TRUE; } }
 		return FALSE;
 	}
 
+	/**
+	 *	Detect if conflicting page builder plugins are active
+	 *	@dependencies	...
+	 *	@since			...
+	 */
 	static public function is_builder_active() {
-		/**
-		 *  Detect if conflicting page builder plugins are active
-		 */
 		global $wpss_builder_active; if( !empty( $wpss_builder_active ) ) { return TRUE; }
 		$builder_plugs = array( 'beaver-builder-lite-version/fl-builder.php', 'bb-plugin/fl-builder.php' );
 		foreach( $builder_plugs as $k => $p ) {
 			if( self::is_plugin_active( $p ) ) {
-				if( class_exists( 'FLBuilderModel' ) && FLBuilderModel::is_builder_active() ) { $wpss_builder_active = TRUE; return TRUE; }
+				if( method_exists( 'FLBuilderModel', 'is_builder_active' ) && FLBuilderModel::is_builder_active() ) { $wpss_builder_active = TRUE; return TRUE; }
 			}
 		}
 		return FALSE;
 	}
 
+	/**
+	 *	Check for Surrogates
+	 *	- Server Caching, Reverse Poxies, WAFS: Varnish, Cloudflare (Rocket Loader), Sucuri WAF, Incapsula, etc.
+	 *	- Specific web hosts that use Varnish: WP Engine, Dreamhost, SiteGround, Bluehost, GoDaddy...
+	 *	@dependencies	WPSS_Utils::get_ip_dns_params(), WPSS_Utils::get_web_host(), WP_SpamShield::update_option(), WP_SpamShield::is_varnish_active()(), WP_SpamShield::get_option(), ...
+	 *	@since			1.9.9.5
+	 */
 	static public function is_surrogate() {
-		/**
-		 *  Check for Surrogates
-		 *  - Server Caching, Reverse Poxies, WAFS: Varnish, Cloudflare (Rocket Loader), Sucuri WAF, Incapsula, etc.
-		 *	- Specific web hosts that use Varnish: WP Engine, Dreamhost, SiteGround, Bluehost, GoDaddy...
-		 *  @since 1.9.9.5
-		 */
 		global $wpss_surrogate; if( isset( $wpss_surrogate ) && is_bool( $wpss_surrogate ) ) { return TRUE; }
 		$wpss_surrogate = FALSE; $web_host = WPSS_Utils::get_web_host( WPSS_Utils::get_ip_dns_params() );
 		if( !empty( $web_host ) && ( $web_host === 'WP Engine' || $web_host === 'Dreamhost' || $web_host === 'SiteGround' || $web_host === 'Bluehost'  || $web_host === 'GoDaddy' ) ) { $wpss_surrogate = TRUE; WP_SpamShield::update_option( array( 'surrogate' => $wpss_surrogate ) ); return TRUE; }
@@ -408,15 +452,16 @@ class WPSS_Compatibility {
 		return $wpss_surrogate;
 	}
 
+	/**
+	 *	Varnish detection
+	 *	@dependencies	WP_SpamShield::update_option(), WP_SpamShield::is_plugin_active(), 
+	 *	@since			1.9.9.5
+	 */
 	static public function is_varnish_active() {
-		/**
-		 *  Varnish detection
-		 *  @since 1.9.9.5
-		 */
 		global $wpss_varnish_active,$wpss_surrogate,$_WPSS_ENV; if( isset( $wpss_varnish_active ) && is_bool( $wpss_varnish_active ) ) { $wpss_surrogate = TRUE; return TRUE; }
 		if( function_exists( 'get_loaded_extensions' ) ) { $ext_loaded = @get_loaded_extensions(); }
 		$ext_loaded	= ( !empty( $ext_loaded ) && is_array( $ext_loaded ) ) ? $ext_loaded : array();
-		$varnish_loaded		= $wpss_varnish_active = $wpss_surrogate = in_array( 'varnish', $ext_loaded, TRUE );
+		$varnish_loaded		= $wpss_varnish_active = $wpss_surrogate = WPSS_PHP::in_array( 'varnish', $ext_loaded );
 		if( TRUE === $varnish_loaded ) { WP_SpamShield::update_option( array( 'surrogate' => $wpss_surrogate ) ); return TRUE; }
 		$varnish_srv_var	= array( 'HTTP_X_VARNISH', );
 		$varnish_env_var	= array( 'HTTP_X_VARNISH', );

@@ -81,8 +81,6 @@ if (is_multisite()) {
 					'updraft_s3generic' => array(),
 					'updraft_dreamobjects' => array(),
 					'updraft_cloudfiles' => array(),
-					'updraft_bitcasa' => array(),
-					'updraft_copycom' => array(),
 					'updraft_openstack' => array(),
 					'updraft_googledrive' => array(),
 					'updraft_dropbox' => array(),
@@ -212,10 +210,6 @@ if (is_multisite()) {
 					$options[$key] = $updraftplus->ftp_sanitise($value);
 				} elseif ('updraft_s3' == $key && is_array($value)) {
 					$options[$key] = $updraftplus->s3_sanitise($value);
-				} elseif ('updraft_bitcasa' == $key && is_array($value)) {
-					$options[$key] = $updraftplus->bitcasa_checkchange($value);
-				} elseif ('updraft_copycom' == $key && is_array($value)) {
-					$options[$key] = $updraftplus->copycom_checkchange($value);
 				} elseif ('updraft_split_every' == $key) {
 					$options[$key] = $updraftplus_admin->optionfilter_split_every($value);
 				} elseif ('updraft_retain' == $key || 'updraft_retain_db' == $key) {

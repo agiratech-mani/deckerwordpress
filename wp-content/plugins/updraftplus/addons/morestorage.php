@@ -17,7 +17,7 @@ class UpdraftPlus_Addon_MoreStorage {
 		add_filter('updraftplus_storage_printoptions', array($this, 'storage_printoptions'), 10, 2);
 		add_filter('updraftplus_storage_printoptions_multi', array($this, 'storage_printoptions_multi'), 10, 1);
 		#add_action('updraftplus_config_print_after_storage', array($this, 'config_print_after_storage'));
-		add_action('updraftplus_config_print_before_storage', array($this, 'config_print_before_storage'));
+		add_action('updraftplus_config_print_before_storage', array($this, 'config_print_before_storage'), 10, 2);
 		add_filter('updraftplus_savestorage', array($this, 'savestorage'), 10, 2);
 		add_action('updraftplus_after_remote_storage_heading_message', array($this, 'after_remote_storage_heading_message'));
 	}
@@ -44,11 +44,12 @@ class UpdraftPlus_Addon_MoreStorage {
 		<?php
 	}
 
-	public function config_print_before_storage($storage) {
+	public function config_print_before_storage($storage, $storage_object = null) {
 		global $updraftplus;
-		?>
-		<tr class="updraftplusmethod <?php echo $storage;?>"><th><h3><?php echo $updraftplus->backup_methods[$storage]; ?></h3></th><td></td></tr>
-		<?php
+		?><tr class="<?php echo is_object($storage_object) ? $storage_object->get_css_classes() : "updraftplusmethod $storage";?>">
+			<th><h3><?php echo $updraftplus->backup_methods[$storage]; ?></h3></th>
+			<td></td>
+		</tr><?php
 	}
 
 	public function savestorage($rinput, $input) {

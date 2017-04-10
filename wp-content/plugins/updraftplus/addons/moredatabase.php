@@ -2,9 +2,9 @@
 /*
 UpdraftPlus Addon: moredatabase:Multiple database backup options
 Description: Provides the ability to encrypt database backups, and to back up external databases
-Version: 1.4
+Version: 1.5
 Shop: /shop/moredatabase/
-Latest Change: 1.12.33
+Latest Change: 1.12.35
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
@@ -353,10 +353,15 @@ class UpdraftPlus_Addon_MoreDatabase {
 			// return basename($file);
 			$time_taken = max(0.000001, microtime(true)-$time_started);
 
-			$sha = sha1_file($updraft_dir.'/'.$file.'.crypt');
-			$updraftplus->jobdata_set('sha1-db'.(('wp' == $whichdb) ? '0' : $whichdb.'0').'.crypt', $sha);
+			$checksums = $updraftplus->which_checksums();
+			
+			foreach ($checksums as $checksum) {
+				$cksum = hash_file($checksum, $updraft_dir.'/'.$file.'.crypt');
+				$updraftplus->jobdata_set($checksum.'-db'.(('wp' == $whichdb) ? '0' : $whichdb.'0').'.crypt', $cksum);
+				$updraftplus->log("$file: encryption successful: ".round($file_size,1)."KB in ".round($time_taken,2)."s (".round($file_size/$time_taken, 1)."KB/s) ($checksum checksum: $cksum)");
+				
+			}
 
-			$updraftplus->log("$file: encryption successful: ".round($file_size,1)."KB in ".round($time_taken,2)."s (".round($file_size/$time_taken, 1)."KB/s) (SHA1 checksum: $sha)");
 			# Delete unencrypted file
 			@unlink($updraft_dir.'/'.$file);
 
@@ -394,30 +399,116 @@ class UpdraftPlus_Addon_MoreDatabase {
 
 		//encrypted path name. The trailing .tmp ensures that it will be cleaned up by the temporary file reaper eventually, if needs be.
 		$encrypted_path = dirname($fullpath).'/encrypt_'.basename($fullpath).'.tmp';
-		//open new file from new path
-		if (false === ($encrypted_file = fopen($encrypted_path,'wb+'))) {
-			$updraftplus->log("Failed to open file for write access: $encrypted_path");
-			return false;
-		}
+
+		$data_encrypted = 0;
+		$buffer_size = defined('UPDRAFTPLUS_CRYPT_BUFFER_SIZE') ? UPDRAFTPLUS_CRYPT_BUFFER_SIZE : 2097152;
+
+		$time_last_logged = microtime(true);
+		
+		$file_size = filesize($fullpath);
+
+		// Set initial value to false so we can check it later and decide what to do
+		$resumption = false;
 
 		//setup encryption
 		$rijndael = new Crypt_Rijndael();
 		$rijndael->setKey($key);
 		$rijndael->disablePadding();
 		$rijndael->enableContinuousBuffer();
-
-		$time_last_logged = microtime(true);
 		
-		$data_encrypted = 0;
-		$file_size = filesize($fullpath);
-		$buffer_size = defined('UPDRAFTPLUS_CRYPT_BUFFER_SIZE') ? UPDRAFTPLUS_CRYPT_BUFFER_SIZE : 2097152;
+		// First we need to get the block length, this method returns the length in bits we need to change this back to bytes in order to use it with the file operation methods.
+		$block_length = $rijndael->getBlockLength() >> 3;
+
+		// Check if the path already exists as this could be a resumption
+		if (file_exists($encrypted_path)) {
+			
+			$updraftplus->log("Temporary encryption file found, will try to resume the encryption");
+
+			// The temp file exists so set resumption to true
+			$resumption = true;
+
+			// Get the file size as this is needed to help resume the encryption
+			$data_encrypted = filesize($encrypted_path);
+			// Get the true file size e.g without padding used for various resumption paths
+			$true_data_encrypted = $data_encrypted - ($data_encrypted % $buffer_size);
+
+			if ($data_encrypted >= $block_length) {
+		
+				// Open existing file from the path
+				if (false === ($encrypted_handle = fopen($encrypted_path, 'rb+'))) {
+					$updraftplus->log("Failed to open file for write access on resumption: $encrypted_path");
+					$resumption = false;
+				}
+				
+				// First check if our buffer size needs padding if it does increase buffer size to length that doesn't need padding
+				if ($buffer_size % 16 != 0) {
+					$pad = 16 - ($buffer_size % 16);
+					$true_buffer_size = $buffer_size + $pad;
+				} else {
+					$true_buffer_size = $buffer_size;
+				}
+				
+				// Now check if using modulo on data encrypted and buffer size returns 0 if it doesn't then the last block was a partial write and we need to discard that and get the last useable IV by adding this value to the block length
+				$partial_data_size = $data_encrypted % $true_buffer_size;
+
+				// We need to reconstruct the IV from the previous run in order for encryption to resume 
+				if (-1 === (fseek($encrypted_handle, $data_encrypted - ($block_length + $partial_data_size)))) {
+					$updraftplus->log("Failed to move file pointer to correct position to get IV: $encrypted_path");
+					$resumption = false;
+				}
+
+				// Read previous block length from file
+				if (false === ($iv = fread($encrypted_handle, $block_length))) {
+					$updraftplus->log("Failed to read from file to get IV: $encrypted_path");
+					$resumption = false;
+				}
+
+				$rijndael->setIV($iv);
+
+				// Now we need to set the file pointer for the original file to the correct position and take into account the padding added, this padding needs to be removed to get the true amount of bytes read from the original file
+				if (-1 === (fseek($file_handle, $true_data_encrypted))) {
+					$updraftplus->log("Failed to move file pointer to correct position to resume encryption: $fullpath");
+					$resumption = false;
+				}
+				
+			} else {
+				// If we enter here then the temp file exists but it is either empty or has one incomplete block we may as well start again
+				$resumption = false;
+			}
+
+			if (!$resumption) {
+				$updraftplus->log("Could not resume the encryption will now try to start again");
+				// remove the existing encrypted file as it's no good to us now
+				@unlink($encrypted_path);
+				// reset the data encrypted so that the loop can be entered
+				$data_encrypted = 0;
+				//setup encryption to reset the IV 
+				$rijndael = new Crypt_Rijndael();
+				$rijndael->setKey($key);
+				$rijndael->disablePadding();
+				$rijndael->enableContinuousBuffer();
+				// reset the file pointer and then we should be able to start from fresh
+				if (-1 === (fseek($file_handle, 0))) {
+					$updraftplus->log("Failed to move file pointer to start position to restart encryption: $fullpath");
+					$resumption = false;
+				}
+			}
+		}
+
+		if (!$resumption) {
+			//open new file from new path
+			if (false === ($encrypted_handle = fopen($encrypted_path,'wb+'))) {
+				$updraftplus->log("Failed to open file for write access: $encrypted_path");
+				return false;
+			}
+		}
 		
 		//loop around the file
 		while ($data_encrypted < $file_size) {
-		
+
 			//read buffer-sized amount from file
 			if (false === ($file_part = fread($file_handle, $buffer_size))) {
-				$updraftplus->log("Failed to read from file: $fullpath, $i");
+				$updraftplus->log("Failed to read from file: $fullpath");
 				return false;
 			}
 			
@@ -430,8 +521,8 @@ class UpdraftPlus_Addon_MoreDatabase {
 
 			$encrypted_data = $rijndael->encrypt($file_part);
 			
-			if (false === fwrite($encrypted_file, $encrypted_data)) {
-				$updraftplus->log("Failed to write to file: $encrypted_path, $i");
+			if (false === fwrite($encrypted_handle, $encrypted_data)) {
+				$updraftplus->log("Failed to write to file: $encrypted_path");
 				return false;
 			}
 			
@@ -444,9 +535,9 @@ class UpdraftPlus_Addon_MoreDatabase {
 			}
 			
 		}
-		 
+
 		//close the main file handle
-		fclose($encrypted_file);
+		fclose($encrypted_handle);
 		fclose($file_handle);
 
 		//encrypted path

@@ -2,12 +2,12 @@
 /*
 UpdraftPlus Addon: googlecloud:Google Cloud Support
 Description: Google Cloud Support
-Version: 1.2
+Version: 1.3
 Shop: /shop/googlecloud/
 Include: includes/googlecloud
-IncludePHP: methods/addon-base.php
+IncludePHP: methods/addon-base-v2.php
 RequiresPHP: 5.2.4
-Latest Change: 1.12.10
+Latest Change: 1.12.35
 */
 
 /*
@@ -17,9 +17,9 @@ Potential enhancements:
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
 
-if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base.php');
+if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
 
-class UpdraftPlus_Addons_RemoteStorage_googlecloud extends UpdraftPlus_RemoteStorage_Addons_Base {
+class UpdraftPlus_Addons_RemoteStorage_googlecloud extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	private $service;
 	private $client;
@@ -52,7 +52,7 @@ class UpdraftPlus_Addons_RemoteStorage_googlecloud extends UpdraftPlus_RemoteSto
 		);
 
 		parent::__construct('googlecloud', 'Google Cloud Storage', true, true);
-		add_filter('updraft_googlecloud_action_auth', array($this, 'action_auth'));
+
 		if (defined('UPDRAFTPLUS_UPLOAD_CHUNKSIZE') && UPDRAFTPLUS_UPLOAD_CHUNKSIZE>0) $this->chunk_size = max(UPDRAFTPLUS_UPLOAD_CHUNKSIZE, 512*1024);
 	}
 	
@@ -915,4 +915,5 @@ class UpdraftPlus_Addons_RemoteStorage_googlecloud extends UpdraftPlus_RemoteSto
 
 }
 
-$updraftplus_addons_googlecloud = new UpdraftPlus_Addons_RemoteStorage_googlecloud;
+// Do *not* instantiate here; it is a storage module, so is instantiated on-demand
+// $updraftplus_addons_googlecloud = new UpdraftPlus_Addons_RemoteStorage_googlecloud;

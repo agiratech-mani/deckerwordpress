@@ -26,6 +26,7 @@
 
 /** MySQL hostname */
 //define('DB_HOST', 'internal-db.s149383.gridserver.com');
+define('FS_METHOD', 'direct');
 
 define('DB_NAME', 'deckercomm');
 
