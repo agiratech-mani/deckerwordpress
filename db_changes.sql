@@ -82,3 +82,6 @@ CREATE TABLE IF NOT EXISTS `dcom_web_token_devices` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 ALTER TABLE  `dcom_web_imports` ADD  `send_email` TINYINT( 1 ) NULL AFTER  `user_id` ;
+
+
+ALTER TABLE  `dcom_web_imports` ADD  `report_to_email` VARCHAR( 100 ) NULL AFTER  `send_email` ;
