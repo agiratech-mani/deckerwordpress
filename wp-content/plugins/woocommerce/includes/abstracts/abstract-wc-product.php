@@ -93,6 +93,9 @@ class WC_Product extends WC_Abstract_Legacy_Product {
 		'rating_counts'      => array(),
 		'average_rating'     => 0,
 		'review_count'       => 0,
+		'course_url'       	 => null,
+		'devices_limit'      => 0,
+		'token_expiry'       => 0,
 	);
 
 	/**
@@ -673,7 +676,6 @@ class WC_Product extends WC_Abstract_Legacy_Product {
 	public function get_review_count( $context = 'view' ) {
 		return $this->get_prop( 'review_count', $context );
 	}
-
 	/*
 	|--------------------------------------------------------------------------
 	| Setters
@@ -1249,6 +1251,7 @@ class WC_Product extends WC_Abstract_Legacy_Product {
 		$this->set_prop( 'review_count', absint( $count ) );
 	}
 
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Other Methods
@@ -1890,5 +1893,63 @@ class WC_Product extends WC_Abstract_Legacy_Product {
 			$class = 'in-stock';
 		}
 		return apply_filters( 'woocommerce_get_availability_class', $class, $this );
+	}
+
+	/**
+	 * Set course_url.
+	 *
+	 * @since 3.0.0
+	 * @param string $course_url Options: 'yes', 'no' or 'notify'.
+	 */
+	public function set_course_url( $course_url ) {
+		$this->set_prop( 'course_url', $course_url );
+	}
+	/**
+	 * Set course_url.
+	 *
+	 * @since 3.0.0
+	 * @param string $course_url Options: 'yes', 'no' or 'notify'.
+	 */
+	public function set_devices_limit( $devices_limit ) {
+		$this->set_prop( 'devices_limit', $devices_limit );
+	}
+	/**
+	 * Set course_url.
+	 *
+	 * @since 3.0.0
+	 * @param string $course_url Options: 'yes', 'no' or 'notify'.
+	 */
+	public function set_token_expiry( $token_expiry ) {
+		$this->set_prop( 'token_expiry', $token_expiry );
+	}
+	/**
+	 * Get course_url.
+	 *
+	 * @param  string $context
+	 * @since 3.0.0
+	 * @return string 
+	 */
+	public function get_course_url( $context = 'view') {
+		return $this->get_prop( 'course_url',$context);
+	}
+	/**
+	 * Get devices_limit.
+	 *
+	 * @param  string $context
+	 * @since 3.0.0
+	 * @return string
+	 */
+	public function get_devices_limit($context = 'view' ) {
+		return $this->get_prop( 'devices_limit', $context );
+	}
+	/**
+	 * Get token_expiry.
+	 *
+	 * @param  string $context
+	 * @since 3.0.0
+	 * @return string
+	 */
+	public function get_token_expiry( $context = 'view' ) {
+		return $this->get_prop( 'token_expiry', $context );
 	}
 }

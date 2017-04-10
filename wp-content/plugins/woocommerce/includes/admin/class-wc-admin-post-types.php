@@ -376,6 +376,9 @@ class WC_Admin_Post_Types {
 						<div class="tax_status">' . esc_html( $the_product->get_tax_status() ) . '</div>
 						<div class="tax_class">' . esc_html( $the_product->get_tax_class() ) . '</div>
 						<div class="backorders">' . esc_html( $the_product->get_backorders() ) . '</div>
+						<div class="course_url">' . esc_html($the_product->get_course_url()) . '</div>
+						<div class="devices_limit">' . esc_html($the_product->get_devices_limit()) . '</div>
+						<div class="token_expiry">' . esc_html($the_product->get_token_expiry()) . '</div>
 					</div>
 				';
 
@@ -971,7 +974,7 @@ class WC_Admin_Post_Types {
 			$product->set_tax_class( wc_clean( $_REQUEST['_tax_class'] ) );
 		}
 
-		if ( $product->is_type( 'simple' ) || $product->is_type( 'external' ) ) {
+		if ( $product->is_type( 'simple' ) || $product->is_type( 'external' ) || $product->is_type('course')) {
 
 			if ( isset( $_REQUEST['_regular_price'] ) ) {
 				$new_regular_price = ( '' === $_REQUEST['_regular_price'] ) ? '' : wc_format_decimal( $_REQUEST['_regular_price'] );
@@ -999,6 +1002,12 @@ class WC_Admin_Post_Types {
 				$product->set_date_on_sale_to( '' );
 				$product->set_date_on_sale_from( '' );
 			}
+		}
+		if($product->is_type('course'))
+		{
+			$product->set_course_url( $_REQUEST['_course_url']  );
+			$product->set_devices_limit( $_REQUEST['_devices_limit'] );
+			$product->set_token_expiry( $_REQUEST['_token_expiry'] );
 		}
 
 		// Handle Stock Data

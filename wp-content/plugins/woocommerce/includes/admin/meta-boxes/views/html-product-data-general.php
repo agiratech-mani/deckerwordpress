@@ -19,8 +19,13 @@
 			) );
 		?>
 	</div>
-
-	<div class="options_group pricing show_if_simple show_if_external hidden">
+	<div class="options_group show_if_course">
+		<?php
+			// External URL
+			woocommerce_wp_text_input( array( 'id' => '_course_url', 'label' => __( 'Coruse URL', 'woocommerce' ), 'placeholder' => 'http://', 'description' => __( 'Enter the external URL to the product.', 'woocommerce' ) ) );
+		?>
+	</div>
+	<div class="options_group pricing show_if_simple show_if_external show_if_course hidden">
 		<?php
 			woocommerce_wp_text_input( array(
 				'id'        => '_regular_price',
@@ -50,7 +55,21 @@
 			do_action( 'woocommerce_product_options_pricing' );
 		?>
 	</div>
+	<div class="options_group show_if_course hidden">
+		<?php 
+		// Download Limit
+		woocommerce_wp_text_input( array( 'id' => '_devices_limit', 'label' => __( 'Devices limit', 'woocommerce' ), 'placeholder' => __( 'Unlimited', 'woocommerce' ), 'description' => __( 'Leave blank for unlimited.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+			'step' 	=> '1',
+			'min'	=> '0'
+		) ) );
 
+		// Expirey
+		woocommerce_wp_text_input( array( 'id' => '_token_expiry', 'label' => __( 'Token validity', 'woocommerce' ), 'placeholder' => __( 'Never', 'woocommerce' ), 'description' => __( 'Enter the number of days before a Token expires, or leave blank.', 'woocommerce' ), 'type' => 'number', 'custom_attributes' => array(
+			'step' 	=> '1',
+			'min'	=> '0'
+		) ) );
+		?>
+	</div>
 	<div class="options_group show_if_downloadable hidden">
 		<div class="form-field downloadable_files">
 			<label><?php _e( 'Downloadable files', 'woocommerce' ); ?></label>

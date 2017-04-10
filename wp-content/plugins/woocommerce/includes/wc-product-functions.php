@@ -522,6 +522,7 @@ function wc_get_product_types() {
 		'grouped'  => __( 'Grouped product', 'woocommerce' ),
 		'external' => __( 'External/Affiliate product', 'woocommerce' ),
 		'variable' => __( 'Variable product', 'woocommerce' ),
+		'course'   => __( 'Course product', 'woocommerce' ),
 	) );
 }
 

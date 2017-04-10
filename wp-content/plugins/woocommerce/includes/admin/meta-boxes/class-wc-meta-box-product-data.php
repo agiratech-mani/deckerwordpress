@@ -79,7 +79,7 @@ class WC_Meta_Box_Product_Data {
 			'general' => array(
 				'label'  => __( 'General', 'woocommerce' ),
 				'target' => 'general_product_data',
-				'class'  => array( 'hide_if_grouped' ),
+				'class'  => array( 'show_if_simple','show_if_external','show_if_course'),
 			),
 			'inventory' => array(
 				'label'  => __( 'Inventory', 'woocommerce' ),
@@ -89,17 +89,17 @@ class WC_Meta_Box_Product_Data {
 			'shipping' => array(
 				'label'  => __( 'Shipping', 'woocommerce' ),
 				'target' => 'shipping_product_data',
-				'class'  => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external' ),
+				'class'  => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external', 'hide_if_course' ),
 			),
 			'linked_product' => array(
 				'label'  => __( 'Linked Products', 'woocommerce' ),
 				'target' => 'linked_product_data',
-				'class'  => array(),
+				'class'  => array('hide_if_course'),
 			),
 			'attribute' => array(
 				'label'  => __( 'Attributes', 'woocommerce' ),
 				'target' => 'product_attributes',
-				'class'  => array(),
+				'class'  =>  array('hide_if_course'),
 			),
 			'variations' => array(
 				'label'  => __( 'Variations', 'woocommerce' ),
@@ -109,7 +109,7 @@ class WC_Meta_Box_Product_Data {
 			'advanced' => array(
 				'label'  => __( 'Advanced', 'woocommerce' ),
 				'target' => 'advanced_product_data',
-				'class'  => array(),
+				'class'  =>  array('hide_if_course'),
 			),
 		) );
 	}
@@ -299,8 +299,10 @@ class WC_Meta_Box_Product_Data {
 			'reviews_allowed'    => ! empty( $_POST['_reviews_allowed'] ),
 			'attributes'         => $attributes,
 			'default_attributes' => self::prepare_set_attributes( $attributes, 'default_attribute_' ),
+			'course_url'         => esc_url_raw( $_POST['_course_url'] ),
+			'devices_limit'      => wc_clean( $_POST['_devices_limit'] ),
+			'token_expiry'       => wc_clean( $_POST['_token_expiry'] ),
 		) );
-
 		if ( is_wp_error( $errors ) ) {
 			WC_Admin_Meta_Boxes::add_error( $errors->get_error_message() );
 		}

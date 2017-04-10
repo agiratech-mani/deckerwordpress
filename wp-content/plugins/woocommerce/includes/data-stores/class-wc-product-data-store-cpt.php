@@ -58,6 +58,9 @@ class WC_Product_Data_Store_CPT extends WC_Data_Store_WP implements WC_Object_Da
 		'_wp_old_slug',
 		'_edit_last',
 		'_edit_lock',
+		'_course_url',
+		'_devices_limit',
+		'_token_expiry',
 	);
 
 	/**
@@ -294,8 +297,11 @@ class WC_Product_Data_Store_CPT extends WC_Data_Store_WP implements WC_Object_Da
 			'downloadable'       => get_post_meta( $id, '_downloadable', true ),
 			'gallery_image_ids'  => array_filter( explode( ',', get_post_meta( $id, '_product_image_gallery', true ) ) ),
 			'download_limit'     => get_post_meta( $id, '_download_limit', true ),
-			'download_expiry'    => get_post_meta( $id, '_download_expiry', true ),
+			'download_expiry'    => get_post_meta( $id, '_download_expiry', true ),			
 			'image_id'           => get_post_thumbnail_id( $id ),
+			'course_url'     => get_post_meta( $id, '_course_url', true ),
+			'devices_limit'    => get_post_meta( $id, '_devices_limit', true ),
+			'token_expiry'    => get_post_meta( $id, '_token_expiry', true ),
 		) );
 	}
 
@@ -438,6 +444,9 @@ class WC_Product_Data_Store_CPT extends WC_Data_Store_WP implements WC_Object_Da
 			'_wc_average_rating'     => 'average_rating',
 			'_wc_rating_count'       => 'rating_counts',
 			'_wc_review_count'       => 'review_count',
+			'_course_url'       	 => 'course_url',
+			'_devices_limit'         => 'devices_limit',
+			'_token_expiry'          => 'token_expiry',
 		);
 
 		// Make sure to take extra data (like product url or text for external products) into account.
