@@ -37,8 +37,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</p>
 
 		<?php else : ?>
-
-			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
+			<?php if($isCourse): ?>
+				<p class="woocommerce-thankyou-order-received">
+				Thanks for purchasing <span style="color:#D22735;font-weight:bold;">Decker Digital: Communicate To Influence</span>. We bet you're anxious to get started! Please check your email for your Unique Course Link to access the course on Chrome, along with all your license details. 
+				</p>
+				<p class="woocommerce-thankyou-order-received">
+				As always, we’re available at <a href="mailto:support@decker.com">support@decker.com</a>. Happy communicating!
+				</p>
+				<br>
+			<?php else : ?>
+				<p class="woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
+			<?php endif; ?>
 
 			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
 

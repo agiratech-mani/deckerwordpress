@@ -76,6 +76,27 @@ class WC_Settings_Rest_API extends WC_Settings_Page {
 				'type' => 'sectionend',
 				'id' => 'general_options',
 			),
+			array( 'title' => __( 'Bitly Options', 'woocommerce' ), 'type' => 'title', 'desc' => __( 'Enter Bitly Api key and login name <a href="https://support.bitly.com/hc/en-us/articles/231140388-How-do-I-find-my-API-key-" target="_blank">Refer Link to Get Bitly</a>.', 'woocommerce' ), 'id' => 'bitly_options' ),
+			array(
+				'title'    => __( 'Bitly Login', 'woocommerce' ),
+				'id'       => 'woocommerce_bitly_login',
+				'css'      => 'width:250px;',
+				'default'  => '',
+				'type'     => 'text',
+				'desc_tip' =>  true,
+			),
+			array(
+				'title'    => __( 'Bitly API KEY', 'woocommerce' ),
+				'id'       => 'woocommerce_bitly_api_key',
+				'css'      => 'width:250px;',
+				'default'  => '',
+				'type'     => 'text',
+				'desc_tip' =>  true,
+			),
+			array(
+				'type' => 'sectionend',
+				'id' => 'bitly_options'
+			),
 		) );
 
 		return apply_filters( 'woocommerce_get_settings_' . $this->id, $settings );

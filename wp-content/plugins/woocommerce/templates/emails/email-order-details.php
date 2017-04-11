@@ -29,11 +29,33 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 <?php else : ?>
 	<h2><a class="link" href="<?php echo esc_url( admin_url( 'post.php?post=' . $order->get_id() . '&action=edit' ) ); ?>"><?php printf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ); ?></a> (<?php printf( '<time datetime="%s">%s</time>', $order->get_date_created()->format( 'c' ), wc_format_datetime( $order->get_date_created() ) ); ?>)</h2>
 <?php endif; ?>
-
+<?php
+if($email->isCourse)
+{
+	_e("You have purchased a license to access this course for one year, on a single computer. Please note your expiry date above.");	
+}
+?>
+<br>
+<br>
 <table class="td" cellspacing="0" cellpadding="6" style="width: 100%; font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;" border="1">
 	<thead>
 		<tr>
-			<th class="td" scope="col" style="text-align:<?php echo $text_align; ?>;"><?php _e( 'Product', 'woocommerce' ); ?></th>
+			<th class="td" scope="col" style="text-align:left;">
+			<?php 
+			if($email->isCourse && $email->isOthers)
+			{
+				_e( 'Course/Product', 'woocommerce' );
+			}
+			elseif($email->isCourse)
+			{
+				_e( 'Course', 'woocommerce' );
+			}
+			else
+			{
+				_e( 'Product', 'woocommerce' );
+			}
+			?>
+			</th>
 			<th class="td" scope="col" style="text-align:<?php echo $text_align; ?>;"><?php _e( 'Quantity', 'woocommerce' ); ?></th>
 			<th class="td" scope="col" style="text-align:<?php echo $text_align; ?>;"><?php _e( 'Price', 'woocommerce' ); ?></th>
 		</tr>

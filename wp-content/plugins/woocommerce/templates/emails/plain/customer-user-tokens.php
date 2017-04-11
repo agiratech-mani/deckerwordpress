@@ -23,29 +23,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @hooked WC_Emails::email_header() Output the email header
  */
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+do_action( 'woocommerce_email_header', $email_heading); ?>
 
-<p><?php echo "Hi there! Your Decker Digital order has been completed and you’re set to go!";?></p>
+<p><?php printf( __( "Hi there! Your Decker Digital order has been completed and you’re set to go!", 'woocommerce' )); ?></p>
+<h2><?php printf( __( 'Course license details', 'woocommerce' )); ?></h2>
+<div>
+	You have purchased a license to access Decker Digital: Communicate To Influence for one year, on a single computer. Please note your expiry date below.
+	<br>
+	<br>
+	To get started, copy and paste your Unique Course Link into your Chrome browser. You’ll want to bookmark this link and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place.
+	<br>
+	<br>
+	Happy communicating!
+	<br>
+	<br>
+</div>
 <?php
 
-/**
- * @hooked WC_Emails::order_details() Shows the order details table.
- * @hooked WC_Structured_Data::generate_order_data() Generates structured data.
- * @hooked WC_Structured_Data::output_structured_data() Outputs structured data.
- * @since 2.5.0
- */
-do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
 
-/**
- * @hooked WC_Emails::order_meta() Shows order meta data.
- */
-do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
+do_action( 'woocommerce_email_generate_tokens', $token, $sent_to_admin, $plain_text, $email );
 
 /**
  * @hooked WC_Emails::customer_details() Shows customer details
  * @hooked WC_Emails::email_address() Shows email address
  */
-do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
+//do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
 /**
  * @hooked WC_Emails::email_footer() Output the email footer

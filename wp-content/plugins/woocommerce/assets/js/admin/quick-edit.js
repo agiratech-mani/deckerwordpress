@@ -27,6 +27,9 @@ jQuery(function( $ ) {
 			tax_status     = $wc_inline_data.find( '.tax_status' ).text(),
 			tax_class      = $wc_inline_data.find( '.tax_class' ).text(),
 			backorders     = $wc_inline_data.find( '.backorders' ).text();
+			course_url     = $wc_inline_data.find( '.course_url' ).text();
+			devices_limit  = $wc_inline_data.find( '.devices_limit' ).text();
+			token_expiry   = $wc_inline_data.find( '.token_expiry' ).text();
 
 		var formatted_regular_price = regular_price.replace('.', woocommerce_admin.mon_decimal_point ),
 			formatted_sale_price	= sale_price.replace('.', woocommerce_admin.mon_decimal_point );
@@ -53,6 +56,10 @@ jQuery(function( $ ) {
 		$( 'select[name="_stock_status"] option[value="' + stock_status + '"]', '.inline-edit-row' ).attr( 'selected', 'selected' );
 		$( 'select[name="_backorders"] option[value="' + backorders + '"]', '.inline-edit-row' ).attr( 'selected', 'selected' );
 
+		$( 'input[name="_course_url"]', '.inline-edit-row' ).val( course_url );
+		$( 'input[name="_devices_limit"]', '.inline-edit-row' ).val( devices_limit );
+		$( 'input[name="_token_expiry"]', '.inline-edit-row' ).val( token_expiry );
+
 		if ( 'yes' === featured ) {
 			$( 'input[name="_featured"]', '.inline-edit-row' ).attr( 'checked', 'checked' );
 		} else {
@@ -71,7 +78,7 @@ jQuery(function( $ ) {
 		var product_type       = $wc_inline_data.find( '.product_type' ).text(),
 			product_is_virtual = $wc_inline_data.find( '.product_is_virtual' ).text();
 
-		if ( 'simple' === product_type || 'external' === product_type ) {
+		if ( 'simple' === product_type || 'external' === product_type || 'course' === product_type) {
 			$( '.price_fields', '.inline-edit-row' ).show().removeAttr( 'style' );
 		} else {
 			$( '.price_fields', '.inline-edit-row' ).hide();
@@ -87,6 +94,12 @@ jQuery(function( $ ) {
 			$( '.stock_fields', '.inline-edit-row' ).hide();
 		} else {
 			$( '.stock_fields', '.inline-edit-row' ).show().removeAttr( 'style' );
+		}
+		if('course' === product_type)
+		{
+			$( '.dimension_fields', '.inline-edit-row' ).hide();
+			$( '.sku_fields', '.inline-edit-row' ).hide();
+			$( '.length_fields', '.inline-edit-row' ).hide();
 		}
 	});
 

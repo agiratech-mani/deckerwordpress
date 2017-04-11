@@ -23,31 +23,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @hooked WC_Emails::email_header() Output the email header
  */
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+do_action( 'woocommerce_email_header', $email_heading); ?>
 
-<p><?php echo "Hi there! Your Decker Digital order has been completed and you’re set to go!";?></p>
+<p><?php printf( __( "Hi there! You’ll find your course license details below, and we bet you’re anxious to get started…", 'woocommerce' )); ?></p>
+
+<h2><?php _e( 'Welcome to Decker Digital: Communicate to Influence', 'woocommerce' ); ?></h2>
+<div>
+	Let’s go!
+	<br>
+	<br>
+	Copy and paste your <span style="color:#D22735;font-weight:bold;">Unique Course Link</span> below into your <b>Chrome browser</b>. 
+	<br>
+	<br>
+	Be sure to bookmark this link, and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place. 
+	<br>
+	<br>
+	Happy communicating!
+	<br>
+	<br>
+</div>
 <?php
-
-/**
- * @hooked WC_Emails::order_details() Shows the order details table.
- * @hooked WC_Structured_Data::generate_order_data() Generates structured data.
- * @hooked WC_Structured_Data::output_structured_data() Outputs structured data.
- * @since 2.5.0
- */
-do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
-
-/**
- * @hooked WC_Emails::order_meta() Shows order meta data.
- */
-do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email );
-
+do_action( 'woocommerce_email_generate_tokens', $token, $sent_to_admin, $plain_text, $email );
 /**
  * @hooked WC_Emails::customer_details() Shows customer details
  * @hooked WC_Emails::email_address() Shows email address
  */
-do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
+//do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
 
 /**
  * @hooked WC_Emails::email_footer() Output the email footer
  */
+_e("Need help? Email us at <a href='mailto:support@decker.com'>support@decker.com</a> or give us a call at (844) 897-2389.");
+
 do_action( 'woocommerce_email_footer', $email );

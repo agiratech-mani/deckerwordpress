@@ -203,6 +203,25 @@ class WC_Shortcode_Checkout {
 		wc_empty_cart();
 
 		wc_get_template( 'checkout/thankyou.php', array( 'order' => $order ) );
+		$items = $order->get_items();
+		$isCourse = false;
+		$isOthers = false;
+		foreach ($items as $key => $value) {
+			$pro = wc_get_product($value['item_meta']['_product_id'][0]);
+			if($pro->product_type == "course" && !$isCourse)
+			{
+				$isCourse = true;
+			}
+			else if(!$isOthers)
+			{
+				$isOthers  = true;
+			}
+			if($isCourse && $isOthers)
+			{
+				break;
+			}
+		}
+		wc_get_template( 'checkout/thankyou.php', array( 'order' => $order,'isCourse'=>$isCourse,'isOthers'=>$isOthers ) );
 	}
 
 	/**

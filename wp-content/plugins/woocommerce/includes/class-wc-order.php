@@ -1788,4 +1788,9 @@ class WC_Order extends WC_Abstract_Order {
 
 		return apply_filters( 'woocommerce_get_order_item_totals', $total_rows, $this, $tax_display );
 	}
+	public function get_web_tokens()
+	{
+		$web_tokens = wootokens_get_web_tokens($this->id);
+		return $web_tokens;
+	}
 }

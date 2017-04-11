@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php do_action( 'woocommerce_product_quick_edit_start' ); ?>
 
 		<?php if ( wc_product_sku_enabled() ) : ?>
-
+		<div class="sku_fields">
 			<label>
 				<span class="title"><?php _e( 'SKU', 'woocommerce' ); ?></span>
 				<span class="input-text-wrap">
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</span>
 			</label>
 			<br class="clear" />
-
+		</div>
 		<?php endif; ?>
 
 		<div class="price_fields">
@@ -118,7 +118,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 		<?php endif; ?>
-
+		<div class="length_fields">
 		<label class="alignleft">
 			<span class="title"><?php _e( 'Shipping class', 'woocommerce' ); ?></span>
 			<span class="input-text-wrap">
@@ -133,7 +133,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</span>
 		</label>
 		<br class="clear" />
-
+		</div>
+		<div class="price_fields">
+			<label>
+				<span class="title"><?php _e( 'Coruse URL', 'woocommerce' ); ?></span>
+				<span class="input-text-wrap">
+					<input type="text" class="course_url" style="" name="_course_url" id="_course_url" value="" placeholder="http://"> 
+				</span>
+			</label>
+			<br class="clear" />
+			<label>
+				<span class="title"><?php _e( 'Devices limit', 'woocommerce' ); ?></span>
+				<span class="input-text-wrap">
+					<input type="text" name="_devices_limit" class="text devices_limit" placeholder="<?php esc_attr_e( 'Unlimited', 'woocommerce' ); ?>" value="">
+				</span>
+			</label>
+			<br class="clear" />
+			<label>
+				<span class="title"><?php _e( 'Token validity', 'woocommerce' ); ?></span>
+				<span class="input-text-wrap">
+					<input type="text" name="_token_expiry" class="text wc_input_price token_expiry" placeholder="<?php esc_attr_e( 'Never', 'woocommerce' ); ?>" value="">
+				</span>
+			</label>
+			<br class="clear" />
+		</div>
 		<label class="alignleft">
 			<span class="title"><?php _e( 'Visibility', 'woocommerce' ); ?></span>
 			<span class="input-text-wrap">

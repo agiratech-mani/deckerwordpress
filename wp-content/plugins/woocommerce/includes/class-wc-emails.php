@@ -86,6 +86,8 @@ class WC_Emails {
 			'woocommerce_order_partially_refunded',
 			'woocommerce_new_customer_note',
 			'woocommerce_created_customer',
+			'woocommerce_token_generated',
+			'woocommerce_web_token_report',
 		) );
 
 		if ( apply_filters( 'woocommerce_defer_transactional_emails', true ) ) {
@@ -156,6 +158,7 @@ class WC_Emails {
 		add_action( 'woocommerce_email_footer', array( $this, 'email_footer' ) );
 		add_action( 'woocommerce_email_order_details', array( $this, 'order_details' ), 10, 4 );
 		add_action( 'woocommerce_email_order_meta', array( $this, 'order_meta' ), 10, 3 );
+		add_action( 'woocommerce_email_order_tokens', array( $this, 'order_tokens' ), 10, 3 );
 		add_action( 'woocommerce_email_customer_details', array( $this, 'customer_details' ), 10, 3 );
 		add_action( 'woocommerce_email_customer_details', array( $this, 'email_addresses' ), 20, 3 );
 
@@ -164,7 +167,7 @@ class WC_Emails {
 		add_action( 'woocommerce_no_stock_notification', array( $this, 'no_stock' ) );
 		add_action( 'woocommerce_product_on_backorder_notification', array( $this, 'backorder' ) );
 		add_action( 'woocommerce_created_customer_notification', array( $this, 'customer_new_account' ), 10, 3 );
-
+		add_action( 'woocommerce_email_generate_tokens', array( $this, 'generate_tokens' ), 10, 3 );
 		// Let 3rd parties unhook the above via this hook
 		do_action( 'woocommerce_email', $this );
 	}
@@ -187,7 +190,8 @@ class WC_Emails {
 		$this->emails['WC_Email_Customer_Note'] 		             = include( 'emails/class-wc-email-customer-note.php' );
 		$this->emails['WC_Email_Customer_Reset_Password'] 		     = include( 'emails/class-wc-email-customer-reset-password.php' );
 		$this->emails['WC_Email_Customer_New_Account'] 		         = include( 'emails/class-wc-email-customer-new-account.php' );
-
+		$this->emails['WC_Email_Generate_Tokens'] 		         = include( 'emails/class-wc-email-generate-tokens.php' );
+		$this->emails['WC_Email_Web_Token_Report'] 		         = include( 'emails/class-wc-email-web-token-report.php' );
 		$this->emails = apply_filters( 'woocommerce_email_classes', $this->emails );
 
 		// include css inliner
@@ -369,7 +373,32 @@ class WC_Emails {
 			}
 		}
 	}
+	public function order_tokens( $order, $sent_to_admin = false, $plain_text = false ) 
+	{
+		$web_tokens = $order->get_web_tokens();
+		if(!empty($web_tokens))
+		{
+			if ( $plain_text ) {
+				echo  wc_get_template( 'emails/plain/email-web-tokens-details.php', array( 'web_tokens' => $web_tokens ) );
+			} else {
+				echo wc_get_template( 'emails/email-web-tokens-details.php', array( 'web_tokens' => $web_tokens ) );
+			}
+		}
 
+	}
+	public function generate_tokens($token, $sent_to_admin = false, $plain_text = false)
+	{
+		//print_r($token);
+		//$web_tokens = $order->get_web_tokens();
+		if(!empty($token))
+		{
+			if ( $plain_text ) {
+				echo  wc_get_template( 'emails/plain/email-web-tokens-details.php', array( 'web_tokens' => $token ) );
+			} else {
+				echo wc_get_template( 'emails/email-web-gen-tokens-details.php', array( 'web_tokens' => $token ) );
+			}
+		}
+	}
 	/**
 	 * Is customer detail field valid?
 	 * @param  array  $field

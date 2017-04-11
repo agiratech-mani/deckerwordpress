@@ -175,6 +175,10 @@ jQuery( function( $ ) {
 				$( '.product_data_tabs' ).find( 'li a[href="#' + $id + '"]' ).parent().hide();
 			}
 		});
+		if(product_type == "course")
+		{
+			$("#_sold_individually").attr("checked","checked");
+		}
 	}
 
 	// Sale price schedule.
