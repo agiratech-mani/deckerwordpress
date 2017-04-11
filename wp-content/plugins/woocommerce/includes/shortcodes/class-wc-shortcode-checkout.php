@@ -202,12 +202,11 @@ class WC_Shortcode_Checkout {
 		// Empty current cart
 		wc_empty_cart();
 
-		wc_get_template( 'checkout/thankyou.php', array( 'order' => $order ) );
 		$items = $order->get_items();
 		$isCourse = false;
 		$isOthers = false;
 		foreach ($items as $key => $value) {
-			$pro = wc_get_product($value['item_meta']['_product_id'][0]);
+			$pro = wc_get_product($value->get_product_id());
 			if($pro->product_type == "course" && !$isCourse)
 			{
 				$isCourse = true;

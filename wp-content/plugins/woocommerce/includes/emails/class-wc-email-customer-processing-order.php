@@ -58,7 +58,7 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 			$this->isCourse = false;
 			$this->isOthers = false;
 			foreach ($items as $key => $value) {
-				$pro = wc_get_product($value['item_meta']['_product_id'][0]);
+				$pro = wc_get_product($value->get_product_id());
 				if($pro->product_type == "course" && !$this->isCourse)
 				{
 					$this->isCourse = true;
