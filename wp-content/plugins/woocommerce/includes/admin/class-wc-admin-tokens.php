@@ -269,6 +269,72 @@ class WC_Admin_Tokens {
 			include( 'settings/views/html-imports-token-users.php' );
 			echo "</div>";
 		}
+		else if(!empty($_GET) && isset($_GET['export'])){
+			$table1 = $wpdb->prefix . 'web_tokens';
+			$table2 = $wpdb->prefix . 'web_import_users';
+			
+			if(!empty($_POST['token_from_date']) && !empty($_POST['token_to_date']))
+			{
+				$from_date = date("Y-m-d H:i:s",strtotime($_POST['token_from_date']));
+				$to_date = date("Y-m-d H:i:s",strtotime($_POST['token_to_date']));
+				echo $from_date;
+				echo $to_date;
+			}
+			else{
+				$dateobj = new DateTime();
+				$from_date = date("Y-m-d",strtotime('2017-03-14'));
+    			$to_date = $dateobj->format('Y-m-d');
+			}
+			if(isset($_POST['submit'])){
+				$objPHPExcel = new PHPExcel(); 
+				$objPHPExcel->setActiveSheetIndex(0); 
+				$query = "SELECT order_type,first_name,last_name,email,company,token,short_url,long_url,token_created_date,token_expiry_date,token_last_accessed from $table1 left join $table2 ON  $table1.user_id=$table2.id where date(created)>='2017-03-13' AND date(created)<='2017-03-14' "; 
+				
+				$result = $wpdb->get_results( $query, 'ARRAY_A' );
+				// print_r($result);
+				$objPHPExcel = new PHPExcel();
+
+				$objPHPExcel->setActiveSheetIndex(0); 
+
+				$rowCount = 0; 
+				$cell_definition = array(
+					'A' => 'Type',
+					'B' => 'First Name',
+					'C' => 'Last Name',
+					'D' => 'Email Address',
+					'E' => 'Company',
+					'F' => 'Token',
+					'G' => 'Short URL',
+					'H' => 'Long URL',
+					'I' => 'License Create Date',
+					'J' => 'License Expiry Date',
+					'K' => 'License Last Accessed'
+				);
+
+				// Build headers
+				foreach( $cell_definition as $column => $value )
+					$objPHPExcel->getActiveSheet()->setCellValue( "{$column}1", $value ); 
+
+				// Build cells
+				while( $rowCount < count($result) ){ 
+					$cell = $rowCount + 2;
+					foreach( $cell_definition as $column => $value )
+						$objPHPExcel->getActiveSheet()->setCellValue($column.$cell, $result[$rowCount][$value]); 
+						
+				    $rowCount++; 
+				} 
+				
+				header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+				header('Content-Disposition: attachment;filename="Export.xlsx"');
+				header('Cache-Control: max-age=0');
+				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+				$objWriter->save('php://output');
+			}
+
+			echo "<div class='wrap'>";
+			include( 'settings/views/html-exports-token-users.php' );
+			echo "</div>";
+		}
 		else if(!empty($_GET) && isset($_GET['token_id']) && $_GET['token_id'] > 0)
 		{
 			echo "<div class='wrap'>";
@@ -298,7 +364,7 @@ class WC_Admin_Tokens {
 		else
 		{
 			echo "<div class='wrap'>";
-			echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>' . '</h2>';
+			echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>'.' <a href="admin.php?page=wc-tokens&export=token" class="page-title-action">Export Tokens</a>' . '</h2>';
 			//echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
 			$tokens_table_list = new WC_Admin_Tokens_Table_List();
 			$tokens_table_list->prepare_items();
