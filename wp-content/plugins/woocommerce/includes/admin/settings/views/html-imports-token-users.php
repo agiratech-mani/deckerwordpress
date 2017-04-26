@@ -75,7 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<tr valign="top">
 					<td colspan="2" scope="row" style="padding-left: 0;">
 						<input type="submit" class="button button-primary button-large" name="save" id="import_users" accesskey="p" value="<?php esc_attr_e( 'Import Users', 'woocommerce' ); ?>" />
-						<a style="color: #a00; text-decoration: none; margin-left: 10px;" href="admin.php?page=wc-tokens"><?php echo __( 'Cancel', 'woocommerce' ); ?></a>
+						<a class="button button-link button-large" style="color: #a00; text-decoration: none; margin-left: 10px;" href="admin.php?page=wc-tokens"><?php echo __( 'Cancel', 'woocommerce' ); ?></a>
 					</td>
 				</tr>
 			</tbody>

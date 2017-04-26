@@ -66,7 +66,7 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
  * @hooked WC_Emails::email_footer() Output the email footer
  */
 if($email->isCourse)
-{
+{	
 	_e("Need help? Email us at <a href='mailto:support@decker.com'>support@decker.com</a> or give us a call at (844) 897-2389.");	
 }
 

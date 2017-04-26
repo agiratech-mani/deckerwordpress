@@ -273,6 +273,7 @@ class WC_Admin_Tokens {
 			
 			$table1 = $wpdb->prefix . 'web_tokens';
 			$table2 = $wpdb->prefix . 'web_import_users';
+			$table3 = $wpdb->prefix . 'postmeta';
 			
 			if(!empty($_POST['token_from_date']) && !empty($_POST['token_to_date']))
 			{
@@ -287,68 +288,127 @@ class WC_Admin_Tokens {
 			if(isset($_POST['submit'])){
 				$objPHPExcel = new PHPExcel(); 
 				$objPHPExcel->setActiveSheetIndex(0); 
-				$query = "SELECT order_type,first_name,last_name,email,company,token,short_url,long_url,token_created_date,token_expiry_date,token_last_accessed from $table1 left join $table2 ON  $table1.user_id=$table2.id where date(created)>='$from_date' AND date(created)<='$to_date'"; 
+				/*$query = "SELECT order_type,first_name,last_name,email,company,token,short_url,long_url,token_created_date,token_expiry_date,token_last_accessed from $table1 left join $table2 ON  $table1.user_id=$table2.id where date(created)>='$from_date' AND date(created)<='$to_date' order by created desc"; */
+
+				$query = "SELECT order_type,CASE WHEN order_type = 'Order' THEN order_id ELSE 0 END AS order_id,
+					substring_index (substring_index (tokens.meta_value,',',1), ',', -1) AS first_name,
+					substring_index (substring_index (tokens.meta_value,',',2), ',', -1) AS last_name,
+					substring_index (substring_index (tokens.meta_value,',',3), ',', -1) AS company,
+					substring_index (substring_index (tokens.meta_value,',',4), ',', -1) AS email,
+					token,
+					short_url,
+					long_url,
+					token_created_date,
+					token_expiry_date,
+					token_last_accessed
+					FROM (
+					      (SELECT order_type,order_id,
+					              CONCAT(IFNULL(first_name, ''),',',IFNULL(last_name, ''),',',IFNULL(company, ''),',',IFNULL(email, '')) AS meta_value,
+					              token,
+					              short_url,
+					              long_url,
+					              token_created_date,
+					              token_expiry_date,
+					              token_last_accessed
+					       FROM $table1
+					       LEFT JOIN $table2 ON  $table2.id = $table1.user_id
+					       
+					       WHERE date(token_created_date)>='$from_date'
+					         AND date(token_created_date)<='$to_date'
+					         AND $table1.order_type = 'Upload'
+					       ORDER BY token_created_date DESC)
+					    UNION ALL
+					      (SELECT order_type,order_id,
+					              GROUP_CONCAT(pm.meta_value) AS meta_value,
+					              token,
+					              short_url,
+					              long_url,
+					              token_created_date,
+					              token_expiry_date,
+					              token_last_accessed
+					       FROM $table1 AS dw
+					       LEFT JOIN $table3 AS pm ON (pm.post_id = dw.order_id
+					                                         AND (pm.meta_key = '_billing_first_name'
+					                                              OR pm.meta_key = '_billing_last_name'
+					                                              OR pm.meta_key = '_billing_company'
+					                                              OR pm.meta_key = '_billing_email'))
+					       WHERE dw.order_type = 'Order'
+					       AND date(dw.token_created_date)>='$from_date'
+					       AND date(dw.token_created_date)<='$to_date'
+					       GROUP BY dw.order_id
+					       ORDER BY dw.token_created_date DESC)) AS tokens
+					ORDER BY tokens.token_created_date DESC";
 				$result = $wpdb->get_results( $query, 'ARRAY_A' ); 
 				$rowCount = 0; 
-
-				$cell_header = array(
-					'A' => 'Type',
-					'B' => 'First Name',
-					'C' => 'Last Name',
-					'D' => 'Email Address',
-					'E' => 'Company',
-					'F' => 'Token',
-					'G' => 'Short URL',
-					'H' => 'Long URL',
-					'I' => 'License Create Date',
-					'J' => 'License Expiry Date',
-					'K' => 'License Last Accessed'
-				);
-
-				$cell_definition = array(
-					'A' => 'order_type',
-					'B' => 'first_name',
-					'C' => 'last_name',
-					'D' => 'email',
-					'E' => 'company',
-					'F' => 'token',
-					'G' => 'short_url',
-					'H' => 'long_url',
-					'I' => 'token_created_date',
-					'J' => 'token_expiry_date',
-					'K' => 'token_last_accessed '
-				);
-				$styleArray = array(
-				    'font' => array(
-				        'bold' => true
-				    )
-				);
-
-				//Build headers
-				foreach( $cell_header as $column => $value ){
-					$objPHPExcel->getActiveSheet()->setCellValue( "{$column}1", $value ); 
-					$objPHPExcel->getActiveSheet()->getStyle("{$column}1")->applyFromArray($styleArray);
+				$rowCnt = count($result);
+				$csverror = [];
+				if($rowCnt <= 0)
+				{
+					$csverror[] = "Result is empty for select dates.";
 				}
+				if(empty($csverror))
+				{
+					$cell_header = array(
+						'A' => 'Type',
+						'B' => 'Order ID',
+						'C' => 'First Name',
+						'D' => 'Last Name',
+						'E' => 'Email Address',
+						'F' => 'Company',
+						'G' => 'Token',
+						'H' => 'Short URL',
+						'I' => 'Long URL',
+						'J' => 'License Create Date',
+						'K' => 'License Expiry Date',
+						'L' => 'License Last Accessed'
+					);
 
-				// Build cells
-				while( $rowCount < count($result) ){ 
-					$cell = $rowCount + 2;
-					foreach( $cell_definition as $column => $value )
-						$objPHPExcel->getActiveSheet()->setCellValue($column.$cell, $result[$rowCount][$value]); 
-						
-				    $rowCount++; 
-				} 
+					$cell_definition = array(
+						'A' => 'order_type',
+						'B' => 'order_id',
+						'C' => 'first_name',
+						'D' => 'last_name',
+						'E' => 'email',
+						'F' => 'company',
+						'G' => 'token',
+						'H' => 'short_url',
+						'I' => 'long_url',
+						'J' => 'token_created_date',
+						'K' => 'token_expiry_date',
+						'L' => 'token_last_accessed '
+					);
+					$styleArray = array(
+					    'font' => array(
+					        'bold' => true
+					    )
+					);
 
-				ob_clean();
-				header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-				header('Content-Disposition: attachment;filename="Decker Digital License Download.xlsx"');
-				header('Cache-Control: max-age=0');
-				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-				$objWriter->save('php://output');
-				exit;
+					//Build headers
+					foreach( $cell_header as $column => $value ){
+						$objPHPExcel->getActiveSheet()->setCellValue( "{$column}1", $value ); 
+						$objPHPExcel->getActiveSheet()->getStyle("{$column}1")->applyFromArray($styleArray);
+					}
+
+					// Build cells
+					while( $rowCount < count($result) ){ 
+						$cell = $rowCount + 2;
+						foreach( $cell_definition as $column => $value )
+							$objPHPExcel->getActiveSheet()->setCellValue($column.$cell, $result[$rowCount][$value]); 
+							
+					    $rowCount++; 
+					} 
+
+					ob_clean();
+					header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+					header('Content-Disposition: attachment;filename="Decker Digital License Download.xlsx"');
+					header('Cache-Control: max-age=0');
+					$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+					$objWriter->save('php://output');
+					exit;
+				}
 			}
-
 			echo "<div class='wrap'>";
+			echo '<h2>' . __( 'Export Tokens', 'woocommerce' ).'</h2>';
 			include( 'settings/views/html-exports-token-users.php' );
 			echo "</div>";
 		}

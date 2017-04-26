@@ -45,7 +45,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 				<tr valign="top">
 					<td colspan="2" scope="row" style="padding-left: 0;">
-						<input type="submit" class="button button-primary button-large" name="submit" id="export_users" accesskey="p" value="<?php esc_attr_e( 'Export Users', 'woocommerce' ); ?>" />
+						<div class="form-group">        
+				      <div class="col-sm-offset-2 col-sm-10">
+				        <input type="submit" class="button button-primary button-large" name="submit" id="export_users" accesskey="p" value="<?php esc_attr_e( 'Export Tokens', 'woocommerce' ); ?>" />
+
+				        <button type="Reset"  style="margin-left: 10px;" class="button button-default button-large" name="submit" id="export_users" accesskey="p" value="" /><?php esc_attr_e( 'Reset', 'woocommerce' ); ?></button>
+								<a class="button button-link button-large" style="color: #a00; text-decoration: none; margin-left: 10px;" href="admin.php?page=wc-tokens"><?php echo __( 'Cancel', 'woocommerce' ); ?></a>
+				      </div>
+				    </div>
+						
 					</td>
 				</tr>
 			</tbody>
