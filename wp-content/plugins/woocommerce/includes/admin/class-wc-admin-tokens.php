@@ -270,6 +270,7 @@ class WC_Admin_Tokens {
 			echo "</div>";
 		}
 		else if(!empty($_GET) && isset($_GET['export'])){
+			
 			$table1 = $wpdb->prefix . 'web_tokens';
 			$table2 = $wpdb->prefix . 'web_import_users';
 			
@@ -277,8 +278,6 @@ class WC_Admin_Tokens {
 			{
 				$from_date = date("Y-m-d H:i:s",strtotime($_POST['token_from_date']));
 				$to_date = date("Y-m-d H:i:s",strtotime($_POST['token_to_date']));
-				echo $from_date;
-				echo $to_date;
 			}
 			else{
 				$dateobj = new DateTime();
@@ -288,16 +287,11 @@ class WC_Admin_Tokens {
 			if(isset($_POST['submit'])){
 				$objPHPExcel = new PHPExcel(); 
 				$objPHPExcel->setActiveSheetIndex(0); 
-				$query = "SELECT order_type,first_name,last_name,email,company,token,short_url,long_url,token_created_date,token_expiry_date,token_last_accessed from $table1 left join $table2 ON  $table1.user_id=$table2.id where date(created)>='2017-03-13' AND date(created)<='2017-03-14' "; 
-				
-				$result = $wpdb->get_results( $query, 'ARRAY_A' );
-				// print_r($result);
-				$objPHPExcel = new PHPExcel();
-
-				$objPHPExcel->setActiveSheetIndex(0); 
-
+				$query = "SELECT order_type,first_name,last_name,email,company,token,short_url,long_url,token_created_date,token_expiry_date,token_last_accessed from $table1 left join $table2 ON  $table1.user_id=$table2.id where date(created)>='$from_date' AND date(created)<='$to_date'"; 
+				$result = $wpdb->get_results( $query, 'ARRAY_A' ); 
 				$rowCount = 0; 
-				$cell_definition = array(
+
+				$cell_header = array(
 					'A' => 'Type',
 					'B' => 'First Name',
 					'C' => 'Last Name',
@@ -311,9 +305,30 @@ class WC_Admin_Tokens {
 					'K' => 'License Last Accessed'
 				);
 
-				// Build headers
-				foreach( $cell_definition as $column => $value )
+				$cell_definition = array(
+					'A' => 'order_type',
+					'B' => 'first_name',
+					'C' => 'last_name',
+					'D' => 'email',
+					'E' => 'company',
+					'F' => 'token',
+					'G' => 'short_url',
+					'H' => 'long_url',
+					'I' => 'token_created_date',
+					'J' => 'token_expiry_date',
+					'K' => 'token_last_accessed '
+				);
+				$styleArray = array(
+				    'font' => array(
+				        'bold' => true
+				    )
+				);
+
+				//Build headers
+				foreach( $cell_header as $column => $value ){
 					$objPHPExcel->getActiveSheet()->setCellValue( "{$column}1", $value ); 
+					$objPHPExcel->getActiveSheet()->getStyle("{$column}1")->applyFromArray($styleArray);
+				}
 
 				// Build cells
 				while( $rowCount < count($result) ){ 
@@ -323,12 +338,14 @@ class WC_Admin_Tokens {
 						
 				    $rowCount++; 
 				} 
-				
+
+				ob_clean();
 				header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-				header('Content-Disposition: attachment;filename="Export.xlsx"');
+				header('Content-Disposition: attachment;filename="Decker Digital License Download.xlsx"');
 				header('Cache-Control: max-age=0');
 				$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 				$objWriter->save('php://output');
+				exit;
 			}
 
 			echo "<div class='wrap'>";
