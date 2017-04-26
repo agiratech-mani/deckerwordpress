@@ -38,7 +38,7 @@ class WC_Admin_Tokens {
         if($token_expiry != '' && $token_expiry > 0)
         {
             $dateobj->add(new DateInterval('P'.$token_expiry.'D'));
-            $expirydate = $dateobj->format('Y-m-d H:i:s');
+            $expirydate = $dateobj->format('Y-m-d 23:59:59');
         }
         else
         {
