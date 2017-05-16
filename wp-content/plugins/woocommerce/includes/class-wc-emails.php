@@ -168,6 +168,9 @@ class WC_Emails {
 		add_action( 'woocommerce_product_on_backorder_notification', array( $this, 'backorder' ) );
 		add_action( 'woocommerce_created_customer_notification', array( $this, 'customer_new_account' ), 10, 3 );
 		add_action( 'woocommerce_email_generate_tokens', array( $this, 'generate_tokens' ), 10, 3 );
+
+		add_action( 'woocommerce_token_generated_notification', array( $this, 'imported_new_tokens' ) );
+		//add_action( 'woocommerce_token_generated_notification', array( $this, 'trigger' ) );
 		// Let 3rd parties unhook the above via this hook
 		do_action( 'woocommerce_email', $this );
 	}
@@ -311,7 +314,21 @@ class WC_Emails {
 		$email = $this->emails['WC_Email_Customer_New_Account'];
 		$email->trigger( $customer_id, $user_pass, $password_generated );
 	}
+	/**
+	 * Customer token mail.
+	 *
+	 * @param int $tokenid
+	 * @param array $imported_new_tokens
+	 */
+	public function imported_new_tokens( $tokenid) {
+		if ( ! $tokenid ) {
+			return;
+		}
+		//$user_pass = ! empty( $new_customer_data['user_pass'] ) ? $new_customer_data['user_pass'] : '';
 
+		$email = $this->emails['WC_Email_Generate_Tokens'];
+		$email->trigger( $tokenid);
+	}
 	/**
 	 * Show the order details table
 	 */

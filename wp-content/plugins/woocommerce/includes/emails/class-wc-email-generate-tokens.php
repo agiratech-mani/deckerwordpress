@@ -32,13 +32,13 @@ class WC_Email_Generate_Tokens extends WC_Email {
 		$this->template_html    = 'emails/customer-user-tokens.php';
 		$this->template_plain   = 'emails/plain/customer-user-tokens.php';
 		// Triggers for this email
-		add_action( 'woocommerce_token_generated_notification', array( $this, 'trigger' ) );
+		
 
 		// Call parent constructor
 		parent::__construct();
 
 		// Other settings
-		$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
+		//$this->recipient = $this->get_option( 'recipient', get_option( 'admin_email' ) );
 	}
 
 	/**
