@@ -4,8 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WC_Email_Generate_Tokens' ) ) :
-
+if ( ! class_exists( 'WC_Email_Generate_Tokens', false ) ) :
 /**
  * Cancelled Order Email.
  *
@@ -23,8 +22,8 @@ class WC_Email_Generate_Tokens extends WC_Email {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->id               = 'token_generated';
-		$this->customer_email = true;
+		$this->id               = 'generate_tokens';
+		$this->customer_email 	= true;
 		$this->title            = __( 'Your License Details', 'woocommerce' );
 		$this->description      = __( 'Token Generated.', 'woocommerce' );
 		$this->heading          = __( 'Your License Details', 'woocommerce' );
@@ -102,7 +101,7 @@ class WC_Email_Generate_Tokens extends WC_Email {
 	/**
 	 * Initialise settings form fields.
 	 */
-	public function init_form_fields() {
+	/*public function init_form_fields() {
 		$this->form_fields = array(
 			'enabled' => array(
 				'title'         => __( 'Enable/Disable', 'woocommerce' ),
@@ -144,7 +143,7 @@ class WC_Email_Generate_Tokens extends WC_Email {
 				'desc_tip'      => true
 			)
 		);
-	}
+	}*/
 }
 
 endif;

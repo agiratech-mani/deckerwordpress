@@ -161,15 +161,14 @@ class WC_Emails {
 		add_action( 'woocommerce_email_order_tokens', array( $this, 'order_tokens' ), 10, 3 );
 		add_action( 'woocommerce_email_customer_details', array( $this, 'customer_details' ), 10, 3 );
 		add_action( 'woocommerce_email_customer_details', array( $this, 'email_addresses' ), 20, 3 );
-
 		// Hooks for sending emails during store events
 		add_action( 'woocommerce_low_stock_notification', array( $this, 'low_stock' ) );
 		add_action( 'woocommerce_no_stock_notification', array( $this, 'no_stock' ) );
 		add_action( 'woocommerce_product_on_backorder_notification', array( $this, 'backorder' ) );
 		add_action( 'woocommerce_created_customer_notification', array( $this, 'customer_new_account' ), 10, 3 );
-		add_action( 'woocommerce_email_generate_tokens', array( $this, 'generate_tokens' ), 10, 3 );
-
-		add_action( 'woocommerce_token_generated_notification', array( $this, 'imported_new_tokens' ) );
+		add_action( 'woocommerce_token_generated_notification', array( $this, 'generate_tokens' ),10,1 );
+		
+		add_action( 'woocommerce_email_generate_tokens', array( $this, 'email_generate_tokens' ), 10, 3 );
 		//add_action( 'woocommerce_token_generated_notification', array( $this, 'trigger' ) );
 		// Let 3rd parties unhook the above via this hook
 		do_action( 'woocommerce_email', $this );
@@ -320,7 +319,7 @@ class WC_Emails {
 	 * @param int $tokenid
 	 * @param array $imported_new_tokens
 	 */
-	public function imported_new_tokens( $tokenid) {
+	public function generate_tokens( $tokenid) {
 		if ( ! $tokenid ) {
 			return;
 		}
@@ -403,7 +402,7 @@ class WC_Emails {
 		}
 
 	}
-	public function generate_tokens($token, $sent_to_admin = false, $plain_text = false)
+	public function email_generate_tokens($token, $sent_to_admin = false, $plain_text = false)
 	{
 		//print_r($token);
 		//$web_tokens = $order->get_web_tokens();
