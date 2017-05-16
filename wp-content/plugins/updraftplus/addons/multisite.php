@@ -86,8 +86,8 @@ if (is_multisite()) {
 					'updraft_dropbox' => array(),
 					'updraft_onedrive' => array(),
 					'updraft_azure' => array(),
-					'updraft_sftp_settings' => array(),
-					'updraft_webdav_settings' => array(),
+					'updraft_sftp' => array(),
+					'updraft_webdav' => array(),
 
 					'updraft_log_syslog' => 0,
 					'updraft_ssl_nossl' => 0,
@@ -225,7 +225,7 @@ if (is_multisite()) {
 						}
 					}
 					$options[$key] = $updraftplus->just_one($value);
-				} elseif ('updraft_webdav_settings' == $key) {
+				} elseif ('updraft_webdav' == $key) {
 					$options[$key] = $updraftplus->construct_webdav_url($value);
 				} elseif ('updraft_email' == $key) {
 					$options[$key] = $updraftplus->just_one_email($value);

@@ -50,7 +50,7 @@ class UpdraftPlus_Addon_Reporting {
 		if ($simple_format) {
 			return $date.' - '.htmlspecialchars($backup['label']);
 		} else {
-			return $date.'<br>'.htmlspecialchars($backup['label']);
+			return $date.htmlspecialchars($backup['label']);
 		}
 	}
 

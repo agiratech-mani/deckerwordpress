@@ -26,7 +26,7 @@ class WC_Admin_Tokens {
 	}
 	private static function generate_tokens($fileid,$userid,$product_id,$data,$token_send_email = 0)
 	{
-		$bitly_login = get_option( 'woocommerce_bitly_login', '' );
+	$bitly_login = get_option( 'woocommerce_bitly_login', '' );
     	$bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
 		$product = wc_get_product($product_id);
 		$courseurl = $product->get_course_url();
@@ -162,6 +162,7 @@ class WC_Admin_Tokens {
 								    }
 							    }
 							}
+	die;
 						}
 						/*else
 						{

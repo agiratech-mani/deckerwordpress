@@ -40,25 +40,33 @@ class UpdraftPlus_Addon_S3_Enhanced {
 		return $class;
 	}
 
-	public function extra_storage_options($opts) {
+	/**
+	 * This method outputs html to the page for the extra storage options.
+	 * @param  Object $backup_module_object - This is an instance of the remote storage object.
+	 */
+	public function extra_storage_options($backup_module_object) {
+
+		$opts = $backup_module_object->get_options();
+
+		$classes = $backup_module_object->get_css_classes();
 		?>
-		<tr class="updraftplusmethod s3">
+		<tr class="<?php echo $classes;?>">
 			<th><?php _e('Storage class', 'updraftplus');?>:<br><a href="https://aws.amazon.com/s3/storage-classes/"><em><?php _e('(Read more)', 'updraftplus');?></em></a></th>
 			<td>
 				<?php
 					$rrs = empty($opts['rrs']) ? 'STANDARD' : $opts['rrs'];
 					if (!empty($rrs) && 'STANDARD' != $rrs && 'STANDARD_IA' != $rrs) $rrs = 'REDUCED_REDUNDANCY';
 				?>
-				<select name="updraft_s3[rrs]" data-updraft_settings_test="rrs">
+				<select <?php $backup_module_object->output_settings_field_name_and_id('rrs');?> data-updraft_settings_test="rrs">
 					<option value="STANDARD" <?php if ('STANDARD' == $rrs) echo ' selected="selected"';?>><?php _e('Standard', 'updraftplus');?></option>
 					<option value="STANDARD_IA" <?php if ('STANDARD_IA' == $rrs) echo ' selected="selected"';?>><?php _e('Standard (infrequent access)', 'updraftplus');?></option>
 					<option value="REDUCED_REDUNDANCY" <?php if ('REDUCED_REDUNDANCY' == $rrs) echo ' selected="selected"';?>><?php _e('Reduced redundancy', 'updraftplus');?></option>
 				</select>
 			</td>
 		</tr>
-		<tr class="updraftplusmethod s3">
+		<tr class="<?php echo $classes;?>">
 			<th><?php _e('Server-side encryption', 'updraftplus');?>:<br><a href="https://aws.amazon.com/blogs/aws/new-amazon-s3-server-side-encryption/"><em><?php _e('(Read more)', 'updraftplus');?></em></a></th>
-			<td><input data-updraft_settings_test="server_side_encryption" title="<?php esc_attr_e(__("Check this box to use Amazon's server-side encryption", 'updraftplus')); ?>" type="checkbox" name="updraft_s3[server_side_encryption]" id="updraft_s3_server_side_encryption" value="1" <?php if (!empty($opts['server_side_encryption'])) echo 'checked="checked"';?>/></td>
+			<td><input data-updraft_settings_test="server_side_encryption" title="<?php esc_attr_e(__("Check this box to use Amazon's server-side encryption", 'updraftplus')); ?>" type="checkbox" <?php $backup_module_object->output_settings_field_name_and_id('server_side_encryption');?> value="1" <?php if (!empty($opts['server_side_encryption'])) echo 'checked="checked"';?>/></td>
 		</tr>
 		<?php
 	}

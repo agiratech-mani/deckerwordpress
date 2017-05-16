@@ -21,7 +21,7 @@ class UpdraftPlus_AddonStorage_viastream extends UpdraftPlus_RemoteStorage_Addon
 			$url = $storage_arr['url'];
 		} else {
 			$this->bootstrap();
-			$options = UpdraftPlus_Options::get_updraft_option('updraft_'.$this->method.'_settings');
+			$options = $this->get_options();
 			if (!array($options) || !isset($options['url'])) {
 				$updraftplus->log('No '.$this->desc.' settings were found');
 				$updraftplus->log(sprintf(__('No %s settings were found','updraftplus'), $this->desc), 'error');
@@ -137,7 +137,7 @@ class UpdraftPlus_AddonStorage_viastream extends UpdraftPlus_RemoteStorage_Addon
 		$storage = $this->bootstrap();
 		if (is_wp_error($storage)) return $storage;
 
-		$options = UpdraftPlus_Options::get_updraft_option('updraft_'.$this->method.'_settings');
+		$options = $this->get_options();
 		if (!array($options) || empty($options['url'])) return new WP_Error('no_settings', sprintf(__('No %s settings were found','updraftplus'), $this->desc));
 
 		$url = trailingslashit($options['url']);
@@ -175,7 +175,7 @@ class UpdraftPlus_AddonStorage_viastream extends UpdraftPlus_RemoteStorage_Addon
 			return false;
 		}
 
-		$options = UpdraftPlus_Options::get_updraft_option('updraft_'.$this->method.'_settings');
+		$options = $this->get_options();
 		if (!array($options) || !isset($options['url'])) {
 			$updraftplus->log('No '.$this->desc.' settings were found');
 			$updraftplus->log(sprintf(__('No %s settings were found','updraftplus'), $this->desc), 'error');
@@ -204,24 +204,21 @@ class UpdraftPlus_AddonStorage_viastream extends UpdraftPlus_RemoteStorage_Addon
 
 	public function config_print() {
 
-		$options = UpdraftPlus_Options::get_updraft_option('updraft_'.$this->method.'_settings');
+		$options = $this->get_options();
 		$url = isset($options['url']) ? htmlspecialchars($options['url']) : '';
 
+		$classes = $this->get_css_classes();
+
 		?>
-			<tr class="updraftplusmethod <?php echo $this->method;?>">
+			<tr class="<?php echo $classes; ?>">
 				<td></td>
 				<td><em><?php printf(__('%s is a great choice, because UpdraftPlus supports chunked uploads - no matter how big your site is, UpdraftPlus can upload it a little at a time, and not get thwarted by timeouts.','updraftplus'), $this->desc);?></em></td>
 			</tr>
 
-			<?php $this->config_print_middlesection($url); ?>
-
-			<tr class="updraftplusmethod <?php echo $this->method;?>">
-			<th></th>
-			<td><p><button id="updraft-<?php echo $this->method;?>-test" type="button" class="button-primary updraft-test-button" data-method="<?php echo $this->method;?>" data-method_label="<?php esc_attr_e($this->desc);?>"><?php printf(__('Test %s Settings','updraftplus'), $this->desc);?></button></p></td>
-			</tr>
-
-		<?php
-
+			<?php 
+				$this->config_print_middlesection($url); 
+				
+				echo $this->get_test_button_html($this->desc);
 	}
 
 	public function download_file($ret, $files) {
@@ -239,7 +236,7 @@ class UpdraftPlus_AddonStorage_viastream extends UpdraftPlus_RemoteStorage_Addon
 			return false;
 		}
 
-		$options = UpdraftPlus_Options::get_updraft_option('updraft_'.$this->method.'_settings');
+		$options = $this->get_options();
 
 		if (!array($options) || !isset($options['url'])) {
 			$updraftplus->log('No '.$this->desc.' settings were found');

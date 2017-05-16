@@ -11,7 +11,7 @@ if ( ! class_exists( 'WC_Email_Generate_Tokens' ) ) :
  *
  * An email sent to the admin when an order is cancelled.
  *
- * @class       WC_Email_Cancelled_Order
+ * @class       WC_Email_Generate_Tokens
  * @version     2.2.7
  * @package     WooCommerce/Classes/Emails
  * @author      WooThemes
@@ -30,8 +30,7 @@ class WC_Email_Generate_Tokens extends WC_Email {
 		$this->heading          = __( 'Your License Details', 'woocommerce' );
 		$this->subject          = __( '[{site_title}] Your License Details', 'woocommerce' );
 		$this->template_html    = 'emails/customer-user-tokens.php';
-		$this->template_plain   = 'emails/plain/email-web-gen-tokens-details.php';
-
+		$this->template_plain   = 'emails/plain/customer-user-tokens.php';
 		// Triggers for this email
 		add_action( 'woocommerce_token_generated_notification', array( $this, 'trigger' ) );
 
@@ -66,7 +65,6 @@ class WC_Email_Generate_Tokens extends WC_Email {
 		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
 			return;
 		}
-
 		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
 	}
 

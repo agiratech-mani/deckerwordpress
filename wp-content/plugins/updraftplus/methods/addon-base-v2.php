@@ -58,7 +58,7 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 
 		global $updraftplus;
 
-		$this->options = $this->get_opts();
+		$this->options = $this->get_options();
 
 		if (!$this->options_exist($this->options)) {
 			$updraftplus->log('No '.$this->method.' settings were found');
@@ -102,7 +102,7 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 				return new WP_Error('no_listing', 'This remote storage method does not support file listing');
 			}
 
-			$this->options = $this->get_opts();
+			$this->options = $this->get_options();
 			if (!$this->options_exist($this->options)) return new WP_Error('no_settings', sprintf(__('No %s settings were found','updraftplus'), $this->description));
 
 			$this->storage = $this->bootstrap();
@@ -132,7 +132,7 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 
 		if (empty($this->storage)) {
 
-			$this->options = $this->get_opts();
+			$this->options = $this->get_options();
 			if (!$this->options_exist($this->options)) {
 				$updraftplus->log('No '.$this->method.' settings were found');
 				$updraftplus->log(sprintf(__('No %s settings were found','updraftplus'), $this->description), 'error');
@@ -165,16 +165,6 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 		
 	}
 
-	protected function get_opts() {
-		global $updraftplus;
-		$opts = $updraftplus->get_job_option('updraft_'.$this->method);
-		return (is_array($opts)) ? $opts : array();
-	}
-
-	public function get_credentials() {
-		return array('updraft_'.$this->method, 'updraft_ssl_disableverify', 'updraft_ssl_nossl', 'updraft_ssl_useservercerts');
-	}
-
 	public function download_file($ret, $files) {
 
 		global $updraftplus;
@@ -188,7 +178,7 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 			return false;
 		}
 
-		$this->options = $this->get_opts();
+		$this->options = $this->get_options();
 		if (!$this->options_exist($this->options)) {
 			$updraftplus->log('No '.$this->method.' settings were found');
 			$updraftplus->log(sprintf(__('No %s settings were found','updraftplus'), $this->description), 'error');
@@ -230,12 +220,14 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 
 	public function config_print() {
 
-		$this->options = $this->get_opts();
+		$this->options = $this->get_options();
 		$method = $this->method;
+
+		$classes = $this->get_css_classes();
 
 		if ($this->chunked) {
 		?>
-			<tr class="updraftplusmethod <?php echo $method; ?>">
+			<tr class="<?php echo $classes; ?>">
 				<td></td>
 				<td><p><em><?php printf(__('%s is a great choice, because UpdraftPlus supports chunked uploads - no matter how big your site is, UpdraftPlus can upload it a little at a time, and not get thwarted by timeouts.','updraftplus'), $this->description);?></em></p></td>
 			</tr>
@@ -245,15 +237,7 @@ abstract class UpdraftPlus_RemoteStorage_Addons_Base_v2 extends UpdraftPlus_Back
 
 			if (!$this->test_button || (method_exists($this, 'should_print_test_button') && !$this->should_print_test_button())) return;
 
-		?>
-
-		<tr class="updraftplusmethod <?php echo $method;?>">
-		<th></th>
-		<td><p><button id="updraft-<?php echo $method;?>-test" type="button" class="button-primary updraft-test-button" data-method="<?php echo $method;?>" data-method_label="<?php esc_attr_e($this->description);?>"><?php printf(__('Test %s Settings','updraftplus'), $this->description);?></button></p></td>
-		</tr>
-
-		<?php
-
+			echo $this->get_test_button_html($this->description);
 	}
 
 	public function config_print_javascript_onready() {

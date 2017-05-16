@@ -19,6 +19,7 @@ ajax-pagination,https://security.dxw.com/advisories/end-user-exploitable-local-f
 ajax-random-post,http://www.vapidlabs.com/wp/wp_advisory.php?v=494
 all-in-one-adsense-and-ypn,http://secunia.com/advisories/45579/
 alpine-photo-tile-for-instagram,https://www.sumofpwn.nl/advisory/2016/cross_site_scripting_in_alpine_phototile_for_instagram_wordpress_plugin.html
+analytic,https://www.pluginvulnerabilities.com/2017/04/11/vulnerability-details-remote-code-execution-rce-vulnerability-in-analytic/
 answer-my-question,http://lenonleite.com.br/en/blog/2016/11/11/answer-my-question-1-3-plugin-for-wordpress-sql-injection/
 anti-plagiarism,http://www.vapidlabs.com/wp/wp_advisory.php?v=161
 anyvar,http://www.vapidlabs.com/advisory.php?v=177
@@ -77,6 +78,7 @@ facebook-with-login,https://packetstormsecurity.com/files/136397/WordPress-Faceb
 fast-image-adder,http://www.vapid.dhs.org/advisory.php?v=139
 featured-content,http://secunia.com/advisories/43064/
 file-manager,https://sumofpwn.nl/advisory/2016/cross_site_request_forgery_in_file_manager_wordpress_plugin.html
+flickr-picture-backup,http://www.vapidlabs.com/advisory.php?v=190
 fluxlive,http://web.archive.org/web/20170223205030/https://wordpress.org/support/topic/wordpress-plugin-fluxlive-cross-site-scripting-xss/
 fmoblog,http://secunia.com/advisories/34341/
 form-lightbox,https://www.pluginvulnerabilities.com/2016/07/18/option-update-vulnerability-in-form-lightbox/
@@ -109,6 +111,7 @@ html5avmanager,http://www.opensyscom.fr/Actualites/wordpress-plugins-html5-av-ma
 httpbl,https://www.pluginvulnerabilities.com/2016/04/18/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-httpbl-wordpress-plugin/
 hungred-post-thumbnail,http://secunia.com/advisories/49447/
 i-dump-iphone-to-wordpress-photo-uploader,http://packetstormsecurity.com/files/131363/WordPress-Windows-Desktop-And-iPhone-Photo-Uploader-File-Upload.html
+image-gallery-with-slideshow,http://www.vapidlabs.com/advisory.php?v=189
 indexisto,http://www.vapidlabs.com/wp/wp_advisory.php?v=38
 invit0r,http://secunia.com/advisories/49519/
 is-human,http://secunia.com/advisories/44627/
@@ -117,6 +120,7 @@ iwant-one-ihave-one,http://secunia.com/advisories/43467/
 kento-post-view-counter,http://seclists.org/oss-sec/2016/q2/83
 keypic,https://www.pluginvulnerabilities.com/2016/08/15/authenticated-user-deletion-vulnerability-in-keypic/
 kish-guest-posting,http://secunia.com/advisories/47688/
+kittycatfish,https://www.tad.bg/en/exploits/our-exploits/kittycatfish-2-2-plugin-for-wordpress-sql-injection
 lb-mixed-slideshow,http://secunia.com/advisories/49610/
 lightbox-photo-gallery,http://packetstormsecurity.com/files/129507/WordPress-Lightbox-Photo-Gallery-1.0-CSRF-XSS.html
 lightbox-plus,https://www.pluginvulnerabilities.com/2016/04/05/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-lightbox-plus-colorbox/
@@ -127,6 +131,7 @@ magic-fields,https://www.pluginvulnerabilities.com/2016/05/31/authenticated-arbi
 mail-masta,https://packetstormsecurity.com/files/138481/WordPress-Mail-Master-1.0-Local-File-Inclusion.html
 mailchimp-integration,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
 mailpress,https://www.pluginvulnerabilities.com/2016/07/14/local-file-inclusion-lfi-vulnerability-in-mailpress/
+marketing-wp,https://www.tad.bg/en/exploits/our-exploits/marketing-wp-2-0-1-wordpress-plugin-sql-injection
 media-file-manager-advanced,http://research.evex.pw/?vuln=16
 meenews,http://secunia.com/advisories/46969/
 member-approval,https://security.dxw.com/advisories/csrf-in-member-approval-131109-permits-unapproved-registrations/
@@ -141,6 +146,7 @@ mobile-domain,http://packetstormsecurity.com/files/130316/WordPress-Mobile-Domai
 mobile-friendly-app-builder-by-easytouch,http://www.vapidlabs.com/advisory.php?v=179
 more-fields,https://packetstormsecurity.com/files/135991/WordPress-More-Fields-2.1-Cross-Site-Request-Forgery.html
 multi-meta-box,http://www.vulnerability-lab.com/get_content.php?id=1818
+mwp-viral-signup,https://www.tad.bg/en/exploits/our-exploits/wow-viral-signups-2-1-wordpress-plugin-sql-injection
 my-category-order,http://cinu.pl/research/wp-plugins/mail_a466a618943f052549c573eae8759c62.html
 my-link-order,http://cinu.pl/research/wp-plugins/mail_c936a62544e64fab5f175b7266ea45af.html
 my-page-order,http://cinu.pl/research/wp-plugins/mail_88e91a1dd014479789092dba7d5652b8.html
@@ -228,6 +234,7 @@ tidio-gallery,http://www.vapidlabs.com/wp/wp_advisory.php?v=427
 time-sheets,https://www.pluginvulnerabilities.com/2017/02/17/reflected-cross-site-scripting-xss-vulnerability-in-time-sheets/
 total-security,https://www.pluginvulnerabilities.com/2016/07/18/persistent-cross-site-scripting-xss-vulnerability-in-total-security/
 trafficanalyzer,http://www.exploit-db.com/exploits/36677/
+triagis-security-evaluation,https://www.pluginvulnerabilities.com/2017/04/19/cross-site-request-forgery-csrf-vulnerabilities-in-triagis-security-evaluation/
 tweetscribe,http://packetstormsecurity.com/files/129645/WordPress-TweetScribe-1.1-CSRF-XSS.html
 twimp-wp,http://packetstormsecurity.com/files/129643/WordPress-twimp-wp-Cross-Site-Request-Forgery-Cross-Site-Scripting.html
 twitter-cards-meta,https://www.pluginvulnerabilities.com/2016/12/09/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-twitter-cards-meta/
@@ -244,6 +251,7 @@ web-tripwire,https://www.pluginvulnerabilities.com/2017/02/13/vulnerability-deta
 webapp-builder,http://www.vapidlabs.com/advisory.php?v=181
 website-contact-form-with-file-upload,https://www.pluginvulnerabilities.com/2016/09/19/arbitrary-file-upload-vulnerability-in-n-media-website-contact-form-with-file-upload/
 wordpress-file-monitor,https://www.pluginvulnerabilities.com/2016/06/22/persistent-cross-site-scripting-vulnerability-in-wordpress-file-monitor/
+wordpress-firewall-2,https://security.dxw.com/advisories/csrfstored-xss-in-wordpress-firewall-2-allows-unauthenticated-attackers-to-do-almost-anything-an-admin-can/
 wordpress-gallery,http://secunia.com/advisories/51347/
 wordpress-processing-embed,http://secunia.com/advisories/42545/
 wordpress-whois-search,http://secunia.com/advisories/47428/

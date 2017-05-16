@@ -51,6 +51,10 @@ Please let us know if you are interested in us adding additional localizations.
 
 == Changelog ==
 
+= 1.0.61 =
+* Refreshed removed and no longer updated plugin lists with data from May 1, 2017 
+* Added additional security advisories
+
 = 1.0.60 =
 * Refreshed removed and no longer updated plugin lists with data from April 3, 2017 
 * Added additional security advisories

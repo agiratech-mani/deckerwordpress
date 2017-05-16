@@ -162,12 +162,17 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		return true;
 	}
 
+	/**
+	 * This method will send the final block of data to be written to file on the Azure remote storage location
+	 * @param  String $file - the file to read from
+	 * @return Boolean - a boolean value to indicate success or failure of the chunked upload finish call
+	 */
 	public function chunked_upload_finish($file) {
 		global $updraftplus;
 		$updraftplus->log("Azure: all chunks uploaded; now commmitting blob blocks");
 		// Commit the blocks to create the blob
 
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 
 		$directory = !empty($opts['directory']) ? trailingslashit($opts['directory']) : "";
 		$hash_key = md5($directory.$file);
@@ -281,9 +286,14 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		return false;
 	}
 
+	/**
+	 * This method is used to get a list of backup files for the remote storage option
+	 * @param  string $match - a string to match when looking for files
+	 * @return Array - returns an array of file locations or a WordPress error
+	 */
 	public function do_listfiles($match = 'backup_') {
 		global $updraftplus;
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		
 		$directory = !empty($opts['directory']) ? trailingslashit($opts['directory']) : "";
 		
@@ -316,7 +326,7 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		
 		return $results;
 	}
-	
+
 	public function do_credentials_test_parameters() {
 		return array(
 			'account_name' => 'Account Name',
@@ -366,6 +376,27 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		}
 
 	}
+
+	/**
+	 * This method overrides the parent method and lists the supported features of this remote storage option. 
+	 * @return Array - an array of supported features (any features not mentioned are assumed to not be supported) 
+	 */
+	public function get_supported_features() {
+		// This options format is handled via only accessing options via $this->get_options()
+		return array('multi_options');
+	}
+
+	/**
+	 * Retrieve default options for this remote storage module.
+	 * @return Array - an array of options
+	 */
+	public function get_default_options() {
+		return array(
+			'account_name' => '',
+			'key' => '',
+			'container' => '',
+		);
+	}
 	
 	public function do_bootstrap($opts, $connect = true) {
 
@@ -377,7 +408,7 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		
 		//set up connection string
 		//DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]
-		if (empty($opts)) $opts = $this->get_opts();
+		if (empty($opts)) $opts = $this->get_options();
 		
 		$protocol = isset($opts['nossl']) ? ($opts['nossl'] ? 'http' : 'https') : ( UpdraftPlus_Options::get_updraft_option('updraft_ssl_nossl') ? 'http' : 'https');
 
@@ -458,13 +489,10 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		return false;
 	}
 	
-	public function get_opts() {
-		global $updraftplus;
-		$opts = $updraftplus->get_job_option('updraft_azure');
-		if (!is_array($opts)) $opts = array('account_name' => '', 'key' => '', 'container' => '', 'directory' => '');
-		return $opts;
-	}
-	
+	/**
+	 * This outputs the html to the settings page for the Azure settings.
+	 * @param  Array $opts - this is an array of Azure settings.
+	 */
 	public function do_config_print($opts) {
 		//account name***
 		//key
@@ -472,6 +500,8 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 		//directory
 		
 		global $updraftplus_admin;
+
+		$classes = $this->get_css_classes();
 		
 		//print("HERE");
 		//$this->bootstrap();
@@ -495,32 +525,32 @@ class UpdraftPlus_Addons_RemoteStorage_azure extends UpdraftPlus_RemoteStorage_A
 			$callback_text = '<p>'.htmlspecialchars(__('You must add the following as the authorised redirect URI in your Azure console (under "API Settings") when asked','updraftplus')).': <kbd>'.UpdraftPlus_Options::admin_page_url().'</kbd></p>';
 		}*/
 
-		$updraftplus_admin->storagemethod_row(
-			'azure',
+		$updraftplus_admin->storagemethod_row_multi(
+			$classes,
 			'',
 			'<img width="434" src="'.UPDRAFTPLUS_URL.'/images/azure.png"><p><a href="https://account.live.com/developers/applications/create">'.__('Create Azure credentials in your Azure developer console.', 'updraftplus').'</a></p><p><a href="https://updraftplus.com/faqs/microsoft-azure-setup-guide/">'.__('For longer help, including screenshots, follow this link.', 'updraftplus').'</a></p>'
 		);
 		?>
-		<tr class="updraftplusmethod azure">
+		<tr class="<?php echo $classes; ?>">
 			<th><?php echo __('Azure','updraftplus').' '.__('Account Name', 'updraftplus'); ?>:</th>
-			<td><input data-updraft_settings_test="account_name" type="text" autocomplete="off" style="width:442px" id="updraft_azure_account_name" name="updraft_azure[account_name]" value="<?php echo esc_attr($account_name) ?>" /><br><em><?php echo htmlspecialchars(__('This is not your Azure login - see the instructions if needing more guidance.','updraftplus'));?></em></td>
+			<td><input data-updraft_settings_test="account_name" type="text" autocomplete="off" style="width:442px" <?php $this->output_settings_field_name_and_id('account_name');?> value="<?php echo esc_attr($account_name) ?>" /><br><em><?php echo htmlspecialchars(__('This is not your Azure login - see the instructions if needing more guidance.','updraftplus'));?></em></td>
 		</tr>
-		<tr class="updraftplusmethod azure">
+		<tr class="<?php echo $classes; ?>">
 			<th><?php echo __('Azure','updraftplus').' '.__('Key', 'updraftplus'); ?>:</th>
-			<td><input data-updraft_settings_test="key" type="<?php echo apply_filters('updraftplus_admin_secret_field_type', 'password'); ?>" autocomplete="off" style="width:442px" id="updraft_azure_key" name="updraft_azure[key]" value="<?php echo esc_attr($key); ?>" /></td>
+			<td><input data-updraft_settings_test="key" type="<?php echo apply_filters('updraftplus_admin_secret_field_type', 'password'); ?>" autocomplete="off" style="width:442px" <?php $this->output_settings_field_name_and_id('key');?> value="<?php echo esc_attr($key); ?>" /></td>
 		</tr>
 
 		<?php
-		$updraftplus_admin->storagemethod_row(
-			'azure',
+		$updraftplus_admin->storagemethod_row_multi(
+			$classes,
 			'Azure '.__('Container', 'updraftplus').':',
-			'<input data-updraft_settings_test="container" title="'.esc_attr(sprintf(__('Enter the path of the %s you wish to use here.', 'updraftplus'), 'container').' '.sprintf(__('If the %s does not already exist, then it will be created.'), 'container')).'" type="text" style="width:442px" id="updraft_azure_container" name="updraft_azure[container]" value="'.esc_attr(strtolower($container)).'"><br><a href="https://azure.microsoft.com/en-gb/documentation/articles/storage-php-how-to-use-blobs/"><em>'.__("See Microsoft's guidelines on container naming by following this link.", 'updraftplus').'</a></em>'
+			'<input data-updraft_settings_test="container" title="'.esc_attr(sprintf(__('Enter the path of the %s you wish to use here.', 'updraftplus'), 'container').' '.sprintf(__('If the %s does not already exist, then it will be created.'), 'container')).'" type="text" style="width:442px" '.$this->output_settings_field_name_and_id('container', true) .' value="'.esc_attr(strtolower($container)).'"><br><a href="https://azure.microsoft.com/en-gb/documentation/articles/storage-php-how-to-use-blobs/"><em>'.__("See Microsoft's guidelines on container naming by following this link.", 'updraftplus').'</a></em>'
 		);
 		
-		$updraftplus_admin->storagemethod_row(
-			'azure',
+		$updraftplus_admin->storagemethod_row_multi(
+			$classes,
 			'Azure '.__('Prefix', 'updraftplus').' <em>('.__('optional', 'updraftplus').')</em>:',
-			'<input title="'.esc_attr(sprintf(__('You can enter the path of any %s virtual folder you wish to use here.', 'updraftplus'), 'Azure').' '.sprintf(__('If you leave it blank, then the backup will be placed in the root of your %s', 'updraftplus').'.', __('container', 'updraftplus'))).'" data-updraft_settings_test="directory" type="text" style="width:442px" id="updraft_azure_directory" name="updraft_azure[directory]" value="'.esc_attr($directory).'">'
+			'<input title="'.esc_attr(sprintf(__('You can enter the path of any %s virtual folder you wish to use here.', 'updraftplus'), 'Azure').' '.sprintf(__('If you leave it blank, then the backup will be placed in the root of your %s', 'updraftplus').'.', __('container', 'updraftplus'))).'" data-updraft_settings_test="directory" type="text" style="width:442px"  '.$this->output_settings_field_name_and_id('directory', true) .' value="'.esc_attr($directory).'">'
 		);
 	}
 

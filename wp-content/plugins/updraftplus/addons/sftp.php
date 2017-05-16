@@ -40,7 +40,7 @@ class UpdraftPlus_Addons_RemoteStorage_sftp_helper {
 class UpdraftPlus_Addons_RemoteStorage_sftp extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
 
 	public function do_connect_and_chdir() {
-		$options = UpdraftPlus_Options::get_updraft_option('updraft_sftp_settings');
+		$options = $this->get_options();
 		if (!array($options)) return new WP_Error('no_settings', sprintf(__('No %s settings were found','updraftplus'),'SCP/SFTP'));
 		
 		if (empty($options['host'])) return new WP_Error('no_settings', sprintf(__('No %s found','updraftplus'),__('SCP/SFTP host setting','updraftplus')));
@@ -52,7 +52,7 @@ class UpdraftPlus_Addons_RemoteStorage_sftp extends UpdraftPlus_RemoteStorage_Ad
 		$key = (empty($options['key'])) ? '' : $options['key'];
 		$port = empty($options['port']) ? 22 : (int)$options['port'];
 		$path = empty($options['path']) ? '' : $options['path'];
-		$scp = empty($options['scp']) ? false : true;
+		$scp = empty($options['scp']) ? 0 : 1;
 
 		$this->path = $path;
 
@@ -324,9 +324,26 @@ class UpdraftPlus_Addons_RemoteStorage_sftp extends UpdraftPlus_RemoteStorage_Ad
 
 	}
 
+	public function get_supported_features() {
+		// This options format is handled via only accessing options via $this->get_options()
+		return array('multi_options');
+	}
+
+	public function get_default_options() {
+		return array(
+			'host' => '',
+			'port' => '22',
+			'user' => '',
+			'pass' => '',
+			'key' => '',
+			'path' => '',
+			'scp' => 0,
+		);
+	}
+
 	public function config_print() {
 
-		$options = UpdraftPlus_Options::get_updraft_option('updraft_sftp_settings');
+		$options = $this->get_options();
 		$host = isset($options['host']) ? htmlspecialchars($options['host']) : '';
 		$user = isset($options['user']) ? htmlspecialchars($options['user']) : '';
 		$pass = isset($options['pass']) ? htmlspecialchars($options['pass']) : '';
@@ -336,47 +353,49 @@ class UpdraftPlus_Addons_RemoteStorage_sftp extends UpdraftPlus_RemoteStorage_Ad
 		$scp = (isset($options['scp']) && $options['scp']) ? true : false;
 		$fingerprint = isset($options['fingerprint']) ? htmlspecialchars($options['fingerprint']) : '';
 
+		$classes = $this->get_css_classes();
+
 		?>
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th>SFTP/SCP:</th>
 				<td>
 					<p><em><?php _e('Resuming partial uploads is supported for SFTP, but not for SCP. Thus, if using SCP then you will need to ensure that your webserver allows PHP processes to run long enough to upload your largest backup file.','updraftplus');?></em></p>
 				</td>
 			</tr>
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th><?php _e('Host','updraftplus');?>:</th>
 				<td>
-					<input type="text" style="width: 292px" data-updraft_settings_test="host" id="updraft_sftp_settings_host" name="updraft_sftp_settings[host]" value="<?php echo esc_attr($host);?>" />
+					<input type="text" style="width: 292px" data-updraft_settings_test="host" <?php $this->output_settings_field_name_and_id('host');?> value="<?php echo esc_attr($host);?>" />
 				</td>
 			</tr>
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th><?php _e('Port','updraftplus');?>:</th>
 				<td>
-					<input type="text" style="width: 292px" id="updraft_sftp_settings_port" data-updraft_settings_test="port"  name="updraft_sftp_settings[port]" value="<?php echo esc_attr($port); ?>" />
+					<input type="text" style="width: 292px" data-updraft_settings_test="port"  <?php $this->output_settings_field_name_and_id('port');?> value="<?php echo esc_attr($port); ?>" />
 				</td>
 			</tr>
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th><?php _e('Username', 'updraftplus');?>:</th>
 				<td>
-					<input type="text" autocomplete="off" style="width: 292px" data-updraft_settings_test="user" id="updraft_sftp_settings_user" name="updraft_sftp_settings[user]" value="<?php echo esc_attr($user); ?>" />
+					<input type="text" autocomplete="off" style="width: 292px" data-updraft_settings_test="user" <?php $this->output_settings_field_name_and_id('user');?> value="<?php echo esc_attr($user); ?>" />
 				</td>
 			</tr>
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th><?php _e('Password', 'updraftplus');?>:</th>
 				<td>
-					<input data-updraft_settings_test="pass" type="<?php echo apply_filters('updraftplus_admin_secret_field_type', 'password'); ?>" autocomplete="off" style="width: 292px" id="updraft_sftp_settings_pass" name="updraft_sftp_settings[pass]" value="<?php echo esc_attr($pass);?>" />
+					<input data-updraft_settings_test="pass" type="<?php echo apply_filters('updraftplus_admin_secret_field_type', 'password'); ?>" autocomplete="off" style="width: 292px" <?php $this->output_settings_field_name_and_id('pass');?> value="<?php echo esc_attr($pass);?>" />
 					<br><em><?php _e('Your login may be either password or key-based - you only need to enter one, not both.', 'updraftplus'); ?></em>
 				</td>
 			</tr>
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th><?php _e('Key', 'updraftplus');?>:</th>
 				<td>
-					<textarea style="width: 292px; height: 120px;" data-updraft_settings_test="key" id="updraft_sftp_settings_key" name="updraft_sftp_settings[key]"><?php echo htmlspecialchars($key); ?></textarea>
+					<textarea style="width: 292px; height: 120px;" data-updraft_settings_test="key" <?php $this->output_settings_field_name_and_id('key');?>><?php echo htmlspecialchars($key); ?></textarea>
 					<br><em><?php echo _x('PKCS1 (PEM header: BEGIN RSA PRIVATE KEY), XML and PuTTY format keys are accepted.', 'Do not translate BEGIN RSA PRIVATE KEY. PCKS1, XML, PEM and PuTTY are also technical acronyms which should not be translated.', 'updraftplus'); ?></em>
 				</td>
 			</tr>
@@ -385,30 +404,28 @@ class UpdraftPlus_Addons_RemoteStorage_sftp extends UpdraftPlus_RemoteStorage_Ad
 			<tr class="updraftplusmethod sftp">
 				<th>Fingerprint:</th>
 				<td>
-					<input type="text" style="width: 292px" id="updraft_sftp_settings_fingerprint" name="updraft_sftp_settings[fingerprint]" value="$fingerprint" /><br><em>MD5 (128-bit) fingerprint, in hex format - should have the same length and general appearance as this (colons optional): 73:51:43:b1:b5:fc:8b:b7:0a:3a:a9:b1:0f:69:73:a8. Using a fingerprint is not essential, but you are not secure against <a href="http://en.wikipedia.org/wiki/Man-in-the-middle_attack">MITM attacks</a> if you do not use one</em>.
+					<input type="text" style="width: 292px" id="updraft_sftp_fingerprint" name="updraft_sftp[fingerprint]" value="$fingerprint" /><br><em>MD5 (128-bit) fingerprint, in hex format - should have the same length and general appearance as this (colons optional): 73:51:43:b1:b5:fc:8b:b7:0a:3a:a9:b1:0f:69:73:a8. Using a fingerprint is not essential, but you are not secure against <a href="http://en.wikipedia.org/wiki/Man-in-the-middle_attack">MITM attacks</a> if you do not use one</em>.
 				</td>
 			</tr>
 			-->
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th><?php _e('Directory path','updraftplus');?>:</th>
 				<td>
-					<input type="text" style="width: 292px" data-updraft_settings_test="path" id="updraft_sftp_settings_path" name="updraft_sftp_settings[path]" value="<?php echo $path; ?>" /><br><em><?php _e('Where to change directory to after logging in - often this is relative to your home directory.','updraftplus');?></em>
+					<input type="text" style="width: 292px" data-updraft_settings_test="path" <?php $this->output_settings_field_name_and_id('path');?> value="<?php echo $path; ?>" /><br><em><?php _e('Where to change directory to after logging in - often this is relative to your home directory.','updraftplus');?></em>
 				</td>
 			</tr>
 
-			<tr class="updraftplusmethod sftp">
+			<tr class="<?php echo $classes; ?>">
 				<th>SCP:</th>
 				<td>
-					<input type="checkbox" id="updraft_sftp_settings_scp" data-updraft_settings_test="scp" name="updraft_sftp_settings[scp]" value="1"<?php if ($scp) echo ' checked="checked"'; ?>> <label for="updraft_sftp_settings_scp"><?php _e('Use SCP instead of SFTP', 'updraftplus');?></label>
+					<input type="checkbox" data-updraft_settings_test="scp" <?php $this->output_settings_field_name_and_id('scp');?> value="1"<?php if ($scp) echo ' checked="checked"'; ?>> <label for="updraft_sftp_scp"><?php _e('Use SCP instead of SFTP', 'updraftplus');?></label>
 				</td>
 			</tr>
 
-		<tr class="updraftplusmethod sftp">
-		<th></th>
-		<td><p><button id="updraft-sftp-test" type="button" class="button-primary updraft-test-button" data-method_label="SCP/SFTP" data-method="sftp"><?php echo sprintf(__('Test %s Settings','updraftplus'),'SFTP/SCP');?></button></p></td>
-		</tr>
 		<?php
+
+		echo $this->get_test_button_html('SFTP/SCP');
 
 	}
 

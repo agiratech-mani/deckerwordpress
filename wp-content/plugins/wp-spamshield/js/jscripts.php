@@ -1,7 +1,7 @@
 <?php
 /**
  *  WP-SpamShield Dynamic JS File
- *  Version: 1.9.9.9.4
+ *  Version: 1.9.9.9.7
  */
 
 /* Security Check - BEGIN */
@@ -42,7 +42,7 @@ if(!defined('WPSS_HASH_ALT')){$alt_prefix=js_wpss_md5(WPSS_SERVER_NAME_NODOT);de
 if(!defined('WPSS_SITE_URL')&&!empty($_SESSION['wpss_site_url_'.WPSS_HASH_ALT])){$site_url=$_SESSION['wpss_site_url_'.WPSS_HASH_ALT];define('WPSS_SITE_URL',$site_url);}
 if(defined('WPSS_SITE_URL')&&!defined('WPSS_HASH')){$hash_prefix=js_wpss_md5(WPSS_SITE_URL);define('WPSS_HASH',$hash_prefix);}
 elseif(!empty($_SESSION)&&!empty($_COOKIE)&&!defined('WPSS_HASH')){
-	foreach($_COOKIE as $ck_name => $ck_val){
+	foreach($_COOKIE as $ck_name => $ck_v){
 		if(preg_match("~^comment_author_([a-z0-9]{32})$~i",$ck_name,$matches)){define('WPSS_HASH',$matches[1]);break;}
 	}
 }
@@ -265,7 +265,7 @@ if(!empty($cl_sbluck)){
 }elseif(!empty($sbluck)){
 	@setcookie($lang_ck_key,$lang_ck_val,$current_dt+60*60*24*365*10,$ck_dir,WPSS_SERVER_NAME,$is_https,TRUE); /* 10 years */
 }
-@setcookie($wpss_ck_key,$wpss_ck_val,$current_dt+60*60*4,$ck_dir,WPSS_SERVER_NAME,$is_https,TRUE); /* 4 hours - Keep this line for cache control on browsers with aggressive caching: Safari, etc. */
+@setcookie($ck_key,$ck_val,$current_dt+60*60*4,$ck_dir,WPSS_SERVER_NAME,$is_https,TRUE); /* 4 hours - Keep this line as backstop for cache control on browsers with aggressive caching: Safari, etc. */
 @setcookie(js_wpss_casetrans('lower',$CKON),js_wpss_casetrans('lower',$SJECT.'_'.strrev(uniqid())),$current_dt+60*5,$ck_dir,WPSS_SERVER_NAME,$is_https,TRUE); /* 5 minutes - Cache control - setting cookies turns off Varnish caching for this script */
 /* Control caching */
 if(function_exists('header_remove')){@header_remove('Cache-Control');@header_remove('Last-Modified');@header_remove('ETag');}

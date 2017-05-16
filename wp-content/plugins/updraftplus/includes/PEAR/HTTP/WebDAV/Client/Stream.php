@@ -151,8 +151,22 @@ class HTTP_WebDAV_Client_Stream
         // rewrite the request URL
         if (!$this->_parse_url($path)) return false;
 
+        $writing = preg_match('|[aw\+]|', $mode);
+        
         // query server for WebDAV options
-        if (!$this->_check_options())  return false;
+        if (!$this->_check_options()) {
+			if ($writing) {
+				// Retry on the directory instead of on the file itself
+				$old_url = $this->url;
+				$this->url = dirname($this->url);
+				if (!$this->_check_options()) {
+					$this->url = $old_url;
+					return false;
+				}
+				$this->url = $old_url;
+			}
+			return false;
+		}
 
         // now get the file metadata
         // we only need type, size, creation and modification date
@@ -190,6 +204,11 @@ class HTTP_WebDAV_Client_Stream
             } 
             $this->eof = true;
             // else fallthru
+// 		case 405: // method disabled. In write mode, try to carry on.
+// 			if (preg_match('|[aw\+]|', $mode)) {
+//                 break; // write
+//             }
+//             $this->eof = true;
         default: 
             trigger_error("file not found: ".$req->getResponseCode());
             return false;

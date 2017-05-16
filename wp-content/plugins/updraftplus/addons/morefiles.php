@@ -2,9 +2,9 @@
 /*
 UpdraftPlus Addon: morefiles:Back up more files, including WordPress core
 Description: Creates a backup of WordPress core (including everything in that directory WordPress is in), and any other file/directory you specify too.
-Version: 2.4
+Version: 2.5
 Shop: /shop/more-files/
-Latest Change: 1.12.35
+Latest Change: 1.13.1
 */
 
 if (!defined('UPDRAFTPLUS_DIR')) die('No direct access allowed');
@@ -46,7 +46,6 @@ class UpdraftPlus_Addons_MoreFiles {
 		
 		add_filter('updraftplus_include_wpcore_exclude', array($this, 'include_wpcore_exclude'));
 
-		add_action('updraftplus_admin_enqueue_scripts', array($this, 'updraftplus_admin_enqueue_scripts'));
 	}
 
 	public function updraftplus_browse_download_link($link) {
@@ -106,11 +105,6 @@ class UpdraftPlus_Addons_MoreFiles {
 		return array('error' => 'UpdraftPlus: no such file or diretory (' . $fullpath . '): if the file does exist please make sure it is readable by the server.');
 	}
 	
-	public function updraftplus_admin_enqueue_scripts() {
-		global $updraftplus_admin;
-		$updraftplus_admin->enqueue_jstree();
-	}
-
 	public function fileinfo_more($data, $ind) {
 		if (!is_array($data) || !is_numeric($ind) || empty($this->more_paths) || !is_array($this->more_paths) || empty($this->more_paths[$ind])) return $data;
 

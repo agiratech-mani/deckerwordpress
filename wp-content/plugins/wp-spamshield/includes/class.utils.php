@@ -1,7 +1,7 @@
 <?php
 /**
  *  WP-SpamShield Utilities
- *  File Version 1.9.9.9.4
+ *  File Version 1.9.9.9.9
  */
 
 /* Make sure file remains secure if called directly */
@@ -55,7 +55,7 @@ class WPSS_Utils extends WP_SpamShield {
 
 	/**
 	 *  @alias of 		WP_SpamShield::is_php_ver()
-	 *	@used by		WPSS_Utils::ksort_array(), 
+	 *	@used by		WPSS_Utils::ksort_array(), ...
 	 *  @since			1.9.9.8.2
 	 */
 	static public function is_php_ver( $ver ) {
@@ -439,10 +439,10 @@ class WPSS_Utils extends WP_SpamShield {
 
 	/**
 	 *	Attempt to detect and identify web host
-	 *	As of RSSD.20170317.01, web hosts detected: 97+
+	 *	As of RSSD.20170414.01, web hosts detected: 98+
 	 *	@dependencies	WPSS_Utils::get_option(), WPSS_Utils::update_option(), WPSS_Utils::get_server_hostname(), WPSS_Utils::get_ip_dns_params(), WPSS_Utils::get_reverse_dns(), WP_SpamShield::is_valid_ip(), WPSS_Utils::get_ns(), WPSS_Utils::sort_unique()
 	 *	@used by		...
-	 *	@func_ver		RSSD.20170317.01
+	 *	@func_ver		RSSD.20170414.01
 	 *	@since			WPSS 1.9.9.8.2, RSSD 1.0.3
 	 */
 	static public function get_web_host( $params = array() ) {
@@ -525,6 +525,7 @@ class WPSS_Utils extends WP_SpamShield {
 			'IX Web Hosting'			=> array( 'slug' => 'ix-web-hosting', 'webhost' => 'IX Web Hosting', 'domains' => 'cloudbyix.com,cloudix.com,ecommerce.com,hostexcellence.com,ixwebhosting.com,ixwebsites.com,opentransfer.com,webhost.biz', 'parent' => 'Ecommerce Corporation', ), 
 			'JustHost'					=> array( 'slug' => 'justhost', 'webhost' => 'JustHost', 'domains' => 'justhost.com', ), 
 			'LeaseWeb'					=> array( 'slug' => 'leaseweb', 'webhost' => 'LeaseWeb', 'domains' => 'leaseweb.com,leaseweb.net,leaseweb.nl,lswcdn.com', ), 
+			'Lightning Base'			=> array( 'slug' => 'lightning-base', 'webhost' => 'Lightning Base', 'domains' => 'lightningbase.com', ), 
 			'Linode'					=> array( 'slug' => 'linode', 'webhost' => 'Linode', 'domains' => 'linode.com', ), 
 			'Liquid Web'				=> array( 'slug' => 'liquid-web', 'webhost' => 'Liquid Web', 'domains' => 'liquidweb.com', ), 
 			'Lunarpages'				=> array( 'slug' => 'lunarpages', 'webhost' => 'Lunarpages', 'domains' => 'lunarfo.com,lunarpages.com,lunarservers.com', ), 
@@ -812,7 +813,7 @@ class WPSS_Utils extends WP_SpamShield {
 	 */
 	static public function is_ini_value_changeable( $setting ) {
 		if( WP_SpamShield::is_wp_ver( '4.6' ) ) {
-			return wp_is_ini_value_changeable( $setting ) ? TRUE : FALSE;
+			return wp_is_ini_value_changeable( $setting );
 		}
 		return TRUE;
 	}
@@ -898,6 +899,24 @@ class WPSS_PHP extends WPSS_Utils {
 		return ( isset( $haystack_flip[$needle] ) );
 	}
 
+	/**
+	 *  Drop-in replacement for native PHP function extension_loaded()
+	 *  @dependencies	WPSS_PHP::in_array()
+	 *  @used by		...
+	 *  @since			1.9.9.9.6
+	 *  @reference		http://php.net/manual/en/function.extension-loaded.php
+	 *  @param			string	$extension 
+	 */
+	static public function extension_loaded( $extension ) {
+		if( empty( $extension ) || !is_string( $extension ) ) { return FALSE; }
+		if( function_exists( 'get_loaded_extensions' ) ) {
+			$ext_loaded	= @get_loaded_extensions();
+			$ext_loaded	= ( !empty( $ext_loaded ) && is_array( $ext_loaded ) ) ? $ext_loaded : array();
+			return ( WPSS_PHP::in_array( $extension, $ext_loaded ) );
+		}
+		return ( function_exists( 'extension_loaded' ) && (bool) @extension_loaded( $extension ) );
+	}
+
 }
 
 
@@ -978,5 +997,4 @@ class WPSS_Func extends WPSS_PHP {
 	}
 
 }
-
 

@@ -24,6 +24,8 @@ do_credentials_test($testfile, $posted_settings) - return true/false
 do_credentials_test_deletefile($testfile, $posted_settings)
 */
 
+# Converted to multi-options (Feb 2017-) and previous options conversion removed: Yes
+
 if (!class_exists('UpdraftPlus_RemoteStorage_Addons_Base_v2')) require_once(UPDRAFTPLUS_DIR.'/methods/addon-base-v2.php');
 
 class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorage_Addons_Base_v2 {
@@ -47,7 +49,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 	public function do_upload($file, $from) {
 
 		global $updraftplus;
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		
 		$message = "OneDrive did not return the expected data";
 		
@@ -343,7 +345,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 	public function do_download($file, $fullpath, $start_offset) {
 
 		global $updraftplus;
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		
 		$message = "OneDrive did not return the expected data";
 		
@@ -392,7 +394,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 
 	public function do_delete($file) {
 		global $updraftplus;
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		
 		$message = "OneDrive did not return the expected data";
 		
@@ -458,7 +460,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 	public function do_listfiles($match = 'backup_') {
 	
 		global $updraftplus;
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		
 		$message = "OneDrive did not return the expected data";
 		
@@ -508,7 +510,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 		global $updraftplus;
 		
 		
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		
 		$use_master = $this->use_master($opts);
 		
@@ -650,7 +652,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 		}
 		 
 		//save details back to $opts
-		UpdraftPlus_Options::update_updraft_option('updraft_onedrive', $opts);
+		$this->set_options($opts, true);
 		
 		//setup array to be sent to oneDrive
 		$onedrive_options = array(
@@ -700,15 +702,15 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 					$encoded_token = stripslashes($_GET['token']);
 					$token = json_decode($encoded_token);
 					
-					$opts = $this->get_opts();
+					$opts = $this->get_options();
 					$this->auth_token_stage2($token, $opts);
 				}
 		} elseif (isset($_GET['updraftplus_onedriveauth'])) {
 			// Clear out the existing credentials
 			if ('doit' == $_GET['updraftplus_onedriveauth']) {
-				$opts = $this->get_opts();
+				$opts = $this->get_options();
 				$opts['refresh_token'] = '';
-				UpdraftPlus_Options::update_updraft_option('updraft_onedrive', $opts);
+				$this->set_options($opts, true);
 			}
 			try {
 				$this->auth_request();
@@ -722,7 +724,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 	public function show_authed_admin_warning() {
 		global $updraftplus_admin;
 
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 
 		if (empty($opts['refresh_token'])) return;
 		//$updraftplus_refresh_token = $opts['refresh_token'];
@@ -754,7 +756,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 					$opts['ownername'] = $account_info->user->displayName;
 					$message .= ". <br>".sprintf(__('Your %s account name: %s','updraftplus'),'OneDrive', htmlspecialchars($account_info->user->displayName));
 				}
-				UpdraftPlus_Options::update_updraft_option('updraft_onedrive', $opts);
+				$this->set_options($opts, true);
 
 			} else {
 				if (is_wp_error($service) && 'cloudflare_block' == $service->get_error_code()) {
@@ -825,22 +827,27 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 			'filesystem' => array('read' => true, 'write' => true)
 		));
 	}
-	
-	public function get_opts() {
-		global $updraftplus;
-		$opts = $updraftplus->get_job_option('updraft_onedrive');
-	
-		if (!is_array($opts)) $opts = array('clientid' => '', 'secret' => '', 'url' => '');
-		
-		return $opts;
+
+	public function get_supported_features() {
+		// This options format is handled via only accessing options via $this->get_options()
+		return array('multi_options');
 	}
-	
+
+	public function get_default_options() {
+		return array(
+			'clientid' => '',
+			'secret' => '',
+			'url' => '',
+			'folder' => '',
+		);
+	}
+
 	//Directs users to the login/authentication page
 	private function auth_request() {
 
 		require_once(UPDRAFTPLUS_DIR.'/includes/onedrive/onedrive.php');
 	
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		$use_master = $this->use_master($opts);
 		
 		//Get the client id
@@ -885,7 +892,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 	
 	private function auth_token($code) {
 
-		$opts = $this->get_opts();
+		$opts = $this->get_options();
 		$use_master = $this->use_master($opts);
 
 		$secret = (empty($opts['secret'])) ? '' : $opts['secret'];
@@ -922,7 +929,7 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 
 			$opts['refresh_token'] = $token->token->data->refresh_token;
 
-			UpdraftPlus_Options::update_updraft_option('updraft_onedrive', $opts);
+			$this->set_options($opts, true);
 
 			header('Location: '.UpdraftPlus_Options::admin_page_url().'?page=updraftplus&action=updraftmethod-onedrive-auth&state=success');
 		} else {
@@ -939,6 +946,8 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 		global $updraftplus_admin;
 		
 		$use_master = $this->use_master($opts);
+
+		$classes = $this->get_css_classes();
 
 		$folder = (empty($opts['folder'])) ? '' : untrailingslashit($opts['folder']);
 		
@@ -961,36 +970,36 @@ class UpdraftPlus_Addons_RemoteStorage_onedrive extends UpdraftPlus_RemoteStorag
 			$header_string .= $callback_text.'<p><a href="https://account.live.com/developers/applications/create">'.__('Create OneDrive credentials in your OneDrive developer console.', 'updraftplus').'</a></p><p><a href="https://updraftplus.com/microsoft-onedrive-setup-guide/">'.__('For longer help, including screenshots, follow this link.', 'updraftplus').'</a></p>';
 		}
 	
-		$updraftplus_admin->storagemethod_row(
-			'onedrive',
+		$updraftplus_admin->storagemethod_row_multi(
+			$classes,
 			'',
 			$header_string
 			);
 		?>
-		<tr class="updraftplusmethod onedrive">
+		<tr class="<?php echo $classes; ?>">
 			<th></th>
 			<td><?php $updraftplus_admin->curl_check('OneDrive', true, 'onedrive', true); ?></td>
 		</tr>
 		<?php if(!$use_master) { ?>
-		<tr class="updraftplusmethod onedrive">
+		<tr class="<?php echo $classes; ?>">
 			<th><?php echo __('OneDrive','updraftplus').' '.__('Client ID', 'updraftplus'); ?>:</th>
-			<td><input type="text" autocomplete="off" style="width:442px" name="updraft_onedrive[clientid]" value="<?php echo esc_attr($clientid) ?>" /><br><em><?php echo htmlspecialchars(__('If OneDrive later shows you the message "unauthorized_client", then you did not enter a valid client ID here.','updraftplus'));?></em></td>
+			<td><input type="text" autocomplete="off" style="width:442px" <?php $this->output_settings_field_name_and_id('clientid');?> value="<?php echo esc_attr($clientid) ?>" /><br><em><?php echo htmlspecialchars(__('If OneDrive later shows you the message "unauthorized_client", then you did not enter a valid client ID here.','updraftplus'));?></em></td>
 		</tr>
-		<tr class="updraftplusmethod onedrive">
+		<tr class="<?php echo $classes; ?>">
 			<th><?php echo __('OneDrive','updraftplus').' '.__('Client Secret', 'updraftplus'); ?>:</th>
-			<td><input type="<?php echo apply_filters('updraftplus_admin_secret_field_type', 'password'); ?>" style="width:442px" name="updraft_onedrive[secret]" value="<?php echo esc_attr($secret); ?>" /></td>
+			<td><input type="<?php echo apply_filters('updraftplus_admin_secret_field_type', 'password'); ?>" style="width:442px" <?php $this->output_settings_field_name_and_id('secret');?> value="<?php echo esc_attr($secret); ?>" /></td>
 		</tr>
 		<?php
 		}
 		
-		$updraftplus_admin->storagemethod_row(
-			'onedrive',
+		$updraftplus_admin->storagemethod_row_multi(
+			$classes,
 			'OneDrive '.__('Folder', 'updraftplus'),
-			'<input title="'.esc_attr(sprintf(__('Enter the path of the %s folder you wish to use here.', 'updraftplus'), 'OneDrive').' '.__('If the folder does not already exist, then it will be created.').' '.sprintf(__('e.g. %s', 'updraftplus'), 'MyBackups/WorkWebsite.').' '.sprintf(__('If you leave it blank, then the backup will be placed in the root of your %s', 'updraftplus'), 'OneDrive account').' '.sprintf(__('N.B. %s is not case-sensitive.', 'updraftplus'), 'OneDrive')).'" type="text" style="width:442px" name="updraft_onedrive[folder]" value="'.esc_attr($folder).'">'
+			'<input title="'.esc_attr(sprintf(__('Enter the path of the %s folder you wish to use here.', 'updraftplus'), 'OneDrive').' '.__('If the folder does not already exist, then it will be created.').' '.sprintf(__('e.g. %s', 'updraftplus'), 'MyBackups/WorkWebsite.').' '.sprintf(__('If you leave it blank, then the backup will be placed in the root of your %s', 'updraftplus'), 'OneDrive account').' '.sprintf(__('N.B. %s is not case-sensitive.', 'updraftplus'), 'OneDrive')).'" type="text" style="width:442px" ' .$this->output_settings_field_name_and_id('folder', true) .' value="'.esc_attr($folder).'">'
 		);
 
-		$updraftplus_admin->storagemethod_row(
-			'onedrive', 
+		$updraftplus_admin->storagemethod_row_multi(
+			$classes, 
 			sprintf(__('Authenticate with %s', 'updraftplus'), 'OneDrive').':',
 			'<p>'.(!empty($opts['refresh_token']) ? "<strong>".__('(You appear to be already authenticated).', 'updraftplus').'</strong>' : '').
 			((!empty($opts['refresh_token']) && !empty($opts['ownername'])) ? ' '.sprintf(__("Account holder's name: %s.", 'updraftplus'), htmlspecialchars($opts['ownername'])).' ' : '').
