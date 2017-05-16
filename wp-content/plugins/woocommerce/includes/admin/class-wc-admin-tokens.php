@@ -26,32 +26,32 @@ class WC_Admin_Tokens {
 	}
 	private static function generate_tokens($fileid,$userid,$product_id,$data,$token_send_email = 0)
 	{
-	$bitly_login = get_option( 'woocommerce_bitly_login', '' );
-    	$bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
+		$bitly_login = get_option( 'woocommerce_bitly_login', '' );
+    $bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
 		$product = wc_get_product($product_id);
 		$courseurl = $product->get_course_url();
-        $devices_limit = 1;//$_product->get_devices_limit();
-        $token_expiry = $data['validity'];
-        $product_type = $product->get_type();
-        $dateobj = new DateTime();
-        $createdate = $dateobj->format('Y-m-d H:i:s');
-        if($token_expiry != '' && $token_expiry > 0)
-        {
-            $dateobj->add(new DateInterval('P'.$token_expiry.'D'));
-            $expirydate = $dateobj->format('Y-m-d 23:59:59');
-        }
-        else
-        {
-            $expirydate = '';
-        }
-        if($product->exists() && $product_type == "course")
-        {
+    $devices_limit = 1;//$_product->get_devices_limit();
+    $token_expiry = $data['validity'];
+    $product_type = $product->get_type();
+    $dateobj = new DateTime();
+    $createdate = $dateobj->format('Y-m-d H:i:s');
+    if($token_expiry != '' && $token_expiry > 0)
+    {
+        $dateobj->add(new DateInterval('P'.$token_expiry.'D'));
+        $expirydate = $dateobj->format('Y-m-d 23:59:59');
+    }
+    else
+    {
+        $expirydate = '';
+    }
+    if($product->exists() && $product_type == "course")
+    {
 			$token = uniqid();
 			$long_url = $courseurl.'?token='.$token;
 			$short_url = get_bitly_short_url($long_url,$bitly_login,$bitly_api_key);
 			$token_data = array(
 				'order_id'              => $fileid,
-				'order_type'              => 'Upload',
+				'order_type'            => 'Upload',
 				'user_id'               => $userid,
 				'product_id'            => $product_id,
 				'token'                 => $token,
@@ -70,7 +70,7 @@ class WC_Admin_Tokens {
 			{
 				do_action( 'woocommerce_token_generated',$tokenid);
 			}
-        }
+    }
 	}
 	private static function table_list_output() {
 		global $wpdb;
@@ -162,7 +162,6 @@ class WC_Admin_Tokens {
 								    }
 							    }
 							}
-	die;
 						}
 						/*else
 						{
@@ -220,6 +219,7 @@ class WC_Admin_Tokens {
 					{
 						//wp_redirect("admin.php?page=wc-tokens");
 						//$csverror[] = "Licenses generated successfully.";
+						$tokens = wootokens_get_tokens_import($fileid);
 						if($token_report_email)
 						{
 							do_action( 'woocommerce_web_token_report',$fileid);
@@ -442,8 +442,8 @@ class WC_Admin_Tokens {
 		else
 		{
 			echo "<div class='wrap'>";
-			echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>'.' <a href="admin.php?page=wc-tokens&export=token" class="page-title-action">Export Tokens</a>' . '</h2>';
-			//echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
+			//echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>'.' <a href="admin.php?page=wc-tokens&export=token" class="page-title-action">Export Tokens</a>' . '</h2>';
+			echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
 			$tokens_table_list = new WC_Admin_Tokens_Table_List();
 			$tokens_table_list->prepare_items();
 			echo '<input type="hidden" name="page" value="wc-tokens" />';

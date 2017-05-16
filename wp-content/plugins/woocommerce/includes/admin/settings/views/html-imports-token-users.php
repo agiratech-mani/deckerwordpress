@@ -81,6 +81,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</tbody>
 		</table>
 	</form>
+<?php 
+  if(!empty($tokens)):
+?>
+	<br>
+	<h2>Imported Licenses</h2>
+	<table class="wp-list-table widefat fixed striped">
+    <thead>
+      <tr>
+      	<th>S.No	</th>
+      	<th>Token	</th>
+      	<th>First Name	</th>
+      	<th>Last Name	</th>
+      	<th>Email	</th>
+      	<th>Short Url	</th>
+      	<th>Long Url	</th>
+      	<th>Created Date	</th>
+      	<th>Expiry Date	</th>
+      	<th>Company</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<?php 
+    	if(!empty($tokens)): 
+    		foreach($tokens as $token):
+    	?>
+    		<tr>
+	        <td><?php echo $token['sno']; ?></td>
+	        <td><?php echo $token['token']; ?></td>
+	        <td><?php echo $token['first_name']; ?></td>
+	        <td><?php echo $token['last_name']; ?></td>
+	        <td><?php echo $token['email']; ?></td>
+	        <td><?php echo $token['short_url']; ?></td>
+	        <td><?php echo $token['long_url']; ?></td>
+	        <td><?php echo $token['created_date']; ?></td>
+	        <td><?php echo $token['expiry_date']; ?></td>
+	        <td><?php echo $token['company']; ?></td>
+	      </tr>
+    	<?php 
+    		endforeach;
+    	endif; 
+    	?>
+    </tbody>
+  </table>
+  <?php
+  	endif; 
+  ?>
 </div>
 <script type="text/javascript">
 	

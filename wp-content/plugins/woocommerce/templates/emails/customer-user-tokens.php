@@ -44,6 +44,8 @@ do_action( 'woocommerce_email_header', $email_heading); ?>
 </div>
 <?php
 do_action( 'woocommerce_email_generate_tokens', $token, $sent_to_admin, $plain_text, $email );
+
+
 /**
  * @hooked WC_Emails::customer_details() Shows customer details
  * @hooked WC_Emails::email_address() Shows email address
