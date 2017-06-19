@@ -376,7 +376,7 @@ class WC_Admin_Tokens {
 						'I' => 'long_url',
 						'J' => 'token_created_date',
 						'K' => 'token_expiry_date',
-						'L' => 'token_last_accessed '
+						'L' => 'token_last_accessed'
 					);
 					$styleArray = array(
 					    'font' => array(
