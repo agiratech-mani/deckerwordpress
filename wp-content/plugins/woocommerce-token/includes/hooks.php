@@ -27,7 +27,7 @@ function web_tokens_routes()
 }
 function verify_tokens(WP_REST_Request $request) {
 
-	global $wpdb, $web_tokens;
+	global $wpdb;
 	$web_tokens = new WooCommerce_Token();
 	$params = $request->get_params();
     $type = $params['type'];

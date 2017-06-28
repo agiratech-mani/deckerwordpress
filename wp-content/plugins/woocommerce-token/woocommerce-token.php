@@ -14,22 +14,23 @@ require_once dirname( __FILE__ ) . '/classes/classes.php';
 require_once dirname( __FILE__ ) . '/includes/hooks.php';
 //require_once dirname( __FILE__ ) . '/includes/widgets.php';
 function wootokens_add_web_tokens( $data ) {
-    global $web_tokens;
+    $web_tokens = new WooCommerce_Token();
     $id = $web_tokens->add_web_tokens( $data );
     return $id;
 }
 function wootokens_get_web_tokens( $order_id = NULL ) {
-    global $web_tokens;
+    $web_tokens = new WooCommerce_Token();
     $tokens = $web_tokens->get_web_tokens( $order_id );
     return $tokens;
 }
 function wootokens_get_tokens_import( $importid = NULL ) {
-    global $web_tokens;
+    $web_tokens = new WooCommerce_Token();
     $tokens = $web_tokens->get_tokens_import( $importid );
     return $tokens;
 }
 function wootokens_get_import( $importid = NULL ) {
-    global $web_tokens,$wpdb;
+    global $wpdb;
+    $web_tokens = new WooCommerce_Token();
     $sql = "select * from {$wpdb->prefix}web_imports ";
     if(!is_null($importid))
     {
@@ -40,7 +41,7 @@ function wootokens_get_import( $importid = NULL ) {
     return $web_tokens;
 }
 function wootokens_get_web_token( $order_id = NULL ) {
-    global $web_tokens;
+    $web_tokens = new WooCommerce_Token();
     $tokens = $web_tokens->get_web_token_by_id( $order_id );
     return $tokens;
 }

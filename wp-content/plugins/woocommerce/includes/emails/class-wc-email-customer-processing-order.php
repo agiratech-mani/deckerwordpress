@@ -47,6 +47,8 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 	 * @param WC_Order $order Order object.
 	 */
 	public function trigger( $order_id, $order = false ) {
+		$logger = new WC_Logger();
+		$logger->info( "woocommerce_order_status_pending_to_processing_notification : ". $order_id );
 		if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
 			$order = wc_get_order( $order_id );
 		}

@@ -393,7 +393,7 @@ class WC_Structured_Data {
 		$markup['url']                = $order_url;
 		$markup['orderStatus']        = isset( $order_status[ $order->get_status() ] ) ? $order_status[ $order->get_status() ] : '';
 		$markup['orderNumber']        = $order->get_order_number();
-		$markup['orderDate']          = $order->get_date_created()->format( 'c' );
+		$markup['orderDate']          = $order->get_date_created();
 		$markup['acceptedOffer']      = $markup_offers;
 		$markup['discount']           = $order->get_total_discount();
 		$markup['discountCurrency']   = $order->get_currency();

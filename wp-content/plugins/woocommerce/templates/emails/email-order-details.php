@@ -27,7 +27,7 @@ do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plai
 <?php if ( ! $sent_to_admin ) : ?>
 	<h2><?php printf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ); ?></h2>
 <?php else : ?>
-	<h2><a class="link" href="<?php echo esc_url( admin_url( 'post.php?post=' . $order->get_id() . '&action=edit' ) ); ?>"><?php printf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ); ?></a> (<?php printf( '<time datetime="%s">%s</time>', $order->get_date_created()->format( 'c' ), wc_format_datetime( $order->get_date_created() ) ); ?>)</h2>
+	<h2><a class="link" href="<?php echo esc_url( admin_url( 'post.php?post=' . $order->get_id() . '&action=edit' ) ); ?>"><?php printf( __( 'Order #%s', 'woocommerce' ), $order->get_order_number() ); ?></a> (<?php printf( '<time datetime="%s">%s</time>', wc_format_datetime( $order->get_date_created() ), wc_format_datetime( $order->get_date_created() ) ); ?>)</h2>
 <?php endif; ?>
 <?php
 if($email->isCourse)

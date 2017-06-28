@@ -295,7 +295,10 @@ class WC_Order extends WC_Abstract_Order {
 	 * Handle the status transition.
 	 */
 	protected function status_transition() {
+		$logger = new WC_Logger();
+		$logger->info( "status transition" );
 		if ( $this->status_transition ) {
+			$logger->info( print_r($this->status_transition,true) );
 			do_action( 'woocommerce_order_status_' . $this->status_transition['to'], $this->get_id(), $this );
 
 			if ( ! empty( $this->status_transition['from'] ) ) {
