@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'WC_Email_Web_Token_Report' ) ) :
+if ( ! class_exists( 'WC_Email_Web_Token_Report',false ) ) :
 require_once ABSPATH . 'wp-includes/PHPExcel/Classes/PHPExcel.php';
 /**
  * Cancelled Order Email.

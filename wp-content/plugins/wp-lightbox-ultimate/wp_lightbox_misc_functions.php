@@ -14,30 +14,25 @@ function wp_lightbox_anchor_text_protected_s3_video_display($atts)
                 'autoplay' = 'false',
 	), $atts));
         */
-	//Do some error checking on the name and bucket parameters
+        if(isset($atts['link']) && !empty($atts['link'])){
+            //Check if PHP version is >= 5.5.0
+            if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+                return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+            }
+            //Check if we have OpenSSL extension enabeld
+            if (!extension_loaded('openssl')) {
+                return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+            }
+        }
         $name = "";
         $bucket = "";
         if($atts['name'])
         {
             $name = $atts['name'];
-            if (preg_match("/http/", $atts['name'])){
-                    return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "name" field for your Protected S3 Video shortcode. You should only use the name of the video file in this field (Not the full URL of the file).</div>';	 
-            }
-        }
-        else
-        {
-            return '<div class="wp_lightbox_error_message">Please specify the name of your S3 video in the "name" parameter</div>';
         }
         if($atts['bucket'])
         {
             $bucket = $atts['bucket'];
-            if (preg_match("/http/", $atts['bucket'])){
-                    return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "bucket" field for your Protected S3 Video shortcode. You should only use the name of the bucket in this field (Not the full URL).</div>';	 
-            }
-        }
-        else
-        {
-            return '<div class="wp_lightbox_error_message">Please specify the name of your S3 bucket containing the video in the "bucket" parameter</div>';
         }
         $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
 	$secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
@@ -108,30 +103,25 @@ function wp_lightbox_protected_s3_video_display($atts)
 		'img_height' => '',
 	), $atts));
         */
-	//Do some error checking on the name and bucket parameters
+        if(isset($atts['link']) && !empty($atts['link'])){
+            //Check if PHP version is >= 5.5.0
+            if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+                return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+            }
+            //Check if we have OpenSSL extension enabeld
+            if (!extension_loaded('openssl')) {
+                return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+            }
+        }
         $name = "";
         $bucket = "";
         if($atts['name'])
         {
             $name = $atts['name'];
-            if (preg_match("/http/", $atts['name'])){
-                    return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "name" field for your Protected S3 Video shortcode. You should only use the name of the video file in this field (Not the full URL of the file).</div>';	 
-            }
-        }
-        else
-        {
-            return '<div class="wp_lightbox_error_message">Please specify the name of your S3 video in the "name" parameter</div>';
         }
         if($atts['bucket'])
         {
             $bucket = $atts['bucket'];
-            if (preg_match("/http/", $atts['bucket'])){
-                    return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "bucket" field for your Protected S3 Video shortcode. You should only use the name of the bucket in this field (Not the full URL).</div>';	 
-            }
-        }
-        else
-        {
-            return '<div class="wp_lightbox_error_message">Please specify the name of your S3 bucket containing the video in the "bucket" parameter</div>';
         }
 	$access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
 	$secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
@@ -197,30 +187,41 @@ function wp_lightbox_embed_protected_s3_video_display($atts)
             'class' => '',
     ), $atts));
      */
-    $atts['anchor_type'] = "embed";
-    $error_msg = wplu_validate_amazon_s3_parameter($atts);
-    if(!empty($error_msg))
-    {
-        return $error_msg;
+    if(isset($atts['link']) && !empty($atts['link'])){
+        //Check if PHP version is >= 5.5.0
+        if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+            return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+        }
+        //Check if we have OpenSSL extension enabeld
+        if (!extension_loaded('openssl')) {
+            return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+        }
     }
     $wp_lightbox_config = WP_Lightbox_Config::getInstance();
+    $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
+    $secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
+    $link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
+
+    if(empty($access_key) || empty($secret_key)){
+        return '<div class="wp_lightbox_error_message">You must fill in a value in both the "AWS Access Key ID" and the "AWS Secret Access Key" fields in the settings menu!</div>';
+    }
+    if(empty($link_duration) && $link_duration!='0'){
+        $link_duration = '300';
+    }
+
     $class = "";
     $atts = wplu_get_media_dimensions($atts);
     $width = $atts['width'];
     $height =  $atts['height'];
     $name = $atts['name'];
     $bucket = $atts['bucket'];
-    $link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
-    if(empty($link_duration) && $link_duration!='0')
-    {
-        $link_duration = '300';
-    }
+
     $div_id = wp_lightbox_generate_unique_id();
     $player_id = 'player_'.$div_id;
     $autoplay_value = "";
     $is_splash = " is-splash";
     $preload = ' preload="none"'; // still forcing it so firefox does not load video data in the background.
-    if($atts['autoplay'])
+    if(isset($atts['autoplay']))
     {
         if($atts['autoplay']=="true"){
             $autoplay_value = " autoplay";
@@ -229,28 +230,41 @@ function wp_lightbox_embed_protected_s3_video_display($atts)
         }
     }
     $ratio = wp_lightbox_calculate_flowplayer_data_ratio($width, $height);
-    $video_ratio = ' data-ratio="'.$ratio.'"';
+    $video_ratio = ' data-ratio="'.$ratio.'"';   
     
-    $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
-    $secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
-    $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
-    $link = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
-    $link2 = str_replace('%2B', '%25252B',$link);
+    $file = '';
+    if(isset($atts['link']) && !empty($atts['link'])){ //use Amazon S3 Signature version 4
+        require_once(WP_LIGHTBOX_PLUGIN_PATH.'/lib/aws/aws-autoloader.php');
+        $link = $atts['link'];
+        $s3_request = wp_lightbox_s3_url_request($link);       
+        if(isset($s3_request['error']) && !empty($s3_request['error'])){
+            return $s3_request['error'];
+        }
+        if(isset($s3_request['link']) && !empty($s3_request['link'])){
+            $file = $s3_request['link'];
+        }
+    }
+    else{
+        $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
+        $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+        //$file2 = str_replace('%2B', '%25252B',$file);
+    }
     $color = '';
-    if($atts['poster']){
+    if(isset($atts['poster']) && !empty($atts['poster'])){
         $poster = $atts['poster'];
         $color = 'background: #000000 url('.$poster.');background-size: 100% auto;';
     }
     else{
         $color = 'background-color: #000000;';
     }
-    
-    $video_src = '<source type="video/mp4" src="'.$link.'">
-        <source type="video/flash" src="'.$link2.'">';
+    $video_src = '<source type="video/mp4" src="'.$file.'">';
+    /*
+    $video_src = '<source type="video/mp4" src="'.$file.'">
+        <source type="video/flash" src="'.$file2.'">';
     $path_parts = pathinfo($name);
     if($path_parts['extension']=="flv"){
-        $video_src = '<source type="video/flash" src="'.$link2.'">';
-    }
+        $video_src = '<source type="video/flash" src="'.$file2.'">';
+    }*/
     $wp_lightbox_output = <<<EOT
     <div class="lightbox_ultimate_anchor lightbox_ultimate_text_anchor $class">
         <div id="$player_id" class="flowplayer play-button{$is_splash}" data-engine="html5"{$video_ratio}>
@@ -269,6 +283,135 @@ function wp_lightbox_embed_protected_s3_video_display($atts)
 EOT;
     $wp_lightbox_output = wp_lightbox_filter_shortcode_content($wp_lightbox_output);
     return $wp_lightbox_output;
+}
+
+function wp_lightbox_s3_url_request($uri_in) 
+{
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();
+    $aws_acckey = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
+    $aws_seckey = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
+    $expiry = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration');
+    
+    $parsed_file_path = parse_url($uri_in);
+    $region = wp_lightbox_get_s3_region_from_host($parsed_file_path['host']);
+    $s3_err = '';
+    try {
+        $s3 = new Aws\S3\S3Client([
+            'version' => 'latest',
+            'region' => $region,
+            'credentials' => [
+                'key' => $aws_acckey,
+                'secret' => $aws_seckey
+            ],
+            'endpoint' => $parsed_file_path['scheme'] . '://' . $parsed_file_path['host'],
+        ]);
+
+        // bucket and key
+        $bucket_key = wp_lightbox_get_s3_bucket_and_key_from_path($parsed_file_path['path']);
+
+        // the command
+        $cmd = $s3->getCommand('GetObject', [
+            'Bucket' => $bucket_key['bucket'],
+            'Key' => $bucket_key['key']
+        ]);
+        // Get the request, valid for $expiry seconds
+        $request = $s3->createPresignedRequest($cmd, "+$expiry seconds");
+    } catch (S3Exception $e) {
+        $s3_err = $e->getMessage();
+    }
+    $s3_request = array();
+    if (isset($s3_err) && !empty($s3_err)) { //Error occured during interaction with API
+        $s3_request['error'] = $s3_err;
+        return $s3_request;
+    }
+    $s3_request['link'] = $request->getUri();
+
+    return $s3_request;
+}
+
+function wp_lightbox_get_s3_region_from_host($host) 
+{
+    // the region
+    $region = '';
+    // region key
+    $region_key = str_ireplace('.amazonaws.com', '', $host);
+    // check if we need to strip of a subdomain
+    if (false !== stristr($region_key, '.')) {
+        $region_parts = explode('.', $region_key);
+        $region_key = array_pop($region_parts);
+    }
+
+    switch ($region_key) {
+        case 's3-us-west-2':
+            $region = 'us-west-2';
+            break;
+        case 's3-us-west-1':
+            $region = 'us-west-1';
+            break;
+        case 's3-eu-west-1':
+            $region = 'eu-west-1';
+            break;
+        case 'eu-west-2':
+        case 's3-eu-west-2':
+            $region = 'eu-west-2';
+            break;
+        case 'eu-central-1':
+        case 's3-eu-central-1':
+            $region = 'eu-central-1';
+            break;
+        case 's3-ap-southeast-1':
+            $region = 'ap-southeast-1';
+            break;
+        case 's3-ap-southeast-2':
+            $region = 'ap-southeast-2';
+            break;
+        case 's3-ap-northeast-1':
+            $region = 'ap-northeast-1';
+            break;
+        case 's3-sa-east-1':
+            $region = 'sa-east-1';
+            break;
+        case 'ap-northeast-2':
+        case 's3-ap-northeast-2':
+            $region = 'ap-northeast-2';
+            break;
+        case 'ap-south-1':
+        case 's3-ap-south-1':
+            $region = 'ap-south-1';
+            break;
+        case 'ca-central-1':
+        case 's3-ca-central-1':
+            $region = 'ca-central-1';
+            break;
+        case 'us-east-2':
+        case 's3-us-east-2':
+            $region = 'us-east-2';
+            break;
+        case 'cn-north-1':
+        case 's3-cn-north-1':
+            $region = 'cn-north-1';
+            break;
+        case 's3':
+        case 's3-external-1':
+        default:
+            $region = 'us-east-1';
+            break;
+    }
+    // return region
+    return $region;
+}
+
+function wp_lightbox_get_s3_bucket_and_key_from_path($path) 
+{
+    $chunks = explode('/', ltrim($path, '/'));
+
+    if (1 == count($chunks)) {
+        array_unshift($chunks, '.');
+    }
+
+    $bucket = array_shift($chunks);
+
+    return array('bucket' => $bucket, 'key' => str_ireplace('+', ' ', implode('/', $chunks)));
 }
 
 function wp_lightbox_anchor_text_mp4_video_display($atts)
@@ -410,74 +553,130 @@ EOT;
 	return $wp_lightbox_output;	
 }
 
-function wp_lightbox_anchor_text_secure_s3_file_download_display($name,$bucket,$text,$class)
+function wp_lightbox_anchor_text_secure_s3_file_download_display($atts)
 {
-	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
-	
-	//Do some error checking on the name and bucket parameters
-	if (preg_match("/http/", $name)){
-		return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "name" field for your Protected S3 Video shortcode. You should only use the name of the video file in this field (Not the full URL of the file).</div>';	 
-	}
-	if (preg_match("/http/", $bucket)){
-		return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "bucket" field for your Protected S3 Video shortcode. You should only use the name of the bucket in this field (Not the full URL).</div>';	 
-	}
-		
-	$access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
-	$secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
-	$link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
-	
-	if(empty($access_key) || empty($secret_key)){
-		return '<div class="wp_lightbox_error_message">You must fill in a value in both the "AWS Access Key ID" and the "AWS Secret Access Key" fields in the settings menu!</div>';
-	}
-	if(empty($link_duration) && $link_duration!='0'){
-		$link_duration = '300';
-	}
-			
-	$objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
-	$link = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+    /*
+    extract(shortcode_atts(array(
+		'name' => '',
+		'bucket' =>'',
+		'text' => '',
+		'class' => '',
+	), $atts));
+     */
+    if(isset($atts['link']) && !empty($atts['link'])){
+        //Check if PHP version is >= 5.5.0
+        if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+            return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+        }
+        //Check if we have OpenSSL extension enabeld
+        if (!extension_loaded('openssl')) {
+            return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+        }
+    }
+    $name = (isset($atts['name']) && !empty($atts['name'])) ? $atts['name'] : "";
+    $bucket = (isset($atts['bucket']) && !empty($atts['bucket'])) ? $atts['bucket'] : "";
+    $text = (isset($atts['text']) && !empty($atts['text'])) ? $atts['text'] : "";
+    $class = (isset($atts['class']) && !empty($atts['class'])) ? $atts['class'] : "";
+    
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();		
+    $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
+    $secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
+    $link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
 
-	$wp_lightbox_output = <<<EOT
-	<div class="lightbox_ultimate_anchor lightbox_ultimate_text_anchor $class">
-	<a href="$link">$text</a>
-	</div>
+    if(empty($access_key) || empty($secret_key)){
+            return '<div class="wp_lightbox_error_message">You must fill in a value in both the "AWS Access Key ID" and the "AWS Secret Access Key" fields in the settings menu!</div>';
+    }
+    if(empty($link_duration) && $link_duration!='0'){
+            $link_duration = '300';
+    }
+    $file = '';
+    if(isset($atts['link']) && !empty($atts['link'])){ //use Amazon S3 Signature version 4
+        require_once(WP_LIGHTBOX_PLUGIN_PATH.'/lib/aws/aws-autoloader.php');
+        $link = $atts['link'];
+        $s3_request = wp_lightbox_s3_url_request($link);
+        if(isset($s3_request['error']) && !empty($s3_request['error'])){
+            return $s3_request['error'];
+        }
+        if(isset($s3_request['link']) && !empty($s3_request['link'])){
+            $file = $s3_request['link'];
+        }
+    }
+    else{
+        $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
+        $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+    }
+
+    $wp_lightbox_output = <<<EOT
+    <div class="lightbox_ultimate_anchor lightbox_ultimate_text_anchor $class">
+    <a href="$file">$text</a>
+    </div>
 EOT;
-	$wp_lightbox_output = wp_lightbox_filter_shortcode_content($wp_lightbox_output);
-	return $wp_lightbox_output;	
+    $wp_lightbox_output = wp_lightbox_filter_shortcode_content($wp_lightbox_output);
+    return $wp_lightbox_output;	
 }
 
-function wp_lightbox_secure_s3_file_download_display($name,$bucket,$source,$class,$img_attributes)
+function wp_lightbox_secure_s3_file_download_display($atts)
 {
-	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
-	
-	//Do some error checking on the name and bucket parameters
-	if (preg_match("/http/", $name)){
-		return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "name" field for your Protected S3 Video shortcode. You should only use the name of the video file in this field (Not the full URL of the file).</div>';	 
-	}
-	if (preg_match("/http/", $bucket)){
-		return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "bucket" field for your Protected S3 Video shortcode. You should only use the name of the bucket in this field (Not the full URL).</div>';	 
-	}
-		
-	$access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
-	$secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
-	$link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
-	
-	if(empty($access_key) || empty($secret_key)){
-		return '<div class="wp_lightbox_error_message">You must fill in a value in both the "AWS Access Key ID" and the "AWS Secret Access Key" fields in the settings menu!</div>';
-	}
-	if(empty($link_duration) && $link_duration!='0'){
-		$link_duration = '300';
-	}
-			
-	$objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
-	$link = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+    /*
+    extract(shortcode_atts(array(
+            'name' => '',
+            'bucket' =>'',
+            'source' => '',
+            'class' => '',
+            'img_attributes' => '',
+    ), $atts)); 
+    */
+    if(isset($atts['link']) && !empty($atts['link'])){
+        //Check if PHP version is >= 5.5.0
+        if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+            return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+        }
+        //Check if we have OpenSSL extension enabeld
+        if (!extension_loaded('openssl')) {
+            return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+        }
+    }
+    $name = (isset($atts['name']) && !empty($atts['name'])) ? $atts['name'] : "";
+    $bucket = (isset($atts['bucket']) && !empty($atts['bucket'])) ? $atts['bucket'] : "";
+    $source = (isset($atts['source']) && !empty($atts['source'])) ? $atts['source'] : "";
+    $class = (isset($atts['class']) && !empty($atts['class'])) ? $atts['class'] : "";
+    $img_attributes = (isset($atts['img_attributes']) && !empty($atts['img_attributes'])) ? $atts['img_attributes'] : "";
+    
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();		
+    $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
+    $secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
+    $link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
 
-	$wp_lightbox_output = <<<EOT
-	<div class="lightbox_ultimate_anchor lightbox_ultimate_image_anchor $class">
-	<a href="$link"><img src="$source" $img_attributes /></a>
-	</div>
+    if(empty($access_key) || empty($secret_key)){
+            return '<div class="wp_lightbox_error_message">You must fill in a value in both the "AWS Access Key ID" and the "AWS Secret Access Key" fields in the settings menu!</div>';
+    }
+    if(empty($link_duration) && $link_duration!='0'){
+            $link_duration = '300';
+    }
+    $file = '';
+    if(isset($atts['link']) && !empty($atts['link'])){ //use Amazon S3 Signature version 4
+        require_once(WP_LIGHTBOX_PLUGIN_PATH.'/lib/aws/aws-autoloader.php');
+        $link = $atts['link'];
+        $s3_request = wp_lightbox_s3_url_request($link);
+        if(isset($s3_request['error']) && !empty($s3_request['error'])){
+            return $s3_request['error'];
+        }
+        if(isset($s3_request['link']) && !empty($s3_request['link'])){
+            $file = $s3_request['link'];
+        }
+    }
+    else{
+        $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
+        $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+    }
+
+    $wp_lightbox_output = <<<EOT
+    <div class="lightbox_ultimate_anchor lightbox_ultimate_image_anchor $class">
+    <a href="$file"><img src="$source" $img_attributes /></a>
+    </div>
 EOT;
-	$wp_lightbox_output = wp_lightbox_filter_shortcode_content($wp_lightbox_output);
-	return $wp_lightbox_output;
+    $wp_lightbox_output = wp_lightbox_filter_shortcode_content($wp_lightbox_output);
+    return $wp_lightbox_output;
 }
 
 function wp_lightbox_ultimate_fancy_gallery_display($class,$content)
@@ -531,22 +730,22 @@ function wp_lightbox_ultimate_youtube_video_embed_display($videoid,$playlist,$wi
     {
         if(!empty($playlist))
         {
-            $youtube_link = "http://www.youtube.com/embed/videoseries?list=".$playlist."&wmode=transparent&";
+            $youtube_link = "https://www.youtube.com/embed/videoseries?list=".$playlist."&wmode=transparent&";
         }
         else
         {
-            $youtube_link = "http://www.youtube.com/v/".$videoid."?wmode=transparent&";
+            $youtube_link = "https://www.youtube.com/v/".$videoid."?wmode=transparent&";
         }
     }
     else
     {
         if(!empty($playlist))
         {
-            $youtube_link = "http://www.youtube.com/embed/videoseries?list=".$playlist."&wmode=transparent&";
+            $youtube_link = "https://www.youtube.com/embed/videoseries?list=".$playlist."&wmode=transparent&";
         }
         else
         {
-            $youtube_link = "http://www.youtube.com/embed/".$videoid."?wmode=transparent&";
+            $youtube_link = "https://www.youtube.com/embed/".$videoid."?wmode=transparent&";
         }
     }
     if($show_suggested_video=="1")
@@ -557,10 +756,12 @@ function wp_lightbox_ultimate_youtube_video_embed_display($videoid,$playlist,$wi
     {
         $show_suggested_video = "&rel=0";
     }
+    /* 
     if($use_https=="1")
     {
         $youtube_link = str_replace("http://","https://",$youtube_link);	
     }
+    */
     if($enable_privacy=="1")
     {
         $youtube_link = str_replace("youtube","youtube-nocookie",$youtube_link);
@@ -690,17 +891,25 @@ function wp_lightbox_ultimate_embed_audio_display($url,$cover_image,$width,$heig
             $coverimage = ' poster="'.$cover_image.'"';
 	}
         $autoplay_value = "";
-	if($autoplay=="true")
-        {
-            //$autoplay_value = ' autoplay="'.$autoplay.'"';
-            $autoplay_value = 'mediaElement.play();';
-        }
 	$div_id = wp_lightbox_generate_unique_id();
 	$player_id = 'player_'.$div_id;
 	$wp_lightbox_audio_rel = "wp_lightbox_audio_rel_".$div_id;
+        if($autoplay=="true")
+        {
+            $autoplay_value = <<<EOT
+            mediaElement.oncanplay = function() {
+                mediaElement.play();
+            };    
+EOT;
+        }
+        $audio_autoplay = '';
+        if(!empty($direct_embed) && $autoplay=="true")
+	{
+            $audio_autoplay = ' autoplay';
+        }
 	$flash_player_url = WP_LIGHTBOX_LIB_URL.'/mediaelement/flashmediaelement.swf';
         $embed_code = <<<EOT
-        <audio id="$player_id"{$coverimage} controls="control"> 
+        <audio id="$player_id"{$coverimage} controls="control"{$audio_autoplay}> 
             <source src="$url" type="audio/mp3" />
             <object type="application/x-shockwave-flash" data="$flash_player_url"> 
                 <param name="movie" value="$flash_player_url" /> 
@@ -985,10 +1194,12 @@ EOT;
     $ratio = 'ratio: '.$ratio.',';
     $window_width = $width+20;
     
-    $video_file = '{ flash:   "mp4:'.$video.'" }';
+    //$video_file = '{ flash:   "mp4:'.$video.'" }';
+    $video_file = '{ type: "video/mp4", src:  "mp4:'.$video.'" }';
     $path_parts = pathinfo($video);
     if($path_parts['extension']=="flv"){
-        $video_file = '{ flash:   "flv:'.$video.'" }';
+        //$video_file = '{ flash:   "flv:'.$video.'" }';
+        $video_file = '{ type: "video/flash", src:  "flash:'.$video.'" }';
     }
     $wp_lightbox_output = <<<EOT
     <div class="lightbox_ultimate_anchor lightbox_ultimate_text_anchor $class">
@@ -1023,11 +1234,11 @@ EOT;
                         engine: 'flash',
                         rtmp: "$rtmp_net_url",
                         $ratio
-                        playlist: [
-                          [
-                              $video_file
-                          ]
-                        ]
+                        clip: {
+                            sources: [
+                                $video_file
+                            ]
+                        }
                     })
                     $("#$player_id").addClass("play-button");
                     $autoplay_value
@@ -1122,7 +1333,7 @@ function wp_lightbox_enqueue_misc_scripts()
     wp_register_script('wplu-slider', WP_LIGHTBOX_LIB_URL.'/nivo-slider/jquery.nivo.slider.pack.js', array('jquery'), WP_LIGHTBOX_VERSION);
     wp_enqueue_script('wplu-slider');
     */
-    if(has_shortcode( $post->post_content, 'wp_lightbox_ultimate_youtube_video_embed')){
+    if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, 'wp_lightbox_ultimate_youtube_video_embed')){
         wp_register_script('fitvidsjs', WP_LIGHTBOX_LIB_URL.'/js/jquery.fitvids.js', array('jquery'), WP_LIGHTBOX_VERSION);
         wp_enqueue_script('fitvidsjs');
     }

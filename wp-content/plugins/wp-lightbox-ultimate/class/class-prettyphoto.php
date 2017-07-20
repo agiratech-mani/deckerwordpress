@@ -23,7 +23,7 @@ class WPLU_prettyPhoto
     var $keyboard_shortcuts;
     var $ie6_fallback;
     
-    function WPLU_prettyPhoto()
+    function __construct()
     {
         $this->animation_speed = 'fast';
         $this->slideshow = '5000';

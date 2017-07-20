@@ -1,0 +1,312 @@
+<?php
+/**
+ * The template used for displaying page content in Decker Digital full width layouts
+ *
+ * @package WordPress
+ * @subpackage Twenty_Eleven
+ * @since Twenty Eleven 1.0
+ */
+?>
+<style type="text/css">
+@keyframes flip {
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+  to {
+    transform: perspective(400px);
+  }
+}
+
+.section {
+    padding:55px 0;
+    color:#16618b;
+    font-size:20px;
+    line-height:1.4em;
+    text-align:center;
+}
+.section.big-image {
+    padding: 0 0 55px 0;
+}
+
+.inner-section {
+    width:100%;
+    max-width:1044px;
+    margin:0 auto;
+}
+.entry-content .section h1, .entry-content .section h2 {
+    font-family: 'felt_tip_romanregular' !important;
+    text-align:center;
+    margin:0 auto;
+    font-size:53px;
+    line-height:1.52em;
+    font-weight:normal;
+    color:#16618b;
+}
+.entry-content .section h2.title-size53 {font-size:53px;}
+.entry-content .section h2.title-size36 {font-size:36px;}
+
+.section h3 {
+    text-align:center;
+    font-weight:normal;
+    font-size:22px;
+    color:#16618b;
+    font-family:"Benton Sans Cond",?Arial,?sans-serif;
+    line-height:1.4em;
+    max-width:800px;
+    margin:0 auto;
+}
+.section h3.subtitle-size22 {font-size:22px;}
+.section h3.subtitle-size26 {font-size:26px;}
+.section h3.subtitle-size28 {font-size:28px;}
+
+.section.bg-blue_dark h1, .section.bg-blue_dark h2, .bg-blue_dark h3,
+.section.bg-red h1, .section.bg-red h2, .section.bg-red h3 {
+	color:#ffffff;
+}
+.section, .section.bg-white { background-color:#ffffff; }
+.section.bg-red, .module .bg-red { background-color:#c83d44; color:#ffffff; }
+.section.bg-blue_dark, .module .bg-blue_dark { background-color:#2f8abc; color:#ffffff; }
+.section.bg-blue_med, .module .bg-blue_med { background-color:#bde7fb; }
+.module .bg-orange { background-color:#F79625; color:#ffffff; }
+.section.bg-blue_light { background-color:#e2f6ff; }
+.section.bg-gray_light { background-color:#f6f6f6; }
+
+.inner-section p {
+    text-align:left;
+    max-width:840px;
+}
+.inner-section p,
+.inner-section img.aligncenter {
+    margin-left:auto;
+    margin-right:auto;
+}
+.inner-section .statement_detail p {
+    max-width:100%;
+    margin-left:0;
+}
+.entry-content .section img {
+    max-width:100%;
+    height:auto;
+}
+.inner-section .statement {
+    text-align:left;
+    font-weight:bold;
+    font-size:18px;
+    margin:0 5px 1em 0;
+}
+.inner-section .statement:before {
+    font-family: "FontAwesome";
+    content:"\f0da";/* down: content:"\f0d7"; */
+}
+.inner-section .statement_detail {
+    margin:0 0 2em 12px;
+}
+
+.section-content {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 50px;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.module {
+	width: 20%;
+	height: 200px;
+	margin: 15px 5px;
+	padding: 5px;
+	display: -webkit-flex;
+	display: flex;
+	cursor: pointer;
+}
+.module_inner {
+	height: 90%;
+	width: 100%;
+	border-radius: 5px;
+	padding: 15px;
+	-webkit-display: flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+}
+.module .over {
+	font-size:22px;
+	margin: 0 auto;
+}
+.module .under {
+	font-size:18px;
+	text-align:left;
+	display: none;		
+}
+.flip_side {
+	backface-visibility: visible !important;
+	animation-name: flip;
+	animation-duration: 1500ms;
+	animation-fill-mode: both;
+	/*background-color: #fff !important;*/
+}
+.normal {
+	backface-visibility: visible !important;
+	animation-name: unflip;
+	animation-duration: 1s;
+	animation-fill-mode: both;
+}
+.under ul li {
+	font-size: 14px;
+	margin: 0 0 10px;
+	line-height: normal;
+}
+
+.section a.link-button {
+	display:inline-block;
+	background-color: #c83d44;
+	border-radius: 4px;
+	font-family: felt_tip_romanregular;
+	font-size: 25px;
+	padding: 13px 20px;
+	margin:15px;
+	color:#ffffff;
+}
+.section a.link-button:hover {
+    text-decoration:none;
+    cursor:pointer;
+}
+/* Note: Video player styling with image over video editable in footer.php */
+
+</style>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+	<div class="entry-content">
+		<?php
+        the_content();
+
+        if( have_rows('section') ):
+            while ( have_rows('section') ) : the_row();
+                $moreclass = false;
+                $background_color = get_sub_field('background_color');
+                if($background_color){
+                    $moreclass = ' bg-'.$background_color;
+                }
+                $style = false;
+                /*if($background=='image'){
+                    $background_image = get_sub_field('background_image');
+                    $style = ' style="background-image:url('.$background_image['url'].');"';
+                }*/
+
+                $title = false;
+                $subtitle = false;
+                $title_size = intval(get_sub_field('title_size'));
+                if(get_sub_field('title')){
+                    $title = '<h2 class="title-size'.$title_size.'">'.get_sub_field('title').'</h2>';
+                }
+                $subtitle_size = intval(get_sub_field('subtitle_size'));
+                if(get_sub_field('subtitle')){
+                    $subtitle = '<h3 class="subtitle-size'.$subtitle_size.'">'.get_sub_field('subtitle').'</h3>';
+                }
+
+                $display = false;
+                $content_type = get_sub_field('content_type');
+                if($content_type=="general"){
+                    $general_content = get_sub_field('general_content');
+                    $display = get_sub_field('general_content');
+
+                } elseif($content_type=="image"){
+                    $big_image = get_sub_field('big_image');//echo '<pre>';print_r($big_image);echo '</pre>';
+                    $moreclass .= ' big-image';
+                    $display = '<img src="'.$big_image['url'].'" alt="'.$big_image['alt'].'" width="'.$big_image['sizes']['large-feature-width'].'" height="'.$big_image['large-feature-height'].'" />';
+
+                } elseif($content_type=="modules"){
+                    if( have_rows('lab_module') ):
+											while ( have_rows('lab_module') ) : the_row();
+												$module_color = get_sub_field('module_color');
+												$display .=
+												'<div class="module">
+													<div class="module_inner bg-'.$module_color.'">
+														<div class="over">
+															<strong>'.get_sub_field('module_number').'</strong><br />
+															'.get_sub_field('module_title').'
+														</div>
+														<div class="under">
+															'.get_sub_field('module_text').'
+														</div>
+													</div>
+												</div>';
+											endwhile;
+                    endif;
+
+                } elseif($content_type=="accordion"){
+                    if( have_rows('expandcollapse') ):
+                        while ( have_rows('expandcollapse') ) : the_row();
+                            $display .=
+                            '<div class="statement">
+                                '.get_sub_field('question_or_statement').'
+                            </div>
+                            <div class="statement_detail">
+                                '.get_sub_field('expanded_detail').'
+                            </div>';
+                        endwhile;
+                    endif;
+                }
+
+                echo '
+                <div class="section '.$moreclass.'" '.$style.'>
+                    <div class="inner-section">
+                        '.$title.'
+                        '.$subtitle.'
+                        <div class="section-content">
+                            '.$display.'
+                        </div>
+                    </div>
+                </div>';
+
+            endwhile;
+
+            echo do_shortcode(get_field('html_code'));
+
+        endif;
+
+        ?>
+        <div style="clear:both;"></div>
+
+	</div><!-- .entry-content -->
+
+</article><!-- #post-<?php the_ID(); ?> -->
+
+<script type="text/javascript">
+(function($) {
+$(function() {
+	
+// Engine for the modules flip box
+$(".module").addClass("normal");
+
+$(".module_inner").mouseenter(function(){
+	$(this).addClass("flip_side").removeClass("normal");
+	$(this).find(".over").css({"display":"none"});
+	$(this).find(".under").css({"display":"block"});
+});
+$(".module").mouseleave(function() {
+	$(".flip_side").removeClass("flip_side").addClass("normal");
+	$(this).find(".over").slideDown();
+	$(this).find(".under").hide();
+
+});
+
+
+
+	
+});
+})(jQuery);
+
+</script>

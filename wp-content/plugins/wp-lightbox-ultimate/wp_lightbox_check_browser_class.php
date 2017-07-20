@@ -71,7 +71,7 @@ class WP_LIGHTBOX_CHECK_BROWSER {
 		
 		const OPERATING_SYSTEM_UNKNOWN = 'unknown';
 
-		public function WP_LIGHTBOX_CHECK_BROWSER($useragent="") {
+		function __construct($useragent="") {
 			$this->reset();
 			if( $useragent != "" ) {
 				$this->setUserAgent($useragent);

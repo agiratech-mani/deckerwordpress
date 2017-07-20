@@ -60,90 +60,87 @@ if ( 0 === $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
     <div class="product-top">
         <?php
         if(is_page_template( 'page-locations.php' ) || is_page_template( 'page-full-width.php' )){//locations page, NY pages
+					echo '
+					<div class="coursecolumn coursesale">';
+						if ($product->is_on_sale()){
+							echo '<ins class="earlybird">Early Bird</ins>';
+						}
+						echo '&nbsp;
+					</div>
+					<div class="coursecolumn coursetitle">
+							'; the_title(); echo '';
+							if ($price_html = $product->get_price_html()){
+								if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
+									// sold out
+								} else {
+									echo '<span class="price">'.$price_html.'</span>';
+								}
+							}
+							// if($product->get_type() == "course")
+							// {
+							// 	$device_limit = ($product->get_devices_limit() == ''?"Unlimited":$product->get_devices_limit());
+							// 	$token_expiry = ($product->get_token_expiry() == ''?"Never":$product->get_token_expiry().'(Days)');
+							// 	//echo '<span class=" price"> Devices : '.$device_limit.'</span>';
+							// 	echo '<span class=" price"> Validity : '.$token_expiry.'</span>';
+							// }
+							echo '
+					</div>
+					<div class="coursecolumn courseregister">';
+						if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
+							echo '<span class="soldout">SOLD OUT</span>';
+						} else {
+							echo woocommerce_template_loop_add_to_cart();
+						}
+						echo '
+					</div>';
 
-            echo '
-            <div class="coursecolumn coursesale">';
-                if ($product->is_on_sale()){
-                    echo '<ins class="earlybird">Early Bird</ins>';
-                }
-                echo '&nbsp;
-            </div>
-            <div class="coursecolumn coursetitle">
-                '; the_title(); echo '';
-                if ($price_html = $product->get_price_html()){
-                    if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
-                        // sold out
-                    } else {
-                        echo '
-	                <span class="price">'.$price_html.'</span>';
-                    }
-                }
-               	// if($product->get_type() == "course")
-                // {
-                // 	$device_limit = ($product->get_devices_limit() == ''?"Unlimited":$product->get_devices_limit());
-                // 	$token_expiry = ($product->get_token_expiry() == ''?"Never":$product->get_token_expiry().'(Days)');
-                // 	//echo '<span class=" price"> Devices : '.$device_limit.'</span>';
-                // 	echo '<span class=" price"> Validity : '.$token_expiry.'</span>';
-                // }
-                echo '
-            </div>
-            <div class="coursecolumn courseregister">';
-                if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
-                    echo '<span class="soldout">SOLD OUT</span>';
-                } else {
-		            echo woocommerce_template_loop_add_to_cart();
-                }
-                echo '
-            </div>
-            ';
+        } else { ?>
 
-        } else {?>
-
-            <?php
-            /**
+			<?php
+			/**
 			 * woocommerce_before_shop_loop_item_title hook
 			 *
 			 * @hooked woocommerce_show_product_loop_sale_flash - 10
 			 * @hooked woocommerce_template_loop_product_thumbnail - 10
 			 */
-            do_action( 'woocommerce_before_shop_loop_item_title' ); ?>
+				do_action( 'woocommerce_before_shop_loop_item_title' ); ?>
 
-            <h3><?php the_title(); ?></h3>
+				<h3><?php the_title(); ?></h3>
 
-            <?php
+				<?php
 		    if(stripos($_SERVER['REQUEST_URI'],'/self-directed-learning-resources/') !== false || stripos($_SERVER['REQUEST_URI'],'/decker-digital-learning-resources') !== false){
-		        // || stripos($_SERVER['SCRIPT_URL'],'/program-registration/')!==false
+					// || stripos($_SERVER['SCRIPT_URL'],'/program-registration/')!==false
 
-            	/**
-	            * woocommerce_after_shop_loop_item_title hook.
-	            *
-	            * @hooked woocommerce_template_loop_rating - 5
-	            * @hooked woocommerce_template_loop_price - 10
-	            */
-	            //do_action( 'woocommerce_after_shop_loop_item_title' );
+					/**
+					* woocommerce_after_shop_loop_item_title hook.
+					*
+					* @hooked woocommerce_template_loop_rating - 5
+					* @hooked woocommerce_template_loop_price - 10
+					*/
+					//do_action( 'woocommerce_after_shop_loop_item_title' );
 
-	            /**
-	            * woocommerce_after_shop_loop_item hook.
-	            *
-	            * @hooked woocommerce_template_loop_product_link_close - 5
-	            * @hooked woocommerce_template_loop_add_to_cart - 10
-	            */
-	            do_action( 'woocommerce_after_shop_loop_item' );
+					/**
+					* woocommerce_after_shop_loop_item hook.
+					*
+					* @hooked woocommerce_template_loop_product_link_close - 5
+					* @hooked woocommerce_template_loop_add_to_cart - 10
+					*/
+					do_action( 'woocommerce_after_shop_loop_item' );
 		    }
 		    ?>
 
 		    <?php
 		    if($product->manage_stock=='yes' && ($product->stock_status=='outofstock' || $product->stock==0)){
     		    echo '<span class="soldout">SOLD OUT</span>';
-            } else {
+				} else {
 		        /**
 			     * woocommerce_after_shop_loop_item_title hook
 			     *
 			     * @hooked woocommerce_template_loop_price - 10
 			     */
 			     do_action( 'woocommerce_after_shop_loop_item_title' );
-            }
-        }
+					}
+			}
 
 	/**
 	 * woocommerce_after_shop_loop_item hook.

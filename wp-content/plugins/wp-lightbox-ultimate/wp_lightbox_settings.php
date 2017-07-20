@@ -56,17 +56,17 @@ function wp_lightbox_add_general_settings_menu()
 	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
 	if (isset($_POST['wp_lightbox_general_settings_update']))
 	{
-		$wp_lightbox_config->setValue('wp_lightbox_enable_jquery_checkbox',($_POST["wp_lightbox_enable_jquery_checkbox"]=='1')?1:'');
-		$wp_lightbox_config->setValue('wp_lightbox_disable_shortcode_formatting',(isset($_POST["wp_lightbox_disable_shortcode_formatting"]) && $_POST["wp_lightbox_disable_shortcode_formatting"]=='1')?1:'');
-		$wp_lightbox_config->setValue('wp_lightbox_width',(string)$_POST["wp_lightbox_width"]);
-		$wp_lightbox_config->setValue('wp_lightbox_height',(string)$_POST["wp_lightbox_height"]);
+		$wp_lightbox_config->setValue('wp_lightbox_enable_jquery_checkbox', isset($_POST["wp_lightbox_enable_jquery_checkbox"])?1:'');
+		$wp_lightbox_config->setValue('wp_lightbox_disable_shortcode_formatting', isset($_POST["wp_lightbox_disable_shortcode_formatting"])?1:'');
+		$wp_lightbox_config->setValue('wp_lightbox_width', sanitize_text_field($_POST["wp_lightbox_width"]));
+		$wp_lightbox_config->setValue('wp_lightbox_height', sanitize_text_field($_POST["wp_lightbox_height"]));
 		
-		$wp_lightbox_config->setValue('wp_lightbox_enable_mp4_video_display',(isset($_POST["wp_lightbox_enable_mp4_video_display"]) && $_POST["wp_lightbox_enable_mp4_video_display"]=='1')?1:'');
+		$wp_lightbox_config->setValue('wp_lightbox_enable_mp4_video_display', isset($_POST["wp_lightbox_enable_mp4_video_display"])?1:'');
 		
-                $wp_lightbox_config->setValue('wp_lightbox_enable_amazon_s3_video_display',($_POST["wp_lightbox_enable_amazon_s3_video_display"]=='1')?1:'');
-		$wp_lightbox_config->setValue('wp_lightbox_amazon_s3_access_key',trim($_POST["wp_lightbox_amazon_s3_access_key"]));
-		$wp_lightbox_config->setValue('wp_lightbox_amazon_s3_secret_key',trim($_POST["wp_lightbox_amazon_s3_secret_key"]));
-		$wp_lightbox_config->setValue('wp_lightbox_amazon_s3_link_duration',trim($_POST["wp_lightbox_amazon_s3_link_duration"]));		
+                $wp_lightbox_config->setValue('wp_lightbox_enable_amazon_s3_video_display', isset($_POST["wp_lightbox_enable_amazon_s3_video_display"])?1:'');
+		$wp_lightbox_config->setValue('wp_lightbox_amazon_s3_access_key', sanitize_text_field($_POST["wp_lightbox_amazon_s3_access_key"]));
+		$wp_lightbox_config->setValue('wp_lightbox_amazon_s3_secret_key', sanitize_text_field($_POST["wp_lightbox_amazon_s3_secret_key"]));
+		$wp_lightbox_config->setValue('wp_lightbox_amazon_s3_link_duration', sanitize_text_field($_POST["wp_lightbox_amazon_s3_link_duration"]));		
 
         echo '<div id="message" class="updated fade"><p>';                
         echo '<strong>Options Updated!';        
@@ -204,44 +204,44 @@ function wp_lightbox_add_library_menu()
 	if (isset($_POST['wp_lightbox_library_settings_update']))
 	{
             $wp_lightbox_config->setValue('wp_lightbox_prettyPhoto_checkbox',($_POST["wp_lightbox_prettyPhoto_checkbox"]=='1')?1:'');
-            $wplu_prettyPhoto->animation_speed = $_POST["wp_lightbox_prettyPhoto_animation_speed"];
-            $wplu_prettyPhoto->slideshow = trim($_POST["wp_lightbox_prettyPhoto_slideshow"]);
-            $wplu_prettyPhoto->autoplay_slideshow = ($_POST["wp_lightbox_prettyPhoto_autoplay_slideshow"]=='1')?'true':'false';
-            $wplu_prettyPhoto->opacity = trim($_POST["wp_lightbox_prettyPhoto_opacity"]);
-            $wplu_prettyPhoto->show_title = ($_POST["wp_lightbox_prettyPhoto_show_title"]=='1')?'true':'false';
-            $wplu_prettyPhoto->allow_resize = ($_POST["wp_lightbox_prettyPhoto_allow_resize_window"]=='1')?'true':'false';
-            $wplu_prettyPhoto->allow_expand = ($_POST["wp_lightbox_prettyPhoto_allow_resized_image_expansion"]=='1')?'true':'false';
-            $wplu_prettyPhoto->counter_separator_label = trim($_POST["wp_lightbox_prettyPhoto_counter_separator_label"]);
-            $wplu_prettyPhoto->theme = $_POST["wp_lightbox_prettyPhoto_theme"];
-            $wplu_prettyPhoto->horizontal_padding = trim($_POST["wp_lightbox_prettyPhoto_horizontal_padding"]);
-            $wplu_prettyPhoto->hideflash = ($_POST["wp_lightbox_prettyPhoto_hide_flash"]=='1')?'true':'false';
-            $wplu_prettyPhoto->wmode = trim($_POST["wp_lightbox_prettyPhoto_wmode"]);
-            $wplu_prettyPhoto->autoplay = ($_POST["wp_lightbox_prettyPhoto_autoplay"]=='1')?'true':'false';
-            $wplu_prettyPhoto->modal = ($_POST["wp_lightbox_prettyPhoto_modal"]=='1')?'true':'false';
-            $wplu_prettyPhoto->deeplinking = ($_POST["wp_lightbox_prettyPhoto_enable_deeplinking"]=='1')?'true':'false';
-            $wplu_prettyPhoto->overlay_gallery = ($_POST["wp_lightbox_prettyPhoto_display_overlay_thrumbnail_gallery"]=='1')?'true':'false';
-            $wplu_prettyPhoto->overlay_gallery_max = trim($_POST["wp_lightbox_prettyPhoto_overlay_gallery_max"]);
-            $wplu_prettyPhoto->keyboard_shortcuts = ($_POST["wp_lightbox_prettyPhoto_keyboard_shortcuts"]=='1')?'true':'false';
-            $wplu_prettyPhoto->ie6_fallback = ($_POST["wp_lightbox_prettyPhoto_ie6_fallback"]=='1')?'true':'false';
+            $wplu_prettyPhoto->animation_speed = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_animation_speed"]);
+            $wplu_prettyPhoto->slideshow = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_slideshow"]);
+            $wplu_prettyPhoto->autoplay_slideshow = isset($_POST["wp_lightbox_prettyPhoto_autoplay_slideshow"])?'true':'false';
+            $wplu_prettyPhoto->opacity = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_opacity"]);
+            $wplu_prettyPhoto->show_title = isset($_POST["wp_lightbox_prettyPhoto_show_title"])?'true':'false';
+            $wplu_prettyPhoto->allow_resize = isset($_POST["wp_lightbox_prettyPhoto_allow_resize_window"])?'true':'false';
+            $wplu_prettyPhoto->allow_expand = isset($_POST["wp_lightbox_prettyPhoto_allow_resized_image_expansion"])?'true':'false';
+            $wplu_prettyPhoto->counter_separator_label = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_counter_separator_label"]);
+            $wplu_prettyPhoto->theme = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_theme"]);
+            $wplu_prettyPhoto->horizontal_padding = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_horizontal_padding"]);
+            $wplu_prettyPhoto->hideflash = isset($_POST["wp_lightbox_prettyPhoto_hide_flash"])?'true':'false';
+            $wplu_prettyPhoto->wmode = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_wmode"]);
+            $wplu_prettyPhoto->autoplay = isset($_POST["wp_lightbox_prettyPhoto_autoplay"])?'true':'false';
+            $wplu_prettyPhoto->modal = isset($_POST["wp_lightbox_prettyPhoto_modal"])?'true':'false';
+            $wplu_prettyPhoto->deeplinking = isset($_POST["wp_lightbox_prettyPhoto_enable_deeplinking"])?'true':'false';
+            $wplu_prettyPhoto->overlay_gallery = isset($_POST["wp_lightbox_prettyPhoto_display_overlay_thrumbnail_gallery"])?'true':'false';
+            $wplu_prettyPhoto->overlay_gallery_max = sanitize_text_field($_POST["wp_lightbox_prettyPhoto_overlay_gallery_max"]);
+            $wplu_prettyPhoto->keyboard_shortcuts = isset($_POST["wp_lightbox_prettyPhoto_keyboard_shortcuts"])?'true':'false';
+            $wplu_prettyPhoto->ie6_fallback = isset($_POST["wp_lightbox_prettyPhoto_ie6_fallback"])?'true':'false';
 
-            $wp_lightbox_config->setValue('wp_lightbox_fancybox_checkbox',($_POST["wp_lightbox_fancybox_checkbox"]=='1')?1:'');
+            $wp_lightbox_config->setValue('wp_lightbox_fancybox_checkbox', isset($_POST["wp_lightbox_fancybox_checkbox"])?1:'');
 
-            $wp_lightbox_config->setValue('wp_lightbox_colorbox_checkbox',($_POST["wp_lightbox_colorbox_checkbox"]=='1')?1:'');
-            $wp_lightbox_config->setValue('wp_lightbox_colorbox_transition_type',(string)$_POST["wp_lightbox_colorbox_transition_type"]);
-            $wp_lightbox_config->setValue('wp_lightbox_colorbox_opacity',trim($_POST["wp_lightbox_colorbox_opacity"]));
-            $wp_lightbox_config->setValue('wp_lightbox_colorbox_overlayclose',($_POST["wp_lightbox_colorbox_overlayclose"]=='1')?1:'');
+            $wp_lightbox_config->setValue('wp_lightbox_colorbox_checkbox', isset($_POST["wp_lightbox_colorbox_checkbox"])?1:'');
+            $wp_lightbox_config->setValue('wp_lightbox_colorbox_transition_type', sanitize_text_field($_POST["wp_lightbox_colorbox_transition_type"]));
+            $wp_lightbox_config->setValue('wp_lightbox_colorbox_opacity', sanitize_text_field($_POST["wp_lightbox_colorbox_opacity"]));
+            $wp_lightbox_config->setValue('wp_lightbox_colorbox_overlayclose', isset($_POST["wp_lightbox_colorbox_overlayclose"])?1:'');
 
-            $wp_lightbox_config->setValue('wp_lightbox_flowplayer_checkbox',($_POST["wp_lightbox_flowplayer_checkbox"]=='1')?1:'');
+            $wp_lightbox_config->setValue('wp_lightbox_flowplayer_checkbox', isset($_POST["wp_lightbox_flowplayer_checkbox"])?1:'');
             //$wp_lightbox_config->setValue('wp_lightbox_flowplayer_autoplay',($_POST["wp_lightbox_flowplayer_autoplay"]=='1')?1:'');
             //$wp_lightbox_config->setValue('wp_lightbox_use_flowplayer_unlimited_checkbox',($_POST["wp_lightbox_use_flowplayer_unlimited_checkbox"]=='1')?1:'');
-            $wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_license_key',trim($_POST["wp_lightbox_flowplayer_commercial_license_key"]));
-            $wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_logo',trim($_POST["wp_lightbox_flowplayer_commercial_logo"]));
+            $wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_license_key', sanitize_text_field($_POST["wp_lightbox_flowplayer_commercial_license_key"]));
+            $wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_logo', sanitize_text_field($_POST["wp_lightbox_flowplayer_commercial_logo"]));
             //$wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_play_button',trim($_POST["wp_lightbox_flowplayer_commercial_play_button"]));
             //$wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_play_button_width',trim($_POST["wp_lightbox_flowplayer_commercial_play_button_width"]));
             //$wp_lightbox_config->setValue('wp_lightbox_flowplayer_commercial_play_button_height',trim($_POST["wp_lightbox_flowplayer_commercial_play_button_height"]));
 
-            $wp_lightbox_config->setValue('wp_lightbox_html5_checkbox',($_POST["wp_lightbox_html5_checkbox"]=='1')?1:'');
-            $wp_lightbox_config->setValue('wp_lightbox_html5_autoplay',($_POST["wp_lightbox_html5_autoplay"]=='1')?1:'');
+            $wp_lightbox_config->setValue('wp_lightbox_html5_checkbox', isset($_POST["wp_lightbox_html5_checkbox"])?1:'');
+            $wp_lightbox_config->setValue('wp_lightbox_html5_autoplay', isset($_POST["wp_lightbox_html5_autoplay"])?1:'');
 		
             WPLU_prettyPhoto::save_object($wplu_prettyPhoto);
             $wp_lightbox_config->saveConfig(); 

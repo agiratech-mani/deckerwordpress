@@ -2,7 +2,7 @@
 Theme Name: Twentyeleven Child
 Description: Child theme for the twentyeleven theme
 Author: Red Earth Design
-Template: twentyeleven
+Template: twentyeleven 
 *//* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 -------------------------------------------------------------- *//*
 .bentonsanscondensedbold {
@@ -929,7 +929,7 @@ body #gform_wrapper_18 .gform_footer input[type="submit"] {
 #home-right #text-text-3 .textwidget p, #home-right #text-text-3 .textwidget a, #home-right #text-text-3 .textwidget dt, #home-right #text-text-3 .textwidget dd, #left-block #text-text-3 .textwidget p, #left-block #text-text-3 .textwidget a, #left-block #text-text-3 .textwidget dt, #left-block #text-text-3 .textwidget dd, #secondary #text-text-3 p, #secondary #text-text-3 a, #secondary #text-text-3 dt, #secondary #text-text-3 dd {
   font-size: 13px;
   letter-spacing: .005em;
-}
+	}
 
 #home-right #text-text-3 .textwidget dd {
   line-height: 18px;
@@ -4613,7 +4613,9 @@ form#contactform input.error, form#contactform-i input.error, form#contactform-g
   padding: 0 0 0 36px;
   background: none;
 }
-
+.page-id-15187 .call-to-action.group div.cta3 {
+  width: 205px;
+}
 .call-to-action.group.cti div.cta3, .call-to-action.group.dmtsm div.cta3 {
   width: 165px;
   padding: 0 0 0 22px;
@@ -5515,8 +5517,13 @@ table.cart td.actions .button.alt, #content table.cart td.actions .button.alt {
   color: #fff;
   font-style: italic;
 }
-/* =Responsive Structure
 
+.page-id-163 .post-11903 .product-top .pdesc p:first-child {
+	display: none;
+}
+
+
+/* =Responsive Structure
 ----------------------------------------------- */
 
 #ie7 article.intro {

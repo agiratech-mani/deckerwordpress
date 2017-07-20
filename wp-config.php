@@ -15,26 +15,17 @@
  */
 
 // ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-//define('DB_NAME', 'db149383_deckercomm');
+/** The name of the database for WordPress */                                                                                                     
+define('REVISR_GIT_PATH', ''); // Added by Revisr
+define('REVISR_WORK_TREE', '/home/decker/public_html/'); // Added by Revisr
+define( 'WPCACHEHOME', '/home/decker/public_html/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define('DB_NAME', 'decker_dcommweb');
 
 /** MySQL database username */
-//define('DB_USER', 'db149383');
+define('DB_USER', 'decker_deckerc');
 
 /** MySQL database password */
-//define('DB_PASSWORD', 'V@_jz28#Qoo');
-
-/** MySQL hostname */
-//define('DB_HOST', 'internal-db.s149383.gridserver.com');
-define('FS_METHOD', 'direct');
-
-define('DB_NAME', 'deckercomm');
-
-/** MySQL database username */
-define('DB_USER', 'root');
-
-/** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'wu7fZzhyGKCZ');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -85,8 +76,8 @@ $table_prefix  = 'dcom_';
 
 //define('ENABLE_CACHE', true);
 define('WP_POST_REVISIONS', '7');
-define('WP_MEMORY_LIMIT', '256M');
-define( 'WP_MAX_MEMORY_LIMIT', '256M' );
+define('WP_MEMORY_LIMIT', '99M');
+define( 'WP_MAX_MEMORY_LIMIT', '99M' );
 define( 'WP_CRON_LOCK_TIMEOUT', 900 );
 define( 'WP_CACHE', true );
 define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true ); //do not add new themes on automatic WP upgrade
@@ -100,6 +91,7 @@ define('DISALLOW_FILE_EDIT', true); //disable file editing in administration are
  * in their development environments.
  */
 define('WP_DEBUG', false);
+
 /*
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);

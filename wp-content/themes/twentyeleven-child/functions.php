@@ -923,16 +923,17 @@ remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_p
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
 
 
+//
+remove_filter( 'woocommerce_short_description', 'filter_woocommerce_short_description', 10, 1 ); 
+
+
+
 // Woocommerce customize email notification
+// Recipients: finance@decker.com, celeste@decker.com, courtney@decker.com
 add_action('woocommerce_email_after_order_table', 'add_order_email_instructions', 10, 2);
 function add_order_email_instructions($order, $sent_to_admin) {
 	if (!$sent_to_admin) {
 		global $woocommerce;
-		//print_r();
-        /*print_r(get_post_meta($order->id,"_add_customer_term",true));
-        update_post_meta($order->id,"_add_customer_term",1);
-        echo $order->id;
-        print_r(get_post_meta($order->id,"_add_customer_term",true));*/
         $order_id = $order->id;
         $items = $order->get_items();
         $_add_customer_term = get_post_meta($order_id,"_add_customer_term",true);
@@ -941,7 +942,6 @@ function add_order_email_instructions($order, $sent_to_admin) {
             update_post_meta($order_id,"_add_customer_term",1);
             foreach ($items as $key => $item) {
                 $_product_id = $item['item_meta']['_product_id'][0];
-                //echo "_product_id".$_product_id;
                 $terms = get_the_terms($_product_id, 'product_cat');
                 foreach ($terms as $term) {
                     $_categoryid = $term->term_id;
@@ -952,23 +952,11 @@ function add_order_email_instructions($order, $sent_to_admin) {
                 }
             }
         }
-		/*foreach ( $woocommerce->cart->get_cart() as $cart_item_key => $values ) {
-			$_product = $values['data'];
-			$terms = get_the_terms($_product->id, 'product_cat');
-
-			foreach ($terms as $term) {
-				$_categoryid = $term->term_id;
-				if(($_categoryid === 2448)) {
-					// Message that goes out in admin's order notes
-					$order->add_order_note("Customer agreed with the terms and conditions");
-							
-					// Message that goes out in customer's email
-					// echo "<br/>";
-                    // echo "This receipt also verifies that you have read and accepted the <a href='https://decker.com/terms-and-conditions'>Terms and Conditions</a>";
-				}
-			}
-		}*/
         echo "<br/>";
         echo "This receipt also verifies that you have read and accepted the <a href='https://decker.com/terms-and-conditions'>Terms and Conditions</a>";
 	}
 }
+
+
+// Allow automatic updates even though we're using version control
+add_filter( 'automatic_updates_is_vcs_checkout', '__return_false', 1 );

@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: WP Lightbox Ultimate
-Version: 2.2.3
+Version: 2.2.6
 Plugin URI: http://www.tipsandtricks-hq.com
 Author: Tips & Tricks HQ
 Author URI:http://www.tipsandtricks-hq.com
 Description: A simple lightbox plugin for WordPress
 */
-define('WP_LIGHTBOX_VERSION', "2.2.3");
+define('WP_LIGHTBOX_VERSION', "2.2.6");
 include_once('wp_lightbox1.php');
 
 include_once('wp_lightbox_config.php');

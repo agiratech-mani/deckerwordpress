@@ -69,7 +69,7 @@ if($_SERVER['SCRIPT_URL']=='/shop/'){//shop
 	 * as styles, scripts, and meta tags.
 	 */
 	wp_head();
-?>
+?>                        
 
 	<!--inserted manually so we can insert a different code for the book site -->
 	<script>

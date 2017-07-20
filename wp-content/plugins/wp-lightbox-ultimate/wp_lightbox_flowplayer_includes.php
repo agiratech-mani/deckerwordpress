@@ -98,6 +98,7 @@ EOT;
         $(function(){
             $('.$video_rel').fancybox({
                 padding	: 10,
+                title: '$title',
                 tpl: {
                   wrap: '<div class="fancybox-wrap" tabIndex="-1">' +
                         '<div class="fancybox-skin">' +
@@ -111,11 +112,12 @@ EOT;
                         splash: true,
                         engine: 'html5',
                         $ratio
-                        playlist: [
-                          [
-                            { $video_type:   "$link" }
-                          ]
-                        ]
+                        clip: {
+                            sources: [
+                                  { type: "video/$video_type",
+                                    src:  "$link" }
+                            ]
+                        }
                     })
                     $("#$player_id").addClass("play-button");
                     $autoplay_value
@@ -231,6 +233,7 @@ EOT;
         $(function(){
             $('.$video_rel').fancybox({
                 padding	: 10,
+                title: '$title',
                 tpl: {
                   wrap: '<div class="fancybox-wrap" tabIndex="-1">' +
                         '<div class="fancybox-skin">' +
@@ -244,11 +247,12 @@ EOT;
                         splash: true,
                         engine: 'html5',
                         $ratio
-                        playlist: [
-                          [
-                            { $video_type:   "$link" }
-                          ]
-                        ]
+                        clip: {
+                            sources: [
+                                  { type: "video/$video_type",
+                                    src:  "$link" }
+                            ]
+                        }
                     })
                     $("#$player_id").addClass("play-button");
                     $autoplay_value
@@ -269,14 +273,15 @@ EOT;
 
 function wp_lightbox_flowplayer_anchor_text_protected_s3_video_display($name,$bucket,$width,$height,$title,$autoplay,$text,$class,$atts)
 {
+    //Check if PHP version is >= 5.5.0
+    if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+        return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+    }
+    //Check if we have OpenSSL extension enabeld
+    if (!extension_loaded('openssl')) {
+        return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+    }
     $wp_lightbox_config = WP_Lightbox_Config::getInstance();
-    //Do some error checking on the name and bucket parameters
-    if (preg_match("/http/", $name)){
-            return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "name" field for your Protected S3 Video shortcode. You should only use the name of the video file in this field (Not the full URL of the file).</div>';	 
-    }
-    if (preg_match("/http/", $bucket)){
-            return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "bucket" field for your Protected S3 Video shortcode. You should only use the name of the bucket in this field (Not the full URL).</div>';	 
-    }
     $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
     $secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
     $link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
@@ -293,10 +298,23 @@ function wp_lightbox_flowplayer_anchor_text_protected_s3_video_display($name,$bu
         $width = $wp_lightbox_config->getValue('wp_lightbox_width');
         $height = $wp_lightbox_config->getValue('wp_lightbox_height');	
     }
-    $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
-    $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
-    $file2 = str_replace('%2B', '%25252B',$file);
-
+    $file = '';
+    if(isset($atts['link']) && !empty($atts['link'])){ //use Amazon S3 Signature version 4
+        require_once(WP_LIGHTBOX_PLUGIN_PATH.'/lib/aws/aws-autoloader.php');
+        $link = $atts['link'];
+        $s3_request = wp_lightbox_s3_url_request($link);       
+        if(isset($s3_request['error']) && !empty($s3_request['error'])){
+            return $s3_request['error'];
+        }
+        if(isset($s3_request['link']) && !empty($s3_request['link'])){
+            $file = $s3_request['link'];
+        }
+    }
+    else{
+        $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
+        $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+        $file2 = str_replace('%2B', '%25252B',$file);
+    }
     $div_id = wp_lightbox_generate_unique_id();
     $player_id = 'player_'.$div_id;
     $video_rel = "wplu_".$div_id;
@@ -317,22 +335,30 @@ function wp_lightbox_flowplayer_anchor_text_protected_s3_video_display($name,$bu
     $ratio = wp_lightbox_calculate_flowplayer_data_ratio($width, $height);
     $ratio = 'ratio: '.$ratio.',';
     $window_width = $width+20;
-    
+    /*
     $video_file = '{ mp4:   "'.$file.'" },
                             { flash:   "'.$file2.'" }';
+     */
+    /*
+    $video_file = '{ type: "video/mp4", src:  "'.$file.'" },
+                    { type: "video/flash", src:  "'.$file2.'" }';*/
+    $video_file = '{ type: "video/mp4", src:  "'.$file.'" }';
+    /*
     $path_parts = pathinfo($name);
     if($path_parts['extension']=="flv"){
-        $video_file = '{ flash:   "'.$file2.'" }';
+        //$video_file = '{ flash:   "'.$file2.'" }';
+        $video_file = '{ type: "video/flash", src:  "'.$file2.'" }';
     }
+    */
     $detect = new WP_LIGHTBOX_MOBILE_DETECT();
     if($detect->isMobile() && !$detect->isTablet())
     {
-        $video_src = '<source type="video/mp4" src="'.$file.'">
-        <source type="video/flash" src="'.$file2.'">';
+        $video_src = '<source type="video/mp4" src="'.$file.'">';
+        /*<source type="video/flash" src="'.$file2.'">';
         $path_parts = pathinfo($name);
         if($path_parts['extension']=="flv"){
             $video_src = '<source type="video/flash" src="'.$file2.'">';
-        }
+        }*/
         $is_splash = " is-splash";
         $wp_lightbox_output = <<<EOT
         <div class="lightbox_ultimate_anchor lightbox_ultimate_text_anchor $class">
@@ -383,6 +409,7 @@ EOT;
         $(function(){
             $('.$video_rel').fancybox({
                 padding	: 10,
+                title: '$title',
                 tpl: {
                   wrap: '<div class="fancybox-wrap" tabIndex="-1">' +
                         '<div class="fancybox-skin">' +
@@ -396,11 +423,11 @@ EOT;
                         splash: true,
                         engine: 'html5',
                         $ratio
-                        playlist: [
-                          [
-                            $video_file
-                          ]
-                        ]
+                        clip: {
+                            sources: [
+                                $video_file
+                            ]
+                        }
                     })
                     $("#$player_id").addClass("play-button");
                     $autoplay_value
@@ -421,14 +448,15 @@ EOT;
 
 function wp_lightbox_flowplayer_protected_s3_video_display($name,$bucket,$width,$height,$title,$autoplay,$source,$class,$img_attributes,$atts)
 {
+    //Check if PHP version is >= 5.5.0
+    if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+        return '<div class="wp_lightbox_error_message">Minimun PHP 5.5.0 required for Amazon S3 API to work. You are running ' . PHP_VERSION . '. Request your hosting provider to upgrade your PHP version to a more recent version then try again.</div>';
+    }
+    //Check if we have OpenSSL extension enabeld
+    if (!extension_loaded('openssl')) {
+        return '<div class="wp_lightbox_error_message">The amazon S3 API communication needs OpenSSL PHP extension installed. Request your hosting provider to install the OpenSSL PHP exention then try again.</div>';
+    }
     $wp_lightbox_config = WP_Lightbox_Config::getInstance();
-    //Do some error checking on the name and bucket parameters
-    if (preg_match("/http/", $name)){
-            return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "name" field for your Protected S3 Video shortcode. You should only use the name of the video file in this field (Not the full URL of the file).</div>';	 
-    }
-    if (preg_match("/http/", $bucket)){
-            return '<div class="wp_lightbox_error_message">Looks like you have entered a URL in the "bucket" field for your Protected S3 Video shortcode. You should only use the name of the bucket in this field (Not the full URL).</div>';	 
-    }
     $access_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_access_key');
     $secret_key = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_secret_key');
     $link_duration = $wp_lightbox_config->getValue('wp_lightbox_amazon_s3_link_duration'); 
@@ -445,9 +473,23 @@ function wp_lightbox_flowplayer_protected_s3_video_display($name,$bucket,$width,
         $width = $wp_lightbox_config->getValue('wp_lightbox_width');
         $height = $wp_lightbox_config->getValue('wp_lightbox_height');	
     }
-    $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
-    $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
-    $file2 = str_replace('%2B', '%25252B',$file);
+    $file = '';
+    if(isset($atts['link']) && !empty($atts['link'])){ //use Amazon S3 Signature version 4
+        require_once(WP_LIGHTBOX_PLUGIN_PATH.'/lib/aws/aws-autoloader.php');
+        $link = $atts['link'];
+        $s3_request = wp_lightbox_s3_url_request($link);       
+        if(isset($s3_request['error']) && !empty($s3_request['error'])){
+            return $s3_request['error'];
+        }
+        if(isset($s3_request['link']) && !empty($s3_request['link'])){
+            $file = $s3_request['link'];
+        }
+    }
+    else{
+        $objS3 = new wp_lightbox_ultimate_amazon_s3("$access_key", "$secret_key");
+        $file = $objS3->getAuthenticatedURL($bucket,$name,$link_duration);
+        $file2 = str_replace('%2B', '%25252B',$file);
+    }
 
     $div_id = wp_lightbox_generate_unique_id();
     $player_id = 'player_'.$div_id;
@@ -469,13 +511,21 @@ function wp_lightbox_flowplayer_protected_s3_video_display($name,$bucket,$width,
     $ratio = wp_lightbox_calculate_flowplayer_data_ratio($width, $height);
     $ratio = 'ratio: '.$ratio.',';
     $window_width = $width+20;
-    
+    /*
     $video_file = '{ mp4:   "'.$file.'" },
                             { flash:   "'.$file2.'" }';
+     */
+    /*
+    $video_file = '{ type: "video/mp4", src:  "'.$file.'" },
+                    { type: "video/flash", src:  "'.$file2.'" }'; 
+    */ 
+    $video_file = '{ type: "video/mp4", src:  "'.$file.'" }';
+    /*
     $path_parts = pathinfo($name);
     if($path_parts['extension']=="flv"){
-        $video_file = '{ flash:   "'.$file2.'" }';
-    }
+        //$video_file = '{ flash:   "'.$file2.'" }';
+        $video_file = '{ type: "video/flash", src:  "'.$file2.'" }';
+    }*/
     $detect = new WP_LIGHTBOX_MOBILE_DETECT();
     $anchor = '<img src="'.$source.'" '.$img_attributes.' />';
     if(isset($atts['show_play_button']) && !empty($atts['show_play_button'])){
@@ -484,12 +534,14 @@ function wp_lightbox_flowplayer_protected_s3_video_display($name,$bucket,$width,
     }
     if($detect->isMobile() && !$detect->isTablet())
     {
-        $video_src = '<source type="video/mp4" src="'.$file.'">
+        $video_src = '<source type="video/mp4" src="'.$file.'">';
+        /*    
         <source type="video/flash" src="'.$file2.'">';
         $path_parts = pathinfo($name);
         if($path_parts['extension']=="flv"){
             $video_src = '<source type="video/flash" src="'.$file2.'">';
         }
+        */
         $is_splash = " is-splash";
         $wp_lightbox_output = <<<EOT
         <div class="lightbox_ultimate_anchor lightbox_ultimate_image_anchor $class">
@@ -540,6 +592,7 @@ EOT;
         $(function(){
             $('.$video_rel').fancybox({
                 padding	: 10,
+                title: '$title',
                 tpl: {
                   wrap: '<div class="fancybox-wrap" tabIndex="-1">' +
                         '<div class="fancybox-skin">' +
@@ -553,11 +606,11 @@ EOT;
                         splash: true,
                         engine: 'html5',
                         $ratio
-                        playlist: [
-                          [
-                            $video_file
-                          ]
-                        ]
+                        clip: {
+                            sources: [
+                                $video_file
+                            ]
+                        }
                     })
                     $("#$player_id").addClass("play-button");
                     $autoplay_value
@@ -597,12 +650,12 @@ function wp_lightbox_enqueue_flowplayer_scripts()
     //wp_register_script('jquery.tools', WP_LIGHTBOX_LIB_URL.'/js/jquery.tools.min.js');
     //wp_enqueue_script('jquery.tools');
     if($wp_lightbox_config->getValue('wp_lightbox_flowplayer_commercial_license_key')){
-        wp_register_script('flowplayer', 'https://releases.flowplayer.org/6.0.3/commercial/flowplayer.min.js', array('jquery'), WP_LIGHTBOX_VERSION);
+        wp_register_script('flowplayer', 'https://releases.flowplayer.org/7.0.2/commercial/flowplayer.min.js', array('jquery'), WP_LIGHTBOX_VERSION);
     }
     else{
-        wp_register_script('flowplayer', 'https://releases.flowplayer.org/6.0.3/flowplayer.min.js', array('jquery'), WP_LIGHTBOX_VERSION);
+        wp_register_script('flowplayer', 'https://releases.flowplayer.org/7.0.2/flowplayer.min.js', array('jquery'), WP_LIGHTBOX_VERSION);
     }
     wp_enqueue_script('flowplayer');
-    wp_register_style('flowplayer', 'https://releases.flowplayer.org/6.0.3/skin/minimalist.css', false, WP_LIGHTBOX_VERSION);
+    wp_register_style('flowplayer', 'https://releases.flowplayer.org/7.0.2/skin/skin.css', false, WP_LIGHTBOX_VERSION);
     wp_enqueue_style('flowplayer');
 }

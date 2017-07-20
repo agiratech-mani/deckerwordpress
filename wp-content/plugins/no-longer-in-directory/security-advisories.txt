@@ -73,6 +73,7 @@ ecstatic,https://www.pluginvulnerabilities.com/2016/07/25/arbitrary-file-upload-
 embed-articles,http://packetstormsecurity.com/files/131797/WordPress-Embed-Articles-7.0.3-CSRF-XSS.html
 enable-google-analytics,https://wordpress.org/support/topic/how-to-report-malware-in-plugins
 event-commerce-wp-event-calendar,https://www.pluginvulnerabilities.com/2016/10/03/persistent-cross-site-scripting-xss-vulnerability-in-eventcommerce-wp-event-calendar/
+eventr,http://www.vapidlabs.com/advisory.php?v=192
 events-manager-extended,http://secunia.com/advisories/41294/
 facebook-with-login,https://packetstormsecurity.com/files/136397/WordPress-Facebook-With-Login-1.0-Cross-Site-Scripting-SQL-Injection.html
 fast-image-adder,http://www.vapid.dhs.org/advisory.php?v=139
@@ -90,6 +91,7 @@ gallery-objects,https://www.homelab.it/index.php/2014/07/18/wordpress-gallery-ob
 gallery-slider,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
 gd-star-rating,https://security.dxw.com/advisories/csrf-and-blind-sql-injection-in-gd-star-rating-1-9-22/
 genesis-simple-defaults,https://www.pluginvulnerabilities.com/2016/09/22/arbitrary-file-upload-vulnerability-in-genesis-simple-defaults/
+gift-certificate-creator,http://www.vapidlabs.com/advisory.php?v=191
 global-content-blocks,https://sumofpwn.nl/advisory/2016/cross_site_request_forgery_in_global_content_blocks_wordpress_plugin.html
 google-analytics-analyze,https://www.pluginvulnerabilities.com/2016/10/24/a-good-example-of-why-wordpress-keeping-quiet-about-unfixed-plugin-vulnerabilities-doesnt-make-sense/
 google-analytics-dashboard,https://www.sumofpwn.nl/advisory/2016/cross_site_scripting_in_google_analytics_dashboard_wordpress_plugin.html
@@ -145,6 +147,7 @@ mobile-app-builder-by-wappress,http://www.vapidlabs.com/advisory.php?v=180
 mobile-domain,http://packetstormsecurity.com/files/130316/WordPress-Mobile-Domain-1.5.2-Cross-Site-Request-Forgery-Cross-Site-Scripting.html
 mobile-friendly-app-builder-by-easytouch,http://www.vapidlabs.com/advisory.php?v=179
 more-fields,https://packetstormsecurity.com/files/135991/WordPress-More-Fields-2.1-Cross-Site-Request-Forgery.html
+msmc-redirect-after-comment,https://security.dxw.com/advisories/csrf-stored-xss-in-msmc-redirect-after-comment/
 multi-meta-box,http://www.vulnerability-lab.com/get_content.php?id=1818
 mwp-viral-signup,https://www.tad.bg/en/exploits/our-exploits/wow-viral-signups-2-1-wordpress-plugin-sql-injection
 my-category-order,http://cinu.pl/research/wp-plugins/mail_a466a618943f052549c573eae8759c62.html
@@ -212,6 +215,7 @@ simply-poll,https://packetstormsecurity.com/files/140288/WordPress-Simply-Poll-1
 site-analytics,https://www.pluginvulnerabilities.com/2016/10/18/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-site-analytics-plugin/
 site-import,https://www.exploit-db.com/exploits/39558/
 slide-show-pro,https://www.pluginvulnerabilities.com/2016/06/07/arbitrary-file-upload-vulnerability-in-slideshow-pro/
+slidedeck2,https://www.pluginvulnerabilities.com/2017/05/03/vulnerability-details-reflected-cross-site-scripting-xss-vulnerability-in-slidedeck-2-3/
 sliding-recent-posts,http://packetstormsecurity.com/files/129504/WordPress-Sliding-Recent-Posts-1.0-CSRF-XSS.html
 sliding-social-icons,http://packetstormsecurity.com/files/129509/WordPress-Sliding-Social-Icons-1.61-CSRF-XSS.html
 smart-slide-show,https://www.pluginvulnerabilities.com/2016/06/07/arbitrary-file-upload-vulnerability-in-smart-slideshow/
@@ -225,6 +229,7 @@ spamtask,https://www.pluginvulnerabilities.com/2017/02/06/vulnerability-details-
 spnbabble,http://packetstormsecurity.com/files/129580/WordPress-SPNbabble-1.4.1-CSRF-XSS.html
 stats-counter,https://www.pluginvulnerabilities.com/2016/12/15/php-object-injection-vulnerability-in-stats-counter/
 stats-wp,https://www.pluginvulnerabilities.com/2017/02/13/vulnerability-details-remote-code-execution-rce-vulnerability-in-stats-wp/
+surveys,http://www.vapidlabs.com/advisory.php?v=193
 tagninja,http://secunia.com/advisories/43132/
 tera-charts,http://www.vapidlabs.com/wp/wp_advisory.php?v=455
 the-viddler-wordpress-plugin,https://www.pluginvulnerabilities.com/2016/06/03/cross-site-request-forgery-csrfcross-site-scripting-xss-vulnerability-in-viddler-wordpress-plugin/

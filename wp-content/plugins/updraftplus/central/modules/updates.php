@@ -396,7 +396,8 @@ class UpdraftCentral_Updates_Commands extends UpdraftCentral_Commands {
 						'title' => $update->Title,
 						'author_name' => $update->AuthorName,
 						'update' => array(
-							'plugin' => $update->update->plugin,
+							// With Affiliates-WP, if you have not connected, this is null.
+							'plugin' => isset($update->update->plugin) ? $update->update->plugin : null,
 							'slug' => $update->update->slug,
 							'new_version' => $update->update->new_version,
 							'package' => $update->update->package,

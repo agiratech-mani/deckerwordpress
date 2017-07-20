@@ -2,7 +2,7 @@
 Contributors: WhiteFirDesign
 Tags: security, plugins
 Requires at least: 3.3
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,7 +27,9 @@ If you want WordPress to begin alerting when installed plugins have been removed
 
 The plugin will also separately list any plugins that have not been updated in the WordPress.org Plugin Directory in over two years.
 
-For removed plugins that have a security vulnerability, a link to a security advisory maybe included in the results of the check. You can get comprehensive monitoring of security vulnerabilities in all of the plugins you use and the ability to help choose plugins that [will receive a security review from us](https://www.pluginvulnerabilities.com/wordpress-plugin-security-reviews/) with our with our [Plugin Vulnerabilities service](https://www.pluginvulnerabilities.com/).
+For removed plugins that have a security vulnerability, a link to a security advisory maybe included in the results of the check.
+
+In the past we have been about the only ones notifying the Plugin Directory of plugins with disclosed vulnerabilities in their current versions, which usually leads them to being removed from the Plugin Directory pending a fix. Due to WordPress' continued poor handling of notifying about removed plugins and other issues, we have [stopped doing that until concrete plans are made to fix two of those issues](https://www.pluginvulnerabilities.com/2017/06/08/taking-a-stand-against-the-continued-poor-handling-of-security-with-wordpress/). With that there is likely to be an increasing number of plugins that remain in the directory despite containing vulnerabilities. So simply keeping your plugins up to date and using this plugin will not keep you protected against vulnerabilities in WordPress plugins at this time. Until WordPress starts to fix those issue, you can get comprehensive monitoring of security vulnerabilities with our [Plugin Vulnerabilities service](https://www.pluginvulnerabilities.com/) (along with other benefits including the [ability to vote/suggest plugins to receive a security review by us](https://www.pluginvulnerabilities.com/wordpress-plugin-security-reviews/)). You can get your first month of the service for free when you use the coupon code "FirstMonthFree" when [signing up](https://www.pluginvulnerabilities.com/product/subscription/).
 
 To insure that plugins that have returned to the WordPress.org Plugin Directory since the list was last updated are not incorrectly warned about, the plugin rechecks the WordPress.org Plugin Directory to confirm any installed plugins that are on the list have not returned to the directory.
 
@@ -37,19 +39,16 @@ The check is done using the plugin's directory (folder) name which could lead to
 
 Please let us know if you are interested in us adding additional localizations.
 
-== Installation ==
-
-1. Copy plugin files to the plugins folder.
-
-2. Activate the plugin.
-
-3. Click the No Longer in Directory item in the Plugins Menu to see results.
-
 == Screenshots ==
 
 1. Plugin Page
 
 == Changelog ==
+
+= 1.0.62 =
+* Updated re-check for removed plugins to work with Plugin Directory change
+* Refreshed removed and no longer updated plugin lists with data from June 8, 2017 
+* Added additional security advisories
 
 = 1.0.61 =
 * Refreshed removed and no longer updated plugin lists with data from May 1, 2017 

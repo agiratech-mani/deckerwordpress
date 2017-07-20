@@ -2,6 +2,7 @@
 define('WP_LIGHTBOX_PLUGIN_URL', plugins_url('',__FILE__));
 define('WP_LIGHTBOX_LIB_URL',WP_LIGHTBOX_PLUGIN_URL.'/lib');
 define('WP_LIGHTBOX_IMAGE_URL',WP_LIGHTBOX_PLUGIN_URL.'/images');
+define('WP_LIGHTBOX_PLUGIN_PATH', untrailingslashit(plugin_dir_path(__FILE__)));
 
 include_once('wp_lightbox_prettyPhoto_includes.php');
 include_once('wp_lightbox_fancybox_includes.php');
@@ -103,25 +104,43 @@ function wp_lightbox_menu()
 function wp_lightbox_ultimate_tinyMCE_addbutton() 
 {
 	// check user permission
-	if ( ! current_user_can('edit_posts') && ! current_user_can('edit_pages') )
-	return;	
+	if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+            return;
+        }	
 	// Add only in Rich Editor mode
-	if (get_user_option('rich_editing') == 'true') 
-	{
-		add_filter("mce_external_plugins", "wp_lightbox_ultimate_tinyMCE_load");
-		add_filter('mce_buttons', 'wp_lightbox_ultimate_tinyMCE_register_button');
-	}
+        if ( get_user_option( 'rich_editing' ) !== 'true' ) {
+            return;
+        }
+        add_filter("mce_external_plugins", "wp_lightbox_ultimate_tinyMCE_add_button");
+        add_filter('mce_buttons', 'wp_lightbox_ultimate_tinyMCE_register_button');
 }
-function wp_lightbox_ultimate_tinyMCE_load($plugin_array) 
+function wp_lightbox_ultimate_tinyMCE_add_button($plugin_array) 
 {
-	$plug = WP_LIGHTBOX_LIB_URL . '/wp_lightbox_ultimate_tiny_mce_plugin.js';
-	$plugin_array['wplightboxultimate'] = $plug;
+	//$plugin_array['wplightboxultimate'] = WP_LIGHTBOX_LIB_URL . '/wp_lightbox_ultimate_tiny_mce_plugin.js';
+        $plugin_array['wplightboxultimate'] = WP_LIGHTBOX_LIB_URL . '/tinymce_buttons.js';
 	return $plugin_array;
 }
 function wp_lightbox_ultimate_tinyMCE_register_button($buttons) 
 {
-   array_push($buttons, "separator", "WpLightboxUltimateButton");
+   //array_push($buttons, "separator", "WpLightboxUltimateButton");
+   array_push( $buttons, 'wplightboxultimate' );
    return $buttons;	
+}
+
+add_action('after_wp_tiny_mce', 'wp_lightbox_ultimate_tinyMCE_extra_vars');
+ 
+function wp_lightbox_ultimate_tinyMCE_extra_vars() { ?>
+    <script type="text/javascript">
+        var wplu_tinyMCE_object = <?php echo json_encode(
+                    array(
+                            'button_name' => esc_html__('WP Lightbox Ultimate Shortcode Inserter', 'wp-lightbox-ultimate'),
+                            'button_title' => esc_html__('WP Lightbox Ultimate Shortcodes', 'wp-lightbox-ultimate'),
+                            'button_img' => WP_LIGHTBOX_LIB_URL . '/lib_images/wp_lightbox_ultimate_tiny_mce_button.png',
+                            'window_title' => esc_html__('WP Lightbox Ultimate Shortcodes', 'wp-lightbox-ultimate'),
+                    )
+                );
+        ?>;
+    </script><?php
 }
 
 function wp_lightbox_ultimate_clear_float_handler($atts)
@@ -738,49 +757,28 @@ function wp_lightbox_html5_video_handler($atts)
 //TODO
 function wp_lightbox_html5_anchor_text_protected_s3_video_handler($atts)
 {
-	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
-	if($wp_lightbox_config->getValue('wp_lightbox_html5_checkbox')=='')
-	{
-		$wp_lightbox_output = '<div class="wp_lightbox_error_message">';
-		$wp_lightbox_output .= 'You do not have HTML5 checkbox enabled in the settings';
-		$wp_lightbox_output .= '</div>';
-		return $wp_lightbox_output;
-	}
-	extract(shortcode_atts(array(
-		'name' => '',
-		'bucket' =>'',
-		'poster' => '',
-		'width' => '',
-		'height' => '',
-		'title' => '',
-		'text' => 'Click Me',
-		'class' => '',
-	), $atts));
-	return wp_lightbox_html5_anchor_text_protected_s3_video_display($name,$bucket,$poster,$width,$height,$title,$text,$class);
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();
+    if($wp_lightbox_config->getValue('wp_lightbox_html5_checkbox')=='')
+    {
+            $wp_lightbox_output = '<div class="wp_lightbox_error_message">';
+            $wp_lightbox_output .= 'You do not have HTML5 checkbox enabled in the settings';
+            $wp_lightbox_output .= '</div>';
+            return $wp_lightbox_output;
+    }
+    return wp_lightbox_html5_anchor_text_protected_s3_video_display($atts);
 }
 
 function wp_lightbox_html5_protected_s3_video_handler($atts)
 {
-	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
-	if($wp_lightbox_config->getValue('wp_lightbox_html5_checkbox')=='')
-	{
-		$wp_lightbox_output = '<div class="wp_lightbox_error_message">';
-		$wp_lightbox_output .= 'You do not have HTML5 checkbox enabled in the settings';
-		$wp_lightbox_output .= '</div>';
-		return $wp_lightbox_output;
-	}
-	extract(shortcode_atts(array(
-		'name' => '',
-		'bucket' =>'',
-		'poster' => '',
-		'width' => '',
-		'height' => '',
-		'title' => '',
-		'source' => '',
-		'class' => '',
-		'img_attributes' => '',
-	), $atts));
-	return wp_lightbox_html5_protected_s3_video_display($name,$bucket,$poster,$width,$height,$title,$source,$class,$img_attributes,$atts);
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();
+    if($wp_lightbox_config->getValue('wp_lightbox_html5_checkbox')=='')
+    {
+            $wp_lightbox_output = '<div class="wp_lightbox_error_message">';
+            $wp_lightbox_output .= 'You do not have HTML5 checkbox enabled in the settings';
+            $wp_lightbox_output .= '</div>';
+            return $wp_lightbox_output;
+    }
+    return wp_lightbox_html5_protected_s3_video_display($atts);
 }
 
 function wp_lightbox_anchor_text_protected_s3_video_handler($atts)
@@ -850,70 +848,38 @@ function wp_lightbox_mp4_video_handler($atts)
 
 function wp_lightbox_anchor_text_secure_s3_file_download_handler($atts)
 {
-	extract(shortcode_atts(array(
-		'name' => '',
-		'bucket' =>'',
-		'text' => '',
-		'class' => '',
-	), $atts));
-	return wp_lightbox_anchor_text_secure_s3_file_download_display($name,$bucket,$text,$class);
+    return wp_lightbox_anchor_text_secure_s3_file_download_display($atts);
 } 
 
 function wp_lightbox_secure_s3_file_download_handler($atts)
 {
-	extract(shortcode_atts(array(
-		'name' => '',
-		'bucket' =>'',
-		'source' => '',
-		'class' => '',
-		'img_attributes' => '',
-	), $atts));
-	return wp_lightbox_secure_s3_file_download_display($name,$bucket,$source,$class,$img_attributes);
+    return wp_lightbox_secure_s3_file_download_display($atts);
 }
 
 function wp_lightbox_anchor_text_secure_s3_pdf_file_handler($atts)
 {
-	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
-	if($wp_lightbox_config->getValue('wp_lightbox_prettyPhoto_checkbox')=='')
-	{
-		$wp_lightbox_output = '<div class="wp_lightbox_error_message">';
-		$wp_lightbox_output .= 'You do not have prettyPhoto checkbox enabled in the settings';
-		$wp_lightbox_output .= '</div>';
-		return $wp_lightbox_output;
-	}
-	extract(shortcode_atts(array(
-		'name' => '',
-		'bucket' =>'',
-		'width' => '',
-		'height' => '',
-		'title' => '',
-		'text' => '',
-		'class' => '',
-	), $atts));
-	return wp_lightbox_anchor_text_secure_s3_pdf_file_display($name,$bucket,$width,$height,$title,$text,$class);
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();
+    if($wp_lightbox_config->getValue('wp_lightbox_prettyPhoto_checkbox')=='')
+    {
+            $wp_lightbox_output = '<div class="wp_lightbox_error_message">';
+            $wp_lightbox_output .= 'You do not have prettyPhoto checkbox enabled in the settings';
+            $wp_lightbox_output .= '</div>';
+            return $wp_lightbox_output;
+    }
+    return wp_lightbox_anchor_text_secure_s3_pdf_file_display($atts);
 }
 
 function wp_lightbox_secure_s3_pdf_file_handler($atts)
 {
-	$wp_lightbox_config = WP_Lightbox_Config::getInstance();
-	if($wp_lightbox_config->getValue('wp_lightbox_prettyPhoto_checkbox')=='')
-	{
-		$wp_lightbox_output = '<div class="wp_lightbox_error_message">';
-		$wp_lightbox_output .= 'You do not have prettyPhoto checkbox enabled in the settings';
-		$wp_lightbox_output .= '</div>';
-		return $wp_lightbox_output;
-	}
-	extract(shortcode_atts(array(
-		'name' => '',
-		'bucket' =>'',
-		'width' => '',
-		'height' => '',
-		'title' => '',
-		'source' => '',
-		'class' => '',
-		'img_attributes' => '',
-	), $atts));
-	return wp_lightbox_secure_s3_pdf_file_display($name,$bucket,$width,$height,$title,$source,$class,$img_attributes);
+    $wp_lightbox_config = WP_Lightbox_Config::getInstance();
+    if($wp_lightbox_config->getValue('wp_lightbox_prettyPhoto_checkbox')=='')
+    {
+            $wp_lightbox_output = '<div class="wp_lightbox_error_message">';
+            $wp_lightbox_output .= 'You do not have prettyPhoto checkbox enabled in the settings';
+            $wp_lightbox_output .= '</div>';
+            return $wp_lightbox_output;
+    }
+    return wp_lightbox_secure_s3_pdf_file_display($atts);
 }
 
 function wp_lightbox_ultimate_fancy_gallery_handler($atts,$content=null,$code="")
@@ -1153,9 +1119,10 @@ function wp_lightbox_header()
     {
         // Add javascript values in the page
         $flowplayer_code = "";
-        if($wp_lightbox_config->getValue('wp_lightbox_flowplayer_checkbox')){
+        if($wp_lightbox_config->getValue('wp_lightbox_flowplayer_checkbox') || $wp_lightbox_config->getValue('wp_lightbox_enable_mp4_video_display')){
             $flowplayer_code = 'flowplayer.conf.embed = false;';
             $flowplayer_code .= 'flowplayer.conf.keyboard = false;';
+            $flowplayer_code .= 'flowplayer.conf.share = false;';
             $flowplayer_key = $wp_lightbox_config->getValue('wp_lightbox_flowplayer_commercial_license_key');
             if($flowplayer_key){
                 $flowplayer_code .= 'flowplayer.conf.key = "'.$flowplayer_key.'";';

@@ -103,7 +103,7 @@ if(wpmd_is_phone() || $_REQUEST['phone']==1){
     	    </div>
     	    <div class="footer-menu footer-right">
 		        <div class="site-credits">
-                    Copyright &copy; <?php echo date('Y');?> Decker Communications.<br />
+                    Copyright &copy; <?php echo date('Y');?> Decker Communications..<br />
 		            All rights reserved.<br />
 		            Site design by <a href="http://avenue4design.com" target="_blank">Avenue 4</a>
 		        </div>

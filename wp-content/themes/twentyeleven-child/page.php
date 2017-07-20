@@ -27,26 +27,24 @@ get_header();
 				<?php while ( have_posts() ) : the_post(); ?>
 
 				    <?php
-				    if(is_front_page() ||$post->ID==13775){ ?>
+				    if(is_front_page() || $post->ID==13775){ ?>
 				        <div id="home-block">
 
-
-
-				            <?php
-                            if(wpmd_is_phone() || $_REQUEST['phone']==1){
+                            <?php
+                            /*if(wpmd_is_phone() || $_REQUEST['phone']==1){
                                 echo '
                                 <header class="entry-header">
                                     <h1>Which Communications Solution<br />is Right For You?</h1>
                                 </header>';
-                            } else {
-//                                echo do_shortcode('[portfolio_slideshow id=8341 target=current]');
+                            } else {*/
+                                //echo do_shortcode('[portfolio_slideshow id=8341 target=current]');
                             if(is_front_page()){
                             //Not using Portfolio Slideshow Pro anymore, replace with Easing slider
                                 /*echo do_shortcode('[portfolio_slideshow id=8341]');
                                 //This is the test home page
                                 } elseif ($post->ID==13775) {*/
                                 echo do_shortcode('[easingslider id="13774"]');
-                                }
+                                //}
                             }
 
 				            $link = '';

@@ -3,7 +3,7 @@
 Plugin Name: No Longer in Directory
 Plugin URI: https://www.whitefirdesign.com/no-longer-in-directory
 Description: Checks for installed plugins that are no longer in the WordPress.org Plugin Directory.
-Version: 1.0.61
+Version: 1.0.62
 Author: White Fir Design
 Author URI: https://www.whitefirdesign.com/
 License: GPLv2
@@ -129,7 +129,7 @@ function no_longer_in_directory_page() {
 		if ( isset ($plugin_path[1][0]) && in_array ($plugin_path[1][0], $disappeared_plugins )) {
 			//Check that plugin has not returned to the WordPress.org Plugin Directory since plugin list last generated
 			$directory_plugin_head = wp_remote_head('https://wordpress.org/plugins/'.$plugin_path[1][0].'/');
-			if ( $directory_plugin_head ['response']['code'] == "404" )
+			if ( $directory_plugin_head['response']['code'] == "302" )
 				$no_longer_in_directory[$plugin_list[$value]['Name']]= $plugin_path[1][0];
 		}
 		else if ( isset ($plugin_path[1][0]) && in_array ($plugin_path[1][0], $two_year_plugins )) {
@@ -192,6 +192,6 @@ function no_longer_in_directory_page() {
 	}
 	else 
 		echo "<h3>".__('No installed plugins were last updated over two years ago in the WordPress.org Plugin Directory.', 'no-longer-in-directory')."</h3>";
-	echo '<br><br><br>You can get comprehensive monitoring of security vulnerabilities in the plugins you use and the ability to help choose plugins that <a href="https://www.pluginvulnerabilities.com/wordpress-plugin-security-reviews/">will receive a security review from us</a> with our <a href="https://www.pluginvulnerabilities.com/">Plugin Vulnerabilities service</a>. You can get your first month of the service for free when you use the coupon code "FirstMonthFree" when <a href="https://www.pluginvulnerabilities.com/product/subscription/">signing up</a>.';
+	echo '<br><br><br>In the past we have been about the only ones notifying the Plugin Directory of plugins with disclosed vulnerabilities in their current versions, which usually leads them to being removed from the Plugin Directory pending a fix. Due to WordPress\' continued poor handling of notifying about removed plugins and other issues, we have <a href="https://www.pluginvulnerabilities.com/2017/06/08/taking-a-stand-against-the-continued-poor-handling-of-security-with-wordpress/">stopped doing that until concrete plans are made to fix two of those issues</a>. With that there is likely to be an increasing number of plugins that remain in the directory despite containing vulnerabilities. So simply keeping your plugins up to date and using this plugin will not keep you protected against vulnerabilities in WordPress plugins at this time. Until they start to fix those issues, you can get comprehensive monitoring of security vulnerabilities with our <a href="https://www.pluginvulnerabilities.com/">Plugin Vulnerabilities service</a> (along with other benefits, including the <a href="https://www.pluginvulnerabilities.com/wordpress-plugin-security-reviews/">ability to vote/suggest plugins to receive a security review by us</a>). You can get your first month of the service for free when you use the coupon code "FirstMonthFree" when <a href="https://www.pluginvulnerabilities.com/product/subscription/">signing up</a>.';
 	echo '</div>';
 }

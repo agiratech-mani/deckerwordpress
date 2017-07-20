@@ -9,5 +9,5 @@ Disallow: /wp-login.php
 
 ## temporarily block digital/ vanity URL
 ## and its PDF
-Disallow: /digital
-Disallow: /wp-content/uploads/2016/07/Decker-Digital-Promo-7276.pdf
+#Disallow: /digital
+#Disallow: /wp-content/uploads/2016/07/Decker-Digital-Promo-7276.pdf
