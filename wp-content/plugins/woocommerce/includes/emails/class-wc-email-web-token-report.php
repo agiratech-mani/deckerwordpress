@@ -85,7 +85,8 @@ class WC_Email_Web_Token_Report extends WC_Email {
 			$writer = PHPExcel_IOFactory::createWriter($ea, 'Excel2007');
 			            
 			$writer->setIncludeCharts(true);
-			$target_dir = get_home_path()."wp-content/uploads/importdownloads/";
+			$upload_dir = wp_upload_dir();
+			$target_dir = $upload_dir['basedir'].'/imports/downloads/';
 			if(!is_dir($target_dir))
 			{
 				mkdir($target_dir,0777,true);

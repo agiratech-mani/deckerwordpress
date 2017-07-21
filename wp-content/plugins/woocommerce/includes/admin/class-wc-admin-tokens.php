@@ -102,7 +102,9 @@ class WC_Admin_Tokens {
 				$product_id = $_POST['token_product'];
 				if(empty($error))
 				{
-					$target_dir = get_home_path()."wp-content/uploads/imports/";
+					$upload = wp_upload_dir();
+    				$upload_dir = $upload['basedir'];
+					$target_dir = $upload_dir . '/imports/';
 					if(!is_dir($target_dir))
 					{
 						mkdir($target_dir,0777,true);
