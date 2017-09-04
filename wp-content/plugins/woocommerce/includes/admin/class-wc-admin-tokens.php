@@ -415,6 +415,25 @@ class WC_Admin_Tokens {
 			include( 'settings/views/html-exports-token-users.php' );
 			echo "</div>";
 		}
+		else if(!empty($_GET) && isset($_GET['refresh'])){
+			echo "refresh";
+			$table1 = $wpdb->prefix . 'web_tokens';
+			$query = "SELECT * FROM $table1 WHERE short_url ='RATE_LIMIT_EXCEEDED' AND id = 422 ORDER BY ID LIMIT 0,90";
+
+			$result = $wpdb->get_results( $query, 'ARRAY_A' );
+			print_r($result);
+			foreach ($result as $key => $res) {
+				var $where = array('id'=>$res['id']);
+				$short_url = get_bitly_short_url($res['long_url'],$bitly_login,$bitly_api_key);
+				echo "short_url";
+				print_r($short_url);
+				var $shorturl = "shorturl";
+				var $data = array('short_url'=>$short_url);
+				 $wpdb->update($table1,$data,$where);
+			}
+			
+			die;
+		}
 		else if(!empty($_GET) && isset($_GET['token_id']) && $_GET['token_id'] > 0)
 		{
 			echo "<div class='wrap'>";

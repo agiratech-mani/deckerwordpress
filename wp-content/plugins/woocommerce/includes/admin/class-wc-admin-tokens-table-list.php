@@ -272,6 +272,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 			'token' => array( 'id', false ),
 			'token_device_limit' => array( 'token_device_limit', false ),
 			'token_expiry_date' => array( 'token_expiry_date', false ),
+			'token_last_accessed' => array( 'token_last_accessed', false ),
 		);
 		return $sortable_columns;
 	}
