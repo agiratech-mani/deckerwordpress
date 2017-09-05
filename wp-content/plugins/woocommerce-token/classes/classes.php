@@ -100,6 +100,7 @@ class WooCommerce_Token
     {
         global $wpdb;
         $registered = 0;
+        $startingdate = '';
         $params = $request->get_params();
         $token = $params['token'];
         $useragent = $params['useragent'];
@@ -118,9 +119,17 @@ class WooCommerce_Token
             $tid = $tokenobj[0]->id;
             $devicecount = $tokenobj[0]->token_device_limit;
             $token_expiry_date = $tokenobj[0]->token_expiry_date;
+            $start_date = $tokenobj[0]->token_start_date;
             $datetime1 = new DateTime($token_expiry_date);
+            $startdate = new DateTime($start_date);
             $datetime2 = new DateTime();
-            if($datetime1 >= $datetime2 || $token_expiry_date == "0000-00-00 00:00:00")
+            $startingdate = $startdate->format("d/m/Y");
+            if($startdate > $datetime2)
+            {
+                $success = 0;
+                $status = "NotYetStarted";
+            }
+            else if($datetime1 >= $datetime2 || $token_expiry_date == "0000-00-00 00:00:00")
             {
                 $devices = $this->get_web_token_devices_by($tid,$browser,$os,$device_type);
                 if(count($devices) > 0)
@@ -176,7 +185,8 @@ class WooCommerce_Token
         $data = array( 
             'success'=>$success,
             'status'=> $status,
-            'registered'=> $registered
+            'registered'=> $registered,
+            'startdate'=> $startingdate,
         );
 
         // Create the response object

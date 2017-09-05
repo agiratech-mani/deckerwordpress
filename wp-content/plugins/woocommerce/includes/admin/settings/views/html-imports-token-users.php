@@ -56,6 +56,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</tr>
 				<tr valign="top">
 					<th scope="row" class="titledesc">
+						<label for="token_to_date"><?php _e( 'Token Start Date', 'woocommerce' ); ?></label>
+					</th>
+					<td class="forminp">
+						<input name="token_start_date" type="date" id="token_start_date">
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row" class="titledesc">
 						<label for="token_file"><?php _e( 'Send Email?', 'woocommerce' ); ?></label>
 					</th>
 					<td class="forminp">
