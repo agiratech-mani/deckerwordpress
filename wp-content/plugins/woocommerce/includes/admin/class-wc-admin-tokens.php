@@ -27,50 +27,52 @@ class WC_Admin_Tokens {
 	private static function generate_tokens($fileid,$userid,$product_id,$data,$token_send_email = 0)
 	{
 		$bitly_login = get_option( 'woocommerce_bitly_login', '' );
-    $bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
-		$product = wc_get_product($product_id);
-		$courseurl = $product->get_course_url();
-    $devices_limit = 1;//$_product->get_devices_limit();
-    $token_expiry = $data['validity'];
-    $product_type = $product->get_type();
-    $dateobj = new DateTime();
-    $createdate = $dateobj->format('Y-m-d H:i:s');
-    if($token_expiry != '' && $token_expiry > 0)
-    {
-        $dateobj->add(new DateInterval('P'.$token_expiry.'D'));
-        $expirydate = $dateobj->format('Y-m-d 23:59:59');
-    }
-    else
-    {
-        $expirydate = '';
-    }
-    if($product->exists() && $product_type == "course")
-    {
-			$token = uniqid();
-			$long_url = $courseurl.'?token='.$token;
-			$short_url = get_bitly_short_url($long_url,$bitly_login,$bitly_api_key);
-			$token_data = array(
-				'order_id'              => $fileid,
-				'order_type'            => 'Upload',
-				'user_id'               => $userid,
-				'product_id'            => $product_id,
-				'token'                 => $token,
-				'short_url'             => trim($short_url),
-				'long_url'              => $long_url,
-				'token_device_limit'    => $devices_limit,
-				'token_created_date'    => $createdate,
-				'token_expiry_date'     => $expirydate,
-				'token_last_accessed'   => '',
-				'token_last_device'     => ''
-			);
-			$tokenid =wootokens_add_web_tokens($token_data);
+	    $bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
+			$product = wc_get_product($product_id);
+			$courseurl = $product->get_course_url();
+	    $devices_limit = 1;//$_product->get_devices_limit();
+	    $token_expiry = $data['validity'];
+	    $start_date = $data['start_date'];
+	    $product_type = $product->get_type();
+	    $dateobj = new DateTime();
+	    $createdate = $dateobj->format('Y-m-d H:i:s');
+	    if($token_expiry != '' && $token_expiry > 0)
+	    {
+	        $dateobj->add(new DateInterval('P'.$token_expiry.'D'));
+	        $expirydate = $dateobj->format('Y-m-d 23:59:59');
+	    }
+	    else
+	    {
+	        $expirydate = '';
+	    }
+	    if($product->exists() && $product_type == "course")
+	    {
+				$token = uniqid();
+				$long_url = $courseurl.'?token='.$token;
+				$short_url = get_bitly_short_url($long_url,$bitly_login,$bitly_api_key);
+				$token_data = array(
+					'order_id'              => $fileid,
+					'order_type'            => 'Upload',
+					'user_id'               => $userid,
+					'product_id'            => $product_id,
+					'token'                 => $token,
+					'short_url'             => trim($short_url),
+					'long_url'              => $long_url,
+					'token_device_limit'    => $devices_limit,
+					'token_created_date'    => $createdate,
+					'token_expiry_date'     => $expirydate,
+					'token_start_date'     => $start_date,
+					'token_last_accessed'   => '',
+					'token_last_device'     => ''
+				);
+				$tokenid =wootokens_add_web_tokens($token_data);
 
-			//Commended Token Generetad mail code based on client instruction - March 17 2017
-			if($token_send_email)
-			{
-				do_action( 'woocommerce_token_generated',$tokenid);
-			}
-    }
+				//Commended Token Generetad mail code based on client instruction - March 17 2017
+				if($token_send_email)
+				{
+					do_action( 'woocommerce_token_generated',$tokenid);
+				}
+	    }
 	}
 	private static function table_list_output() {
 		global $wpdb;
@@ -99,6 +101,23 @@ class WC_Admin_Tokens {
 				{
 					$error[] = "Please select License sheet.";
 				}
+				if(!empty($_POST['token_start_date']))
+				{
+					$token_start_date = date("Y-m-d",strtotime($_POST['token_start_date']));
+
+					$currenttime = strtotime(date("Y-m-d"));
+					$token_starttime = strtotime($_POST['token_start_date']);
+					if($token_starttime < $currenttime)
+					{
+						$error[] = "Token Start Date should not be less then current date.";
+					}
+					$token_start_date = date("Y-m-d",strtotime($_POST['token_start_date']));
+				}
+				else
+				{
+					$token_start_date = date("Y-m-d");
+				}
+				
 				$product_id = $_POST['token_product'];
 				if(empty($error))
 				{
@@ -125,6 +144,7 @@ class WC_Admin_Tokens {
 				        $data['user_id'] = get_current_user_id();
 				        $data['send_email'] = $token_send_email;
 				        $data['report_to_email'] = $_POST['token_report_email'];
+				        $data['token_start_date'] = $token_start_date;
 				        $data['created'] = (new DateTime())->format("Y-m-d H:i:s");
 				        $wpdb->insert( $table_name, $data);
 				        $fileid = $wpdb->insert_id;
@@ -151,7 +171,9 @@ class WC_Admin_Tokens {
 								        $csvdata['email'] = $email;
 								        $csvdata['company'] = $data[3];
 								        $csvdata['validity'] = ($data[4]>0?$data[4]:1);
+								        $csvdata['start_date'] = $token_start_date;
 								        $csvdata['created'] = (new DateTime())->format("Y-m-d H:i:s");
+								        print_r($csvdata);
 								        $wpdb->insert( $wpdb->prefix . 'web_import_users', $csvdata);
 								        $userid = $wpdb->insert_id;
 								        self::generate_tokens($fileid,$userid,$product_id,$csvdata,$token_send_email);
@@ -416,23 +438,22 @@ class WC_Admin_Tokens {
 			echo "</div>";
 		}
 		else if(!empty($_GET) && isset($_GET['refresh'])){
-			echo "refresh";
-			$table1 = $wpdb->prefix . 'web_tokens';
-			$query = "SELECT * FROM $table1 WHERE short_url ='RATE_LIMIT_EXCEEDED' AND id = 422 ORDER BY ID LIMIT 0,90";
+			$bitly_login = get_option( 'woocommerce_bitly_login', '' );
+            $bitly_api_key = get_option( 'woocommerce_bitly_api_key', '' );
+            $table1 = $wpdb->prefix . 'web_tokens';
+            $query = "SELECT * FROM $table1 WHERE short_url ='RATE_LIMIT_EXCEEDED' ORDER BY ID LIMIT 0,90";
+            $result = $wpdb->get_results( $query, 'ARRAY_A' );
+            //print_r($result);
+            foreach ($result as $key => $res) {
+                    echo "ID:".$res['id'];
+                    $where = array('id'=>$res['id']);
+                    $short_url = get_bitly_short_url($res['long_url'],$bitly_login,$bitly_api_key);
+                    echo "short_url:".$short_url."<br>";
+                    $shorturl = "shorturl";
+                     $data = array('short_url'=>$short_url);
+                     $wpdb->update($table1,$data,$where);
+            }
 
-			$result = $wpdb->get_results( $query, 'ARRAY_A' );
-			print_r($result);
-			foreach ($result as $key => $res) {
-				var $where = array('id'=>$res['id']);
-				$short_url = get_bitly_short_url($res['long_url'],$bitly_login,$bitly_api_key);
-				echo "short_url";
-				print_r($short_url);
-				var $shorturl = "shorturl";
-				var $data = array('short_url'=>$short_url);
-				 $wpdb->update($table1,$data,$where);
-			}
-			
-			die;
 		}
 		else if(!empty($_GET) && isset($_GET['token_id']) && $_GET['token_id'] > 0)
 		{
