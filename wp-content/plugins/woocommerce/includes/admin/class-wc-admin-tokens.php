@@ -173,7 +173,6 @@ class WC_Admin_Tokens {
 								        $csvdata['validity'] = ($data[4]>0?$data[4]:1);
 								        $csvdata['start_date'] = $token_start_date;
 								        $csvdata['created'] = (new DateTime())->format("Y-m-d H:i:s");
-								        print_r($csvdata);
 								        $wpdb->insert( $wpdb->prefix . 'web_import_users', $csvdata);
 								        $userid = $wpdb->insert_id;
 								        self::generate_tokens($fileid,$userid,$product_id,$csvdata,$token_send_email);
@@ -324,6 +323,7 @@ class WC_Admin_Tokens {
 					short_url,
 					long_url,
 					token_created_date,
+					token_start_date,
 					token_expiry_date,
 					token_last_accessed
 					FROM (
@@ -384,6 +384,7 @@ class WC_Admin_Tokens {
 						'H' => 'Short URL',
 						'I' => 'Long URL',
 						'J' => 'License Create Date',
+						'K' => 'License Start Date',
 						'K' => 'License Expiry Date',
 						'L' => 'License Last Accessed'
 					);
@@ -399,6 +400,7 @@ class WC_Admin_Tokens {
 						'H' => 'short_url',
 						'I' => 'long_url',
 						'J' => 'token_created_date',
+						'K' => 'token_start_date',
 						'K' => 'token_expiry_date',
 						'L' => 'token_last_accessed'
 					);
@@ -484,8 +486,8 @@ class WC_Admin_Tokens {
 		else
 		{
 			echo "<div class='wrap'>";
-			//echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>'.' <a href="admin.php?page=wc-tokens&export=token" class="page-title-action">Export Tokens</a>' . '</h2>';
-			echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
+			echo '<h1>' . __( 'Tokens', 'woocommerce' ).' <a href="admin.php?page=wc-tokens&import=token" class="page-title-action">Import Tokens</a>'.' <a href="admin.php?page=wc-tokens&export=token" class="page-title-action">Export Tokens</a>' . '</h2>';
+			//echo '<h1>' . __( 'Tokens', 'woocommerce' ). '</h2>';
 			$tokens_table_list = new WC_Admin_Tokens_Table_List();
 			$tokens_table_list->prepare_items();
 			echo '<input type="hidden" name="page" value="wc-tokens" />';

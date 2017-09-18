@@ -105,6 +105,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       	<th>Short Url	</th>
       	<th>Long Url	</th>
       	<th>Created Date	</th>
+      	<th>Start Date	</th>
       	<th>Expiry Date	</th>
       	<th>Company</th>
       </tr>
@@ -123,6 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	        <td><?php echo $token['short_url']; ?></td>
 	        <td><?php echo $token['long_url']; ?></td>
 	        <td><?php echo $token['created_date']; ?></td>
+	        <td><?php echo $token['start_date']; ?></td>
 	        <td><?php echo $token['expiry_date']; ?></td>
 	        <td><?php echo $token['company']; ?></td>
 	      </tr>

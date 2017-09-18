@@ -45,6 +45,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 			'token'        => __( 'Token', 'woocommerce' ),
 			'short_url' => __( 'Course URL', 'woocommerce' ),
 			'registered' => __( 'Device Registered', 'woocommerce' ),
+			'token_start_date' => __( 'Token Start Date', 'woocommerce' ),
 			'token_expiry_date' => __( 'Token Expiry Date', 'woocommerce' ),
 			'token_last_accessed' => __( 'Last Accessed', 'woocommerce' )
 		);
@@ -271,6 +272,7 @@ class WC_Admin_Tokens_Table_List extends WP_List_Table {
 			'short_url' => array( 'short_url', false ),
 			'token' => array( 'id', false ),
 			'token_device_limit' => array( 'token_device_limit', false ),
+			'token_start_date' => array( 'token_start_date	', false ),
 			'token_expiry_date' => array( 'token_expiry_date', false ),
 			'token_last_accessed' => array( 'token_last_accessed', false ),
 		);
