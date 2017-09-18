@@ -72,10 +72,11 @@ class WC_Email_Web_Token_Report extends WC_Email {
     		$ews->setCellValue('F1', 'Short Url');
     		$ews->setCellValue('G1', 'Long Url');
     		$ews->setCellValue('H1', 'Created Date');
-    		$ews->setCellValue('I1', 'Expiry Date');
-    		$ews->setCellValue('J1', 'Company');
+    		$ews->setCellValue('I1', 'Start Date');
+    		$ews->setCellValue('J1', 'Expiry Date');
+    		$ews->setCellValue('K1', 'Company');
     		$ews->fromArray($tokens, ' ', 'A2');
-    		$header = 'A1:J1';
+    		$header = 'A1:K1';
 			$style = array(
 			    'font' => array('bold' => true,),
 			    'alignment' => array('horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,),

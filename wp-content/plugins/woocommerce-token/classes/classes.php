@@ -38,7 +38,7 @@ class WooCommerce_Token
     public function get_tokens_import($importid = NULL)
     {
         global $wpdb;
-        $sql = "SELECT users.id as 'sno',tokens.token as 'token',users.first_name  as 'first_name',users.last_name as 'last_name',users.email as 'email',tokens.short_url as 'short_url',tokens.long_url as 'long_url',tokens.token_created_date as 'created_date',tokens.token_expiry_date as 'expiry_date',users.company as 'company'";
+        $sql = "SELECT users.id as 'sno',tokens.token as 'token',users.first_name  as 'first_name',users.last_name as 'last_name',users.email as 'email',tokens.short_url as 'short_url',tokens.long_url as 'long_url',tokens.token_created_date as 'created_date',tokens.token_start_date as 'start_date',tokens.token_expiry_date as 'expiry_date',users.company as 'company'";
         $sql .=" FROM `{$wpdb->prefix}web_tokens` as tokens";
         $sql .=" LEFT JOIN `{$wpdb->prefix}web_import_users` as users on users.id = tokens.user_id";
         $sql .=" Where tokens.order_id = {$importid} and tokens.order_type = 'Upload'";
