@@ -30,10 +30,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	Let’s go!
 	<br>
 	<br>
-	Copy and paste your <span style="color:#D22735;font-weight:bold;">Unique Course Link</span> below into your <b>Chrome browser</b>. 
+	Copy and paste your <span style="color:#D22735;font-weight:bold;">Unique Course Link</span> below into your <b>Chrome</b> or <b>Internet Explorer 11</b> browser. 
 	<br>
 	<br>
 	Be sure to bookmark this link, and keep it handy so that you can return to the course at any time. And don’t worry, we’ll save your place. 
+	<br>
+	<br>
+	Tips on getting set up: Decker Digital asks you to record yourself using your computer’s webcam and microphone (headset recommended). <br> 	
+	1) Please quit any other program that might be using the webcam before launching Decker Digital.<br> 
+	2) If your laptop is docked with a workstation that has an external webcam, we recommend undocking the laptop to default to its built-in webcam.<br>
+	3) The course also uses the Flash plug-in from Adobe. If you encounter problems getting into the course, your computer may not have Flash fully configured. <a href="https://decker.com/decker-digital-setup-troubleshooting" target="_blank">This page</a> offers helpful tips on getting Flash properly set up.<br> 
+	4) We don’t yet support a proxy server to cross a corporate firewall; if you find you cannot get set up to record with the webcam in Module 1, this may be the problem. To solve it, disconnect from your corporate network, perhaps using wi-fi at home.
 	<br>
 	<br>
 	Happy communicating!

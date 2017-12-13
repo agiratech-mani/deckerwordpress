@@ -46,48 +46,48 @@ class WC_Email_Customer_Processing_Order extends WC_Email {
 	 * @param int $order_id The order ID.
 	 * @param WC_Order $order Order object.
 	 */
-	public function trigger( $order_id, $order = false ) {
-		$logger = new WC_Logger();
-		$logger->info( "woocommerce_order_status_pending_to_processing_notification : ". $order_id );		
-if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
-			$order = wc_get_order( $order_id );
-		}
-
-		if ( is_a( $order, 'WC_Order' ) ) {
-			$this->object       = $order;
-			$this->recipient    = $this->object->get_billing_email();
-			$items = $this->object->get_items();
-			$this->isCourse = false;
-			$this->isOthers = false;
-			foreach ($items as $key => $value) {
-				$pro = wc_get_product($value->get_product_id());
-				if($pro->product_type == "course" && !$this->isCourse)
-				{
-					$this->isCourse = true;
-				}
-				else if(!$isOthers)
-				{
-					$this->isOthers  = true;
-				}
-				if($this->isCourse && $this->isOthers)
-				{
-					break;
-				}
-			}
-
-			$this->find['order-date']      = '{order_date}';
-			$this->find['order-number']    = '{order_number}';
-
-			$this->replace['order-date']   = wc_format_datetime( $this->object->get_date_created() );
-			$this->replace['order-number'] = $this->object->get_order_number();
-		}
-
-		if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
-			return;
-		}
-
-		$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+public function trigger( $order_id, $order = false ) {
+	$logger = new WC_Logger();
+	$logger->info( "woocommerce_order_status_pending_to_processing_notification : ". $order_id );		
+	if ( $order_id && ! is_a( $order, 'WC_Order' ) ) {
+		$order = wc_get_order( $order_id );
 	}
+
+	if ( is_a( $order, 'WC_Order' ) ) {
+		$this->object       = $order;
+		$this->recipient    = $this->object->get_billing_email();
+		$items = $this->object->get_items();
+		$this->isCourse = false;
+		$this->isOthers = false;
+		foreach ($items as $key => $value) {
+			$pro = wc_get_product($value->get_product_id());
+			if($pro->product_type == "course" && !$this->isCourse)
+			{
+				$this->isCourse = true;
+			}
+			else if(!$isOthers)
+			{
+				$this->isOthers  = true;
+			}
+			if($this->isCourse && $this->isOthers)
+			{
+				break;
+			}
+		}
+
+		$this->find['order-date']      = '{order_date}';
+		$this->find['order-number']    = '{order_number}';
+
+		$this->replace['order-date']   = wc_format_datetime( $this->object->get_date_created() );
+		$this->replace['order-number'] = $this->object->get_order_number();
+	}
+
+	if ( ! $this->is_enabled() || ! $this->get_recipient() ) {
+		return;
+	}
+
+	$this->send( $this->get_recipient(), $this->get_subject(), $this->get_content(), $this->get_headers(), $this->get_attachments() );
+}
 
 	/**
 	 * Get content html.

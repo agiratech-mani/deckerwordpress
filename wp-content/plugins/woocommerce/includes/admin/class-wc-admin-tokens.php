@@ -65,7 +65,7 @@ class WC_Admin_Tokens {
 					'token_last_accessed'   => '',
 					'token_last_device'     => ''
 				);
-				$tokenid =wootokens_add_web_tokens($token_data);
+				$tokenid = wootokens_add_web_tokens($token_data);
 
 				//Commended Token Generetad mail code based on client instruction - March 17 2017
 				if($token_send_email)
@@ -447,10 +447,10 @@ class WC_Admin_Tokens {
             $result = $wpdb->get_results( $query, 'ARRAY_A' );
             //print_r($result);
             foreach ($result as $key => $res) {
-                    echo "ID:".$res['id'];
+                    //echo "ID:".$res['id'];
                     $where = array('id'=>$res['id']);
                     $short_url = get_bitly_short_url($res['long_url'],$bitly_login,$bitly_api_key);
-                    echo "short_url:".$short_url."<br>";
+                    //echo "short_url:".$short_url."<br>";
                     $shorturl = "shorturl";
                      $data = array('short_url'=>$short_url);
                      $wpdb->update($table1,$data,$where);

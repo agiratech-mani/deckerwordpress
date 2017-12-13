@@ -13,6 +13,7 @@ class WooCommerce_Token
             'short_url'				=> $data['short_url'],
             'token_device_limit'	=> $data['token_device_limit'],
             'token_created_date'	=> $data['token_created_date'],
+            'token_start_date'     => date('Y-m-d'),
             'token_expiry_date'		=> $data['token_expiry_date'],
             'token_last_accessed'	=> $data['token_last_accessed'],
             'token_last_device'		=> $data['token_last_device']
